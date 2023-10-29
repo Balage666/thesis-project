@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'stock',
+        'created_by'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+    use HasFactory;
+
+    public function Distributor() {
+        return $this->belongsTo(User::class, 'id', 'created_by');
+    }
+
+    public function Pictures() {
+        return $this->hasMany(ProductPicture::class, 'product_id', 'id');
+    }
+
+    public function Comments() {
+        return $this->hasMany(ProductComment::class, 'product_id', 'id');
+    }
+
+    public function Ratings() {
+        return $this->hasMany(ProductRating::class, 'product_id', 'id');
+    }
+}
