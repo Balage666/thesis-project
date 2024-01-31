@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'message' => session('message')
             ],
             'active_session' => [
-                'user' => auth()->user() ?? null
+                'user' => auth()->user() ? auth()->user()->load(['Roles', 'PhoneNumbers', 'Addresses', 'Products']) : null
             ]
         ]);
     }

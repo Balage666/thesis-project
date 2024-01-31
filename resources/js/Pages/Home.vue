@@ -13,6 +13,8 @@ import { Link } from '@inertiajs/inertia-vue3'
             <hr>
             <h2>{{ $page.props.active_session.user.email }}</h2>
             <hr>
+            <h2>{{ $page.props.active_session.user }}</h2>
+            <hr>
             <img
                 :src="$page.props.active_session.user.profile_picture"
                 :title="$page.props.active_session.user.name"
