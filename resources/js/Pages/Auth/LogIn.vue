@@ -85,7 +85,6 @@ const form = useForm({
 
                                 <div class="d-grid">
                                     <Link href="/auth/sign-up" method="get" as="button" type="button" class="btn btn-outline btn-lg authNormalButtonBackground">Register</Link>
-
                                 </div>
 
                             </div>
