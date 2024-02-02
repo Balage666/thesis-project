@@ -73,8 +73,8 @@ const form = useForm({
                             <hr class="my-4">
 
                             <div class="d-grid">
-                            <button class="btn btn-lg btn-secondary shadow-sm fw-bold"
-                                type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+                            <a :href="route('google-log-in')" class="btn btn-lg btn-secondary shadow-sm fw-bold"
+                                type="button"><i class="fab fa-google me-2"></i> Sign in with google</a>
                             </div>
 
                             <hr class="my-4">
@@ -84,7 +84,7 @@ const form = useForm({
                                 <h4 class="text-start">I'm new here!</h4>
 
                                 <div class="d-grid">
-                                    <Link :href="route('sign-up')" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-warning shadow-sm fw-bold">Register</Link>
+                                    <Link :href="route('sign-up')" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-warning shadow-sm fw-bold"> <i class="fa-solid fa-plus"></i> Register</Link>
                                 </div>
 
                             </div>
