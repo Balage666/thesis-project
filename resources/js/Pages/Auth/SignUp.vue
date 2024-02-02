@@ -29,7 +29,7 @@ const form = useForm({
 
                     <h3 class="mb-7">Create your account!</h3>
 
-                    <form @submit.prevent="form.post('/auth/sign-on')">
+                    <form @submit.prevent="form.post(route('sign-on'))">
 
                         <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div>
                         <div class="form-outline mb-4">
@@ -90,7 +90,7 @@ const form = useForm({
 
 
                     <div class="d-grid gap-2">
-                        <button class="btn btn-lg authSubmitButtonBackground" type="submit">Register</button>
+                        <button class="btn btn-lg btn-primary fw-bold" type="submit">Register</button>
                     </div>
 
 
@@ -103,7 +103,7 @@ const form = useForm({
                         <h4 class="text-start">Already have an account?</h4>
 
                         <div class="d-grid">
-                            <Link href="/auth/log-in" method="get" as="button" type="button" class="btn btn-outline btn-lg authNormalButtonBackground">Login</Link>
+                            <Link :href="route('log-in')" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-warning fw-bold">Login</Link>
 
                         </div>
 

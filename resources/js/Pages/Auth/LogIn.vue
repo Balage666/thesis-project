@@ -19,15 +19,15 @@ const form = useForm({
 
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card shadow-2-strong authFormCardBackground" style="border-radius: 1rem;">
+                    <div class="card shadow-lg p-3 authFormCardBackground" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
                             <h1 class="mb-5">Hi!</h1>
 
                             <h3 class="mb-7">Please, type your email and password!</h3>
 
-                            <form @submit.prevent="form.post('/auth/log-on')">
-
+                            <!-- <form @submit.prevent="form.post('/auth/log-on')"> -->
+                            <form @submit.prevent="form.post(route('log-on'))">
                                 <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
                                 <div class="form-outline mb-4">
                                     <label class="form-label d-flex justify-content-start" for="email">Email</label>
@@ -64,7 +64,7 @@ const form = useForm({
                                 </div> -->
 
                             <div class="d-grid gap-2">
-                                <button class="btn btn-lg authSubmitButtonBackground" type="submit">Login</button>
+                                <button class="btn btn-lg btn-primary shadow-sm fw-bold" type="submit">Login</button>
                             </div>
 
 
@@ -73,7 +73,7 @@ const form = useForm({
                             <hr class="my-4">
 
                             <div class="d-grid">
-                            <button class="btn btn-lg signInWithGoogleButtonBackground"
+                            <button class="btn btn-lg btn-secondary shadow-sm fw-bold"
                                 type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
                             </div>
 
@@ -84,7 +84,7 @@ const form = useForm({
                                 <h4 class="text-start">I'm new here!</h4>
 
                                 <div class="d-grid">
-                                    <Link href="/auth/sign-up" method="get" as="button" type="button" class="btn btn-outline btn-lg authNormalButtonBackground">Register</Link>
+                                    <Link :href="route('sign-up')" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-warning shadow-sm fw-bold">Register</Link>
                                 </div>
 
                             </div>

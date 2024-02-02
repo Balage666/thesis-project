@@ -10,22 +10,71 @@
 
 }
 
-.authSubmitButtonBackground {
-
+.btn-primary {
+    color: #00433F;
     background-color: #63F5EC;
-
+    border-color: #63F5EC;
 }
 
-.authNormalButtonBackground {
+.btn-primary:hover {
+    color: #2F4858;
+    background-color: #00D7FA;
+    border-color: #00D7FA;
+}
+
+.btn-primary.active,
+.btn-primary:active:hover,
+.btn-primary:active:active {
+    color: #4d5143;
+    background-color: #05B4FC;
+    border-color: #05B4FC;
+}
+
+/* .authNormalButtonBackground {
 
     background-color: #FFCEA5;
 
-}
+} */
 
-.signInWithGoogleButtonBackground {
+/* .signInWithGoogleButtonBackground {
 
     background-color: #E27127;
 
+} */
+
+.btn-secondary {
+    border-color: #eba865;
+    background-color: #eba865;
+}
+
+.btn-secondary:hover {
+    border-color: #c18f5e;
+    background-color: #c18f5e;
+}
+
+.btn-secondary:active,
+.btn-secondary:active:hover,
+.btn-secondary:active:active {
+    border-color: #c86c10;
+    background-color: #c86c10;
+}
+
+
+.btn-warning {
+    border-color: #F9F871;
+    background-color: #F9F871;
+}
+
+.btn-warning:hover {
+    border-color: #FFE171;
+    background-color: #FFE171;
+}
+
+.btn-warning:active,
+.btn-warning:active:hover,
+.btn-warning:active:active {
+    border-color: #FFCA80;
+    background-color: #FFCA80;
 }
 
 

@@ -15,6 +15,8 @@ import { Link } from '@inertiajs/inertia-vue3'
             <hr>
             <h2>{{ $page.props.active_session.user }}</h2>
             <hr>
+            <h2>{{ route().has('storefront') }}</h2>
+            <hr>
             <img
                 :src="$page.props.active_session.user.profile_picture"
                 :title="$page.props.active_session.user.name"
@@ -25,6 +27,6 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 
 
-        <Link v-if="$page.props.active_session.user" href="/auth/log-out">Log Out!</Link>
+        <Link v-if="$page.props.active_session.user" class="btn btn-outline btn-lg btn-warning fw-bold" :href="route('log-out')">Log Out!</Link>
     </div>
 </template>
