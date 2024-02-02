@@ -11,7 +11,8 @@ const props = defineProps({
 
 onMounted(() => {
     setTimeout(() => {
-        router.get('/storefront')
+        console.log('redirecting back to storefront')
+        router.get(route('storefront'))
     }, 2500)
 })
 
