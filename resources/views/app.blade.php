@@ -9,5 +9,7 @@
     </head>
     <body>
         @inertia
+
+        <x-translations></x-translations>
     </body>
 </html>
