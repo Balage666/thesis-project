@@ -1,0 +1,21 @@
+{
+    "Hi!": "Szia!",
+    "Please, type your email and password!": "Kérlek add meg az e-mail címed és a jelszavadat!",
+    "The page expired, please try again.": "Az oldal munkamenete lejárt! Kérlek próbáld meg újratölteni az oldalt!",
+    "Email address": "E-mail cím",
+    "Enter your email": "Add meg az E-mail címed",
+    "Password": "Jelszó",
+    "Type your password": "Írd be a jelszavadat",
+    "Login": "Bejelentkezés",
+    "Sign in with google": "Bejelentkezés Google fiók használatával",
+    "I'm new here!": "Még nincs fiókom!",
+    "Register": "Regisztráció",
+    "Welcome!": "Üdvözüljük!",
+    "Create your account!": "Hozd létre a fiókod!",
+    "Full Name": "Teljes Név",
+    "Give your name": "Add meg a neved",
+    "Email": "E-mail",
+    "Password confirmation": "Jelszó megerősítés",
+    "Confirm your password": "Írd be újra a jelszavadat!",
+    "Already have an account?": "Már van Fiókom!"
+}
