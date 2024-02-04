@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8265d2b006c6c7e7ac40bb3b36e037bc",
+    "content-hash": "760e85172ae18da81e8e04c8de1cfa1d",
     "packages": [
         {
             "name": "brick/math",
@@ -364,6 +364,73 @@
                 }
             ],
             "time": "2023-08-10T19:36:49+00:00"
+        },
+        {
+            "name": "druc/laravel-langscanner",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/druc/laravel-langscanner.git",
+                "reference": "282a6523bbcabc466c07aa46314764f822f8b4e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/druc/laravel-langscanner/zipball/282a6523bbcabc466c07aa46314764f822f8b4e2",
+                "reference": "282a6523bbcabc466c07aa46314764f822f8b4e2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "orchestra/testbench": "^7.02",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Druc\\Langscanner\\LangscannerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Druc\\Langscanner\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Constantin Druc",
+                    "email": "druc@pinsmile.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Scan missing language translations.",
+            "homepage": "https://github.com/druc/laravel-langscanner",
+            "keywords": [
+                "druc",
+                "laravel-langscanner"
+            ],
+            "support": {
+                "issues": "https://github.com/druc/laravel-langscanner/issues",
+                "source": "https://github.com/druc/laravel-langscanner/tree/v2.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/druc",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-17T10:04:21+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3375,6 +3442,66 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-01-11T08:43:00+00:00"
         },
         {
             "name": "symfony/console",
