@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -42,7 +43,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load(['Roles', 'PhoneNumbers', 'Addresses', 'Products']) : null
-            ]
+            ],
+            'locales' => config('app.locales')
         ]);
     }
 }
