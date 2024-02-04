@@ -51,10 +51,7 @@ class Translations extends Component
 
         $translations = array_merge($phpTranslations, $jsonTranslations);
 
-        dd($translations);
-
-        //TODO: Continue implementing this next time
-        //TODO: Refer to this: https://tallpad.com/series/inertiajs-laravel-misc/lessons/handling-translations-in-laravel-and-inertiajs-applications
+        // dd($translations["Login"]["Hi!"]);
 
         return view('components.translations', [
             'translations' => $translations
