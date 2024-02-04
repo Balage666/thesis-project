@@ -13,7 +13,7 @@ const form = useForm({
 
 <template>
     <Head>
-        <title>Registration</title>
+        <title>{{ __(Registration) }}</title>
     </Head>
 
     <div>
@@ -25,21 +25,21 @@ const form = useForm({
             <div class="card shadow-2-strong authFormCardBackground" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
 
-                    <h1 class="mb-5">Welcome!</h1>
+                    <h1 class="mb-5">{{ __("Welcome!") }}</h1>
 
-                    <h3 class="mb-7">Create your account!</h3>
+                    <h3 class="mb-7">{{ __("Create your account!") }}</h3>
 
                     <form @submit.prevent="form.post(route('sign-on'))">
 
                         <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div>
                         <div class="form-outline mb-4">
-                            <label class="form-label d-flex justify-content-start" for="name">Full Name</label>
+                            <label class="form-label d-flex justify-content-start" for="name">{{ __("Full Name") }}</label>
                             <input
                                 class="form-control form-control-lg formInputFieldBackground"
                                 id="name"
                                 name="name"
                                 type="text"
-                                placeholder="Give your name"
+                                :placeholder="__('Give your name')"
                                 v-model="form.name"
                                 required
                             >
@@ -48,13 +48,13 @@ const form = useForm({
 
                         <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
                         <div class="form-outline mb-4">
-                            <label class="form-label d-flex justify-content-start" for="email">Email</label>
+                            <label class="form-label d-flex justify-content-start" for="email">{{ __("Email address") }}</label>
                             <input
                                 class="form-control form-control-lg formInputFieldBackground"
                                 id="email"
                                 name="email"
                                 type="email"
-                                placeholder="Enter your email"
+                                :placeholder="__('Enter your email')"
                                 v-model="form.email"
                                 required
                             >
@@ -62,35 +62,35 @@ const form = useForm({
 
                         <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div>
                         <div class="form-outline mb-4">
-                            <label class="form-label d-flex justify-content-start" for="password">Password</label>
+                            <label class="form-label d-flex justify-content-start" for="password">{{ __("Password") }}</label>
                             <input
                                 class="form-control form-control-lg formInputFieldBackground"
                                 id="password"
                                 name="password"
                                 type="password"
                                 v-model="form.password"
-                                placeholder="Type your password"
+                                :placeholder="__('Type your password')"
                                 required
                             >
                         </div>
 
                         <div class="alert alert-danger" v-if="form.errors.password_confirmation">{{ form.errors.password_confirmation }}</div>
                         <div class="form-outline mb-4">
-                            <label class="form-label d-flex justify-content-start" for="password_confirmation">Password confirmation</label>
+                            <label class="form-label d-flex justify-content-start" for="password_confirmation">{{ __("Password confirmation") }}</label>
                             <input
                                 class="form-control form-control-lg formInputFieldBackground"
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 type="password"
                                 v-model="form.password_confirmation"
-                                placeholder="Confirm your password"
+                                :placeholder="__('Confirm your password')"
                                 required
                             >
                         </div>
 
 
                     <div class="d-grid gap-2">
-                        <button class="btn btn-lg btn-primary fw-bold" type="submit"> <i class="fa-solid fa-plus"></i> Register</button>
+                        <button class="btn btn-lg btn-primary fw-bold" type="submit"> <i class="fa-solid fa-plus"></i> {{ __("Register") }}</button>
                     </div>
 
 
@@ -100,10 +100,19 @@ const form = useForm({
 
                     <div class="d-grid">
 
-                        <h4 class="text-start">Already have an account?</h4>
+                        <h4 class="text-start">{{__("Already have an account?")}}</h4>
 
                         <div class="d-grid">
-                            <Link :href="route('log-in')" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-warning fw-bold"> <i class="fa-solid fa-right-to-bracket"></i> Login</Link>
+                            <Link
+                                :href="route('log-in')"
+                                method="get"
+                                as="button"
+                                type="button"
+                                class="btn btn-outline btn-lg btn-warning fw-bold"
+                            >
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                {{ __("Login") }}
+                            </Link>
 
                         </div>
 
