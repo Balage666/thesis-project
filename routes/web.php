@@ -33,3 +33,5 @@ Route::get('/auth/log-out', [UserController::class, 'LogOut'])->name('log-out');
 
 Route::get('/auth/sign-up', [UserController::class, 'SignUp'])->name('sign-up');
 Route::post('/auth/sign-on', [UserController::class, 'SignOn'])->name('sign-on');
+
+Route::post('/set-language/{language}')->name('switch-language');
