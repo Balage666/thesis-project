@@ -26,7 +26,9 @@ class Translations extends Component
      */
     public function render(): View|Closure|string
     {
-        $locale = app()->getLocale();
+        // $locale = app()->getLocale();
+
+        $locale = session('locale');
 
         $phpTranslations = [];
         $jsonTranslations = [];
