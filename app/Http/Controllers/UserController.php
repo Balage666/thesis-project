@@ -12,14 +12,10 @@ class UserController extends Controller
 {
     public function LogIn() {
 
-        //return view('auth.login');
-
         return Inertia::render("Auth/LogIn");
     }
 
     public function LogOn(Request $request) {
-
-        // dd($request);
 
 
         $formFields = $request->validate([
@@ -50,8 +46,6 @@ class UserController extends Controller
 
 
     public function SignUp() {
-
-        // return view('auth.signup');
 
         return Inertia::render("Auth/SignUp");
 
