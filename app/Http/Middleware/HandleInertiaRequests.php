@@ -44,7 +44,8 @@ class HandleInertiaRequests extends Middleware
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load(['Roles', 'PhoneNumbers', 'Addresses', 'Products']) : null
             ],
-            'locales' => config('app.locales')
+            'locales' => config('app.locales'),
+            'current_locale' => app()->getLocale() //FIXME: Implement this in a middleware
         ]);
     }
 }

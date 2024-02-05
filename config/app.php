@@ -84,11 +84,17 @@ return [
     */
 
     'locales' => [
-        'en' => 'English',
-        'hu' => 'Hungarian'
+        (object) [
+            'code' => 'en',
+            'value' => 'English'
+        ],
+        (object) [
+            'code' => 'hu',
+            'value' => 'Hungarian'
+        ]
     ],
 
-    'locale' => 'hu',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------

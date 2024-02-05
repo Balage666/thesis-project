@@ -6,7 +6,9 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\Component;
 
 class Translations extends Component
@@ -24,13 +26,10 @@ class Translations extends Component
      */
     public function render(): View|Closure|string
     {
-
-        $locale = App::getLocale();
+        $locale = app()->getLocale();
 
         $phpTranslations = [];
         $jsonTranslations = [];
-
-        // dd($locale, "lang/$locale", lang_path(), File::exists(lang_path("$locale.json")));
 
         if (File::exists(lang_path($locale))) {
             $phpTranslations = collect(
@@ -47,11 +46,7 @@ class Translations extends Component
             $jsonTranslations = json_decode(File::get(lang_path("$locale.json")), true);
         }
 
-        // dd($phpTranslations);
-
-        $translations = array_merge($phpTranslations, $jsonTranslations);
-
-        // dd($translations["Login"]["Hi!"]);
+        $translations =  array_merge($phpTranslations, $jsonTranslations);
 
         return view('components.translations', [
             'translations' => $translations
