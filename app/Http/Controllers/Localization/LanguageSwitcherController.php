@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LanguageController extends Controller
+class LanguageSwitcherController extends Controller
 {
     //TODO: Implement language switching method
 }
