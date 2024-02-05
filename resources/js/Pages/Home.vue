@@ -2,6 +2,8 @@
 
 import { Link } from '@inertiajs/inertia-vue3'
 
+import LanguageSwitcher from '../Components/Language/LanguageSwitcher.vue';
+
 </script>
 
 <template>
@@ -24,9 +26,16 @@ import { Link } from '@inertiajs/inertia-vue3'
             >
         </div>
 
+        <div>
+            <LanguageSwitcher/>
+        </div>
 
-
-
-        <Link v-if="$page.props.active_session.user" class="btn btn-outline btn-lg btn-warning fw-bold" :href="route('log-out')">Log Out!</Link>
+        <Link
+            v-if="$page.props.active_session.user"
+            class="btn btn-outline btn-lg btn-warning fw-bold"
+            :href="route('log-out')"
+        >
+            {{ __("Log Out") }}
+        </Link>
     </div>
 </template>
