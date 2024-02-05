@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Cache;
 
 class LanguageSwitcherController extends Controller
 {
-    //FIXME: Implement language switching method
-    public function setLanguage(String $locale) {
-        app()->setLocale($locale);
+    public function setLanguage(String $language) {
+
+        session()->put('locale', $language);
 
         // dd(Cache::get("translations_$language"));
         return redirect()->back();
