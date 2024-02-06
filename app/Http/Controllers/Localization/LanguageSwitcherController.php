@@ -10,6 +10,7 @@ class LanguageSwitcherController extends Controller
 {
     public function setLanguage(String $language) {
 
+        app()->setLocale($language);
         session()->put('locale', $language);
 
         // dd(Cache::get("translations_$language"));
