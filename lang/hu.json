@@ -9,7 +9,8 @@
     "Login": "Bejelentkezés",
     "Sign in with google": "Bejelentkezés Google fiók használatával",
     "I'm new here!": "Még nincs fiókom!",
-    "Register": "Regisztráció",
+    "Registration": "Regisztráció",
+    "Register": "Regisztrálok",
     "Welcome!": "Üdvözüljük!",
     "Create your account!": "Hozd létre a fiókod!",
     "Full Name": "Teljes Név",
@@ -18,5 +19,7 @@
     "Password confirmation": "Jelszó megerősítés",
     "Confirm your password": "Írd be újra a jelszavadat!",
     "Already have an account?": "Már van Fiókom!",
-    "Log Out": "Kijelentkezés"
+    "Log Out": "Kijelentkezés",
+    "Create a new account!": "Hozz létre egy fiókot!",
+    "Login with existing account": "Bejelentkezés létező fiókkal!"
 }
