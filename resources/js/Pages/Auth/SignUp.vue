@@ -13,7 +13,7 @@ const form = useForm({
 
 <template>
     <Head>
-        <title>{{ __(Registration) }}</title>
+        <title>{{ __("Registration") }}</title>
     </Head>
 
     <div>
@@ -22,7 +22,7 @@ const form = useForm({
 
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card shadow-2-strong authFormCardBackground" style="border-radius: 1rem;">
+            <div class="card shadow-2-strong authFormCardBackground bg-gradient" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
 
                     <h1 class="mb-5">{{ __("Welcome!") }}</h1>
@@ -111,7 +111,7 @@ const form = useForm({
                                 class="btn btn-outline btn-lg btn-warning fw-bold"
                             >
                                 <i class="fa-solid fa-right-to-bracket"></i>
-                                {{ __("Login") }}
+                                {{ __("Login with existing account") }}
                             </Link>
 
                         </div>

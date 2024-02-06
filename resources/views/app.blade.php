@@ -7,7 +7,7 @@
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    <body>
+    <body class="bg-gradient">
         @inertia
 
         <x-translations></x-translations>
