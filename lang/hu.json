@@ -21,5 +21,13 @@
     "Already have an account?": "Már van Fiókom!",
     "Log Out": "Kijelentkezés",
     "Create a new account!": "Hozz létre egy fiókot!",
-    "Login with existing account": "Bejelentkezés létező fiókkal!"
+    "Login with existing account": "Bejelentkezés létező fiókkal!",
+
+    "Account": "Fiók",
+    "Favorites": "Kedvencek",
+    "Basket": "Kosár",
+    "Search": "Keresés",
+
+    "Hungarian": "Magyar",
+    "English": "Angol"
 }
