@@ -1,12 +1,39 @@
+ul.dropdown-menu {
+    background-color: lightgrey;
+}
+
+
+.banner-bg-color {
+    background-color: #3fe8fb;
+}
+
+.banner-logo {
+    width: 149px;
+    height: 67px;
+}
+
+.navbar-bg-color {
+    background-color: #69f1ff;
+}
+
+.main-bg-color {
+    background-color: #82effb;
+}
+
 .formInputFieldBackground {
 
     background-color: #E1FFFF;
 
 }
 
+.form-control:focus {
+    background-color: #a3ebeb;
+}
+
 .authFormCardBackground {
 
-    background-color: #008F9D;
+    background-color: #5eebfa;
+    /* background-color: #008F9D; */
 
 }
 
