@@ -6,9 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\Component;
 
 class Translations extends Component
@@ -28,7 +26,7 @@ class Translations extends Component
     {
         // $locale = app()->getLocale();
 
-        $locale = session('locale');
+        $locale = app()->getLocale();
 
         $phpTranslations = [];
         $jsonTranslations = [];

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Localization;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 class LanguageSwitcherController extends Controller
 {
     public function setLanguage(String $language) {
 
         app()->setLocale($language);
-        session()->put('locale', $language);
+        // session()->put('locale', $language);
+        Session::put('locale', $language);
 
-        // dd(Cache::get("translations_$language"));
         return redirect()->back();
     }
 }

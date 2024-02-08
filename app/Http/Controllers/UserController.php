@@ -37,10 +37,17 @@ class UserController extends Controller
     public function LogOut(Request $request)
     {
         auth()->logout();
+
+        $saved_locale = $request->session()->get('locale');
+        // dd($request->session()->get('locale'));
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/auth/log-in');
+        if ($saved_locale != null) {
+            $request->session()->put('locale', $saved_locale);
+        }
+
+        return redirect()->route('log-in');
     }
 
 
