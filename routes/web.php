@@ -19,8 +19,7 @@ use App\Http\Middleware\SetLocalizationMiddleware;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::middleware([SetLocalizationMiddleware::class])->group(function () {
+Route::group(['middleware' => ['localization', 'inertia']], function () {
 
     Route::get('/', function() {
         return redirect()->route('storefront');
@@ -41,4 +40,11 @@ Route::middleware([SetLocalizationMiddleware::class])->group(function () {
 
     Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language');
 
+
 });
+
+//TODO: remove the following lines or restore them
+// Route::middleware([SetLocalizationMiddleware::class])->group(function () {
+
+
+// });
