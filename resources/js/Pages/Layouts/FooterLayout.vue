@@ -1,13 +1,24 @@
 <script setup>
 
 import ContactInfo from '../../Components/Layout/Footer/ContactInfo.vue';
-//I would have thrown you out already, vscode, If I had a better text editor!
 </script>
 
 
 <template>
     <footer>
         <ContactInfo/>
-        <h1>Footer Layout</h1>
+
+        <div class="banner-bg-color text-center">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div>
+                        <p> <span class="fw-bold">Created by:</span> Karácsony Balázs (H8HYMB) </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </footer>
 </template>

@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-lg banner-bg-color">
         <div class="container-fluid bg-light rounded-5 mx-3 p-3">
             <a class="navbar-brand py-2" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -20,7 +20,6 @@
                     </form>
                 </div>
 
-                <!--TODO: Put real options here with icons using fontawesome-->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-2">
 
                     <li class="nav-item dropdown">
@@ -44,8 +43,6 @@
                     </li>
 
                 </ul>
-
-
 
             </div>
         </div>
