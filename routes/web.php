@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\User\AuthController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\StoreFrontController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
@@ -21,30 +22,36 @@ use App\Http\Middleware\SetLocalizationMiddleware;
 */
 Route::group(['middleware' => ['localization', 'inertia']], function () {
 
-    Route::get('/', function() {
-        return redirect()->route('storefront');
+    Route::group(['middleware' => 'auth'], function () {
+
+        Route::group(['prefix' => 'user-management'], function () {
+            Route::get('create', [UserController::class, 'Create'])->name('user-create');
+            Route::get('list', [UserController::class, 'List'])->name('user-list');
+            Route::get('show', [UserController::class, 'Show'])->name('user-show');
+        });
+
+        Route::get('/', function() {
+            return redirect()->route('storefront');
+        })->withoutMiddleware('auth');
+
+        Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront')->withoutMiddleware('auth');
+
+        Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language');
+
     });
 
-    Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront');
+    Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
 
-    Route::get('/auth/log-in', [UserController::class, 'LogIn'])->name('log-in');
-    Route::post('/auth/log-on', [UserController::class, 'LogOn'])->name('log-on');
+        Route::get('log-in', [AuthController::class, 'LogIn'])->name('log-in');
+        Route::post('log-on', [AuthController::class, 'LogOn'])->name('log-on');
 
-    Route::get('/auth/google-log-in', [GoogleAuthController::class, 'redirect'])->name('google-log-in');
-    Route::get('/auth/google-log-on', [GoogleAuthController::class, 'callBackGoogle'])->name('google-log-on');
+        Route::get('google-log-in', [GoogleAuthController::class, 'redirect'])->name('google-log-in');
+        Route::get('google-log-on', [GoogleAuthController::class, 'callBackGoogle'])->name('google-log-on');
 
-    Route::get('/auth/log-out', [UserController::class, 'LogOut'])->name('log-out');
+        Route::get('log-out', [AuthController::class, 'LogOut'])->name('log-out')->withoutMiddleware('guest');
 
-    Route::get('/auth/sign-up', [UserController::class, 'SignUp'])->name('sign-up');
-    Route::post('/auth/sign-on', [UserController::class, 'SignOn'])->name('sign-on');
-
-    Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language');
-
+        Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
+        Route::post('sign-on', [AuthController::class, 'SignOn'])->name('sign-on');
+    });
 
 });
-
-//TODO: remove the following lines or restore them
-// Route::middleware([SetLocalizationMiddleware::class])->group(function () {
-
-
-// });
