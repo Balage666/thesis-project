@@ -29,7 +29,7 @@ import BodyLayout from './Layouts/BodyLayout.vue';
 <template>
     <div>
 
-        <!-- FIXME: Components don't fill the whole page -->
+        <!-- FIXED... I guess: Components don't fill the whole page -->
         <BodyLayout>
 
             <h1>Vue3 & FormKit test</h1>
