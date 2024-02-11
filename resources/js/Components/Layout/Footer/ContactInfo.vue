@@ -2,6 +2,8 @@
 
 import { Link } from '@inertiajs/inertia-vue3';
 
+import { usedTechnologies } from '../../../Shared/technologies';
+
 </script>
 
 <template>
@@ -94,13 +96,21 @@ import { Link } from '@inertiajs/inertia-vue3';
 
                     <div class="col-12 col-lg-6 text-center">
                         <div class="p-3">
-                            <span class="fw-bold">Technologies used during development:</span>
+                            <span class="fw-bold">{{ __("Technologies used during development:") }}</span>
                         </div>
                     </div>
 
-                    <!--TODO: Render the links dynamically -->
                     <div class="col-12 col-lg-6 ml-lg-0 text-center">
+
                         <a
+                            v-for="technology in usedTechnologies"
+                            class="btn btn-secondary m-1 text-white"
+                            :href="__(technology.url)"
+                            :title="technology.title"
+                            role="button"
+                        > <i :class="technology.icon"></i> </a>
+
+                        <!-- <a
                             class="btn btn-secondary m-1 text-white"
                             role="button"
                         > <i class="fab fa-laravel"></i> </a>
@@ -170,7 +180,7 @@ import { Link } from '@inertiajs/inertia-vue3';
                         <a
                             class="btn btn-secondary m-1 text-white"
                             role="button"
-                        > <i class="fab fa-trello"></i> </a>
+                        > <i class="fab fa-trello"></i> </a> -->
 
 
                     </div>
