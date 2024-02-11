@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Helpers\Shared\Domains;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -20,7 +21,7 @@ class UserFactory extends Factory
     {
         $Username = fake()->firstName()." ".fake()->lastName();
         $UsernameParts = explode(" ", $Username);
-        $Domains = ["@gmail.com", "@protonmail.com", "@ncob.com", "@simgatsy.com", "@simgatla.com", "@flipbasket.tp"];
+        $Domains = Domains::getStoredDomains();
         return [
             'name' => $Username,
             'email' => strtolower($UsernameParts[0]).".".strtolower($UsernameParts[1]).fake()->randomElement($Domains),
