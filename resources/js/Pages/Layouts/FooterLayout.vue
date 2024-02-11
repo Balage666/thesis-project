@@ -14,7 +14,7 @@ import ContactInfo from '../../Components/Layout/Footer/ContactInfo.vue';
 
                 <div class="col-12">
                     <div>
-                        <p> <span class="fw-bold">Created by:</span> Karácsony Balázs (H8HYMB) </p>
+                        <p> <span class="fw-bold">Created by:</span> Karácsony Balázs (H8HYMB) - <span class="fw-bold">{{ new Date().getFullYear() }}</span> </p>
                     </div>
                 </div>
             </div>
