@@ -2,6 +2,14 @@
     width: 100%;
 } */
 
+.no-padding {
+    padding: 0 !important;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
 
 ul.dropdown-menu {
     background-color: lightgrey;
@@ -66,18 +74,8 @@ ul.dropdown-menu {
     border-color: #05B4FC;
 }
 
-/* TODO: Remove the commented lines */
-/* .authNormalButtonBackground {
-
-    background-color: #FFCEA5;
-
-} */
-
-/* .signInWithGoogleButtonBackground {
-
-    background-color: #E27127;
-
-} */
+/* background-color: #FFCEA5; NormalButtonColor
+background-color: #E27127; GoogleButtonColor */
 
 .btn-secondary {
     border-color: #eba865;
