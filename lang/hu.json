@@ -22,12 +22,11 @@
     "Log Out": "Kijelentkezés",
     "Create a new account!": "Hozz létre egy fiókot!",
     "Login with existing account": "Bejelentkezés létező fiókkal!",
-
     "Account": "Fiók",
     "Favorites": "Kedvencek",
     "Basket": "Kosár",
     "Search": "Keresés",
-
     "Hungarian": "Magyar",
-    "English": "Angol"
+    "English": "Angol",
+    "Technologies used during development:": "Fejlesztés alatt felhasznált technológiák"
 }
