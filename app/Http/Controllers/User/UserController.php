@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function Store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

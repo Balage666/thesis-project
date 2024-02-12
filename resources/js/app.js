@@ -11,6 +11,7 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from 'ziggy-js';
 import { plugin as formkitPlugin, defaultConfig } from '@formkit/vue';
+import { createMultiStepPlugin, createAutoAnimatePlugin } from '@formkit/addons'
 import { translations } from './Mixins/translations';
 
 
@@ -20,7 +21,15 @@ createInertiaApp({
         const VueApp = createApp({ render: () => h(App, props) })
         .use(plugin)
         .use(ZiggyVue, Ziggy)
-        .use(formkitPlugin, defaultConfig);
+        .use(formkitPlugin, defaultConfig({
+            config: {
+                classes: {
+                }
+            },
+            plugins: [createMultiStepPlugin(), createAutoAnimatePlugin({
+                duration: 100
+            })]
+        }));
 
         VueApp.mixin(translations);
         VueApp.mount(el);
