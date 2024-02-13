@@ -9,9 +9,8 @@ import { ref } from 'vue';
 
 import { userRoles } from '../../Shared/user-roles'
 
-// console.log(userRoles);
 
-const createUserForm = useForm({
+const form = useForm({
     name: null,
     email: null,
     password: null,
@@ -19,14 +18,13 @@ const createUserForm = useForm({
     roles: []
 });
 
-// console.log(createUserForm.errors.name);
+console.log(form.errors.name);
 
 const sendFormData = () => {
 
+    console.log(`data about to be submitted: ${form.name}, ${form.email}, ${form.password}, ${form.roles}`)
 
-    console.log(`data about to be submitted: ${createUserForm.name}, ${createUserForm.email}, ${createUserForm.password}, ${createUserForm.roles}`)
-
-    createUserForm.post(route('user-store'));
+    form.post(route('user-store'));
 
 }
 
@@ -38,6 +36,7 @@ const sendFormData = () => {
 
         <h1>Create user</h1>
 
+        <!-- TODO: Create Toast notification component-->
         <!-- <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="..." class="rounded me-2" alt="...">
@@ -51,25 +50,26 @@ const sendFormData = () => {
         </div> -->
 
         <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
-            <FormKit type="multi-step" tab-style="progress" :allow-incomplete="false" steps-class="authFormCardBackground">
+
+            <FormKit type="multi-step" tab-style="progress" :allow-incomplete="true" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
 
 
                 <FormKit type="step" name="userInformations">
+                    <h3 class="mb-7 text-center"> {{ __("Create a user with filling the form below!") }} </h3>
 
-                    <div class="alert alert-danger" v-if="createUserForm.errors.name">{{ createUserForm.errors.name }}</div>
+                    <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
 
                     <FormKit
                         id="name"
                         type="text"
                         name="name"
-                        v-model="createUserForm.name"
+                        v-model="form.name"
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
                         label="User's name"
                         :validation="[['required'], ['matches', /^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u]]"
                         validation-visibility="live"
-                        :errors="createUserForm.errors.name ? [createUserForm.errors.name] : null"
 
                     />
 
@@ -78,7 +78,7 @@ const sendFormData = () => {
                         id="email"
                         type="email"
                         name="email"
-                        v-model="createUserForm.email"
+                        v-model="form.email"
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
@@ -92,7 +92,7 @@ const sendFormData = () => {
                             id="password"
                             type="password"
                             name="password"
-                            v-model="createUserForm.password"
+                            v-model="form.password"
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
@@ -105,7 +105,7 @@ const sendFormData = () => {
                             id="password_confirm"
                             type="password"
                             name="password_confirm"
-                            v-model="createUserForm.password_confirmation"
+                            v-model="form.password_confirmation"
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
@@ -123,34 +123,27 @@ const sendFormData = () => {
                             @click="handlers.incrementStep(1)()"
                             label="Continue"
                             data-next="true"
-                            outer-class="form-outline mb-4"
+                            outer-class="form-outline mb-4 ms-auto me-auto"
                             input-class="btn btn-lg btn-secondary shadow-sm fw-bold"
                         />
 
                     </template>
                 </FormKit>
 
-                        <!-- label-class="form-label d-flex justify-content-start fw-bold" -->
                 <FormKit type="step" name="userRoles">
+
+                    <h3 class="mb-7 text-center"> {{ __("Select roles for the user!") }} </h3>
 
                     <FormKit
                         id="roles"
                         name="roles"
                         type="checkbox"
                         label="Roles"
-                        v-model="createUserForm.roles"
+                        v-model="form.roles"
                         :options="userRoles"
                         help="Select roles"
                         validation="required|min:1"
                     />
-
-
-                    <FormKit type="submit"
-                        outer-class="form-outline mb-4"
-                        input-class="btn btn-lg btn-primary shadow-sm fw-bold"
-                    >
-                        Create
-                    </FormKit>
 
                     <template #stepPrevious="{ handlers, node }">
 
@@ -164,16 +157,19 @@ const sendFormData = () => {
                             input-class="btn btn-lg btn-secondary shadow-sm fw-bold"
                         />
 
+
+                        <FormKit type="submit"
+                            label="Create"
+                            outer-class="form-outline mb-4"
+                            input-class="btn btn-lg btn-primary shadow-sm fw-bold"
+                        />
+
                     </template>
 
                 </FormKit>
 
             </FormKit>
         </FormKit>
-
-
-        <!-- /^[\p{L} ,.'-]+$/u -->
-
 
     </div>
 </template>

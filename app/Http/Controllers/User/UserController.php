@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -49,8 +50,33 @@ class UserController extends Controller
         // dd($validator->fails());
 
         if ($validator->fails()) {
-            return back()->withErrors(['name' => 'Invalid credentials'])->onlyInput('name');
+            // dd($validator->errors());
+            return back()->withErrors($validator->errors())->onlyInput('name');
         }
+
+        $tempName = $createUserFormFields["name"];
+
+        $tempNameParts = explode(" ", $tempName);
+
+        $roles = $createUserFormFields['roles'];
+
+        $createUser = User::create([
+            'name' => $tempName,
+            'email' => $createUserFormFields['email'],
+            'password' => $createUserFormFields['password'],
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name={$tempNameParts[0]}+{$tempNameParts[1]}"
+        ]);
+
+        // dd($createUser->id);
+
+        foreach ($roles as $role) {
+            UserRole::create([
+                'name' => $role,
+                'user_id' => $createUser->id
+            ]);
+        }
+
+        return redirect()->route('storefront');
 
     }
 
