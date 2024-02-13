@@ -60,7 +60,8 @@ ul.dropdown-menu {
     border-color: #63F5EC;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     color: #2F4858;
     background-color: #00D7FA;
     border-color: #00D7FA;
@@ -82,7 +83,8 @@ background-color: #E27127; GoogleButtonColor */
     background-color: #eba865;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:focus {
     border-color: #c18f5e;
     background-color: #c18f5e;
 }
