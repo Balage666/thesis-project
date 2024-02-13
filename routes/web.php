@@ -38,7 +38,7 @@ Route::group(['middleware' => ['localization', 'inertia']], function () {
 
         Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront')->withoutMiddleware('auth');
 
-        Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language');
+        Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language')->withoutMiddleware('auth');
 
     });
 
