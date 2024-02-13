@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -30,7 +31,27 @@ class UserController extends Controller
      */
     public function Store(Request $request)
     {
-        dd($request);
+        // dd($request);
+
+        $createUserFormFields = $request->validate([
+            'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'],
+            'roles' => ['required', 'min:1']
+        ]);
+
+        // dd($createUserFormFields);
+
+        $rules = ['email' => 'unique:users,email'];
+
+        $validator = Validator::make($createUserFormFields, $rules);
+
+        // dd($validator->fails());
+
+        if ($validator->fails()) {
+            return back()->withErrors(['name' => 'Invalid credentials'])->onlyInput('name');
+        }
+
     }
 
     /**
