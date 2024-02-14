@@ -29,6 +29,7 @@ export default defineConfig({
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             'ziggy-js': path.resolve('vendor/tightenco/ziggy/dist/vue.es.js'),
+            '*': path.resolve(__dirname, 'resources'),
         }
     },
 });
