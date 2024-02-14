@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class UserController extends Controller
      */
     public function List()
     {
-        return Inertia::render("User/List");
+        return Inertia::render("User/List",
+            ['users' => UserResource::collection( User::paginate(10) )]
+        );
     }
 
     /**
