@@ -93,18 +93,49 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * Legacy Edit Form page
      */
     public function Edit(User $user)
     {
-        //
+
+        // $foundUser = User::where('id', $user->id)->with(['Roles', 'PhoneNumbers', 'Addresses', 'Products'])->get();
+
+        return Inertia::render("User/LegacyEdit", ['userToEdit' => UserResource::collection(User::where('id', $user->id)->get())]);
     }
 
     /**
      * Update the specified resource in storage.
+     * Logic behind Legacy Edit
      */
     public function Update(Request $request, User $user)
     {
-        //
+        // dd($request, $user, $user->Roles());
+
+        $updateUserFormFields = $request->validate([
+            'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u'],
+            'email' => ['required', 'email'],
+            'roles' => ['required', 'min:1']
+        ]);
+
+        $user->name = $updateUserFormFields['name'];
+        $user->email = $updateUserFormFields['email'];
+
+        $roles = $updateUserFormFields['roles'];
+
+        // dd($roles);
+
+        $user->update();
+
+        UserRole::where([['user_id', '=', $user->id], ['name', '!=', 'Customer']])->delete();
+        foreach ($roles as $role) {
+            UserRole::create([
+                'name' => $role,
+                'user_id' => $user->id
+            ]);
+        }
+
+        return redirect()->route('user-list')->with('message', 'User update succeeded!');
+
     }
 
     /**
@@ -112,6 +143,8 @@ class UserController extends Controller
      */
     public function Destroy(User $user)
     {
-        //
+        dd($user);
+
+        $user->delete();
     }
 }

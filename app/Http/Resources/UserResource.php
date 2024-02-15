@@ -23,7 +23,9 @@ class UserResource extends JsonResource
             'profile_picture' => $this->profile_picture,
             'created_at' => $this->created_at,
             'roles' => $this->roles,
-            'addresses' => $this->addresses
+            'addresses' => $this->addresses,
+            'products' => $this->products
+            // 'checked' => false
         ];
     }
 }
