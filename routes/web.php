@@ -28,8 +28,11 @@ Route::group(['middleware' => ['localization', 'inertia']], function () {
             Route::get('create', [UserController::class, 'Create'])->name('user-create');
             Route::get('list', [UserController::class, 'List'])->name('user-list');
             Route::get('show', [UserController::class, 'Show'])->name('user-show');
+            Route::get('edit/{user}', [UserController::class, 'Edit'])->name('user-edit');
 
             Route::post('store', [UserController::class, 'Store'])->name('user-store');
+            Route::post('edit/{user}', [UserController::class, 'Update'])->name('user-update');
+            Route::get('delete/{user}', [UserController::class, 'Destroy'])->name('user-delete');
         });
 
         Route::get('/', function() {
