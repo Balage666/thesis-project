@@ -28,5 +28,12 @@
     "Search": "Keresés",
     "Hungarian": "Magyar",
     "English": "Angol",
-    "Technologies used during development:": "Fejlesztés alatt felhasznált technológiák"
+    "Technologies used during development:": "Fejlesztés alatt felhasznált technológiák",
+    "Create a user with filling the form below!": "Hozz létre egy felhasználót az űrlap mezők kitöltésével!",
+    "Select roles for the user!": "Válaszd ki a jogosultsági köröket a létrehozandó felhasználónak!",
+    "Edit :name's data": ":name adatainak szerkesztése",
+    "Reset :name\\'s password": ":name jelszavának visszaállítása",
+    "Modify roles for :name!": "Módosítsd :name jogosultságait",
+    ":name\\'s Roles": ":name jogosultságai",
+    "List users": "Felhasználók listázása"
 }
