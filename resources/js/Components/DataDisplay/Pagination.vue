@@ -1,6 +1,7 @@
 <script setup>
 
 import { Link } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     pagination: {
@@ -22,8 +23,6 @@ const props = defineProps({
                 v-html="link.label"
                 :disabled="!link.url"
                 :class="{ 'text-white bg-black': link.active, 'bg-disabled text-secondary-subtle': !link.url }"
-
-                preserve-scroll
             />
         </div>
 
