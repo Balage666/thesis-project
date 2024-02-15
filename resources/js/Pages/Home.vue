@@ -27,6 +27,10 @@ import BodyLayout from './Layouts/BodyLayout.vue';
 </style>-->
 
 <template>
+    <Head>
+        <title>Storefront</title>
+    </Head>
+
     <div>
 
         <!-- FIXED... I guess: Components don't fill the whole page -->
