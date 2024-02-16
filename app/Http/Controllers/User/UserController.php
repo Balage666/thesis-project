@@ -88,7 +88,9 @@ class UserController extends Controller
      */
     public function Show(User $user)
     {
-        return Inertia::render("User/Show");
+        return Inertia::render("User/Show", [
+            'userToShow' => UserResource::collection(User::where('id', $user->id)->get())
+        ]);
     }
 
     /**
@@ -100,7 +102,9 @@ class UserController extends Controller
 
         // $foundUser = User::where('id', $user->id)->with(['Roles', 'PhoneNumbers', 'Addresses', 'Products'])->get();
 
-        return Inertia::render("User/LegacyEdit", ['userToEdit' => UserResource::collection(User::where('id', $user->id)->get())]);
+        return Inertia::render("User/LegacyEdit", [
+            'userToEdit' => UserResource::collection(User::where('id', $user->id)->get())
+        ]);
     }
 
     /**
@@ -117,8 +121,17 @@ class UserController extends Controller
             'roles' => ['required', 'min:1']
         ]);
 
+        $rules = ['email' => 'unique:users,email'];
+
+        $validator = Validator::make($updateUserFormFields, $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors())->onlyInput('name');
+        }
+
         $user->name = $updateUserFormFields['name'];
         $user->email = $updateUserFormFields['email'];
+        $user->updated_at = now();
 
         $roles = $updateUserFormFields['roles'];
 
