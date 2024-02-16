@@ -17,11 +17,15 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
             'google_id' => $this->google_id,
+            'signed_in_with_google' => $this->google_id == null,
             'profile_picture' => $this->profile_picture,
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'roles' => $this->roles,
             'addresses' => $this->addresses,
             'products' => $this->products
