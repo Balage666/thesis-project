@@ -110,25 +110,18 @@ const props = defineProps({
                                     <div class="row">
                                         <div class="col-md-12 p-md-5 col-lg-8">
 
-                                            <div class="card">
-                                                <div class="card-header container-fluid no-padding">
-                                                    <div class="row">
-                                                        <div class="col-12 text-center">
-                                                            <img :src="user.profile_picture" class="img-fluid p-3" :alt="user.name" :title="user.name">
+                                            <div class="card border-0 rounded-5">
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-column align-items-center text-center">
+                                                        <img :src="user.profile_picture" :alt="user.name" class="rounded-circle" width="150">
+                                                        <div class="mt-1">
+                                                            <h4>{{ user.name }}</h4>
+                                                            <p class="text-secondary my-1" v-for="role in user.roles">{{ __(role.name) }}</p>
+                                                            <div class="d-grid gap-2">
+                                                                <Link :href="route('user-show', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">View User</Link>
+                                                                <Link :href="route('user-edit', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">Legacy User Editor</Link>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center">{{ user.name }}</h5>
-                                                    <p class="card-text text-center">{{ user.email }}</p>
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li v-for="role in user.roles" class="list-group-item">{{ role.name }}</li>
-                                                </ul>
-                                                <div class="card-body">
-                                                    <div class="d-grid gap-2">
-                                                        <Link href="#" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">User Profile</Link>
-                                                        <a :href="route('user-edit', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">Legacy User Editor</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,12 +133,12 @@ const props = defineProps({
 
                                             <div class="my-3 my-lg-0">
                                                 <h2 class="text-center">List</h2>
-                                                <ul class="list-group ">
-                                                    <li class="list-group-item">An item</li>
-                                                    <li class="list-group-item">A second item</li>
-                                                    <li class="list-group-item">A third item</li>
-                                                    <li class="list-group-item">A fourth item</li>
-                                                    <li class="list-group-item">And a fifth one</li>
+                                                <ul class="list-group border-0 rounded-5">
+                                                    <li class="list-group-item p-3">An item</li>
+                                                    <li class="list-group-item p-3">A second item</li>
+                                                    <li class="list-group-item p-3">A third item</li>
+                                                    <li class="list-group-item p-3">A fourth item</li>
+                                                    <li class="list-group-item p-3">And a fifth one</li>
                                                 </ul>
                                             </div>
 
