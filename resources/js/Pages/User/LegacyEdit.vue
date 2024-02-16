@@ -16,7 +16,7 @@ const props = defineProps({
 
 const userValues = props.userToEdit.data[0];
 
-const rolesUserHave = userValues.roles.map(r => r.name).filter(r => r != 'Customer');
+const rolesUserHave = userValues.roles.map(r => r.name).filter(r => filterUserRoles.includes(r));
 
 console.log(rolesUserHave);
 
