@@ -1,0 +1,18 @@
+.container-img {
+    position: relative;
+    width: 50%;
+}
+
+.container-img img {
+    width: 100%;
+    height: auto;
+}
+
+.container-img .btn {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(0%, -100%);
+    -ms-transform: translate(0, -100%);
+    cursor: pointer;
+}
