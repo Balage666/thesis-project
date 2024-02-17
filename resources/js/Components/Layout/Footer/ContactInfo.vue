@@ -2,7 +2,7 @@
 
 import { Link } from '@inertiajs/inertia-vue3';
 
-import { usedTechnologies } from '../../../Shared/technologies';
+import { usedTechnologies } from '*js-shared/technologies';
 
 </script>
 

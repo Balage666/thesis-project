@@ -4,9 +4,8 @@ import { FormKit } from '@formkit/vue';
 
 import { useForm, router } from '@inertiajs/vue3';
 
-import { userRoles } from '../../Shared/user-roles';
 
-import { filterUserRoles } from '../../Shared/filtered-user-roles';
+import { filterUserRoles } from '*js-shared/filtered-user-roles';
 
 const props = defineProps({
     userToEdit: {
@@ -32,6 +31,10 @@ const sendFormData = () => {
 
 }
 
+const callResetPassword = () => {
+    router.post(route('user-reset-password', { user: userValues }));
+}
+
 </script>
 <template>
     <Head>
@@ -51,6 +54,7 @@ const sendFormData = () => {
                     <h3 class="mb-7 text-center"> {{ __("Edit :name's data", userValues) }} </h3>
 
                     <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+                    <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
 
                     <FormKit
                         id="name"
@@ -83,6 +87,7 @@ const sendFormData = () => {
                         :label="__('Reset :name\'s password', userValues)"
                         outer-class="form-outline mb-4 text-center"
                         input-class="btn btn-lg btn-info shadow-sm fw-bold"
+                        @click="callResetPassword"
                     />
 
 

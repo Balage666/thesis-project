@@ -30,6 +30,9 @@ export default defineConfig({
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             'ziggy-js': path.resolve('vendor/tightenco/ziggy/dist/vue.es.js'),
             '*': path.resolve(__dirname, 'resources'),
+            '*js-shared': path.resolve(__dirname, 'resources/js/Shared'),
+            '*vue-components' : path.resolve(__dirname, 'resources/js/Components'),
+            '*vue-pages': path.resolve(__dirname, 'resources/js/Pages')
         }
     },
 });

@@ -7,7 +7,7 @@ import { useForm, router } from '@inertiajs/vue3';
 
 import { ref } from 'vue';
 
-import { userRoles } from '../../Shared/user-roles'
+import { userRoles } from '*js-shared/user-roles'
 
 
 const form = useForm({
