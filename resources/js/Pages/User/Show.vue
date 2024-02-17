@@ -1,9 +1,13 @@
 <script setup>
 
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { Link, Head } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
+import { useForm, router } from '@inertiajs/vue3';
 
-import BodyLayout from '../Layouts/BodyLayout.vue'
+import BodyLayout from '*/js/Pages/Layouts/BodyLayout.vue';
+
+import editUserModeObj from '*js-shared/edit-user-mode-obj';
 
 const props = defineProps({
     userToShow: {
@@ -11,9 +15,49 @@ const props = defineProps({
     }
 })
 
+
+
+const EditMode = reactive(editUserModeObj);
+
+const toggleEditMode = () => {
+    for (const key in EditMode) {
+        if (Object.hasOwnProperty.call(EditMode, key)) {
+            EditMode[key] = !EditMode[key]
+        }
+    }
+}
+
+console.log(usePage().props.value.flash);
+
 const user = ref(props.userToShow.data[0]);
 
+const editNameForm = useForm({
+    name: user.value.name
+})
+
+const editEmailForm = useForm({
+    email: user.value.email
+})
+
+console.log(editEmailForm.email, editNameForm.name)
+
+const sendModifiedEmailData = () => {
+
+    router.post(route('user-email-edit', { user: user.value }), editEmailForm);
+
+}
+
+const sendModifiedNameData = () => {
+    router.post(route('user-name-edit', { user: user.value }), editNameForm);
+}
+
 </script>
+
+<style scoped>
+
+@import url(*/css/edit-user-mode.css);
+
+</style>
 
 <template>
 
@@ -27,6 +71,8 @@ const user = ref(props.userToShow.data[0]);
             <div class="container-fluid bg-info-subtle border-0 rounded-5 px-4 py-5 my-3">
                 <div class="row">
 
+                    <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
+                    <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
                     <!--TODO: Implement edit mode-->
                     <div class="col-12 col-lg-12">
                         <div class="accordion" id="accordionUserDetails">
@@ -47,7 +93,10 @@ const user = ref(props.userToShow.data[0]);
                                                     <div class="card border-0 rounded-5">
                                                         <div class="card-body">
                                                             <div class="d-flex flex-column align-items-center text-center">
-                                                                <img :src="user.profile_picture" :alt="user.name" class="rounded-circle" width="150">
+                                                                <div class="container-img">
+                                                                    <img :src="user.profile_picture" :alt="user.name" class="rounded-circle" width="150">
+                                                                    <button class="btn btn-lg btn-primary" v-if="EditMode.changeProfilePictureButtonVisible">Change Picture</button>
+                                                                </div>
                                                                 <div class="mt-1">
                                                                     <h4>{{ user.name }}</h4>
                                                                     <!-- TODO: Make a separate accordion for user roles -->
@@ -68,10 +117,14 @@ const user = ref(props.userToShow.data[0]);
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <h6 class="my-0 fw-bold">Full Name</h6>
+                                                                    <h6 class="my-0 fw-bold text-center text-lg-start text-md-start text-sm-start">Full Name</h6>
                                                                 </div>
-                                                                <div class="col-sm-6 text-secondary">
-                                                                    <h6 class="my-0">{{ user.name }}</h6>
+                                                                <div class="col-sm-6">
+                                                                    <h6 class="my-0 text-secondary text-center text-lg-start text-md-start text-sm-start" v-if="!EditMode.editNameFormVisible">{{ user.name }}</h6>
+                                                                    <form v-if="EditMode.editNameFormVisible" @submit.prevent="sendModifiedNameData">
+                                                                        <input class="form-control-sm border-0 rounded-end-0" type="text" name="name" id="name" v-model="editNameForm.name" required>
+                                                                        <input class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" type="submit" value="Modify">
+                                                                    </form>
                                                                 </div>
                                                             </div>
 
@@ -79,10 +132,14 @@ const user = ref(props.userToShow.data[0]);
 
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <h6 class="my-0 fw-bold">Email</h6>
+                                                                    <h6 class="my-0 fw-bold text-center text-lg-start text-md-start text-sm-start">Email</h6>
                                                                 </div>
                                                                 <div class="col-sm-6">
-                                                                    <h6 class="text-secondary my-0">{{ user.email }}</h6>
+                                                                    <h6 class="text-secondary text-center text-lg-start text-md-start text-sm-start my-0" v-if="!EditMode.editEmailFormVisible">{{ user.email }}</h6>
+                                                                    <form v-if="EditMode.editEmailFormVisible" @submit.prevent="sendModifiedEmailData">
+                                                                        <input class="form-control-sm border-0 rounded-end-0" type="email" name="email" id="email" v-model="editEmailForm.email" required>
+                                                                        <input class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" type="submit" value="Modify">
+                                                                    </form>
                                                                 </div>
                                                             </div>
 
@@ -90,11 +147,11 @@ const user = ref(props.userToShow.data[0]);
 
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <h6 class="my-0 fw-bold">Password</h6>
+                                                                    <h6 class="my-0 fw-bold text-center text-lg-start text-md-start text-sm-start">Password</h6>
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <h6 class="my-0 text-secondary">************************</h6>
-                                                                    <!-- <a href="" class="text-secondary my-0">{{__('Reset :name\'s password', user)}}</a> -->
+                                                                <div class="col-sm-6 text-center text-lg-start text-md-start text-sm-start">
+                                                                    <h6 class="my-0 text-secondary" v-if="!EditMode.resetPasswordButtonVisible">************************</h6>
+                                                                    <Link :href="route('user-reset-password', { user: user })" method="post"  class="text-secondary my-0 " v-if="EditMode.resetPasswordButtonVisible">{{__('Reset :name\'s password', user)}}</Link>
                                                                 </div>
                                                             </div>
 
@@ -103,7 +160,7 @@ const user = ref(props.userToShow.data[0]);
                                                             <div class="row">
                                                                 <div class="col-sm-12 d-grid gap-2 gap-lg-0 d-lg-flex d-md-flex align-items-md-center align-items-lg-center justify-content-md-center justify-content-lg-between">
                                                                     <Link :href="route('user-edit', { user: user })" class="btn btn-lg btn-info" as="button" type="button">{{ __("Legacy Editor") }}</Link>
-                                                                    <button class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
+                                                                    <button @click="toggleEditMode" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
                                                                 </div>
                                                             </div>
                                                         </div>
