@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserDetailsController extends Controller
 {
@@ -15,9 +16,15 @@ class UserDetailsController extends Controller
             'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u']
         ]);
 
-        $user->name = $editNameFormField['name'];
-        $user->updated_at = now();
+        $oldName = $user->name;
 
+        $user->name = $editNameFormField['name'];
+
+        if ($oldName == $user->name) {
+            return back()->with('message', 'Name stayed the same!');
+        }
+
+        $user->updated_at = now();
         $user->update();
 
         return redirect()->back()->with('message', 'Name modified!');
@@ -37,10 +44,31 @@ class UserDetailsController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->onlyInput('email');
         }
+
+        $oldEmail = $user->email;
+
+        $user->email = $editEmailFormField['email'];
+
+        // if ($oldEmail == $user->email) {
+        //     return back()->with('message', 'Email stayed the same!');
+        // }
+
+        $user->updated_at = now();
+        $user->update();
+
+        return redirect()->back()->with('message', 'Email modified!');
     }
 
     //TODO: Implement reset password
-    public function ResetPassword() {
+    public function ResetPassword(Request $request, User $user) {
+
+        $resetPassword = "ResetPassword";
+        $user->password = $resetPassword;
+        $user->updated_at = now();
+
+        $user->update();
+
+        return redirect()->back()->with('message', "Password has been reset for {$user->name}!");
 
     }
 }
