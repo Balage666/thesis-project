@@ -147,7 +147,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('user-list')->with('message', 'User update succeeded!');
+        return redirect()->route('user-show', ['user' => $user])->with('message', 'User update succeeded!');
 
     }
 
