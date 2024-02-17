@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Seller',
             'user_id' => 1
         ]);
+        \App\Models\Phone::factory()->create([
+            'number' => '0623400400',
+            'user_id' => 1
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
