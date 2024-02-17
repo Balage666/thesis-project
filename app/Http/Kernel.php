@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
-            \App\Http\Middleware\SetLocalizationMiddleware::class
+            \App\Http\Middleware\SetLocalizationMiddleware::class,
         ],
 
         'api' => [
@@ -67,6 +67,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'localization' => \App\Http\Middleware\SetLocalizationMiddleware::class,
-        'inertia' => \App\Http\Middleware\HandleInertiaRequests::class
+        'inertia' => \App\Http\Middleware\HandleInertiaRequests::class,
     ];
 }
