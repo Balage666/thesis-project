@@ -25,6 +25,8 @@ Route::group(['middleware' => ['localization', 'inertia']], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
+        //TODO: Create a working middleware for these routes
+        //and not an anomaly which makes the devserver shit itself :)
         Route::group(['prefix' => 'user-management'], function () {
             Route::get('create', [UserController::class, 'Create'])->name('user-create');
             Route::get('list', [UserController::class, 'List'])->name('user-list');
@@ -37,7 +39,7 @@ Route::group(['middleware' => ['localization', 'inertia']], function () {
 
             Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit');
             Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit');
-            Route::get('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
+            Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
         });
 
         Route::get('/', function() {
