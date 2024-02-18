@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'localization' => \App\Http\Middleware\SetLocalizationMiddleware::class,
         'inertia' => \App\Http\Middleware\HandleInertiaRequests::class,
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
     ];
 }

@@ -21,49 +21,46 @@ use App\Http\Middleware\SetLocalizationMiddleware;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::group(['middleware' => ['localization', 'inertia']], function () {
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['middleware' => 'auth'], function () {
+    //DONE: Create a working middleware for these routes
+    //and not an anomaly which makes the devserver shit itself :)
+    Route::group(['prefix' => 'user-management', 'middleware' => 'role:Moderator,Admin'], function () {
+        Route::get('create', [UserController::class, 'Create'])->name('user-create');
+        Route::get('list', [UserController::class, 'List'])->name('user-list');
+        Route::get('show/{user}', [UserController::class, 'Show'])->name('user-show');
+        Route::get('edit/{user}', [UserController::class, 'Edit'])->name('user-edit');
 
-        //TODO: Create a working middleware for these routes
-        //and not an anomaly which makes the devserver shit itself :)
-        Route::group(['prefix' => 'user-management'], function () {
-            Route::get('create', [UserController::class, 'Create'])->name('user-create');
-            Route::get('list', [UserController::class, 'List'])->name('user-list');
-            Route::get('show/{user}', [UserController::class, 'Show'])->name('user-show');
-            Route::get('edit/{user}', [UserController::class, 'Edit'])->name('user-edit');
+        Route::post('store', [UserController::class, 'Store'])->name('user-store');
+        Route::post('edit/{user}', [UserController::class, 'Update'])->name('user-update');
 
-            Route::post('store', [UserController::class, 'Store'])->name('user-store');
-            Route::post('edit/{user}', [UserController::class, 'Update'])->name('user-update');
-            Route::get('delete/{user}', [UserController::class, 'Destroy'])->name('user-delete');
+        Route::get('delete/{user}', [UserController::class, 'Destroy'])->name('user-delete');
 
-            Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit');
-            Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit');
-            Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
-        });
-
-        Route::get('/', function() {
-            return redirect()->route('storefront');
-        })->withoutMiddleware('auth');
-
-        Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront')->withoutMiddleware('auth');
-
-        Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language')->withoutMiddleware('auth');
-
+        Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit');
+        Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit');
+        Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
     });
 
-    Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
+    Route::get('/', function() {
+        return redirect()->route('storefront');
+    })->withoutMiddleware('auth');
 
-        Route::get('log-in', [AuthController::class, 'LogIn'])->name('log-in');
-        Route::post('log-on', [AuthController::class, 'LogOn'])->name('log-on');
+    Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront')->withoutMiddleware('auth');
 
-        Route::get('google-log-in', [GoogleAuthController::class, 'redirect'])->name('google-log-in');
-        Route::get('google-log-on', [GoogleAuthController::class, 'callBackGoogle'])->name('google-log-on');
+    Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language')->withoutMiddleware('auth');
 
-        Route::get('log-out', [AuthController::class, 'LogOut'])->name('log-out')->withoutMiddleware('guest');
+});
 
-        Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
-        Route::post('sign-on', [AuthController::class, 'SignOn'])->name('sign-on');
-    });
+Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
 
+    Route::get('log-in', [AuthController::class, 'LogIn'])->name('log-in');
+    Route::post('log-on', [AuthController::class, 'LogOn'])->name('log-on');
+
+    Route::get('google-log-in', [GoogleAuthController::class, 'redirect'])->name('google-log-in');
+    Route::get('google-log-on', [GoogleAuthController::class, 'callBackGoogle'])->name('google-log-on');
+
+    Route::get('log-out', [AuthController::class, 'LogOut'])->name('log-out')->withoutMiddleware('guest');
+
+    Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
+    Route::post('sign-on', [AuthController::class, 'SignOn'])->name('sign-on');
 });
