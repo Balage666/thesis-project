@@ -73,7 +73,7 @@ const sendModifiedNameData = () => {
 
                     <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
                     <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
-                    <!--TODO: Implement edit mode-->
+                    <!--DONE: Implement edit mode-->
                     <div class="col-12 col-lg-12">
                         <div class="accordion" id="accordionUserDetails">
                             <div class="accordion-item authFormCardBackground bg-gradient">

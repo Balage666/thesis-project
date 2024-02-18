@@ -84,25 +84,22 @@ const props = defineProps({
             <div class="row m-3">
                 <div class="col-12">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="accordion-item authFormCardBackground bg-gradient p-3"  v-for="user in props.users.data" :key="user.id" :class="{'bg-warning' : user.checked}">
-                            <div class="row">
-                                <!--FIXME: Shouldn't store the selected state in the backend I guess-->
+                        <div class="accordion-item authFormCardBackground bg-gradient"  v-for="user in props.users.data" :key="user.id">
+                            <!-- <div class="row">
                                 <div class="col-12">
                                     <input type="checkbox" name="" id="" v-model="user.checked">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                    <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + user.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                        <div class="col-3 me-2">
-                                            <img :src="user.profile_picture" class="border-0 rounded-5" width="45px" height="45px">
-                                        </div>
-                                        <div class="col-3 mt-1">
-                                            <span class="fw-bold">{{ user.name }}</span>
-                                        </div>
-                                    </button>
-                                </h2>
-                            </div>
+                            </div> -->
+                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + user.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                    <div class="col-3 me-2">
+                                        <img :src="user.profile_picture" class="border-0 rounded-5" width="45px" height="45px">
+                                    </div>
+                                    <div class="col-3 mt-1">
+                                        <span class="fw-bold">{{ user.name }}</span>
+                                    </div>
+                                </button>
+                            </h2>
 
                             <div :id="'open' + user.id" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                                 <div class="container-fluid accordion-body">
@@ -116,7 +113,7 @@ const props = defineProps({
                                                         <img :src="user.profile_picture" :alt="user.name" class="rounded-circle" width="150">
                                                         <div class="mt-1">
                                                             <h4>{{ user.name }}</h4>
-                                                            <p class="text-secondary my-1" v-for="role in user.roles">{{ __(role.name) }}</p>
+                                                            <!-- <p class="text-secondary my-1" v-for="role in user.roles">{{ __(role.name) }}</p> -->
                                                             <div class="d-grid gap-2">
                                                                 <Link :href="route('user-show', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">View User</Link>
                                                                 <Link :href="route('user-edit', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">Legacy User Editor</Link>
@@ -132,20 +129,15 @@ const props = defineProps({
                                         <div class="col-md-12 p-md-5 col-lg-4">
 
                                             <div class="my-3 my-lg-0">
-                                                <h2 class="text-center">List</h2>
+                                                <h2 class="text-center">{{ __(":first_name\'s roles: ", user) }}</h2>
                                                 <ul class="list-group border-0 rounded-5">
-                                                    <li class="list-group-item p-3">An item</li>
-                                                    <li class="list-group-item p-3">A second item</li>
-                                                    <li class="list-group-item p-3">A third item</li>
-                                                    <li class="list-group-item p-3">A fourth item</li>
-                                                    <li class="list-group-item p-3">And a fifth one</li>
+                                                    <li class="list-group-item p-3" v-for="role in user.roles">{{ __(role.name) }}</li>
                                                 </ul>
                                             </div>
 
                                         </div>
 
                                     </div>
-                                    <!-- <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
                                 </div>
                             </div>
                         </div>
@@ -158,20 +150,5 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-
-
-        <!-- <div class="p-5 bg-warning">
-
-            <div v-for="user in props.users.data" :key="user.id">
-
-
-                #({{ user.id }}): {{ user.name }}
-
-
-            </div>
-
-            <Pagination :pagination="props.users.meta"/>
-
-        </div> -->
     </div>
 </template>

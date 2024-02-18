@@ -1,6 +1,6 @@
 <script setup>
-import Navbar from '../../Components/Layout/Header/Navbar.vue';
-import LanguageSwitcher from '../../Components/Language/LanguageSwitcher.vue';
+import Navbar from '*vue-components/Layout/Header/Navbar.vue';
+import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
 
 </script>
 <template>

@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 
-import ErrorCodeCard from '../Components/Error/ErrorCodeCard.vue';
+import ErrorCodeCard from '*vue-components/Error/ErrorCodeCard.vue';
 
 const props = defineProps({ status: Number })
 

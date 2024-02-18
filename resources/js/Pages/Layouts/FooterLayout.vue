@@ -1,6 +1,6 @@
 <script setup>
 
-import ContactInfo from '../../Components/Layout/Footer/ContactInfo.vue';
+import ContactInfo from '*vue-components/Layout/Footer/ContactInfo.vue';
 </script>
 
 
