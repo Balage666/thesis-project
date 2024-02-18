@@ -71,4 +71,6 @@ class UserDetailsController extends Controller
         return redirect()->back()->with('message', "Password has been reset for {$user->name}!");
 
     }
+
+    public function ChangeProfilePicture(Request $request, User $user) {}
 }
