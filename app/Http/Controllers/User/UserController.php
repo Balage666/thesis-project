@@ -156,8 +156,13 @@ class UserController extends Controller
      */
     public function Destroy(User $user)
     {
-        dd($user);
+        // dd($user);
+        if (auth()->user()->id === $user->id) {
+            return redirect()->route('storefront')->with('message', 'User self-deletion prevented!');
+        }
 
         $user->delete();
+
+        return redirect()->route('user-list')->with('message', 'User deleted');
     }
 }
