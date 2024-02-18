@@ -21,7 +21,7 @@ class UserFactory extends Factory
     {
         $Username = fake()->firstName()." ".fake()->lastName();
         $UsernameParts = explode(" ", $Username);
-        $Domains = Domains::getStoredDomains();
+        $Domains = Domains::STORED_DOMAINS;
         return [
             'name' => $Username,
             'email' => strtolower($UsernameParts[0]).".".strtolower($UsernameParts[1]).fake()->randomElement($Domains),
