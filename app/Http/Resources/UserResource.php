@@ -29,7 +29,6 @@ class UserResource extends JsonResource
             'roles' => $this->roles,
             'addresses' => $this->addresses,
             'products' => $this->products
-            // 'checked' => false
         ];
     }
 }
