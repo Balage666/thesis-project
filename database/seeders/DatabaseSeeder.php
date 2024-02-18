@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Helpers\Shared\SeederHelper;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(5)->create();
+        $userSeed = SeederHelper::USER_SEED;
+
+        \App\Models\User::factory($userSeed)->create();
         \App\Models\UserRole::factory()->create([
             'name' => 'Customer',
             'user_id' => 1
@@ -26,9 +31,29 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin Istrator',
+            'email' => 'admin@bluevenue.tp',
+            'email_verified_at' => now(),
+            'password' => Hash::make('admin'),
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name=Admin+Istrator",
+            'remember_token' => Str::random(10),
+        ]);
+        \App\Models\UserRole::factory()->create([
+            'name' => 'Customer',
+            'user_id' => $userSeed + 1
+        ]);
+        \App\Models\UserRole::factory()->create([
+            'name' => 'Seller',
+            'user_id' => $userSeed + 1
+        ]);
+        \App\Models\UserRole::factory()->create([
+            'name' => 'Moderator',
+            'user_id' => $userSeed + 1
+        ]);
+        \App\Models\UserRole::factory()->create([
+            'name' => 'Admin',
+            'user_id' => $userSeed + 1
+        ]);
     }
 }
