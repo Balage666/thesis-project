@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userSeed = SeederHelper::USER_SEED;
+        $adminSeed = SeederHelper::ADMIN_SEED_VALUE;
 
         \App\Models\User::factory($userSeed)->create();
         \App\Models\UserRole::factory()->create([
@@ -26,12 +27,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Seller',
             'user_id' => 1
         ]);
-        \App\Models\Phone::factory()->create([
-            'number' => '0623400400',
-            'user_id' => 1
-        ]);
+        // \App\Models\Phone::factory()->create([
+        //     'number' => '0623400400',
+        //     'mask' => '(## ##) ### ####',
+        //     'user_id' => 1
+        // ]);
 
         \App\Models\User::factory()->create([
+            'id' => $adminSeed,
             'name' => 'Admin Istrator',
             'email' => 'admin@bluevenue.tp',
             'email_verified_at' => now(),
@@ -41,19 +44,19 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\UserRole::factory()->create([
             'name' => 'Customer',
-            'user_id' => $userSeed + 1
+            'user_id' => $adminSeed
         ]);
         \App\Models\UserRole::factory()->create([
             'name' => 'Seller',
-            'user_id' => $userSeed + 1
+            'user_id' => $adminSeed
         ]);
         \App\Models\UserRole::factory()->create([
             'name' => 'Moderator',
-            'user_id' => $userSeed + 1
+            'user_id' => $adminSeed
         ]);
         \App\Models\UserRole::factory()->create([
             'name' => 'Admin',
-            'user_id' => $userSeed + 1
+            'user_id' => $adminSeed
         ]);
     }
 }
