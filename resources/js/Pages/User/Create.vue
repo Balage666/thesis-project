@@ -36,19 +36,6 @@ const sendFormData = () => {
 
         <h1>Create user</h1>
 
-        <!-- TODO: Create Toast notification component-->
-        <!-- <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small class="text-body-secondary">11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
-        </div> -->
-
         <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
 
             <FormKit type="multi-step" tab-style="progress" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
