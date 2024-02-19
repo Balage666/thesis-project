@@ -13,6 +13,7 @@ import { ZiggyVue } from 'ziggy-js';
 import { plugin as formkitPlugin, defaultConfig } from '@formkit/vue';
 import { createMultiStepPlugin, createAutoAnimatePlugin } from '@formkit/addons'
 import { translations } from './Mixins/translations';
+import PrimeVue from 'primevue/config';
 
 
 createInertiaApp({
@@ -29,7 +30,10 @@ createInertiaApp({
             plugins: [createMultiStepPlugin(), createAutoAnimatePlugin({
                 duration: 100
             })]
-        }));
+        }))
+        .use(PrimeVue, {
+            unstyled: true
+        });
 
         VueApp.mixin(translations);
         VueApp.mount(el);

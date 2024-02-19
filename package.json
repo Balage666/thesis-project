@@ -22,8 +22,10 @@
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/vue3": "^1.0.14",
+        "countries-phone-masks": "^1.0.8",
         "devicon": "^2.16.0",
         "lodash": "^4.17.21",
+        "primevue": "^3.48.1",
         "vue": "^3.4.15",
         "vue-loader": "^17.3.1"
     }
