@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Phone extends Model
 {
 
-    public $timestamps = false;
-
     protected $fillable = [
         'number',
-        'user_id'
+        'mask',
+        'user_id',
     ];
     use HasFactory;
 
