@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->mediumText('number');
+            $table->tinyText('mask');
             $table->bigInteger('user_id')->unsigned();
+            // $table->tinyText('country_iso2code');
+            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            // $table->foreign('country_iso2code')->references('iso2code')->on('countries')->cascadeOnDelete();
         });
     }
 
