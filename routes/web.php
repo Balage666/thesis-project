@@ -7,6 +7,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\StoreFrontController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
+use App\Http\Controllers\Phone\PhoneController;
 use App\Http\Controllers\User\UserDetailsController;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\SetLocalizationMiddleware;
@@ -39,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit');
         Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit');
         Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
+
+        Route::post('phone-add/{user}', [PhoneController::class, 'Store'])->name('phone-number-add');
     });
 
     Route::get('/', function() {
