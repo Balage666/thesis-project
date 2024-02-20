@@ -9,14 +9,17 @@ use App\Http\Controllers\Controller;
 
 class PhoneController extends Controller
 {
+
     public function Store(Request $request, User $user) {
 
         $phoneNumberFormFields = $request->validate([
-            'number' => ['required', 'unique:phones,number'],
+            'countryIso' => ['required'],
+            'number' => ['required'],
             'mask' => ['required']
         ]);
 
         Phone::create([
+            'countryIso2code' => $phoneNumberFormFields['countryIso'],
             'number' => $phoneNumberFormFields['number'],
             'mask' => $phoneNumberFormFields['mask'],
             'user_id' => $user->id
