@@ -6,7 +6,8 @@ import { usePage } from '@inertiajs/inertia-vue3';
 import { useForm, router } from '@inertiajs/vue3';
 
 import BodyLayout from '*/js/Pages/Layouts/BodyLayout.vue';
-import PhoneNumberForm from '*vue-components/Input/PhoneNumberForm.vue';
+import CreatePhoneNumber from '*vue-components/Input/CreatePhoneNumber.vue'
+import ListPhoneNumbers from '*vue-components/DataDisplay/PhoneNumber/ListPhoneNumbers.vue';
 
 import editUserModeObj from '*js-shared/edit-user-mode-obj';
 
@@ -15,7 +16,6 @@ const props = defineProps({
         type: Object
     }
 })
-
 
 
 const EditMode = reactive(editUserModeObj);
@@ -45,7 +45,7 @@ const editEmailForm = useForm({
     email: user.value.email
 })
 
-// console.log(editEmailForm.email, editNameForm.name)
+console.log(user.value);
 
 const sendModifiedEmailData = () => {
 
@@ -55,6 +55,11 @@ const sendModifiedEmailData = () => {
 
 const sendModifiedNameData = () => {
     router.post(route('user-name-edit', { user: user.value }), editNameForm);
+}
+
+const sendEmittedPhoneNumberData = (payload) => {
+    // console.log(payload);
+    router.post(route('phone-number-add', { user: user.value }), payload);
 }
 
 </script>
@@ -186,7 +191,7 @@ const sendModifiedNameData = () => {
 
             <div class="row mt-3">
 
-                <!-- TODO: List Addresses -->
+                <!-- TODO: List and create Addresses -->
                 <div class="col-12 col-lg-6">
                     <div class="accordion" id="accordionAddresses">
 
@@ -223,9 +228,9 @@ const sendModifiedNameData = () => {
                                         <div class="text-end">
                                             <button class="btn" :class="[ PhoneNumberFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="togglePhoneNumberFormComponent"><i class="fa-solid" :class="[ PhoneNumberFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ PhoneNumberFormVisible ? 'Cancel' : 'New phone number' }} </button>
                                         </div>
-                                        <PhoneNumberForm :visible="PhoneNumberFormVisible"/>
+                                        <CreatePhoneNumber :visible="PhoneNumberFormVisible" :user="user" @submitted="sendEmittedPhoneNumberData"/>
                                     </div>
-                                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <ListPhoneNumbers :list="user.phone_numbers"/>
                                 </div>
                             </div>
                         </div>
