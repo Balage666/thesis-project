@@ -9,6 +9,7 @@ class Phone extends Model
 {
 
     protected $fillable = [
+        'countryIso2code',
         'number',
         'mask',
         'user_id',
