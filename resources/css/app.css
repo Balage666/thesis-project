@@ -119,4 +119,21 @@ background-color: #E27127; GoogleButtonColor */
     background-color: #FFCA80;
 }
 
+.btn-danger {
+    border-color: #A43E00;
+    background-color: #A43E00;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    border-color: #782e00;
+    background-color: #782e00;
+}
+
+.btn-danger:active,
+.btn-danger:active:hover,
+.btn-danger:active:active {
+    border-color: #502206;
+    background-color: #502206;
+}
 
