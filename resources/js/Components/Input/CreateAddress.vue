@@ -7,17 +7,37 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
                     <label class="form-label d-flex justify-content-start" for="country">{{ __('Select country') }}</label>
-                    <select class="form-select form-select-lg formInputFieldBackground" name="country" id="country" @change="getStatesByCountryIso" v-model="addressForm.countryIso">
-                        <option :value="NaN">{{ __('--Select country--') }}</option>
-                        <option v-for="country in listOfCountries" :value="country.isoCode" >{{ __(country.name) }}</option>
+                    <select
+                        class="form-select form-select-lg formInputFieldBackground"
+                        name="country"
+                        id="country"
+                        @change="getStatesByCountryIso"
+                        v-model="addressForm.countryIso"
+                    >
+                        <option :value="-1">{{ __('--Select country--') }}</option>
+                        <option
+                            v-for="country in listOfCountries"
+                            :value="country.isoCode"
+                        >{{ __(country.name) }}</option>
                     </select>
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                     <label class="form-label d-flex justify-content-start" for="region">{{ __("Select your state or region") }}</label>
                     <!-- <input class="form-control form-control-lg formInputFieldBackground" type="text" name="region" id="region" v-model="addressForm.region"> -->
-                    <select :disabled="listOfStatesByCountryIso.length == 0" :required="listOfStatesByCountryIso.length != 0" class="form-select form-select-lg formInputFieldBackground" name="region" id="region" v-model="addressForm.region">
-                        <option :value="NaN">{{ __('--Select state or region or country--') }}</option>
-                        <option v-for="state in listOfStatesByCountryIso" :value="state.state_code" >{{ __(state.name) }}</option>
+                    <select
+                        :disabled="listOfStatesByCountryIso.length == 0"
+                        :required="listOfStatesByCountryIso.length != 0"
+                        class="form-select form-select-lg formInputFieldBackground"
+                        name="region"
+                        id="region"
+                        @change="check"
+                        v-model="addressForm.regionIso"
+                    >
+                        <option :value="-1">{{ __('--Select state or region or country--') }}</option>
+                        <option
+                            v-for="state in listOfStatesByCountryIso"
+                            :value="state.isoCode"
+                        >{{ __(state.name) }}</option>
                     </select>
 
                 </div>
@@ -43,7 +63,7 @@
 
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import { Country, State, City } from 'country-state-city'
 
@@ -54,30 +74,43 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    user: {
-        type: Object,
-        required: true
-    }
 });
 
 const listOfCountries = Country.getAllCountries().map(({ flag, name, isoCode }) => ({ flag, name, isoCode }));
 const listOfStatesByCountryIso = ref([])
 
 const addressForm = useForm({
-    'countryIso': NaN,
-    'region' : NaN,
-    'postalZipCode': '',
-    'addressText': ''
+    countryIso: -1,
+    regionIso : -1,
+    postalZipCode: '',
+    addressText: ''
 });
 
-//TODO: Jól van kész lecsukom!
+watch(() => props.visible, (newValue, oldValue, options) => {
+    if (newValue) {
+        console.log(newValue)
+    }
+})
+
 const getStatesByCountryIso = () => {
     listOfStatesByCountryIso.value = State.getStatesOfCountry(addressForm.countryIso);
-    // console.log(State.getStatesOfCountry());
+    // console.log(listOfStatesByCountryIso);
+}
+
+const check = () => {
+    console.log(addressForm.regionIso);
 }
 
 const sendFormData = () => {
-    console.log(addressForm);
+
+
+    if (addressForm.regionIso == -1) {
+        addressForm.regionIso = '-';
+    }
+
+    // console.log(addressForm);
+
+    emits('submitted', addressForm);
 }
 
 </script>
