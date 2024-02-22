@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Address\AddressController;
 use App\Http\Controllers\User\AuthController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
 
         Route::post('phone-add/{user}', [PhoneController::class, 'Store'])->name('phone-number-add');
+        Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create');
     });
 
     Route::get('/', function() {
