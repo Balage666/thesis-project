@@ -170,6 +170,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Axlon\PostalCodeValidation\ValidationServiceProvider::class,
 
         /*
          * Application Service Providers...
