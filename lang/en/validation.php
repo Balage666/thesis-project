@@ -151,6 +151,8 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
+    'postal_code' => 'Invalid postal/zip code in the following countries: :countries',
+    'postal_code_with' => 'Invalid postal/zip code',
 
     /*
     |--------------------------------------------------------------------------
