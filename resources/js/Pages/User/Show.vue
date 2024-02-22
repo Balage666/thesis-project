@@ -72,6 +72,11 @@ const sendEmittedPhoneNumberData = (payload) => {
     router.post(route('phone-number-add', { user: user.value }), payload);
 }
 
+const sendEmittedAddressData = (payload) => {
+    console.log(payload);
+    router.post(route('address-create', { user: user.value }), payload);
+}
+
 </script>
 
 <style scoped>
@@ -212,7 +217,7 @@ const sendEmittedPhoneNumberData = (payload) => {
                             <div class="text-end">
                                 <button class="btn" :class="[ AddressFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="toggleAddressFormComponent"><i class="fa-solid" :class="[ AddressFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ AddressFormVisible ? 'Cancel' : 'New address'}} </button>
                             </div>
-                            <CreateAddress :visible="AddressFormVisible" :user="user" />
+                            <CreateAddress :visible="AddressFormVisible" @submitted="sendEmittedAddressData" />
                         </div>
                         <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
                         <ListAddresses/>
@@ -250,7 +255,7 @@ const sendEmittedPhoneNumberData = (payload) => {
                             <div class="text-end">
                                 <button class="btn" :class="[ PhoneNumberFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="togglePhoneNumberFormComponent"><i class="fa-solid" :class="[ PhoneNumberFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ PhoneNumberFormVisible ? 'Cancel' : 'New phone number' }} </button>
                             </div>
-                            <CreatePhoneNumber :visible="PhoneNumberFormVisible" :user="user" @submitted="sendEmittedPhoneNumberData"/>
+                            <CreatePhoneNumber :visible="PhoneNumberFormVisible" @submitted="sendEmittedPhoneNumberData"/>
                         </div>
                         <ListPhoneNumbers :list="user.phone_numbers"/>
                     </Accordion>
