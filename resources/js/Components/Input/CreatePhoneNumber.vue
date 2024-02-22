@@ -12,19 +12,9 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    user: {
-        type: Object,
-        required: true
-    }
 });
 
 // console.log(props.user);
-
-const watchableProp = reactive({ visible: props.visible });
-
-const countryIso = ref(countries[0].iso);
-const countryCode = ref(countries[0].code);
-
 const phoneNumberForm = useForm({
     countryIso: countries[0].iso,
     number: '',
