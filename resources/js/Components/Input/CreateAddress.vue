@@ -1,3 +1,64 @@
+<script setup>
+import { useForm } from '@inertiajs/inertia-vue3';
+import { ref, watch } from 'vue'
+
+import { Country, State, City } from 'country-state-city'
+
+const emits = defineEmits(['submitted']);
+
+const props = defineProps({
+    visible: {
+        type: Boolean,
+        default: false
+    },
+});
+
+const listOfCountries = Country.getAllCountries().map(({ flag, name, isoCode }) => ({ flag, name, isoCode }));
+const listOfStatesByCountryIso = ref([])
+
+const addressForm = useForm({
+    countryIso: -1,
+    regionIso : -1,
+    postalZipCode: '',
+    addressText: ''
+});
+
+watch(() => props.visible, (newValue, oldValue, options) => {
+    if (newValue) {
+        resetForm();
+    }
+});
+
+const resetForm = () => {
+    addressForm.countryIso = -1;
+    addressForm.regionIso = -1;
+    addressForm.postalZipCode = '';
+    addressForm.addressText = ''
+}
+
+const getStatesByCountryIso = () => {
+    listOfStatesByCountryIso.value = State.getStatesOfCountry(addressForm.countryIso);
+    // console.log(listOfStatesByCountryIso);
+}
+
+const check = () => {
+    console.log(addressForm.regionIso);
+}
+
+const sendFormData = () => {
+
+
+    if (addressForm.regionIso == -1) {
+        addressForm.regionIso = '-';
+    }
+
+    // console.log(addressForm);
+
+    emits('submitted', addressForm);
+}
+
+</script>
+
 <template>
 
     <!-- <pre>{{ listOfStatesByCountryIso }}</pre> -->
@@ -61,56 +122,3 @@
     </form>
 </template>
 
-<script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
-import { ref, watch } from 'vue'
-
-import { Country, State, City } from 'country-state-city'
-
-const emits = defineEmits(['submitted']);
-
-const props = defineProps({
-    visible: {
-        type: Boolean,
-        default: false
-    },
-});
-
-const listOfCountries = Country.getAllCountries().map(({ flag, name, isoCode }) => ({ flag, name, isoCode }));
-const listOfStatesByCountryIso = ref([])
-
-const addressForm = useForm({
-    countryIso: -1,
-    regionIso : -1,
-    postalZipCode: '',
-    addressText: ''
-});
-
-watch(() => props.visible, (newValue, oldValue, options) => {
-    if (newValue) {
-        console.log(newValue)
-    }
-})
-
-const getStatesByCountryIso = () => {
-    listOfStatesByCountryIso.value = State.getStatesOfCountry(addressForm.countryIso);
-    // console.log(listOfStatesByCountryIso);
-}
-
-const check = () => {
-    console.log(addressForm.regionIso);
-}
-
-const sendFormData = () => {
-
-
-    if (addressForm.regionIso == -1) {
-        addressForm.regionIso = '-';
-    }
-
-    // console.log(addressForm);
-
-    emits('submitted', addressForm);
-}
-
-</script>
