@@ -1,6 +1,6 @@
-/* .container-fluid {
-    width: 100%;
-} */
+.position-fixed {
+    z-index: 11;
+}
 
 .no-padding {
     padding: 0 !important;
