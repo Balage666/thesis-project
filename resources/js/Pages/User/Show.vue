@@ -12,6 +12,7 @@ import CreateAddress from '*vue-components/Input/CreateAddress.vue';
 import ListPhoneNumbers from '*vue-components/DataDisplay/PhoneNumber/ListPhoneNumbers.vue';
 import ListAddresses from '*vue-components/DataDisplay/Address/ListAddresses.vue';
 import Accordion from '*vue-components/DataDisplay/Accordion.vue';
+import Toast from '*vue-components/Notification/Toast.vue';
 
 import editUserModeObj from '*js-shared/edit-user-mode-obj';
 
@@ -92,7 +93,6 @@ const sendEmittedAddressData = (payload) => {
     </Head>
 
     <div>
-
         <div class="container-fluid bg-info-subtle border-0 rounded-5 px-4 py-5 my-3">
             <div class="row">
 
@@ -100,6 +100,7 @@ const sendEmittedAddressData = (payload) => {
                 <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
                 <!--DONE: Implement edit mode-->
                 <div class="col-12 col-lg-12">
+
                     <Accordion title="User Details">
                         <div class="border-0 rounded-5 p-5">
                             <div class="row">
@@ -186,6 +187,7 @@ const sendEmittedAddressData = (payload) => {
                             </div>
                         </div>
                     </Accordion>
+
                 </div>
 
             </div>
@@ -195,22 +197,6 @@ const sendEmittedAddressData = (payload) => {
 
                 <!-- TODO: List and create Addresses -->
                 <div class="col-12 col-lg-6">
-                    <!-- <div class="accordion" id="accordionAddresses">
-
-                        <div class="accordion-item authFormCardBackground bg-gradient">
-                            <h2 class="accordion-header" id="headingAddresses">
-                                <button class="accordion-button py-3 px-5 bg-info bg-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddresses" aria-expanded="true" aria-controls="collapseAddresses">
-                                    <h1 class="text-black">Addresses</h1>
-                                </button>
-                            </h2>
-                            <div id="collapseAddresses" class="accordion-collapse collapse show" aria-labelledby="headingAddresses" data-bs-parent="#accordionAddresses">
-                                <div class="accordion-body">
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> -->
 
                     <Accordion title="Addresses">
                         <div class="form-outline mb-4">
@@ -219,36 +205,14 @@ const sendEmittedAddressData = (payload) => {
                             </div>
                             <CreateAddress :visible="AddressFormVisible" @submitted="sendEmittedAddressData" />
                         </div>
-                        <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
-                        <ListAddresses/>
+                        <ListAddresses :list="user.addresses"/>
                     </Accordion>
+
                 </div>
 
 
                 <!-- TODO: List Phones -->
                 <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-                    <!-- <div class="accordion" id="accordionPhones">
-
-                        <div class="accordion-item authFormCardBackground bg-gradient">
-                            <h2 class="accordion-header" id="headingPhones">
-                                <button class="accordion-button py-3 px-5 bg-info bg-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhones" aria-expanded="true" aria-controls="collapsePhones">
-                                    <h1 class="text-black">Phones</h1>
-                                </button>
-                            </h2>
-                            <div id="collapsePhones" class="accordion-collapse collapse show" aria-labelledby="headingPhones" data-bs-parent="#accordionPhones">
-                                <div class="accordion-body">
-                                    <div class="form-outline mb-4">
-                                        <div class="text-end">
-                                            <button class="btn" :class="[ PhoneNumberFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="togglePhoneNumberFormComponent"><i class="fa-solid" :class="[ PhoneNumberFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ PhoneNumberFormVisible ? 'Cancel' : 'New phone number' }} </button>
-                                        </div>
-                                        <CreatePhoneNumber :visible="PhoneNumberFormVisible" :user="user" @submitted="sendEmittedPhoneNumberData"/>
-                                    </div>
-                                    <ListPhoneNumbers :list="user.phone_numbers"/>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> -->
 
                     <Accordion title="Phones">
                         <div class="form-outline mb-4">
@@ -259,6 +223,7 @@ const sendEmittedAddressData = (payload) => {
                         </div>
                         <ListPhoneNumbers :list="user.phone_numbers"/>
                     </Accordion>
+
                 </div>
 
             </div>
@@ -324,40 +289,6 @@ const sendEmittedAddressData = (payload) => {
 
                     <!-- FIXED: Arrow button renders active when the accordion is closed -->
                     <!-- TODO: List User's products -->
-                    <!-- <div class="accordion" id="accordionCreatedProducts">
-
-                        <div class="accordion-item authFormCardBackground bg-gradient">
-
-                            <h2 class="accordion-header" id="headingCreatedProducts">
-                                <button class="accordion-button collapsed py-3 px-5 bg-info bg-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCreatedProducts" aria-expanded="false" aria-controls="collapseCreatedProducts">
-                                    <h1 class="text-black">Created Products</h1>
-                                </button>
-                            </h2>
-                            <div id="collapseCreatedProducts" class="accordion-collapse collapse" aria-labelledby="headingCreatedProducts" data-bs-parent="#accordionCreatedProducts">
-                                <div class="accordion-body">
-                                    <p>
-                                        <strong>
-                                            This is the first item's accordion body.
-                                        </strong>
-                                        It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                    </p>
-
-                                    <p>
-                                        Oh, thank you, thank you. Okay now, we run some industrial strength electrical cable from the top of the clocktower down to spreading it over the street between two lamp posts. Meanwhile, we out-fitted the vehicle with this big pole and hook which runs directly into the flux-capacitor. At the calculated moment, you start off from down the street driving toward the cable execrating to eighty-eight miles per hour. According to the flyer, at !0:04 pm lightning will strike the clocktower sending one point twenty-one gigawatts into the flux-capacitor, sending you back to 1985. Alright now, watch this. You wind up the car and release it, I'll simulate the lightening. Ready, set, release. Huhh. Why not? No. Right. You know Marty, you look so familiar, do I know your mother?
-                                    </p>
-
-                                    <p>
-                                        Well, she's not doing a very good job. Hey beat it, spook, this don't concern you. Hey Marty, I'm not your answering service, but you're outside pouting about the car, Jennifer Parker called you twice. About 30 years, it's a nice round number. Well gee, I don't know.
-                                    </p>
-
-                                    <p>
-                                        Why that's me, look at me, I'm an old man. Oh yes sir. That was so stupid, Grandpa hit him with the car. Breakfast. What did you sleep in your clothes again last night.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> -->
 
                     <Accordion title="Created Products">
                         <p>
@@ -385,6 +316,7 @@ const sendEmittedAddressData = (payload) => {
             </div>
 
         </div>
+
         <!-- <BodyLayout>
         </BodyLayout> -->
 
