@@ -28,7 +28,7 @@ class UserResource extends JsonResource
             'updated_at' => $this->updated_at,
             'roles' => $this->roles,
             'phone_numbers' => PhoneResource::collection($this->phoneNumbers),
-            'addresses' => $this->addresses,
+            'addresses' => AddressResource::collection($this->addresses),
             'products' => $this->products
         ];
     }
