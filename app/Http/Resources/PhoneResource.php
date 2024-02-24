@@ -20,7 +20,9 @@ class PhoneResource extends JsonResource
             'number' => $this->number,
             'formatted_number' => $this->formatNumber($this->number, $this->mask),
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
+            'created_at_human_readable' => $this->created_at->diffForHumans(),
+            'updated_at_human_readable' => $this->updated_at->diffForHumans()
         ];
     }
 
