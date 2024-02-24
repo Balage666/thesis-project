@@ -25,8 +25,6 @@ use App\Http\Middleware\SetLocalizationMiddleware;
 */
 Route::group(['middleware' => 'auth'], function () {
 
-    //DONE: Create a working middleware for these routes
-    //and not an anomaly which makes the devserver shit itself :)
     Route::group(['prefix' => 'user-management', 'middleware' => 'role:Moderator,Admin'], function () {
         Route::get('create', [UserController::class, 'Create'])->name('user-create');
         Route::get('list', [UserController::class, 'List'])->name('user-list');
@@ -53,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/storefront', [StoreFrontController::class, 'Storefront'])->name('storefront')->withoutMiddleware('auth');
 
     Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language')->withoutMiddleware('auth');
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('profile/{user}', [UserController::class, 'Profile'])->name('user-profile');
+    });
 
 });
 
