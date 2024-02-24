@@ -88,9 +88,20 @@ class UserController extends Controller
      */
     public function Show(User $user)
     {
+
         return Inertia::render("User/Show", [
             'userToShow' => UserResource::collection(User::where('id', $user->id)->get())
         ]);
+    }
+
+    public function Profile(User $user) {
+
+        // $this->authorizeForUser(auth()->user(), 'profile', [$user]);
+
+        return Inertia::render("User/Profile", [
+            'user' => UserResource::collection(User::where('id', $user->id)->get())
+        ]);
+
     }
 
     /**
