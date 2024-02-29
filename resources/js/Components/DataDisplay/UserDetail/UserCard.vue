@@ -21,7 +21,7 @@ const props = defineProps({
                     <img :src="props.user.profile_picture" :alt="props.user.name" class="rounded-circle" width="150px">
                     <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible">Change Picture</button>
                 </div>
-                <div class="mt-1">
+                <div class="mt-1 mt-lg-0 mt-md-0">
                     <h4>{{ props.user.name }}</h4>
                 </div>
             </div>

@@ -49,7 +49,7 @@ const sendModifiedEmailData = () => {
 
 </script>
 <template>
-    <div class="card border-0 rounded-5 p-2">
+    <div class="card border-0 rounded-5 mt-5 py-2">
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6">
