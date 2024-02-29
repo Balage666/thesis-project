@@ -9,9 +9,20 @@ use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Helper;
+
 
 class UserController extends Controller
 {
+    private $nameRegex;
+    private $passwordRegex;
+
+    public function __construct() {
+
+        $this->nameRegex = Helper::GetStrictNameRegex();
+        $this->passwordRegex = Helper::GetPasswordRegex();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,9 +49,9 @@ class UserController extends Controller
         // dd($request);
 
         $createUserFormFields = $request->validate([
-            'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u'],
+            'name' => ['required', "regex:$this->nameRegex"],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'],
+            'password' => ['required', 'confirmed', "regex:$this->passwordRegex"],
             'roles' => ['required', 'min:1']
         ]);
 
@@ -127,7 +138,7 @@ class UserController extends Controller
         // dd($request, $user, $user->Roles());
 
         $updateUserFormFields = $request->validate([
-            'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u'],
+            'name' => ['required', "regex:$this->nameRegex"],
             'email' => ['required', 'email'],
             'roles' => ['required', 'min:1']
         ]);

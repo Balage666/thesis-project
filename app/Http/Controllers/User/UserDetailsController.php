@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Helper;
 
 class UserDetailsController extends Controller
 {
     public function EditName(Request $request, User $user) {
 
+        $nameRegex = Helper::GetStrictNameRegex();
+
         $editNameFormField = $request->validate([
-            'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u']
+            'name' => ['required', "regex:$nameRegex"]
         ]);
 
         $oldName = $user->name;

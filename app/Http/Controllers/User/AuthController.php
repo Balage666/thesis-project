@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Helpers\Shared\ValidationHelper;
+use Helper;
 
 class AuthController extends Controller
 {
@@ -61,10 +63,13 @@ class AuthController extends Controller
 
     public function SignOn(Request $request) {
 
+        $nameRegex = Helper::GetStrictNameRegex();
+        $passwordRegex = Helper::GetPasswordRegex();
+
         $formFields = $request->validate([
             'email' => ['required', 'email'],
-            'name' => ['required', 'min:3', 'regex:/^[A-Z][a-z]+\s[a-zA-Z\s\.]+/'],
-            'password' => ['required', 'confirmed', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'],
+            'name' => ['required', 'min:3', "regex:$nameRegex"],
+            'password' => ['required', 'confirmed', 'min:8', "regex:$passwordRegex"],
         ]);
 
 
@@ -87,7 +92,11 @@ class AuthController extends Controller
             "profile_picture" => "https://ui-avatars.com/api/?size=256&background=random&name={$tempNameParts[0]}+{$tempNameParts[1]}",
             "remember_token" => Str::random(10)
         ]);
+        $user->Roles()->save(\App\Models\UserRole::create([
+            'name' => 'Customer',
+            'user_id' => $user->id
+        ]));
 
-        return Inertia::render("Auth/LogIn")->with("registration_success", "Successfully registered!");
+        return redirect()->route('log-in')->with("registration_success", "Successfully registered!");
     }
 }
