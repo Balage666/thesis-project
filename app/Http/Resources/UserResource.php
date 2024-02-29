@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'last_name' => $this->lastName,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
-            'email_verified_at_human_readable' => $this->email_verified_at->diffForHumans(),
+            'email_verified_at_human_readable' => $this->email_verified_at?->diffForHumans(),
             'google_id' => $this->google_id,
             'signed_in_with_google' => $this->google_id != null,
             'profile_picture' => $this->profile_picture,
