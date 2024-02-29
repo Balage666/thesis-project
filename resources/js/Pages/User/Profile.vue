@@ -1,5 +1,13 @@
 <script setup>
 
+import UserCard from '*vue-components/DataDisplay/UserDetail/UserCard.vue';
+import UserDetailsCard from '*vue-components/DataDisplay/UserDetail/UserDetailsCard.vue'
+
+import editProfileModeObj from '*js-shared/edit-profile-mode-obj.js'
+import { reactive } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import InputMask from 'primevue/inputmask'
+
 const props = defineProps({
     user: {
         type: Object,
@@ -7,13 +15,36 @@ const props = defineProps({
     }
 });
 
-const uservalues = props.user.data[0]
+const uservalues = props.user.data[0];
 
+
+const EditMode = reactive(editProfileModeObj);
+
+const editNameForm = useForm({
+    name: uservalues.name
+});
+
+const editEmailForm = useForm({
+    email: uservalues.email
+});
+
+const editPhoneNumberForm = useForm({
+    number: uservalues.phone_numbers[0]?.formatted_number,
+    mask: uservalues.phone_numbers[0]?.mask
+});
+
+const toggelEditMode = () => {
+    for (const key in EditMode) {
+        if (Object.hasOwnProperty.call(EditMode, key)) {
+            EditMode[key] = !EditMode[key]
+        }
+    }
+}
 
 </script>
 <template>
 
-    <pre>{{ props.user }}</pre>
+    <pre>{{ uservalues }}</pre>
 
     <Head>
         <title>Profile page</title>
@@ -26,11 +57,13 @@ const uservalues = props.user.data[0]
 
                 <div class="col-md-6 mb-3">
 
+                    <!-- <UserCard :user="uservalues"/> -->
+
                     <div class="card rounded-3">
                         <div class="card-body">
 
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img :src="uservalues.profile_picture" :alt="uservalues.name" :title="uservalues.name" class="rounded-circle" width="150">
+                                <img :src="uservalues.profile_picture" :alt="uservalues.name" :title="uservalues.name" class="rounded-circle" width="150px">
                                 <div class="mt-3">
                                     <h4>{{ uservalues.name }}</h4>
                                     <p>Created at: {{ uservalues.created_at_human_readable }}</p>
@@ -43,35 +76,64 @@ const uservalues = props.user.data[0]
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <div class="card py-4 rounded-3">
+
+                    <!-- <UserDetailsCard :user="uservalues"/> -->
+
+                    <div class="card py-1 rounded-3">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ uservalues.name }}
+                                    <span v-if="!EditMode.editNameFormVisible">{{ uservalues.name }}</span>
+                                    <form v-if="EditMode.editNameFormVisible">
+                                        <input class="form-control-sm border-0 rounded-end-0" type="text" name="name" id="name" v-model="editNameForm.name" required>
+                                        <input class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" type="submit" value="Modify">
+                                    </form>
+
                                 </div>
                             </div>
+
                             <hr>
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ uservalues.email }}
+                                    <span v-if="!EditMode.editEmailFormVisible">{{ uservalues.email }}</span>
+                                    <form v-if="EditMode.editEmailFormVisible">
+                                        <input class="form-control-sm border-0 rounded-end-0" type="email" name="email" id="email" v-model="editEmailForm.email" required>
+                                        <input class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" type="submit" value="Modify">
+                                    </form>
+
                                 </div>
                             </div>
+
                             <hr>
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Mobile</h6>
                                 </div>
+                                <!--FIXME: Cannot be forced to disappear when toggle button pressed-->
                                 <div class="col-sm-9 text-secondary">
-                                    {{ uservalues.phone_numbers[0]?.number ?? '-' }}
+                                    <span v-if="!EditMode.editPhoneNumberFormVisible">{{ uservalues.phone_numbers[0]?.number ?? '-' }}</span>
+                                    <form v-if="EditMode.editPhoneNumberFormVisible ">
+                                        <InputMask
+                                            class="form-control-sm border-0 rounded-end-0 formInputFieldBackground"
+                                            id="phone_mask"
+                                            name="phone_mask"
+                                        />
+                                        <input class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" type="submit" value="Modify">
+                                    </form>
+                                    <button v-if="EditMode.addPhoneNumberButtonVisible" type="button"><i class="fa-solid fa-plus"></i></button>
                                 </div>
                             </div>
+
                             <hr>
+
                             <div class="row">
                                 <div class="col-sm-3">
                                 <h6 class="mb-0">Address</h6>
@@ -80,6 +142,17 @@ const uservalues = props.user.data[0]
                                     {{ uservalues.addresses[0]?.address_text ?? '-' }}
                                 </div>
                             </div>
+
+                            <hr>
+
+                            <div class="text-center">
+                                <button @click="toggelEditMode" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col-12 text-center">
+                                </div>
+                            </div> -->
                         </div>
                     </div>
 

@@ -100,7 +100,7 @@ const sendEmittedAddressData = (payload) => {
                         <div class="border-0 rounded-5 p-5">
                             <div class="row">
 
-                                <div class="col-lg-4 col-12 mb-2 mb-lg-0">
+                                <div class="col-lg-4 col-12 mb-lg-0">
 
                                     <UserCard
                                         :user="user"
@@ -109,7 +109,7 @@ const sendEmittedAddressData = (payload) => {
 
                                 </div>
 
-                                <div class="col-lg-8 col-12 py-lg-5">
+                                <div class="col-lg-8 col-12">
 
                                     <UserDetailsCard
                                         :user="user"
