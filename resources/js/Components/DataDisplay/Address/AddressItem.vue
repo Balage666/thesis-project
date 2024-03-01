@@ -3,6 +3,7 @@
 import countries from 'countries-phone-masks';
 
 import { State } from 'country-state-city';
+import { Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     item: {
@@ -35,7 +36,7 @@ const gatherNameOfRegion = (countryIso, regionIso) => {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 text-end">
-                                <i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i>
+                                <Link :href="route('address-delete', { address: props.item })" method="get" as="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></Link>
                             </div>
                         </div>
 

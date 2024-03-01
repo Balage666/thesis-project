@@ -71,6 +71,16 @@ const sendEmittedAddressData = (payload) => {
     router.post(route('address-create', { user: user.value }), payload);
 }
 
+const sendEmittedChangedPhoneNumberData = (payload) => {
+    // console.log(payload)
+    const [form, phone] = payload;
+
+    console.log(phone)
+    console.log(form)
+
+    router.post(route('phone-number-update', { phone: phone }), form)
+}
+
 </script>
 
 
@@ -160,7 +170,7 @@ const sendEmittedAddressData = (payload) => {
                             </div>
                             <CreatePhoneNumber :visible="PhoneNumberFormVisible" @submitted="sendEmittedPhoneNumberData"/>
                         </div>
-                        <ListPhoneNumbers :list="user.phone_numbers"/>
+                        <ListPhoneNumbers :list="user.phone_numbers" @listChanged="sendEmittedChangedPhoneNumberData"/>
                     </Accordion>
 
                 </div>

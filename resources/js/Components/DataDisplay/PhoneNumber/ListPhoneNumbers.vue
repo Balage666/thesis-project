@@ -9,13 +9,20 @@ const props = defineProps({
     }
 })
 
+const emits = defineEmits(['listChanged']);
+
+const sendChangedData = (payload) => {
+    // console.log(payload);
+    emits('listChanged', payload);
+}
+
 </script>
 
 <template>
     <div class="container">
         <ul class="list-group" v-if="props.list.length > 0">
         <!-- <pre v-for="item in props.list">{{ item }}</pre> -->
-            <PhoneNumberItem class="list-group-item" v-for="phoneNumberItem in props.list" :item="phoneNumberItem"/>
+            <PhoneNumberItem class="list-group-item" v-for="phoneNumberItem in props.list" :item="phoneNumberItem" @itemChanged="sendChangedData"/>
         </ul>
 
         <h3 v-else class="text-center">There are no available phone numbers!</h3>
