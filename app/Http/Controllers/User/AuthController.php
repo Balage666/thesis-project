@@ -50,7 +50,7 @@ class AuthController extends Controller
             $request->session()->put('locale', $saved_locale);
         }
 
-        return redirect()->route('log-in');
+        return redirect()->route('storefront');
     }
 
 
