@@ -1,12 +1,14 @@
 <script setup>
 
+import { Link } from '@inertiajs/vue3';
+
 </script>
 
 
 <template>
     <nav class="navbar navbar-expand-lg banner-bg-color">
         <div class="container-fluid bg-light rounded-5 mx-3 p-3">
-            <a class="navbar-brand py-2" href="#">Navbar</a>
+            <a class="navbar-brand py-2" href="#">{{ __("Storefront") }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,18 +23,25 @@
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-2">
 
-                    <li class="nav-item dropdown">
+                    <div>
+                        <li class="nav-item dropdown" v-if="!$page.props.permissions.authenticated">
+                            <button class="nav-link" href="#" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-circle-user"></i> {{ __("Account") }}
+                            </button>
+                            <ul class="dropdown-menu bg-white">
+                                <li><Link :href="route('log-in')" method="get" as="button" class="dropdown-item text-center"><i class="fa-solid fa-right-to-bracket"></i> {{ __("Login") }}</Link></li>
+                                <li><Link :href="route('sign-up')" method="get" as="button" class="dropdown-item text-center"><i class="fa-solid fa-plus"></i> {{ __("SignUp") }}</Link></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" v-else>
+                            <button class="nav-link" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"> <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ $page.props.active_session.user.name }}</span> </button>
+                            <ul class="dropdown-menu bg-white">
+                                <li><Link :href="route('log-out')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-door-open"></i> {{ __("LogOut") }}</Link></li>
+                            </ul>
 
-                        <button class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-circle-user"></i> {{ __("Account") }}
-                        </button>
-                        <ul class="dropdown-menu bg-white">
-                            <li><button class="dropdown-item text-center" href="#"><i class="fa-solid fa-right-to-bracket"></i> {{ __("Login") }}</button></li>
-                            <li><button class="dropdown-item text-center" href="#"><i class="fa-solid fa-plus"></i> {{ __("SignUp") }}</button></li>
-                            <!-- <li><hr class="dropdown-divider"></li>
-                            <li><button class="dropdown-item" href="#">Something else here</button></li> -->
-                        </ul>
-                    </li>
+                        </li>
+                    </div>
+
 
                     <li class="nav-item">
                         <button class="nav-link" href="#"> <i class="fa-solid fa-heart"></i> {{ __("Favorites") }}</button>
