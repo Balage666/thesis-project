@@ -6,13 +6,13 @@ import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
 <template>
     <header>
         <div class="navbar banner-bg-color">
-            <div class="col-12 col-lg-10 col-md-6 px-3">
+            <div class="col-12 col-lg-2 col-md-6 px-3">
                 <a class="navbar-brand d-lg-block d-md-block d-sm-flex d-flex align-content-center justify-content-center" :href="route('storefront')" type="button">
                     <img
                         class="banner-logo"
-                        src="/src/img/logo/Flipbasket_transparent.png"
+                        src="/src/img/logo/BlueVenue_extra_small_transparent.png"
                         alt="Brand"
-                        title="FlipBasket"
+                        title="BlueVenue"
 
                     >
                 </a>
