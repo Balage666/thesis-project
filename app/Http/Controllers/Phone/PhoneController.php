@@ -28,4 +28,30 @@ class PhoneController extends Controller
         return redirect()->back()->with('message', 'Phone number added!');
 
     }
+
+    public function Update(Request $request, Phone $phone) {
+
+        $editedPhoneNumberFormField = $request->validate([
+            'number' => ['required', 'unique:phones,number']
+        ]);
+
+        // dd($editedPhoneNumberFormField);
+
+        $phone->number = $editedPhoneNumberFormField['number'];
+        $phone->updated_at = now();
+
+        $phone->update();
+
+        return redirect()->back()->with('message', 'Phone number modifed!');
+    }
+
+    public function Delete(Phone $phone) {
+
+        // dd($phone);
+
+        $phone->delete();
+
+        return redirect()->back()->with('message', 'Phone number deleted!');
+
+    }
 }

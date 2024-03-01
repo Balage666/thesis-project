@@ -43,4 +43,12 @@ class AddressController extends Controller
         return redirect()->back()->with('message', 'Address created!');
 
     }
+
+    public function Delete(Address $address) {
+
+        $address->delete();
+
+        return redirect()->back()->with('message', 'Address successfully deleted!');
+
+    }
 }
