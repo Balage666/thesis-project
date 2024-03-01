@@ -47,6 +47,9 @@ class HandleInertiaRequests extends Middleware
                     'Roles', 'PhoneNumbers', 'Addresses', 'Products'
                 ]) : null
             ],
+            'permissions' => [
+                'authenticated' => auth()->check()
+            ],
             'locales' => config('app.locales'),
             'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale()
         ]);
