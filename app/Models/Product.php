@@ -12,7 +12,8 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'created_by'
+        'created_by',
+        'category_id'
     ];
 
     protected $hidden = [
@@ -23,6 +24,10 @@ class Product extends Model
 
     public function Distributor() {
         return $this->belongsTo(User::class, 'id', 'created_by');
+    }
+
+    public function Category() {
+        return $this->belongsTo(Category::class, 'id', 'category_id');
     }
 
     public function Pictures() {
