@@ -19,7 +19,7 @@ const props = defineProps({
             <div class="d-flex flex-column align-items-center text-center">
                 <div class="container-img">
                     <img :src="props.user.profile_picture" :alt="props.user.name" class="rounded-circle" width="150px">
-                    <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible">Change Picture</button>
+                    <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible"><i class="fa-solid fa-pencil"></i> Change</button>
                 </div>
                 <div class="mt-1 mt-lg-0 mt-md-0">
                     <h4>{{ props.user.name }}</h4>
