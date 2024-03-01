@@ -11,9 +11,6 @@ class StoreFrontController extends Controller
 {
     public function StoreFront() {
 
-
-        // dd(User::find(1)->id);
-        // return view('storefront.welcome');
-        return Inertia::render("Home");
+        return Inertia::render("Storefront");
     }
 }
