@@ -19,16 +19,26 @@ class DatabaseSeeder extends Seeder
         $adminSeed = SeederHelper::ADMIN_SEED_VALUE;
 
         \App\Models\User::factory($userSeed)->create()->each(function($user) {
-            $user->Roles()->save(\App\Models\UserRole::create([
-                'name' => 'Customer',
-                'user_id' => $user->id
-            ]));
+            if($user->id % 2 == 0) {
+                $user->Roles()->saveMany([
+                    \App\Models\UserRole::create([
+                        'name' => 'Customer',
+                        'user_id' => $user->id
+                    ]),
+                    \App\Models\UserRole::create([
+                        'name' => 'Seller',
+                        'user_id' => $user->id
+                    ])
+                ]);
+            }
+            else {
+                $user->Roles()->save(\App\Models\UserRole::create([
+                    'name' => 'Customer',
+                    'user_id' => $user->id
+                ]));
+            }
+
         });
-        // \App\Models\Phone::factory()->create([
-        //     'number' => '0623400400',
-        //     'mask' => '(## ##) ### ####',
-        //     'user_id' => 1
-        // ]);
 
         $admin = \App\Models\User::create([
             'id' => $adminSeed,
