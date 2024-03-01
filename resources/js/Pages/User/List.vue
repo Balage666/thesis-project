@@ -10,7 +10,6 @@ const props = defineProps({
     }
 });
 
-
 </script>
 
 <template>
@@ -23,7 +22,7 @@ const props = defineProps({
         <h1>List users</h1>
 
 
-        <p>{{ props.users }}</p>
+        <pre>{{ props.users }}</pre>
 
         <!--TODO: Complete the design!-->
 
