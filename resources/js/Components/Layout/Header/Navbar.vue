@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
         <div class="container-fluid bg-light rounded-5 mx-3 p-3">
             <a class="navbar-brand py-2" href="#">{{ __("Storefront") }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="fa-solid fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -23,32 +23,38 @@ import { Link } from '@inertiajs/vue3';
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-2">
 
-                    <div>
-                        <li class="nav-item dropdown" v-if="!$page.props.permissions.authenticated">
-                            <button class="nav-link" href="#" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-circle-user"></i> {{ __("Account") }}
+                    <!-- FIXME: Dropdown is bugged on smaller screen resolutions, when items are shown -->
+                    <div class="m-auto">
+                        <li class="nav-item dropdown-center" v-if="!$page.props.permissions.authenticated">
+                            <button class="nav-link row" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-circle-user"></i> <span class="col-12"> {{ __("Account") }} </span>
                             </button>
                             <ul class="dropdown-menu bg-white">
                                 <li><Link :href="route('log-in')" method="get" as="button" class="dropdown-item text-center"><i class="fa-solid fa-right-to-bracket"></i> {{ __("Login") }}</Link></li>
                                 <li><Link :href="route('sign-up')" method="get" as="button" class="dropdown-item text-center"><i class="fa-solid fa-plus"></i> {{ __("SignUp") }}</Link></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown" v-else>
-                            <button class="nav-link" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"> <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ $page.props.active_session.user.name }}</span> </button>
+                        <li class="nav-item dropdown-center" v-else>
+                            <button class="nav-link row" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ $page.props.active_session.user.name }}</span>
+                            </button>
                             <ul class="dropdown-menu bg-white">
                                 <li><Link :href="route('log-out')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-door-open"></i> {{ __("LogOut") }}</Link></li>
                             </ul>
-
                         </li>
                     </div>
 
 
-                    <li class="nav-item">
-                        <button class="nav-link" href="#"> <i class="fa-solid fa-heart"></i> {{ __("Favorites") }}</button>
+                    <li class="nav-item m-auto">
+                        <button class="nav-link row" href="#">
+                            <i class="fa-solid fa-heart"></i> <span class="col-12">{{ __("Favorites") }}</span>
+                        </button>
                     </li>
 
-                    <li class="nav-item">
-                        <button class="nav-link" href="#"> <i class="fa-solid fa-basket-shopping"></i> {{ __("Basket") }}</button>
+                    <li class="nav-item m-auto">
+                        <button class="nav-link row" href="#">
+                            <i class="fa-solid fa-basket-shopping"></i> <span class="col-12">{{ __("Basket") }}</span>
+                        </button>
                     </li>
 
                 </ul>
