@@ -75,5 +75,30 @@ class UserDetailsController extends Controller
 
     }
 
-    public function ChangeProfilePicture(Request $request, User $user) {}
+    public function ChangeProfilePicture(Request $request, User $user) {
+
+        $oldPicture = $user->profile_picture;
+
+        $profilePictureFormFields = $request->validate([
+            'image' => ['required', 'mimes:jpeg,png,jpg']
+        ]);
+        $profilePictureFormFields['image'] = $request->file('image')->store('uploads/users/images', 'public');
+
+        $profilePictureFormFields['image'] = "/storage/{$profilePictureFormFields['image']}";
+
+        $temp = ltrim($oldPicture, '/storage/');
+
+        if (file_exists(public_path("/storage/{$temp}"))) {
+            unlink(public_path($oldPicture));
+        }
+
+        $user->profile_picture = $profilePictureFormFields['image'];
+
+        $user->updated_at = now();
+
+        $user->update();
+
+        return redirect()->back()->with('message', "Profile picture has been changed for {$user->name}!");
+
+    }
 }

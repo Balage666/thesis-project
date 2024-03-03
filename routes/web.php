@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create');
         Route::get('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete');
+
+        Route::post('change-profile-picture/{user}', [UserDetailsController::class, 'ChangeProfilePicture'])->name('user-change-profile-picture');
     });
 
     Route::get('/', function() {
@@ -75,3 +77,7 @@ Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
     Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
     Route::post('sign-on', [AuthController::class, 'SignOn'])->name('sign-on');
 });
+
+Route::get('/new-feature-test', function () {
+    return Inertia::render("Test");
+})->name('feature-test');
