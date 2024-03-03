@@ -32,7 +32,7 @@ createInertiaApp({
             })]
         }))
         .use(PrimeVue, {
-            unstyled: true
+            // unstyled: true
         });
 
         VueApp.mixin(translations);
