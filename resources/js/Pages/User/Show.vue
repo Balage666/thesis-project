@@ -1,11 +1,14 @@
 <script setup>
 
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
+import { Modal } from 'bootstrap';
+
 
 import BodyLayout from '*/js/Pages/Layouts/BodyLayout.vue';
 import CreatePhoneNumber from '*vue-components/Input/CreatePhoneNumber.vue'
 import CreateAddress from '*vue-components/Input/CreateAddress.vue';
+import FileUploadDialog from '*vue-components/Input/FileUploadDialog.vue';
 
 import ListPhoneNumbers from '*vue-components/DataDisplay/PhoneNumber/ListPhoneNumbers.vue';
 import ListAddresses from '*vue-components/DataDisplay/Address/ListAddresses.vue';
@@ -21,10 +24,16 @@ const props = defineProps({
     }
 })
 
+const changeProfilePictureModal = ref(null);
 
 const EditMode = reactive(editUserModeObj);
 const PhoneNumberFormVisible = ref(false);
 const AddressFormVisible = ref(false);
+
+onMounted(() => {
+    changeProfilePictureModal.value = new Modal(document.getElementById('fileUpload'));
+});
+
 
 const toggleEditMode = (payload) => {
 
@@ -43,6 +52,17 @@ const togglePhoneNumberFormComponent = () => {
 
 const toggleAddressFormComponent = () => {
     AddressFormVisible.value = !AddressFormVisible.value;
+}
+
+const showDialog = () => {
+
+    changeProfilePictureModal.value.show();
+}
+
+const closeDialog = () => {
+
+    changeProfilePictureModal.value.hide();
+
 }
 
 const user = ref(props.userToShow.data[0]);
@@ -81,6 +101,13 @@ const sendEmittedChangedPhoneNumberData = (payload) => {
     router.post(route('phone-number-update', { phone: phone }), form)
 }
 
+const sendEmittedChangedProfilePictureData = (payload) => {
+
+    console.log(payload);
+
+    router.post(route('user-change-profile-picture', { user: user.value }), payload);
+}
+
 </script>
 
 
@@ -98,6 +125,14 @@ const sendEmittedChangedPhoneNumberData = (payload) => {
     </Head>
 
     <div>
+
+        <FileUploadDialog
+            :id="'fileUpload'"
+            @onModalClose="closeDialog"
+            @pictureModified="sendEmittedChangedProfilePictureData"
+            :user="user"
+        />
+
         <div class="container-fluid bg-info-subtle border-0 rounded-5 px-4 py-5 my-3">
             <div class="row">
 
@@ -115,6 +150,7 @@ const sendEmittedChangedPhoneNumberData = (payload) => {
                                     <UserCard
                                         :user="user"
                                         :profilePictureEditModeVisible="EditMode.changeProfilePictureButtonVisible"
+                                        @onPictureButtonClick="showDialog"
                                     />
 
                                 </div>
