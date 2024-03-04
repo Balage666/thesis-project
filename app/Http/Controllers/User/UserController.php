@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -99,7 +99,6 @@ class UserController extends Controller
      */
     public function Show(User $user)
     {
-
         return Inertia::render("User/Show", [
             'userToShow' => UserResource::collection(User::where('id', $user->id)->get())
         ]);
