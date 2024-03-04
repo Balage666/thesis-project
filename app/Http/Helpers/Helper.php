@@ -18,6 +18,10 @@ class Helper {
         return SeederHelper::AVAILABLE_ROLES;
     }
 
+    public function GatherCategories() {
+        return SeederHelper::BASE_CATEGORIES;
+    }
+
     public static function GetAdminSeed()
     {
         return SeederHelper::ADMIN_SEED_VALUE;
