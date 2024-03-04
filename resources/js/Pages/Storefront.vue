@@ -19,6 +19,7 @@ import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
             <h1>Vue3 & FormKit test</h1>
 
             <pre>{{ $page.props.permissions }}</pre>
+            <!-- <pre>{{ route().current('storefront') }}</pre> -->
 
             <div v-if="$page.props.active_session.user">
                 <h2>{{ $page.props.active_session.user.name }}</h2>
