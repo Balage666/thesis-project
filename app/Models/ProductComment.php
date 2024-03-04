@@ -16,10 +16,10 @@ class ProductComment extends Model
     use HasFactory;
 
     public function Commenter() {
-        return $this->belongsTo(User::class, 'id', 'commenter_id');
+        return $this->belongsTo(User::class, 'commenter_id', 'id');
     }
 
     public function CommentedProduct() {
-        return $this->belongsTo(Product::class, 'id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

@@ -23,11 +23,11 @@ class Product extends Model
     use HasFactory;
 
     public function Distributor() {
-        return $this->belongsTo(User::class, 'id', 'created_by');
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function Category() {
-        return $this->belongsTo(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function Pictures() {

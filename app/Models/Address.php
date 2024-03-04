@@ -17,6 +17,6 @@ class Address extends Model
     use HasFactory;
 
     public function User() {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

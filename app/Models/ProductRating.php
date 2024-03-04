@@ -15,6 +15,6 @@ class ProductRating extends Model
     use HasFactory;
 
     public function Product() {
-        return $this->belongsTo(Product::class, 'id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }
