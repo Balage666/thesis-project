@@ -14,7 +14,7 @@ import { Link } from '@inertiajs/vue3';
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <div class="w-75 py-2 ms-lg-auto me-lg-auto ms-sm-auto me-sm-auto">
+                <div class="w-75 py-2 ms-lg-auto me-lg-auto ms-sm-auto me-sm-auto" v-show="route().current('storefront')">
                     <form class="d-flex" role="search">
                         <input class="form-control form-control-lg form-control-sm rounded-start-5" type="search" :placeholder="__('Search')" aria-label="Search">
                         <button class="btn btn-primary rounded-end-5" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
