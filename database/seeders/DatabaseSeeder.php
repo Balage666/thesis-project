@@ -67,5 +67,9 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $admin->id
             ])
         ]);
+        \App\Models\Category::create([
+            'name' => 'Miscellaneous'
+        ]);
+        \App\Models\Product::factory(20)->create();
     }
 }
