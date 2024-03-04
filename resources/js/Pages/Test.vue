@@ -1,5 +1,11 @@
 <script setup>
 
+const props = defineProps({
+    products: {
+        type: Object
+    }
+})
+
 // import FileUploadDialog from '*vue-components/Input/FileUploadDialog.vue';
 
 // import { ref, onMounted } from 'vue';
@@ -32,6 +38,8 @@
 <template>
     <div>
         <h1>New Feature test</h1>
+
+        <pre>{{ props.products }}</pre>
 
         <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
 
