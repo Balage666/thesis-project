@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\UserDetail;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\User;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\UserDetail\PhoneResource;
+use App\Http\Resources\UserDetail\AddressResource;
+use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -33,7 +36,7 @@ class UserResource extends JsonResource
             'has_seller_role' => $this->roles()->where('name', 'Seller')->exists(),
             'phone_numbers' => PhoneResource::collection($this->phoneNumbers),
             'addresses' => AddressResource::collection($this->addresses),
-            'products' => $this->products
+            'products' => ProductResource::collection($this->products)
         ];
     }
 }
