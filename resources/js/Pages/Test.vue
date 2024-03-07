@@ -1,36 +1,18 @@
 <script setup>
 
+//TODO: Design lang switcher tommorrow
+import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
+import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
+
+import { ref, onMounted, computed } from 'vue';
+
 const props = defineProps({
     products: {
-        type: Object
+        type: [Array, Object]
     }
 })
 
-// import FileUploadDialog from '*vue-components/Input/FileUploadDialog.vue';
-
-// import { ref, onMounted } from 'vue';
-// import { Modal } from 'bootstrap';
-
-
-// const modalExample = ref(null);
-
-
-// onMounted(() => {
-
-//     modalExample.value = new Modal(document.getElementById('fileUpload'))
-// });
-
-// const showDialog = () => {
-
-//     modalExample.value.show();
-// }
-
-// const closeDialog = () => {
-
-//     modalExample.value.hide();
-
-// }
-
+const carouselProducts = ref(props.products.data);
 
 </script>
 
@@ -39,9 +21,22 @@ const props = defineProps({
     <div>
         <h1>New Feature test</h1>
 
-        <pre>{{ props.products }}</pre>
+        <div>
+            <ProductCarousel class="d-none d-md-none d-lg-flex" :carouselId="'large'" :products="carouselProducts" :visiblePerSlide="3"/>
+        </div>
+
+        <div>
+            <ProductCarousel class="d-none d-md-flex d-sm-none d-lg-none" :carouselId="'mid'" :products="carouselProducts" :visiblePerSlide="2"/>
+        </div>
+
+        <div>
+            <ProductCarousel class="d-flex d-md-none d-sm-flex d-lg-none" :carouesleId="'small'" :products="carouselProducts" :visiblePerSlide="1"/>
+        </div>
 
         <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+
+
+        <!-- <LanguageSwitcher/> -->
 
         <!-- <button type="button" class="btn btn-primary" @click="showDialog">
             Launch static backdrop modal
@@ -94,5 +89,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
+
 </style>
 
