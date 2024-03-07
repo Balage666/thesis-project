@@ -58,7 +58,7 @@ const resetFileUploadInputComponent = () => {
 
 </style>
 
-<!-- TODO: Continue suffering tomorrow -->
+<!-- TODO: Complete the design -->
 <template>
     <div class="modal fade" :id="props.id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">

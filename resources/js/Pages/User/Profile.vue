@@ -182,7 +182,7 @@ const toggelEditMode = () => {
 </template>
 
 <style scoped>
-
+/* TODO: Create separate .css file for these styling */
 body{
     margin-top:20px;
     color: #1a202c;

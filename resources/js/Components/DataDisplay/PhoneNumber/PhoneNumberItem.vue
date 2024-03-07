@@ -60,7 +60,6 @@ const sendEditedPhoneNumberData = () => {
             </div>
             <div class="col-6 text-end">
                 <div class="d-grid d-md-flex align-items-md-end justify-content-md-end gap-2">
-                    <!--TODO: Implement edit and delete phone number methods and routes-->
                     <button type="button" class="btn btn-primary" @click="toggleEditModeForItem">{{ phoneNumberItem.editModeVisible ? 'Cancel' : 'Edit' }}</button>
                     <Link :href="route('phone-number-delete', { phone: props.item })" method="get" as="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">Delete</Link>
                 </div>
