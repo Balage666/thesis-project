@@ -196,8 +196,6 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 
                     </div>
 
-
-                    <!-- TODO: List Phones -->
                     <div class="col-12 col-lg-6 mt-2 mt-lg-0">
 
                         <Accordion title="Phones">
