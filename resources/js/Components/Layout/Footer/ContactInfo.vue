@@ -6,6 +6,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
 </script>
 
+<!--TODO: Fill this with texts if you don't burn out tommorrow-->
 <template>
     <div class="p-3 banner-bg-color">
 
@@ -78,7 +79,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
             <hr class="my-3">
 
-            <section>
+            <section v-if="!$page.props.permissions.authenticated">
 
                 <p class="d-flex justify-content-center align-items-center">
                     <span class="me-3 fw-bold">Register for free!</span>
@@ -89,7 +90,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
             </section>
 
-            <hr class="my-3">
+            <hr class="my-3" v-if="!$page.props.permissions.authenticated">
 
             <section class="p-3 pt-0">
                 <div class="row d-flex align-items-center">
@@ -109,79 +110,6 @@ import { usedTechnologies } from '*js-shared/technologies';
                             :title="technology.title"
                             role="button"
                         > <i :class="technology.icon"></i> </a>
-
-                        <!-- <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-laravel"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-vuejs"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-light"
-                            role="button"
-                        > <i class="fab fa-font-awesome"></i> </a>
-
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-bootstrap"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-sass"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-css3-alt"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-js"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-php"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-light"
-                            role="button"
-                        > <i class="devicon-vitejs-plain"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-light"
-                            role="button"
-                        > <i class="devicon-mysql-original"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-light"
-                            role="button"
-                        > <i class="devicon-apache-plain"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-light"
-                            role="button"
-                        > <i class="fab fa-ubuntu"></i> </a>
-
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-github"></i> </a>
-
-                        <a
-                            class="btn btn-secondary m-1 text-white"
-                            role="button"
-                        > <i class="fab fa-trello"></i> </a> -->
-
 
                     </div>
                 </div>
