@@ -35,5 +35,22 @@
     "Reset :name\\'s password": ":name jelszavának visszaállítása",
     "Modify roles for :name!": "Módosítsd :name jogosultságait",
     ":name\\'s Roles": ":name jogosultságai",
-    "List users": "Felhasználók listázása"
+    "List users": "Felhasználók listázása",
+    "Legacy Editor": "Hagyományos szerkesztés",
+    "Edit Mode": "Szerkesztő mód",
+    "Select country": "Válassz országot",
+    "--Select country--": "--Válassz országot--",
+    "Select your state or region": "Válaszd ki a régiód",
+    "--Select state or region or country--": "--Válassz régiót--",
+    "Type your zip or postal code": "Írd be az írányítószámod",
+    "Type your address here": "Írd be a címed",
+    "Add address": "Számlázási cím hozzáadása",
+    "Select country code": "Válaszd ki az országod kódját",
+    "Type phone number": "Add meg a telefonszámod",
+    "Add phone number": "Telefonszám hozzáadása",
+    "Storefront": "Főoldal",
+    "SignUp": "Regisztráció",
+    "LogOut": "Kijelentkezés",
+    ":first_name\\'s roles: ": ":first_name jogosultságai",
+    ":name\\'s details": ":name felhasználói adatai"
 }
