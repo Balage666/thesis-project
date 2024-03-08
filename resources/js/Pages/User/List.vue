@@ -27,7 +27,7 @@ const props = defineProps({
 
             <!--TODO: Complete the design!-->
 
-            <div class="container p-5 bg-info-subtle border-0 rounded-5">
+            <div class="container-fluid p-5 bg-info-subtle border-0">
 
                 <div class="row m-3 d-none d-md-flex">
 

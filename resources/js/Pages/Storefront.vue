@@ -33,6 +33,9 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
     <div>
         <BodyLayout>
+
+            <!-- <pre>{{ carouselProductsShowCase }}</pre> -->
+
             <div class="container-fluid bg-info-subtle border-0">
 
                 <div class="row">
