@@ -17,30 +17,30 @@ import { usedTechnologies } from '*js-shared/technologies';
                 <div class="row">
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">
-                            Company name
+                            Blue Venue
                         </h6>
                         <p>
-                            Here you can use rows and columns to organize your footer
-                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
+                            Blue Venue is a completely made up brand name for my webshop application
+                            created for my thesis. The app developed with the following technologies mainly:
+                            Laravel, Inertia, Vue3
                         </p>
                     </div>
 
                     <hr class="w-100 clearfix d-md-none" />
 
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 fw-bold">Products</h6>
+                        <h6 class="text-uppercase mb-4 fw-bold">Sources</h6>
                         <p>
-                            <a class="text-white">MDBootstrap</a>
+                            <a class="text-white">Laravel Documentation</a>
                         </p>
                         <p>
-                            <a class="text-white">MDWordPress</a>
+                            <a class="text-white">Inertia Documentation</a>
                         </p>
                         <p>
-                            <a class="text-white">BrandFlow</a>
+                            <a class="text-white">Vue3 Documentation</a>
                         </p>
                         <p>
-                            <a class="text-white">Bootstrap Angular</a>
+                            <a class="text-white">Bootstrap Documentation</a>
                         </p>
                     </div>
 
@@ -51,10 +51,11 @@ import { usedTechnologies } from '*js-shared/technologies';
                             Useful links
                         </h6>
                         <p>
-                            <a class="text-white">Your Account</a>
+                            <a class="text-white" v-if="$page.props.permissions.authenticated">Your Account</a>
+                            <a class="text-white" v-else>Login</a>
                         </p>
                         <p>
-                            <a class="text-white">Become an Affiliate</a>
+                            <a class="text-white">Distributors</a>
                         </p>
                         <p>
                             <a class="text-white">Shipping Rates</a>
