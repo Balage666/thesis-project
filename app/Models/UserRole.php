@@ -16,6 +16,6 @@ class UserRole extends Model
     use HasFactory;
 
     public function User() {
-        $this->belongsTo(User::class, 'id', 'user_id');
+        $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
