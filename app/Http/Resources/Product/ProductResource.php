@@ -34,7 +34,8 @@ class ProductResource extends JsonResource
 
             'category' => new CategoryResource($this->category),
             'distributor' => $this->distributor,
-            'comments' => CommentResource::collection($this->comments)
+            'comments' => CommentResource::collection($this->comments),
+            'ratings' => $this->ratings
         ];
     }
 }
