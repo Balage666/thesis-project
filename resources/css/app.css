@@ -42,6 +42,10 @@ ul.dropdown-menu {
     background-color: #95B0B4;
 }
 
+.filter-board-bg-color {
+    background-color: #BFFBFF;
+}
+
 .formInputFieldBackground {
 
     background-color: #E1FFFF;
@@ -123,6 +127,7 @@ background-color: #E27127; GoogleButtonColor */
     border-color: #A43E00;
     background-color: #A43E00;
 }
+
 
 .btn-danger:hover,
 .btn-danger:focus {
