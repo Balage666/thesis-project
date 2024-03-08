@@ -2,12 +2,17 @@
 
 import { Link, useForm, usePage } from '@inertiajs/inertia-vue3'
 
-import LanguageSwitcher from '../../Components/Language/LanguageSwitcher.vue';
-
+import ToastStack from '*vue-components/Notification/ToastStack.vue';
+import Toast from '*vue-components/Notification/Toast.vue'
 const form = useForm({
     email: null,
     password: null,
 })
+
+const clearForm = () => {
+    form.email = '',
+    form.password = ''
+}
 
 </script>
 
@@ -16,6 +21,8 @@ const form = useForm({
         <title>{{ __("Login") }}</title>
     </Head>
     <div>
+
+        <ToastStack :notifications="form.errors"/>
 
         <div class="container py-5 h-100">
 
@@ -97,14 +104,6 @@ const form = useForm({
                                             <i class="fa-solid fa-plus"></i> {{ __("Create a new account!") }}
                                     </Link>
                                 </div>
-
-                            </div>
-
-                            <hr class="my-4">
-
-                            <div class="d-grid">
-
-                                <LanguageSwitcher/>
 
                             </div>
 
