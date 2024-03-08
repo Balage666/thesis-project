@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Product\ProductCarouselResource;
 use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\StorefrontProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,7 +19,7 @@ class StoreFrontController extends Controller
         $allProducts = Product::paginate(6);
 
         return Inertia::render("Storefront", [
-            'allProducts' => ProductResource::collection($allProducts),
+            'allProducts' => StorefrontProductResource::collection($allProducts),
             'carouselProducts' => ProductCarouselResource::collection($carouselProducts)
         ]);
     }
