@@ -46,23 +46,35 @@ const chunkedCarouselProducts = computed(() => {
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item" v-for="(itemArray, index) in chunkedCarouselProducts" :key="index" :class="{ 'active' : index === 0 }">
-                    <div class="d-flex align-items-center justify-content-center ">
-                        <div class="card my-0 mx-2 bg-light border-success border-3 p-2" v-for="product in itemArray">
-                        <!-- <img src="..." class="card-img-top" alt="..."> -->
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.shortened_description }}</p>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="card my-2 mx-2 bg-light border-info border-3 p-2" v-for="product in itemArray">
+                            <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" class="card-img-top" :alt="product.name" /> -->
+                            <div class="card-body">
 
-                            <div class="row">
-                                <div class="col-12 text-center d-grid gap-2 gap-lg-1 d-md-flex d-lg-flex align-items-md-center justify-content-md-center align-items-lg-center justify-content-lg-between">
-                                    <a href="#" class="btn btn-lg btn-primary">Go somewhere</a>
-                                    <a href="#" class="btn btn-lg btn-primary">Go somewhere</a>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="mb-0">{{ product.name }}</h5>
+                                    <h5 class="text-dark mb-0">{{ product.price }}</h5>
                                 </div>
-                                <!-- <div class="col-12 col-md-6 col-lg-6 text-center">
+
+                                <div class="d-flex justify-content-between gap-1">
+                                    <a href="#" class="btn btn-lg btn-outline-danger" v-show="$page.props.permissions.authenticated"><i class="fa-regular fa-heart"></i></a>
+                                    <a href="#" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></a>
+                                    <a href="#" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></a>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-12 col-md-5 col-lg-5 p-3 text-center">
+                                        <span class="fw-bold">{{ product.price }}</span>
+                                    </div>
+                                    <div class="col-12 col-md-7 col-lg-7 text-center d-grid gap-2 gap-lg-1 d-md-flex d-lg-flex align-items-md-center justify-content-md-center align-items-lg-center justify-content-lg-between">
+                                        <a href="#" class="btn btn-lg btn-outline-danger"><i class="fa-regular fa-heart"></i></a>
+                                        <a href="#" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></a>
+                                        <a href="#" class="btn btn-lg btn-primary"><i class="fa-solid fa-eye"></i></a>
+                                    </div>
                                 </div> -->
                             </div>
                         </div>
-                        </div>
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
                     </div>
                 </div>
             </div>
