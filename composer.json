@@ -8,6 +8,7 @@
         "php": "^8.1",
         "axlon/laravel-postal-code-validation": "^3.5",
         "druc/laravel-langscanner": "^2.1",
+        "emsifa/random-image": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.11",
         "laravel/framework": "^10.10",

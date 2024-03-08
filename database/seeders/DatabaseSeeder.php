@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Helpers\Shared\SeederHelper;
+use Emsifa\RandomImage\RandomImage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $userSeed = SeederHelper::USER_SEED;
         $adminSeed = SeederHelper::ADMIN_SEED_VALUE;
+        $provider = new \Emsifa\RandomImage\Providers\UnsplashProvider();
 
         \App\Models\User::factory($userSeed)->create()->each(function($user) {
             if($user->id % 2 == 0) {
@@ -71,5 +73,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Miscellaneous'
         ]);
         \App\Models\Product::factory(20)->create();
+        // ->each(function ($product) use ($provider) {
+        //     $product->Pictures()->save(\App\Models\ProductPicture::create([
+        //         'product_picture' => RandomImage::make(256, 256, "$product->name", $provider)->url(),
+        //         'product_id' => $product->id
+        //     ]));
+        // });
     }
 }
