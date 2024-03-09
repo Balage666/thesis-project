@@ -10,7 +10,7 @@ class ProductPicture extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'image',
+        'product_picture',
         'product_id'
     ];
 
