@@ -9,6 +9,7 @@ use App\Http\Controllers\StoreFrontController;
 use App\Http\Controllers\Phone\PhoneController;
 use App\Http\Resources\Product\ProductResource;
 use App\Http\Controllers\Address\AddressController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserDetailsController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
@@ -24,6 +25,10 @@ use App\Http\Controllers\Localization\LanguageSwitcherController;
 |
 */
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'role:Admin'], function () {
+        //...
+    });
 
     Route::group(['prefix' => 'user-management', 'middleware' => 'role:Moderator,Admin'], function () {
 
@@ -67,6 +72,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create');
         Route::get('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete');
 
+    });
+
+    Route::group(['prefix' => 'product-management', 'middleware' => 'role:Seller,Admin'], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Product Routes
+        |--------------------------------------------------------------------------
+         */
+        Route::get('create', [ProductController::class, 'Create'])->name('product-create');
+        Route::post('store', [ProductController::class, 'Store'])->name('product-store');
+        Route::get('list', [ProductController::class, 'List'])->name('product-list');
+        Route::get('show/{product}', [ProductController::class, 'Show'])->name('product-show');
+        Route::get('edit/{product}', [ProductController::class, 'Edit'])->name('product-edit');
+        Route::post('edit/{product}', [ProductController::class, 'Update'])->name('product-update');
+        Route::get('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
     });
 
     Route::get('/', function() {
