@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $userSeed = SeederHelper::USER_SEED;
         $adminSeed = SeederHelper::ADMIN_SEED_VALUE;
         $provider = new \Emsifa\RandomImage\Providers\UnsplashProvider();
+        $categories = SeederHelper::BASE_CATEGORIES;
 
         \App\Models\User::factory($userSeed)->create()->each(function($user) {
             if($user->id % 2 == 0) {
@@ -69,9 +70,12 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $admin->id
             ])
         ]);
-        \App\Models\Category::create([
-            'name' => 'Miscellaneous'
-        ]);
+
+        foreach ($categories as $category) {
+            \App\Models\Category::create([
+                'name' => $category
+            ]);
+        }
         \App\Models\Product::factory(20)->create();
         // ->each(function ($product) use ($provider) {
         //     $product->Pictures()->save(\App\Models\ProductPicture::create([
