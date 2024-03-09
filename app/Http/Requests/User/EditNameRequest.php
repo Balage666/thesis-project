@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Helper;
 
 class EditNameRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class EditNameRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,6 +22,7 @@ class EditNameRequest extends FormRequest
      */
     public function rules(): array
     {
+        $nameRegex = Helper::GetStrictNameRegex();
         return [
             'name' => ['required', 'regex:/^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u']
         ];

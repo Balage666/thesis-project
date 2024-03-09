@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Helper;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,11 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $nameRegex = Helper::GetStrictNameRegex();
         return [
-            //
+            'name' => ['required', 'unique:users,email', "regex:$nameRegex"],
+            'email' => ['required', 'email'],
+            'roles' => ['required', 'min:1']
         ];
     }
 }

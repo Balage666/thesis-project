@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Helper;
 
 class SignupRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class SignupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,6 +22,8 @@ class SignupRequest extends FormRequest
      */
     public function rules(): array
     {
+        $nameRegex = Helper::GetStrictNameRegex();
+        $passwordRegex = Helper::GetPasswordRegex();
         return [
             'email' => ['required', 'email'],
             'name' => ['required', 'min:3', 'regex:/^[A-Z][a-z]+\s[a-zA-Z\s\.]+/'],
