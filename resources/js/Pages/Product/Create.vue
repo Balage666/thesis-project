@@ -3,6 +3,7 @@
 import { FormKit } from '@formkit/vue';
 import { useForm, router } from '@inertiajs/inertia-vue3';
 import { computed } from 'vue';
+import { useForSelect } from '*vue-composables/ForSelectComposable';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 
@@ -12,13 +13,7 @@ const props = defineProps({
     }
 });
 
-const categoryList = computed(() => {
-    let list = [];
-    props.categories.data.forEach(element => {
-        list.push({ label: element.name, value: element.id })
-    });
-    return list;
-});
+const { selectOptions } = useForSelect(props.categories.data)
 
 // console.log(categoryList.value)
 
@@ -66,7 +61,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            :options="categoryList"
+                            :options="selectOptions"
                             label="Product category"
                             :validation="[['required']]"
                             validation-visibility="live"
