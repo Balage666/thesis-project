@@ -32,7 +32,8 @@ export default defineConfig({
             '*': path.resolve(__dirname, 'resources'),
             '*js-shared': path.resolve(__dirname, 'resources/js/Shared'),
             '*vue-components' : path.resolve(__dirname, 'resources/js/Components'),
-            '*vue-pages': path.resolve(__dirname, 'resources/js/Pages')
+            '*vue-pages': path.resolve(__dirname, 'resources/js/Pages'),
+            '*vue-composables': path.resolve(__dirname, 'resources/js/Composables')
         }
     },
 });
