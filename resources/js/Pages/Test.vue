@@ -1,10 +1,10 @@
 <script setup>
 
+import { ref, onMounted, computed } from 'vue';
 //TODO: Design lang switcher tommorrow
 import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
 import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
-
-import { ref, onMounted, computed } from 'vue';
+import Tiptap from '*vue-components/Input/TipTap.vue'
 
 const props = defineProps({
     products: {
@@ -21,7 +21,11 @@ const carouselProducts = ref(props.products.data);
     <div>
         <h1>New Feature test</h1>
 
-        <div>
+        <div class="container mx-auto my-5">
+            <Tiptap/>
+        </div>
+
+        <!-- <div>
             <ProductCarousel class="d-none d-md-none d-lg-flex" :carouselId="'large'" :products="carouselProducts" :visiblePerSlide="3"/>
         </div>
 
@@ -31,7 +35,7 @@ const carouselProducts = ref(props.products.data);
 
         <div>
             <ProductCarousel class="d-flex d-md-none d-sm-flex d-lg-none" :carouesleId="'small'" :products="carouselProducts" :visiblePerSlide="1"/>
-        </div>
+        </div> -->
 
         <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
 
