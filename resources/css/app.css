@@ -142,3 +142,10 @@ background-color: #E27127; GoogleButtonColor */
     background-color: #502206;
 }
 
+.tip-tap-size {
+
+    min-height: 12rem;
+    max-height: 12rem;
+
+}
+
