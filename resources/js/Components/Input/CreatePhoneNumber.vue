@@ -21,7 +21,7 @@ const phoneNumberForm = useForm({
     mask: countries[0].mask.replaceAll('#', '9'),
 })
 
-//TODO: Make it reusable with Mixins
+//TODO: Make it reusable with Mixins or Composables
 watch(() => props.visible, (newValue, oldValue, options) => {
     if (newValue) {
         resetForm()
