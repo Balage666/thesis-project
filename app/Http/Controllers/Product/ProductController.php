@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategorySelectorResource;
+use App\Http\Resources\Product\ProductDataResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -102,15 +104,43 @@ class ProductController extends Controller
      */
     public function Edit(Product $product)
     {
-        return Inertia::render("Product/LegacyEdit");
+        $this->authorizeForUser(auth()->user(), "editProduct", [$product]);
+
+        $categories = Category::all();
+        return Inertia::render("Product/LegacyEdit", [
+            "productToEdit" => new ProductDataResource($product),
+            "categories" => CategoryResource::collection($categories)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function Update(Request $request, Product $product)
+    public function Update(StoreProductRequest $storeProductRequest, Product $product)
     {
-        //
+
+        $validated = $storeProductRequest->validated();
+
+        $updateProductFormFields = [
+            ...$validated,
+            "description" => $storeProductRequest["description"]
+        ];
+
+        $oldCategory = $product->category;
+        $newCategory = Category::findOrFail($updateProductFormFields["categoryId"]);
+
+        $product->name = $updateProductFormFields["name"];
+        $product->description = $updateProductFormFields["description"];
+        $product->price = $updateProductFormFields["price"];
+        $product->stock = $updateProductFormFields["stock"];
+
+        $product->Category()->disassociate($oldCategory);
+        $product->Category()->associate($newCategory);
+        $product->setUpdatedAt(now());
+
+        $product->update();
+
+        return redirect()->route('storefront')->with('message', 'Product Updated!');
     }
 
     /**
