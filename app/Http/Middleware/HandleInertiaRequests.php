@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load([
-                    'Roles', 'PhoneNumbers', 'Addresses', 'Products'
+                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'Cart'
                 ]) : null
             ],
             'permissions' => [
