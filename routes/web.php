@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\StoreFrontController;
@@ -88,6 +89,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{product}', [ProductController::class, 'Edit'])->name('product-edit');
         Route::post('edit/{product}', [ProductController::class, 'Update'])->name('product-update');
         Route::get('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
+    });
+
+    Route::group(['prefix' => 'shopping-basket'], function () {
+
+        Route::post('/add/{product}', [CartController::class, 'AddToCart'])->name('add-to-basket')->withoutMiddleware('auth');
+
     });
 
     Route::get('/', function() {
