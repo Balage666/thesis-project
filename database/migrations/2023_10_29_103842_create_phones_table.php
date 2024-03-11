@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('phones', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->tinyText('countryIso2code');
             $table->mediumText('number');
             $table->tinyText('mask');
