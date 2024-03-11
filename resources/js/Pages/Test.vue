@@ -1,16 +1,25 @@
 <script setup>
 
+import { Link } from '@inertiajs/inertia-vue3';
 import { ref, onMounted, computed } from 'vue';
 //TODO: Design lang switcher tommorrow
 import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
 import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
 import Tiptap from '*vue-components/Input/TipTap.vue'
 
+
 const props = defineProps({
     products: {
         type: [Array, Object]
     }
 })
+
+
+const randomProduct = computed(() => {
+    const random = Math.floor(Math.random() * props.products.data.length)
+    return props.products.data[random];
+})
+
 
 const carouselProducts = ref(props.products.data);
 
@@ -21,8 +30,22 @@ const carouselProducts = ref(props.products.data);
     <div>
         <h1>New Feature test</h1>
 
-        <div class="container mx-auto my-5">
+        <pre>{{ $page.props.active_session.user }}</pre>
+        <hr>
+        <pre>{{ randomProduct }}</pre>
+        <!-- <div class="container mx-auto my-5">
             <Tiptap/>
+        </div> -->
+        <!-- <pre>{{ $page.props }}</pre> -->
+        <!-- <pre>{{ randomProduct }}</pre> -->
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ props.products.data[5].name }}</h5>
+                <p class="card-text">{{ props.products.data[5].shortened_description }}</p>
+                <p class="card-text">{{ props.products.data[5].price }}</p>
+                <Link :href="route('add-to-basket', { product: props.products.data[5] })" method="post" as="button" type="button" class="btn btn-primary">Add to Basket</Link>
+            </div>
         </div>
 
         <!-- <div>
