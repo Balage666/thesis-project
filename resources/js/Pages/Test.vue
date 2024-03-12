@@ -6,6 +6,7 @@ import { ref, onMounted, computed } from 'vue';
 import LanguageSwitcher from '*vue-components/Language/LanguageSwitcher.vue';
 import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
 import Tiptap from '*vue-components/Input/TipTap.vue'
+import ToastStack from '*vue-components/Notification/ToastStack.vue';
 
 
 const props = defineProps({
@@ -30,21 +31,27 @@ const carouselProducts = ref(props.products.data);
     <div>
         <h1>New Feature test</h1>
 
-        <pre>{{ $page.props.active_session.user }}</pre>
-        <hr>
-        <pre>{{ randomProduct }}</pre>
-        <!-- <div class="container mx-auto my-5">
-            <Tiptap/>
-        </div> -->
-        <!-- <pre>{{ $page.props }}</pre> -->
-        <!-- <pre>{{ randomProduct }}</pre> -->
+        <ToastStack :notifications="$page.props.errors"/>
+
+        <pre>{{ $page.props }}</pre>
 
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ props.products.data[5].name }}</h5>
-                <p class="card-text">{{ props.products.data[5].shortened_description }}</p>
-                <p class="card-text">{{ props.products.data[5].price }}</p>
-                <Link :href="route('add-to-basket', { product: props.products.data[5] })" method="post" as="button" type="button" class="btn btn-primary">Add to Basket</Link>
+                <h5 class="card-title">{{ props.products.data[0].name }}</h5>
+                <p class="card-text">{{ props.products.data[0].shortened_description }}</p>
+                <p class="card-text">{{ props.products.data[0].price }}</p>
+                <Link :href="route('add-to-basket', { product: props.products.data[0] })" method="post" as="button" type="button" class="btn btn-primary">Add to Basket</Link>
+                <Link :href="route('remove-from-basket', { product: props.products.data[0] })" method="post" as="button" type="button" class="btn btn-danger">Remove from Basket</Link>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ props.products.data[2].name }}</h5>
+                <p class="card-text">{{ props.products.data[2].shortened_description }}</p>
+                <p class="card-text">{{ props.products.data[2].price }}</p>
+                <Link :href="route('add-to-basket', { product: props.products.data[2] })" method="post" as="button" type="button" class="btn btn-primary">Add to Basket</Link>
+                <Link :href="route('remove-from-basket', { product: props.products.data[2] })" method="post" as="button" type="button" class="btn btn-danger">Remove from Basket</Link>
             </div>
         </div>
 
@@ -60,7 +67,7 @@ const carouselProducts = ref(props.products.data);
             <ProductCarousel class="d-flex d-md-none d-sm-flex d-lg-none" :carouesleId="'small'" :products="carouselProducts" :visiblePerSlide="1"/>
         </div> -->
 
-        <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
 
 
         <!-- <LanguageSwitcher/> -->
