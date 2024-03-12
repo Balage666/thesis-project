@@ -7,10 +7,23 @@ use App\Models\Product;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\CartItemStockRequest;
+use Illuminate\Support\Facades\Validator;
+use App\Rules\Cart\ProductStockValidationRule;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function AddToCart(Product $product) {
+    public function AddToCart(CartItemStockRequest $request, Product $product) {
+
+
+        $data['stock'] = $request->route()->parameter('product')->stock;
+
+        $validator = Validator::make($data, $request->rules());
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
 
         if (auth()->check()) {
 
@@ -48,6 +61,7 @@ class CartController extends Controller
 
                 $cartItems[$searchForItem]->save();
             }
+
             $cart->setUpdatedAt(now());
             $cart->save();
         }
@@ -91,6 +105,44 @@ class CartController extends Controller
 
         }
 
-        return redirect()->back();
+        $product->stock--;
+        $product->save();
+        return redirect()->back()->with('message', 'Product added to basket!');
+    }
+
+    public function RemoveFromCart(Product $product) {
+
+        $cart = Cart::find(session('cart_id'));
+
+        if (auth()->check()) {
+
+            //Authenticated user
+            $cart = auth()->user()->Cart;
+
+        }
+
+        if (is_null($cart)) {
+            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+        }
+
+        $cartItems = $cart->CartItems;
+
+        $searchForItem = $cartItems->search(function ($item) use($product) {
+            return $item->ProductItem->id == $product->id;
+        });
+
+
+        if (is_numeric($searchForItem)) {
+
+            $product->stock += $cartItems[$searchForItem]->amount;
+            $product->save();
+            $cartItems[$searchForItem]->delete();
+
+        }
+
+
+        return redirect()->back()->with('message', 'Product removed from basket!');
+
+
     }
 }
