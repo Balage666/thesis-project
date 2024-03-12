@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
+use Inertia\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -38,6 +39,11 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $guest_cart = null;
+        if (!auth()->check() && Session::has('cart_id')) {
+            $guest_cart = Cart::find(Session::get('cart_id'))->load(['CartItems']);
+        }
+
         return array_merge(parent::share($request), [
             'flash' => [
                 'message' => session('message')
@@ -45,13 +51,15 @@ class HandleInertiaRequests extends Middleware
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load([
                     'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'Cart'
-                ]) : null
+                ]) : null,
+                'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems']) : null
             ],
             'permissions' => [
                 'authenticated' => auth()->check()
             ],
             'locales' => config('app.locales'),
-            'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale()
+            'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale(),
+            'guest_cart' => $guest_cart
         ]);
     }
 }
