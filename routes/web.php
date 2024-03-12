@@ -93,8 +93,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'shopping-basket'], function () {
 
-        Route::post('/add/{product}', [CartController::class, 'AddToCart'])->name('add-to-basket')->withoutMiddleware('auth');
+        Route::post(
+            'add/{product}', [CartController::class, 'AddToCart']
+        )->name('add-to-basket')->withoutMiddleware('auth');
 
+        Route::post(
+            'remove/{product}', [CartController::class, 'RemoveFromCart']
+        )->name('remove-from-basket')->withoutMiddleware('auth');
     });
 
     Route::get('/', function() {
