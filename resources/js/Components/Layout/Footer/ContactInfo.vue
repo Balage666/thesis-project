@@ -6,7 +6,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
 </script>
 
-<!--TODO: Fill this with texts if you don't burn out tommorrow-->
+<!--TODO: Add the rest of the technologies-->
 <template>
     <div class="p-3 banner-bg-color">
 
@@ -15,20 +15,20 @@ import { usedTechnologies } from '*js-shared/technologies';
             <section>
 
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">
                             Blue Venue
                         </h6>
                         <p>
                             Blue Venue is a completely made up brand name for my webshop application
                             created for my thesis. The app developed with the following technologies mainly:
-                            Laravel, Inertia, Vue3
+                            Laravel, Inertia, Vue3, FormKit, PrimeVue, Bootstrap
                         </p>
                     </div>
 
                     <hr class="w-100 clearfix d-md-none" />
 
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">Sources</h6>
                         <p>
                             <a class="text-white">Laravel Documentation</a>
@@ -46,7 +46,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
                     <hr class="w-100 clearfix d-md-none" />
 
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">
                             Useful links
                         </h6>
@@ -58,22 +58,22 @@ import { usedTechnologies } from '*js-shared/technologies';
                             <a class="text-white">Distributors</a>
                         </p>
                         <p>
-                            <a class="text-white">Shipping Rates</a>
+                            <a class="text-white">Brands</a>
                         </p>
                         <p>
-                            <a class="text-white">Help</a>
+                            <a class="text-white">Introduction page</a>
                         </p>
                     </div>
 
-                    <hr class="w-100 clearfix d-md-none" />
+                    <!-- <hr class="w-100 clearfix d-md-none" /> -->
 
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <!-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">Contact</h6>
                         <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
                         <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
                         <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
                         <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-                    </div>
+                    </div> -->
                 </div>
 
             </section>
