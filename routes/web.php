@@ -7,12 +7,15 @@ use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\StoreFrontController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Phone\PhoneController;
 use App\Http\Resources\Product\ProductResource;
 use App\Http\Controllers\Address\AddressController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserDetailsController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
+use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
 
 /*
@@ -27,8 +30,10 @@ use App\Http\Controllers\Localization\LanguageSwitcherController;
 */
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['prefix' => 'admin', 'middleware' => 'role:Admin'], function () {
-        //...
+    Route::group(['prefix' => 'dashboard', 'middleware' => 'role:Seller,Moderator,Admin'], function () {
+
+        Route::get('main', [DashboardController::class, 'Main'])->name('dashboard-main');
+
     });
 
     Route::group(['prefix' => 'user-management', 'middleware' => 'role:Moderator,Admin'], function () {
@@ -44,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{user}', [UserController::class, 'Edit'])->name('user-edit');
         Route::post('store', [UserController::class, 'Store'])->name('user-store');
         Route::post('edit/{user}', [UserController::class, 'Update'])->name('user-update');
-        Route::get('delete/{user}', [UserController::class, 'Destroy'])->name('user-delete');
+        Route::post('delete/{user}', [UserController::class, 'Destroy'])->name('user-delete');
 
         /*
         |--------------------------------------------------------------------------
@@ -89,6 +94,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{product}', [ProductController::class, 'Edit'])->name('product-edit');
         Route::post('edit/{product}', [ProductController::class, 'Update'])->name('product-update');
         Route::get('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
+
+        /*
+        |--------------------------------------------------------------------------
+        | ProductDetails Routes
+        |--------------------------------------------------------------------------
+         */
+        Route::post('rating/{product}/add', [ProductDetailsController::class, 'AddRating'])->name('product-rate');
+
     });
 
     Route::group(['prefix' => 'shopping-basket'], function () {
@@ -100,6 +113,20 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post(
             'remove/{product}', [CartController::class, 'RemoveFromCart']
         )->name('remove-from-basket')->withoutMiddleware('auth');
+
+        Route::post('clear', [CartController::class, 'ClearCart'])->name('clear-basket')->withoutMiddleware('auth');
+    });
+
+    Route::group(['prefix' => 'order-management'], function() {
+
+        Route::get('{user}/list', [OrderController::class, 'List'])->name('user-order');
+        Route::get('list/all', [OrderController::class, 'AllList'])->name('all-orders');
+        Route::get('order/{cart}/create', [OrderController::class, 'Create'])->name('order-create')->withoutMiddleware('auth');
+        Route::post('order/{cart}/create', [OrderController::class, 'Store'])->name('order-store')->withoutMiddleware('auth');
+        Route::get('order/{order}/edit', [OrderController::class, 'Edit'])->name('order-edit');
+        Route::post('order/{order}/edit', [OrderController::class, 'Update'])->name('order-update');
+        Route::post('order/{order}/delete', [OrderController::class, 'Destroy'])->name('order-destroy')->withoutMiddleware('auth');
+
     });
 
     Route::get('/', function() {
