@@ -7,14 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductRating extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'rating',
-        'product_id'
+        'product_id',
+        'rater'
     ];
 
     use HasFactory;
 
     public function Product() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    public function Rater() {
+        return $this->belongsTo(User::class, 'rater', 'id');
     }
 }
