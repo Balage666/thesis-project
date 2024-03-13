@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Helpers\Shared\ValidationHelper;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\SignupRequest;
 use Helper;
 
 class AuthController extends Controller
@@ -18,13 +20,15 @@ class AuthController extends Controller
         return Inertia::render("Auth/LogIn");
     }
 
-    public function LogOn(Request $request) {
+    public function LogOn(LoginRequest $request) {
 
 
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $formFields = $request->validated();
+
+        // $formFields = $request->validate([
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
 
         if (auth()->attempt($formFields)) {
 
@@ -61,25 +65,26 @@ class AuthController extends Controller
 
     }
 
-    public function SignOn(Request $request) {
+    public function SignOn(SignupRequest $request) {
 
-        $nameRegex = Helper::GetStrictNameRegex();
-        $passwordRegex = Helper::GetPasswordRegex();
+        // $nameRegex = Helper::GetStrictNameRegex();
+        // $passwordRegex = Helper::GetPasswordRegex();
 
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'name' => ['required', 'min:3', "regex:$nameRegex"],
-            'password' => ['required', 'confirmed', 'min:8', "regex:$passwordRegex"],
-        ]);
+        // $formFields = $request->validate([
+        //     'email' => ['required', 'email'],
+        //     'name' => ['required', 'min:3', "regex:$nameRegex"],
+        //     'password' => ['required', 'confirmed', 'min:8', "regex:$passwordRegex"],
+        // ]);
 
+        $formFields = $request->validated();
 
-        $rules = ['email' => 'unique:users,email'];
+        // $rules = ['email' => 'unique:users,email'];
 
-        $validator = Validator::make($formFields, $rules);
+        // $validator = Validator::make($formFields, $rules);
 
-        if ($validator->fails()) {
-            return back()->withErrors(['email' => 'Invalid email'])->onlyInput('email');
-        }
+        // if ($validator->fails()) {
+        //     return back()->withErrors(['email' => 'Invalid email'])->onlyInput('email');
+        // }
 
         $tempName = $formFields["name"];
 
