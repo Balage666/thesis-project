@@ -1,13 +1,34 @@
 <script setup>
 
 import { Link, useForm } from '@inertiajs/inertia-vue3'
+import { router } from '@inertiajs/vue3';
+
+import ToastStack from '*vue-components/Notification/ToastStack.vue';
 
 const form = useForm({
     name: null,
     email: null,
     password: null,
     password_confirmation: null
-})
+});
+
+const clearForm = () => {
+
+    form.name = null;
+    form.email = null;
+    form.password = null;
+    form.password_confirmation = null;
+
+}
+
+const signUp = () => {
+
+    const data = useForm({ ...form });
+
+    clearForm();
+
+    router.post(route('sign-on'), data);
+}
 
 </script>
 
@@ -15,6 +36,8 @@ const form = useForm({
     <Head>
         <title>{{ __("Registration") }}</title>
     </Head>
+
+    <ToastStack/>
 
     <div>
 
@@ -25,11 +48,11 @@ const form = useForm({
             <div class="card shadow-2-strong authFormCardBackground bg-gradient" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
 
-                    <h1 class="mb-5">{{ __("Welcome!") }}</h1>
+                    <h1 class="mb-3">{{ __("Welcome!") }}</h1>
 
-                    <h3 class="mb-7">{{ __("Create your account!") }}</h3>
+                    <h3 class="mb-3">{{ __("Create your account!") }}</h3>
 
-                    <form @submit.prevent="form.post(route('sign-on'))">
+                    <form @submit.prevent="signUp">
 
                         <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div>
                         <div class="form-outline mb-4">
@@ -46,7 +69,7 @@ const form = useForm({
                         </div>
 
 
-                        <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
+                        <!-- <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="email">{{ __("Email address") }}</label>
                             <input
@@ -60,7 +83,7 @@ const form = useForm({
                             >
                         </div>
 
-                        <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div>
+                        <!-- <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="password">{{ __("Password") }}</label>
                             <input
@@ -74,7 +97,7 @@ const form = useForm({
                             >
                         </div>
 
-                        <div class="alert alert-danger" v-if="form.errors.password_confirmation">{{ form.errors.password_confirmation }}</div>
+                        <!-- <div class="alert alert-danger" v-if="form.errors.password_confirmation">{{ form.errors.password_confirmation }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="password_confirmation">{{ __("Password confirmation") }}</label>
                             <input

@@ -2,8 +2,10 @@
 
 import { Link, useForm, usePage } from '@inertiajs/inertia-vue3'
 
+import { router } from '@inertiajs/vue3';
+
 import ToastStack from '*vue-components/Notification/ToastStack.vue';
-import Toast from '*vue-components/Notification/Toast.vue'
+
 const form = useForm({
     email: null,
     password: null,
@@ -14,6 +16,16 @@ const clearForm = () => {
     form.password = ''
 }
 
+const logIn = () => {
+
+    const data = useForm({ ...form });
+
+    clearForm();
+
+    router.post(route('log-on'), data);
+
+}
+
 </script>
 
 <template>
@@ -22,7 +34,7 @@ const clearForm = () => {
     </Head>
     <div>
 
-        <ToastStack :notifications="form.errors"/>
+        <ToastStack/>
 
         <div class="container py-5 h-100">
 
@@ -32,12 +44,12 @@ const clearForm = () => {
                     <div class="card shadow-lg p-3 authFormCardBackground bg-gradient" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
-                            <h1 class="mb-5">{{ __("Hi!") }}</h1>
+                            <h1 class="mb-3">{{ __("Hi!") }}</h1>
 
-                            <h3 class="mb-7">{{ __("Please, type your email and password!") }}</h3>
+                            <h3 class="mb-3">{{ __("Please, type your email and password!") }}</h3>
 
                             <!-- <form @submit.prevent="form.post('/auth/log-on')"> -->
-                            <form @submit.prevent="form.post(route('log-on'))">
+                            <form @submit.prevent="logIn">
                                 <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
                                 <div class="form-outline mb-4">
                                     <label class="form-label d-flex justify-content-start" for="email">{{ __("Email address") }}</label>
@@ -84,7 +96,7 @@ const clearForm = () => {
 
                             <div class="d-grid">
                             <a :href="route('google-log-in')" class="btn btn-lg btn-secondary shadow-sm fw-bold"
-                                type="button"><i class="fab fa-google me-2"></i> {{ __("Sign in with google") }}</a>
+                                type="button"><i class="fab fa-google me-2"></i> {{ __("Sign in with Google") }}</a>
                             </div>
 
                             <hr class="my-4">
