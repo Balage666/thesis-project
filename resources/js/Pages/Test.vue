@@ -31,7 +31,7 @@ const carouselProducts = ref(props.products.data);
     <div>
         <h1>New Feature test</h1>
 
-        <ToastStack :notifications="$page.props.errors"/>
+        <ToastStack/>
 
         <pre>{{ $page.props }}</pre>
 
