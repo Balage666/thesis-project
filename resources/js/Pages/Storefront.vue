@@ -28,13 +28,13 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
 <template>
     <Head>
-        <title>Storefront</title>
+        <title>{{ __('Storefront') }}</title>
     </Head>
 
     <div>
         <BodyLayout>
 
-            <!-- <pre>{{ carouselProductsShowCase }}</pre> -->
+            <!-- <pre>{{ $page.props.permissions }}</pre> -->
 
             <div class="container-fluid bg-info-subtle border-0">
 
@@ -141,7 +141,7 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                         <hr>
 
-                        <div class="row text-center">
+                        <!-- <div class="row text-center">
                             <div class="col-6">
                                 <Pagination :pagination="props.allProducts.meta"/>
                             </div>
@@ -149,7 +149,7 @@ const allProductsShowCase = computed(() => props.allProducts.data);
                             <div class="col-6">
                                 <p>ASsdasaddads</p>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="container">
@@ -158,7 +158,8 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                                     <div class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in allProductsShowCase">
                                         <div class="card border-3 border-info">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" class="card-img-top" :title="product.category.name" :alt="product.name" />
+                                            <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" class="card-img-top" :title="product.category.name" :alt="product.name" /> -->
+                                            <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" />
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="small">
@@ -201,24 +202,6 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                 </div>
 
-                <!-- <pre>{{ $page.props.permissions }}</pre> -->
-                <!-- <pre>{{ route().current('storefront') }}</pre> -->
-
-                <div v-if="$page.props.active_session.user">
-                    <h2>{{ $page.props.active_session.user.name }}</h2>
-                    <hr>
-                    <h2>{{ $page.props.active_session.user.email }}</h2>
-                    <hr>
-                    <h2>{{ $page.props.active_session.user }}</h2>
-                    <hr>
-                    <h2>{{ route().has('storefront') }}</h2>
-                    <hr>
-                    <img
-                        :src="$page.props.active_session.user.profile_picture"
-                        :title="$page.props.active_session.user.name"
-                        :alt="$page.props.active_session.user.name"
-                    >
-                </div>
             </div>
 
 

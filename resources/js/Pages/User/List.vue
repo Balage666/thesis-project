@@ -1,6 +1,6 @@
 <script setup>
 
-import { Link, Head } from '@inertiajs/vue3';
+import { Link, Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue'
@@ -11,6 +11,13 @@ const props = defineProps({
         type: Object
     }
 });
+
+const check = (user) => {
+
+    console.log(user);
+    router.post(route('user-delete', { user: user }));
+
+}
 
 </script>
 
@@ -25,27 +32,27 @@ const props = defineProps({
 
             <!-- <pre>{{ props.users }}</pre> -->
 
-            <!--TODO: Complete the design!-->
+            <!--TODO: Make it scrollable-->
 
             <div class="container-fluid p-5 bg-info-subtle border-0">
 
                 <div class="row m-3 d-none d-md-flex">
 
-                    <div class="col-lg-3 col-md-12 col-12 mt-3">
+                    <!-- <div class="col-lg-12 col-md-12 col-12 mt-3">
 
                         <form class="d-flex align-content-center justify-content-center" role="search">
                             <input class="form-control form-control-lg border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
                             <button class="btn btn-primary border-2 rounded-start-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                         </form>
 
-                    </div>
+                    </div> -->
 
-                    <div class="col-lg-3 col-md-12 col-12 mt-3"></div>
+                    <!-- <div class="col-lg-3 col-md-12 col-12 mt-3"></div> -->
 
-                    <div class="col-lg-3 col-md-12 col-12 mt-3">
+                    <div class="col-lg-12 col-md-12 col-12 mt-3">
                         <Pagination :pagination="props.users.meta"/>
                     </div>
-                    <div class="col-lg-3 col-md-12 col-12 mt-3"></div>
+                    <!-- <div class="col-lg-3 col-md-12 col-12 mt-3"></div> -->
 
                 </div>
 
@@ -59,7 +66,7 @@ const props = defineProps({
                             <li class="nav-item">
                                 <Pagination :pagination="props.users.meta"/>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                             <li class="nav-item">
@@ -70,7 +77,7 @@ const props = defineProps({
                                     <input class="form-control form-control-lg border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
                                     <button class="btn btn-primary border-2 rounded-start-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                                 </form>
-                            </li>
+                            </li> -->
                         </ul>
                         <!-- <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -131,8 +138,16 @@ const props = defineProps({
                                                 <div class="my-3 my-lg-0">
                                                     <h2 class="text-center">{{ __(":first_name\'s roles: ", user) }}</h2>
                                                     <ul class="list-group border-0 rounded-5">
-                                                        <li class="list-group-item p-3" v-for="role in user.roles">{{ __(role.name) }}</li>
+                                                        <li class="list-group-item p-3 text-center" v-for="role in user.roles">{{ __(role.name) }}</li>
                                                     </ul>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-12">
+
+                                                <div class="my-3 my-lg-0 text-center">
+                                                    <button @click="check(user)" class="btn btn-lg btn-danger" type="button">Delete</button>
                                                 </div>
 
                                             </div>

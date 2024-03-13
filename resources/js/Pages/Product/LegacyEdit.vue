@@ -42,10 +42,15 @@ const sendFormData = () => {
 </style>
 
 <template>
-    <BodyLayout>
-        <h1>Legacy Edit - Product</h1>
 
-        <pre>{{ productValues }}</pre>
+    <Head>
+        <title>{{ __('Legacy Edit - Product') }}</title>
+    </Head>
+
+    <BodyLayout>
+        <!-- <h1>Legacy Edit - Product</h1> -->
+
+        <!-- <pre>{{ productValues }}</pre> -->
 
         <div class="my-5 py-5">
             <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">

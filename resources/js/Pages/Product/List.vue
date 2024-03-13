@@ -2,6 +2,8 @@
 
 import { computed } from 'vue';
 
+import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
+
 const props = defineProps({
     products: {
         type: Object
@@ -19,10 +21,16 @@ console.log(ObjectProperties.value);
 </style>
 
 <template>
-    <!-- <pre>{{ productList }}</pre> -->
-    <div>
 
-        <h1>List products (design in development)</h1>
+    <Head>
+        <title>{{ __('List products (design in development)') }}</title>
+    </Head>
+    <!-- <pre>{{ productList }}</pre> -->
+    <BodyLayout>
+        <!-- <h1>List products (design in development)</h1> -->
+
+
+        <!--TODO: Make it scrollable and redesign it-->
         <table class="table">
             <thead>
                 <tr>
@@ -39,5 +47,5 @@ console.log(ObjectProperties.value);
                 </tr>
             </tbody>
         </table>
-    </div>
+    </BodyLayout>
 </template>

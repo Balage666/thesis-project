@@ -8,19 +8,19 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <nav class="navbar navbar-expand-lg banner-bg-color">
         <div class="container-fluid bg-light rounded-5 mx-3 p-3">
-            <a class="navbar-brand py-2" href="#">{{ __("Storefront") }}</a>
+            <Link class="navbar-brand py-2" :href="route('storefront')">{{ __("Storefront") }}</Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa-solid fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <!--TODO: Might move this to banner-->
-                <div class="w-75 py-2 ms-lg-auto me-lg-auto ms-sm-auto me-sm-auto" v-show="route().current('storefront')">
+                <!--TODO: Remove this-->
+                <!-- <div class="w-75 py-2 ms-lg-auto me-lg-auto ms-sm-auto me-sm-auto" v-show="route().current('storefront')">
                     <form class="d-flex" role="search">
                         <input class="form-control form-control-lg form-control-sm rounded-start-5" type="search" :placeholder="__('Search')" aria-label="Search">
                         <button class="btn btn-primary rounded-end-5" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                     </form>
-                </div>
+                </div> -->
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-2">
 
@@ -40,6 +40,7 @@ import { Link } from '@inertiajs/vue3';
                                 <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ $page.props.active_session.user.name }}</span>
                             </button>
                             <ul class="dropdown-menu bg-white">
+                                <li v-show="$page.props.permissions.elligible_for_dashboard"><Link :href="route('dashboard-main')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-toolbox"></i> {{ __("Dashboard") }}</Link></li>
                                 <li><Link :href="route('log-out')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-door-open"></i> {{ __("LogOut") }}</Link></li>
                             </ul>
                         </li>

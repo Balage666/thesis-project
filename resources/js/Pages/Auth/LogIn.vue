@@ -78,16 +78,9 @@ const logIn = () => {
                                     >
                                 </div>
 
-
-                                <!-- TODO: implement the backend behind this -->
-                                <!-- <div class="form-check d-flex justify-content-start mb-4">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkbox" />
-                                    <label class="form-check-label" for="checkbox"> Remember password </label>
-                                </div> -->
-
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-lg btn-primary shadow-sm fw-bold" type="submit"> <i class="fa-solid fa-right-to-bracket"></i> {{ __("Login") }}</button>
-                            </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-lg btn-primary shadow-sm fw-bold" type="submit"> <i class="fa-solid fa-right-to-bracket"></i> {{ __("Login") }}</button>
+                                </div>
 
 
                             </form>

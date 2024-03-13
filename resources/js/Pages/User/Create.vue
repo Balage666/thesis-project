@@ -2,13 +2,12 @@
 
 
 import { FormKit } from '@formkit/vue';
-
 import { useForm, router } from '@inertiajs/vue3';
-
 import { ref } from 'vue';
 
 import { userRoles } from '*js-shared/user-roles'
 
+import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 
 const form = useForm({
     name: null,
@@ -32,9 +31,11 @@ const sendFormData = () => {
 
 <template>
 
-    <div>
+    <Head>
+        <title>{{ __('Create user') }}</title>
+    </Head>
 
-        <h1>Create user</h1>
+    <BodyLayout>
 
         <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
 
@@ -158,5 +159,5 @@ const sendFormData = () => {
             </FormKit>
         </FormKit>
 
-    </div>
+    </BodyLayout>
 </template>

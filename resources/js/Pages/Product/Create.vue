@@ -39,6 +39,11 @@ const sendFormData = () => {
 </style>
 
 <template>
+
+    <Head>
+        <title>{{ __('Create Product') }}</title>
+    </Head>
+
     <BodyLayout>
 
         <!-- <h1>Create Product</h1> -->

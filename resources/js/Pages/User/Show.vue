@@ -181,7 +181,6 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 
                 <div class="row mt-3">
 
-                    <!-- TODO: List and create Addresses -->
                     <div class="col-12 col-lg-6">
 
                         <Accordion title="Addresses">
