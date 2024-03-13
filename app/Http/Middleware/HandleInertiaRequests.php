@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Cart;
+use App\Models\UserRole;
 use Inertia\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -41,8 +42,17 @@ class HandleInertiaRequests extends Middleware
     {
         $guest_cart = null;
         if (!auth()->check() && Session::has('cart_id')) {
-            $guest_cart = Cart::find(Session::get('cart_id'))->load(['CartItems']);
+            $guest_cart = Cart::find(Session::get('cart_id'))?->load(['CartItems']);
         }
+
+        $elligible_for_dashboard = false;
+        if (auth()->check()) {
+            $roles = UserRole::where('user_id', '=', auth()->user()->id)->get();
+            $elligible_for_dashboard = $roles->some(function ($role) {
+                    return $role->name == 'Moderator' || $role->name == 'Seller' || $role->name == 'Admin';
+            });
+        }
+
 
         return array_merge(parent::share($request), [
             'flash' => [
@@ -50,12 +60,13 @@ class HandleInertiaRequests extends Middleware
             ],
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load([
-                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'Cart'
+                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart'
                 ]) : null,
                 'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems']) : null
             ],
             'permissions' => [
-                'authenticated' => auth()->check()
+                'authenticated' => auth()->check(),
+                'elligible_for_dashboard' => $elligible_for_dashboard
             ],
             'locales' => config('app.locales'),
             'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale(),
