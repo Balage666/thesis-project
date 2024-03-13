@@ -25,6 +25,11 @@ const description = computed(() => {
 </script>
 
 <template>
+
+    <Head>
+        <title>{{ __(title) }}</title>
+    </Head>
+
     <ErrorCodeCard
         :status-code=props.status
         :title=title

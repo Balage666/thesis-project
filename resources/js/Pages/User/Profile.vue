@@ -47,7 +47,7 @@ const toggelEditMode = () => {
     <pre>{{ uservalues }}</pre>
 
     <Head>
-        <title>Profile page</title>
+        <title>{{ __('Profile page') }}</title>
     </Head>
 
     <div class="container">
