@@ -1,20 +1,30 @@
 <script setup>
 import Toast from '*vue-components/Notification/Toast.vue';
 
-const props = defineProps({
-    notifications: {
-        type: [Array, Object],
-        required: true
-    }
+import { usePage } from '@inertiajs/inertia-vue3';
+import { computed } from 'vue';
+
+const messages = computed(() => {
+    return [usePage().props.value.errors, usePage().props.value.flash.message];
 })
 
+const errors = computed(() => {
+    // return Object.entries(messages.value[0]);
+    return messages.value[0];
+});
 
+const notification = computed(() => {
+    return messages.value[1];
+})
+
+console.log(errors.value);
 
 </script>
 <template>
     <div class="position-fixed fixed-top">
         <div class="float-end">
-            <Toast v-for="n in props.notifications" :message="n"/>
+            <Toast v-if="errors" v-for="(e, idx) in errors" :message="e" :key="idx" :index="idx"/>
+            <Toast v-if="notification" :message="notification"/>
         </div>
     </div>
 </template>

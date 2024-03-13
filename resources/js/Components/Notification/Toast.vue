@@ -1,11 +1,15 @@
 <script setup>
 
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated,  ref } from 'vue';
 
 const props = defineProps({
+    index: {
+        type: Number,
+        default: 0
+    },
     message: {
         type: String,
-        default: 'Hello, world! This is a toast message.'
+        default: 'Alert message.'
     },
     toastType: {
         type: String,
@@ -23,9 +27,12 @@ const close = () => {
     hidden.value = true
 }
 
+console.log(props.message);
+
 onMounted(() => {
+
     setTimeout(() => {
-        hidden.value = true;
+        close()
     }, 2500)
 })
 
@@ -34,9 +41,9 @@ onMounted(() => {
 <template>
     <!-- TODO: Design toast component! -->
     <Transition>
-        <div v-show="!hidden" class="toast show my-2" :class="{ 'bg-danger text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header" :class="{ 'bg-danger text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }">
-                <strong class="me-auto">{{ props.title }}</strong>
+        <div v-show="!hidden" class="toast show my-2" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }">
+                <strong class="me-auto">{{ props.title + ' ' + props.idx }}</strong>
                 <!-- <small class="text-body-secondary">11 mins ago</small> -->
                 <button type="button" class="btn-close" @click="close" aria-label="Close"></button>
             </div>
