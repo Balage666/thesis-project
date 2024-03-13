@@ -16,7 +16,6 @@ class CartController extends Controller
 {
     public function AddToCart(CartItemStockRequest $request, Product $product) {
 
-
         $data['stock'] = $request->route()->parameter('product')->stock;
 
         $validator = Validator::make($data, $request->rules());
@@ -145,4 +144,39 @@ class CartController extends Controller
 
 
     }
+
+    public function ClearCart() {
+
+        $cart = Cart::find(session('cart_id'));
+
+        if (auth()->check()) {
+
+            //Authenticated user
+            $cart = auth()->user()->Cart;
+
+        }
+
+        if (is_null($cart)) {
+            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+        }
+
+        $cartItems = $cart->CartItems;
+
+        $cartItems->each(function ($item) {
+            $foundProduct = Product::find($item->ProductItem->id);
+            $foundProduct->stock += $item->amount;
+            $foundProduct->save();
+
+            $item->delete();
+        });
+
+        return redirect()->back()->with('message', 'Cart cleared!');
+
+    }
+
+    public function Increment() {}
+
+    public function Decrement() {}
+
+    public function CheckOut() {}
 }
