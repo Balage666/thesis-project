@@ -128,6 +128,11 @@ background-color: #E27127; GoogleButtonColor */
     background-color: #A43E00;
 }
 
+.error-toast-bg-color {
+    border-color: #A43E00;
+    background-color: #A43E00;
+}
+
 
 .btn-danger:hover,
 .btn-danger:focus {
