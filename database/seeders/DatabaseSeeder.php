@@ -24,21 +24,29 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory($userSeed)->create()->each(function($user) {
             if($user->id % 2 == 0) {
                 $user->Roles()->saveMany([
-                    \App\Models\UserRole::create([
-                        'name' => 'Customer',
-                        'user_id' => $user->id
+                    \App\Models\UserRole::newModelInstance([
+                        'name' => 'Customer'
                     ]),
-                    \App\Models\UserRole::create([
-                        'name' => 'Seller',
-                        'user_id' => $user->id
-                    ])
+                    \App\Models\UserRole::newModelInstance([
+                        'name' => 'Seller'
+                    ]),
+                    // \App\Models\UserRole::create([
+                    //     'name' => 'Customer',
+                    //     'user_id' => $user->id
+                    // ]),
+                    // \App\Models\UserRole::create([
+                    //     'name' => 'Seller',
+                    //     'user_id' => $user->id
+                    // ])
                 ]);
             }
             else {
-                $user->Roles()->save(\App\Models\UserRole::create([
-                    'name' => 'Customer',
-                    'user_id' => $user->id
-                ]));
+                $user->Roles()->save(
+
+                    \App\Models\UserRole::newModelInstance([
+                        'name' => 'Customer',
+                    ])
+                );
             }
 
         });
@@ -53,21 +61,17 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         $admin->Roles()->saveMany([
-            \App\Models\UserRole::create([
+            \App\Models\UserRole::newModelInstance([
                 'name' => 'Customer',
-                'user_id' => $admin->id
             ]),
-            \App\Models\UserRole::create([
+            \App\Models\UserRole::newModelInstance([
                 'name' => 'Seller',
-                'user_id' => $admin->id
             ]),
-            \App\Models\UserRole::create([
+            \App\Models\UserRole::newModelInstance([
                 'name' => 'Moderator',
-                'user_id' => $admin->id
             ]),
-            \App\Models\UserRole::create([
+            \App\Models\UserRole::newModelInstance([
                 'name' => 'Admin',
-                'user_id' => $admin->id
             ])
         ]);
 
@@ -76,12 +80,24 @@ class DatabaseSeeder extends Seeder
                 'name' => $category
             ]);
         }
-        \App\Models\Product::factory(20)->create();
-        // ->each(function ($product) use ($provider) {
+        \App\Models\Product::factory(20)->create()->each(function ($product) {
+
+            $product->Pictures()->save(
+                \App\Models\ProductPicture::newModelInstance([
+                    'product_picture' => fake()->imageUrl(256, 256, $product->Category->name, true, $product->name, false, 'jpg')
+                ])
+            );
+
+        });
+
+        // \App\Models\Product::factory(20)->create()->each(function ($product) use ($provider) {
+
         //     $product->Pictures()->save(\App\Models\ProductPicture::create([
         //         'product_picture' => RandomImage::make(256, 256, "$product->name", $provider)->url(),
         //         'product_id' => $product->id
         //     ]));
-        // });
+
+        // }
+
     }
 }
