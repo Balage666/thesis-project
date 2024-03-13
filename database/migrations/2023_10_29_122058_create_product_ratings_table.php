@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id()->unsigned();
             $table->integer('rating')->unsigned();
             $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('rater')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
+            $table->foreign('rater')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
