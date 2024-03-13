@@ -9,15 +9,17 @@ const messages = computed(() => {
 })
 
 const errors = computed(() => {
-    // return Object.entries(messages.value[0]);
-    return messages.value[0];
+
+    let mappedMessagesArray = Object.entries(messages.value[0]).map((element) => element[1]);
+    return mappedMessagesArray;
+    // return messages.value[0];
 });
 
 const notification = computed(() => {
     return messages.value[1];
 })
 
-console.log(errors.value);
+// console.log(errors.value);
 
 </script>
 <template>
