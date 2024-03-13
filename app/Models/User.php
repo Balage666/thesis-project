@@ -75,6 +75,10 @@ class User extends Authenticatable
         return $this->hasMany(Product::class, 'created_by', 'id');
     }
 
+    public function ProductRatings() {
+        return $this->hasMany(ProductRating::class, 'rater', 'id');
+    }
+
     public function Cart() {
         return $this->hasOne(Cart::class, 'user_id', 'id');
     }
