@@ -179,7 +179,7 @@ class UserController extends Controller
     {
         // dd($user);
         if (auth()->user()->id === $user->id) {
-            return redirect()->route('storefront')->with('message', 'User self-deletion prevented!');
+            return redirect()->route('user-list')->withErrors(['delete' => 'User self-deletion prevented!']);
         }
 
         $user->delete();
