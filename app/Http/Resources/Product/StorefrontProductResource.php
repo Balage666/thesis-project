@@ -23,7 +23,7 @@ class StorefrontProductResource extends JsonResource
             'is_out_of_stock' => $this->stock == 0,
             'is_close_to_run_out_of_stock' => $this->stock < 10,
             'category' => new CategoryResource($this->category),
-            // 'preview_image' => $this->pictures[0]?->product_picture,
+            'preview_image' => $this->pictures[0]?->product_picture,
             'ratings' => $this->ratings
         ];
     }
