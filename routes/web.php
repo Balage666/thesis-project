@@ -13,10 +13,12 @@ use App\Http\Resources\Product\ProductResource;
 use App\Http\Controllers\Address\AddressController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserDetailsController;
+use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
+use App\Http\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('create', [ProductController::class, 'Create'])->name('product-create');
         Route::post('store', [ProductController::class, 'Store'])->name('product-store');
         Route::get('list', [ProductController::class, 'List'])->name('product-list');
-        Route::get('show/{product}', [ProductController::class, 'Show'])->name('product-show');
+        Route::get('show/{product}', [ProductController::class, 'Show'])->name('product-show')->withoutMiddleware('auth')->withoutMiddleware('role:Seller,Admin');
         Route::get('edit/{product}', [ProductController::class, 'Edit'])->name('product-edit');
         Route::post('edit/{product}', [ProductController::class, 'Update'])->name('product-update');
         Route::get('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
@@ -100,8 +102,16 @@ Route::group(['middleware' => 'auth'], function () {
         | ProductDetails Routes
         |--------------------------------------------------------------------------
          */
-        Route::post('rating/{product}/add', [ProductDetailsController::class, 'AddRating'])->name('product-rate');
+        Route::post('rating-add/{product}', [ProductDetailsController::class, 'AddRating'])->name('rate-add')->withoutMiddleware('role:Seller,Admin');
+        Route::post('comment-add/{product}', [ProductDetailsController::class, 'AddComment'])->name('comment-add')->withoutMiddleware('role:Seller,Admin');
+        Route::post('comment-delete/{comment}', [ProductDetailsController::class, 'DeleteComment'])->name('comment-destroy')->withoutMiddleware('role:Seller,Admin');
+    });
 
+    Route::group(['prefix' => 'category-management', 'middleware' => 'role:Seller,Admin'], function () {
+
+        Route::get('list', [CategoryController::class, 'List'])->name('category-list');
+        Route::post('store', [CategoryController::class, 'Store'])->name('category-store');
+        Route::post('delete/{category}', [CategoryController::class, 'Destroy'])->name('category-delete');
     });
 
     Route::group(['prefix' => 'shopping-basket'], function () {
