@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 import { computed, ref } from 'vue';
 import Slider from 'primevue/slider'
 import "primevue/resources/themes/lara-light-cyan/theme.css";
@@ -16,6 +17,9 @@ const props = defineProps({
         type: [Array, Object]
     }
 })
+
+const pageProps = ref(usePage().props.value);
+const permissions = ref(pageProps.value.permissions);
 
 const rangeInput = ref([]);
 
@@ -141,29 +145,17 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                         <hr>
 
-                        <!-- <div class="row text-center">
-                            <div class="col-6">
-                                <Pagination :pagination="props.allProducts.meta"/>
-                            </div>
-
-                            <div class="col-6">
-                                <p>ASsdasaddads</p>
-                            </div>
-                        </div> -->
-
-
-                        <div class="container">
+                        <div class="container overflow-y-scroll h-75">
 
                             <div class="row">
 
                                     <div class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in allProductsShowCase">
                                         <div class="card border-3 border-info">
-                                            <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" class="card-img-top" :title="product.category.name" :alt="product.name" /> -->
                                             <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" />
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="small">
-                                                        <a href="#!" class="text-muted">{{ product.category.name }}</a>
+                                                        <span class="text-muted">{{ product.category.name }}</span>
                                                     </p>
                                                 </div>
 
@@ -185,9 +177,9 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                                                 <div class="d-flex justify-content-between">
 
-                                                        <a href="#" class="btn btn-lg btn-outline-danger" v-show="$page.props.permissions.authenticated"><i class="fa-regular fa-heart"></i></a>
-                                                        <a href="#" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></a>
-                                                        <a href="#" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></a>
+                                                        <Link method="get" href="#" class="btn btn-lg btn-outline-danger" v-show="permissions.authenticated"><i class="fa-regular fa-heart"></i></Link>
+                                                        <Link href="" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></Link>
+                                                        <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                                 </div>
                                             </div>
                                         </div>
