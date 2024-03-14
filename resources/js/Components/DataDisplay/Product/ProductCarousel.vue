@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     carouselId: {
@@ -59,7 +60,7 @@ const chunkedCarouselProducts = computed(() => {
                                 <div class="d-flex justify-content-between gap-1">
                                     <a href="#" class="btn btn-lg btn-outline-danger" v-show="$page.props.permissions.authenticated"><i class="fa-regular fa-heart"></i></a>
                                     <a href="#" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></a>
-                                    <a href="#" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></a>
+                                    <Link :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                 </div>
 
                                 <!-- <div class="row">
