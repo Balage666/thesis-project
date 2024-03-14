@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Comment\CommentResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,9 +19,12 @@ class ProductDataResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'preview_image' => $this->pictures[0]?->product_picture,
+            'images' => $this->pictures,
             'price' => $this->price,
             'stock' => $this->stock,
-            'category_id' => $this->category->id
+            'category_id' => $this->category->id,
+            'comments' => CommentResource::collection($this->comments)
         ];
     }
 }
