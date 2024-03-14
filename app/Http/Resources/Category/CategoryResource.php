@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Category;
 
+use App\Http\Resources\Product\ProductCarouselResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,8 @@ class CategoryResource extends JsonResource
             'updated_at' => $this->updated_at,
             'created_at_human_readable' => $this->created_at->diffForHumans(),
             'updated_at_human_readable' => $this->updated_at->diffForHumans(),
+            'products' => ProductCarouselResource::collection($this->Products),
+            'user' => $this->User
         ];
     }
 }
