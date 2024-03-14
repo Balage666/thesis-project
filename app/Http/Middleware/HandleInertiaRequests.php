@@ -40,17 +40,28 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+
         $guest_cart = null;
         if (!auth()->check() && Session::has('cart_id')) {
             $guest_cart = Cart::find(Session::get('cart_id'))?->load(['CartItems']);
         }
 
         $elligible_for_dashboard = false;
+        $has_admin_role = false;
+        $has_moderator_role = false;
+        $has_seller_role = false;
         if (auth()->check()) {
-            $roles = UserRole::where('user_id', '=', auth()->user()->id)->get();
-            $elligible_for_dashboard = $roles->some(function ($role) {
-                    return $role->name == 'Moderator' || $role->name == 'Seller' || $role->name == 'Admin';
-            });
+
+            $userWithRolesLoaded = auth()->user()->load(['Roles']);
+
+            $elligible_for_dashboard = $userWithRolesLoaded->Roles->contains('name', 'Moderator')
+                || $userWithRolesLoaded->Roles->contains('name', 'Seller')
+                || $userWithRolesLoaded->Roles->contains('name', 'Admin');
+
+            $has_admin_role = $userWithRolesLoaded->Roles->contains('name', 'Admin');
+            $has_moderator_role = $userWithRolesLoaded->Roles->contains('name', 'Moderator');
+            $has_seller_role = $userWithRolesLoaded->Roles->contains('name', 'Seller');
         }
 
 
@@ -66,7 +77,10 @@ class HandleInertiaRequests extends Middleware
             ],
             'permissions' => [
                 'authenticated' => auth()->check(),
-                'elligible_for_dashboard' => $elligible_for_dashboard
+                'elligible_for_dashboard' => $elligible_for_dashboard,
+                'has_admin_role' => $has_admin_role,
+                'has_moderator_role' => $has_moderator_role,
+                'has_seller_role' => $has_seller_role
             ],
             'locales' => config('app.locales'),
             'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale(),
