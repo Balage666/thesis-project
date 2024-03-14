@@ -3,11 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Emsifa\RandomImage\RandomImage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Helpers\Shared\SeederHelper;
-use Emsifa\RandomImage\RandomImage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $categories = SeederHelper::BASE_CATEGORIES;
 
         \App\Models\User::factory($userSeed)->create()->each(function($user) {
+
             if($user->id % 2 == 0) {
                 $user->Roles()->saveMany([
                     \App\Models\UserRole::newModelInstance([
@@ -42,7 +45,6 @@ class DatabaseSeeder extends Seeder
             }
             else {
                 $user->Roles()->save(
-
                     \App\Models\UserRole::newModelInstance([
                         'name' => 'Customer',
                     ])
@@ -77,14 +79,25 @@ class DatabaseSeeder extends Seeder
 
         foreach ($categories as $category) {
             \App\Models\Category::create([
-                'name' => $category
+                'name' => $category,
+                'user_id' => User::inRandomOrder()->first()->id
             ]);
         }
+
         \App\Models\Product::factory(20)->create()->each(function ($product) {
 
-            $product->Pictures()->save(
-                \App\Models\ProductPicture::newModelInstance([
-                    'product_picture' => fake()->imageUrl(256, 256, $product->Category->name, true, $product->name, false, 'jpg')
+            for ($i=0; $i < 5; $i++) {
+                $product->Pictures()->save(
+                    \App\Models\ProductPicture::newModelInstance([
+                        'product_picture' => fake()->imageUrl(256, 256, $product->Category->name, true, $product->name, false, 'jpg')
+                    ])
+                );
+            }
+
+            $product->Comments()->save(
+                \App\Models\ProductComment::newModelInstance([
+                    'comment' => fake()->sentence(),
+                    'commenter_id' => User::inRandomOrder()->first()->id
                 ])
             );
 
