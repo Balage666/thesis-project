@@ -1,6 +1,13 @@
 <script setup>
 
 import { Link } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+
+const pageProps = ref(usePage().props.value);
+
+const currentUser = ref(pageProps.value.active_session.user);
+const permissions = ref(pageProps.value.permissions)
 
 </script>
 
@@ -26,7 +33,7 @@ import { Link } from '@inertiajs/vue3';
 
                     <!-- FIXME: Dropdown is bugged on smaller screen resolutions, when items are shown -->
                     <div class="m-auto">
-                        <li class="nav-item dropdown-center" v-if="!$page.props.permissions.authenticated">
+                        <li class="nav-item dropdown-center" v-if="!permissions.authenticated">
                             <button class="nav-link row" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-circle-user"></i> <span class="col-12"> {{ __("Account") }} </span>
                             </button>
@@ -37,10 +44,10 @@ import { Link } from '@inertiajs/vue3';
                         </li>
                         <li class="nav-item dropdown-center" v-else>
                             <button class="nav-link row" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ $page.props.active_session.user.name }}</span>
+                                <i class="col-12 fa-solid fa-user"></i> <span class="col-12">{{ currentUser.name }}</span>
                             </button>
                             <ul class="dropdown-menu bg-white">
-                                <li v-show="$page.props.permissions.elligible_for_dashboard"><Link :href="route('dashboard-main')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-toolbox"></i> {{ __("Dashboard") }}</Link></li>
+                                <li v-show="permissions.elligible_for_dashboard"><Link :href="route('dashboard-main')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-toolbox"></i> {{ __("Dashboard") }}</Link></li>
                                 <li><Link :href="route('log-out')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-door-open"></i> {{ __("LogOut") }}</Link></li>
                             </ul>
                         </li>
