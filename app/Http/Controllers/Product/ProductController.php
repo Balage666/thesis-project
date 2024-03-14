@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategorySelectorResource;
+use App\Http\Resources\Product\ProductCarouselResource;
 use App\Http\Resources\Product\ProductDataResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Category;
@@ -96,7 +97,12 @@ class ProductController extends Controller
      */
     public function Show(Product $product)
     {
-        return Inertia::render("Product/Show");
+        $productsInSameCategory = ProductCarouselResource::collection($product->Category->Products->shuffle());
+
+        return Inertia::render("Product/Show", [
+            'productsInSameCategory' => $productsInSameCategory,
+            'product' => new ProductDataResource($product)
+        ]);
     }
 
     /**
