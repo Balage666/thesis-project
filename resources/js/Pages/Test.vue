@@ -22,7 +22,7 @@ const currentUser = ref(globalProps.active_session.user);
 // console.log(currentUser.product_ratings.some((r) => r.product_id == props.products.data[0].id));
 
 const checkAlreadyRated = (user, product) => {
-    return user.product_ratings.some((r) => r.product_id == product.id);
+    return user?.product_ratings.some((r) => r.product_id == product.id);
 }
 
 // console.log(checkAlreadyRated(currentUser, props.products.data[0]));
@@ -54,7 +54,7 @@ const check = (payload) => {
         <BodyLayout>
             <h1>New Feature test</h1>
 
-            <pre>{{ $page.props.active_session.user }}</pre>
+            <pre>{{ $page.props.permissions }}</pre>
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
