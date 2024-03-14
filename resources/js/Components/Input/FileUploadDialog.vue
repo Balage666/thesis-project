@@ -64,7 +64,7 @@ const resetFileUploadInputComponent = () => {
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ __('Upload new profile picture') }}</h1>
                         <button type="button" class="btn-close" @click="sendCloseEmit" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -82,7 +82,7 @@ const resetFileUploadInputComponent = () => {
                             </template>
 
                             <template #empty>
-                                <p>Drag and drop files to here to upload.</p>
+                                <p>{{ __('Drag and drop files to here to upload.') }}</p>
                             </template>
                         </FileUpload>
                     </div>
