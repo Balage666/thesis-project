@@ -26,7 +26,7 @@ const notification = computed(() => {
     <div class="position-fixed fixed-top">
         <div class="float-end">
             <Toast v-if="errors" v-for="(e, idx) in errors" :message="e" :key="idx" :index="idx"/>
-            <Toast v-if="notification" :message="notification"/>
+            <Toast v-if="notification" :message="notification" :toastType="message"/>
         </div>
     </div>
 </template>
