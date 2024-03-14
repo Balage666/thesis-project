@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Helpers\Shared\Domains;
+use App\Http\Helpers\Shared\ROLES;
 use App\Http\Helpers\Shared\SeederHelper;
 use App\Http\Helpers\Shared\ValidationHelper;
 
@@ -40,6 +41,10 @@ class Helper {
     public static function GetPasswordRegex()
     {
         return ValidationHelper::PASSWORD_REGEX;
+    }
+
+    public static function GetAdminRole() {
+        return ROLES::ADMIN->value;
     }
 
 }
