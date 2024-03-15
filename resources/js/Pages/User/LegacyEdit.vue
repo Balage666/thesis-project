@@ -3,9 +3,11 @@
 import { FormKit } from '@formkit/vue';
 
 import { useForm, router } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 import { filterUserRoles } from '*js-shared/filtered-user-roles';
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     userToEdit: {
@@ -13,11 +15,38 @@ const props = defineProps({
     }
 })
 
+const pageProps = ref(usePage().props.value);
+const currentUser = ref(pageProps.value.active_session.user);
+
 const userValues = props.userToEdit.data[0];
 
 const rolesUserHave = userValues.roles.map(r => r.name).filter(r => filterUserRoles.includes(r));
 
 console.log(rolesUserHave);
+console.log(userValues.roles);
+
+const rolesReadOnly = () => {
+
+    let readOnly = false;
+    if (currentUser.value.id == userValues.id) {
+        readOnly = true;
+        return readOnly;
+    }
+
+    let currentUserHasOnlyModeratorRole = currentUser.value.roles.some((r) => r.name == 'Moderator') &&
+    !currentUser.value.roles.some((r) => r.name == 'Admin');
+
+    let targetUserHasModeratorOrAdminRole = userValues.roles.some((r) => r.name == 'Moderator') ||
+    userValues.roles.some((r) => r.name == 'Admin')
+
+    if (currentUserHasOnlyModeratorRole && targetUserHasModeratorOrAdminRole) {
+        readOnly = true;
+        return readOnly;
+    }
+
+    return readOnly;
+
+}
 
 const form = useForm({
     name: userValues.name,
@@ -119,6 +148,7 @@ const callResetPassword = () => {
                             :options="filterUserRoles"
                             :help="__('Select roles')"
                             validation="required|min:1"
+                            :disabled="rolesReadOnly()"
                         />
 
                         <template #stepPrevious="{ handlers, node }">

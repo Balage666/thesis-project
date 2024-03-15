@@ -32,6 +32,7 @@ class UserPolicy
         if ($authUser->Roles->contains('name', 'Admin')) {
             // dd('I\'m Admin');
             $canEditUser = true;
+            return $canEditUser;
         }
 
         if ($authUser->Roles->contains('name', 'Moderator')) {
@@ -39,13 +40,17 @@ class UserPolicy
             if ($authUser->id == $targetedUser->id) {
                 // dd('Myself!');
                 $canEditUser = true;
+                return $canEditUser;
             }
 
             if ($targetedUser->Roles->contains('name', 'Customer') &&
                 !$targetedUser->Roles->contains('name', 'Moderator') &&
-                !$targetedUser->Roles->contains('name', 'Admin')) {
+                !$targetedUser->Roles->contains('name', 'Admin'))
+            {
+
                 // dd('A customer');
                 $canEditUser = true;
+                return $canEditUser;
             }
 
             if ($targetedUser->Roles->contains('name', 'Moderator') ||
@@ -53,8 +58,11 @@ class UserPolicy
             ) {
                 // dd('Other moderator or Admin');
                 $canEditUser = false;
+                return $canEditUser;
 
             }
+
+            return $canEditUser;
 
         }
 
