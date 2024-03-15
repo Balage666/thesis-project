@@ -53,7 +53,7 @@ const sendFormData = () => {
 
                 <FormKit type="multi-step" tab-style="progress" :hide-progress-labels="true" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center mb-5">
 
-                    <FormKit type="step" name="productCategory">
+                    <FormKit type="step" :name="__('productCategory')">
 
                         <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
 
@@ -67,10 +67,10 @@ const sendFormData = () => {
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
                             :options="selectOptions"
-                            label="Product category"
+                            :label="__('Product category')"
                             :validation="[['required']]"
                             validation-visibility="live"
-                            placeholder="--Select category--"
+                            :placeholder="__('--Select category--')"
                         />
 
 
@@ -79,7 +79,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(1)()"
-                                label="Continue"
+                                :label="__('Continue')"
                                 data-next="true"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-success shadow-sm fw-bold"
@@ -88,10 +88,10 @@ const sendFormData = () => {
                         </template>
                     </FormKit>
 
-                    <FormKit type="step" name="productDetails">
+                    <FormKit type="step" :name="__('productDetails')">
                         <h3 class="mb-2 mx-auto text-center"> {{ __("Create a product with filling the form below!") }} </h3>
 
-                        <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
 
                         <FormKit
                             id="name"
@@ -101,7 +101,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="Product name"
+                            :label="__('Product name')"
                             :validation="[['required']]"
                             validation-visibility="live"
 
@@ -116,7 +116,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="Product description"
+                            :label="__('Product description')"
                         />
 
                         <FormKit type="group">
@@ -128,7 +128,7 @@ const sendFormData = () => {
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
-                                label="Product price"
+                                :label="__('Product price')"
                                 :validation="[['required']]"
                                 validaton-visibility="live"
                                 number="float"
@@ -144,7 +144,7 @@ const sendFormData = () => {
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
-                                label="Product stock"
+                                :label="__('Product stock')"
                                 :validation="[['required']]"
                                 validaton-visibility="live"
                                 number="integer"
@@ -158,7 +158,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(-1)()"
-                                label="Back"
+                                :label="__('Back')"
                                 data-next="true"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
@@ -172,7 +172,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(1)()"
-                                label="Continue"
+                                :label="__('Continue')"
                                 data-next="true"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-success shadow-sm fw-bold"
@@ -181,7 +181,7 @@ const sendFormData = () => {
                         </template>
                     </FormKit>
 
-                    <FormKit type="step" name="productImages">
+                    <FormKit type="step" :name="__('productImages')">
 
                         <h3 class="mb-2 text-center"> {{ __("Add images for product!") }} </h3>
 
@@ -190,14 +190,14 @@ const sendFormData = () => {
                             name="images[]"
                             type="file"
                             v-model="createProductForm.images"
-                            label="Product images"
+                            :label="__('Product images')"
                             multiple="true"
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
                             file-remove-class="btn btn-danger"
                             accept=".png,.jpg"
-                            help="Select as many images as you would like."
+                            :help="__('Select as many images as you would like.')"
                         />
 
                         <template #stepPrevious="{ handlers, node }">
@@ -215,7 +215,7 @@ const sendFormData = () => {
 
                             <FormKit type="submit"
                                 tabindex="0"
-                                label="Create"
+                                :label="__('Create')"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-primary shadow-sm fw-bold"
                             />
@@ -228,38 +228,6 @@ const sendFormData = () => {
 
             </FormKit>
         </div>
-
-
-        <!-- <form @submit.prevent="">
-
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Name</label>
-                <input v-model="createProductForm.name" type="text" class="form-control formInputFieldBackground" id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea v-model="createProductForm.description" class="form-control formInputFieldBackground" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput2" class="form-label">Price</label>
-                <input v-model="createProductForm.price" type="number" class="form-control formInputFieldBackground" id="exampleFormControlInput2">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput3" class="form-label">Stock</label>
-                <input v-model="createProductForm.stock" type="number" class="form-control formInputFieldBackground" id="exampleFormControlInput3">
-            </div>
-
-            <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">Product Images</label>
-                <input @change="handleImages" class="form-control formInputFieldBackground" type="file" id="formFileMultiple" multiple>
-            </div>
-
-            <div class="mb-3 d-flex gap-2">
-                <button type="button" class="btn btn-secondary">Back</button>
-                <button type="submit" class="btn btn-info">Create</button>
-            </div>
-
-        </form> -->
 
     </BodyLayout>
 </template>

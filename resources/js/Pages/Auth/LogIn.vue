@@ -50,7 +50,7 @@ const logIn = () => {
 
                             <!-- <form @submit.prevent="form.post('/auth/log-on')"> -->
                             <form @submit.prevent="logIn">
-                                <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
+                                <!-- <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div> -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label d-flex justify-content-start" for="email">{{ __("Email address") }}</label>
                                     <input
@@ -64,7 +64,7 @@ const logIn = () => {
                                     >
                                 </div>
 
-                                <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div>
+                                <!-- <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div> -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label d-flex justify-content-start" for="password">{{__("Password")}}</label>
                                     <input

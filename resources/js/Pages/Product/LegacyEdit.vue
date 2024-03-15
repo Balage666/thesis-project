@@ -57,7 +57,7 @@ const sendFormData = () => {
 
                 <FormKit type="multi-step" tab-style="progress" :hide-progress-labels="true" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center mb-5">
 
-                    <FormKit type="step" name="productCategory">
+                    <FormKit type="step" :name="__('productCategory')">
 
                         <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
 
@@ -72,10 +72,10 @@ const sendFormData = () => {
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
                             :options="categoryList"
-                            label="Product category"
+                            :label="__('Product category')"
                             :validation="[['required']]"
                             validation-visibility="live"
-                            placeholder="--Select category--"
+                            :placeholder="__('--Select category--')"
                         />
 
 
@@ -84,7 +84,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(1)()"
-                                label="Continue"
+                                :label="__('Continue')"
                                 data-next="true"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-success shadow-sm fw-bold"
@@ -93,10 +93,10 @@ const sendFormData = () => {
                         </template>
                     </FormKit>
 
-                    <FormKit type="step" name="productDetails">
+                    <FormKit type="step" :name="__('productDetails')">
                         <h3 class="mb-2 mx-auto text-center"> {{ __("Update product with changing one of the values") }} </h3>
 
-                        <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
 
                         <FormKit
                             id="name"
@@ -106,7 +106,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="Product name"
+                            :label="__('Product name')"
                             :validation="[['required']]"
                             validation-visibility="live"
 
@@ -121,7 +121,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="Product description"
+                            :label="__('Product description')"
                         />
 
                         <FormKit type="group">
@@ -133,7 +133,7 @@ const sendFormData = () => {
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
-                                label="Product price"
+                                :label="__('Product price')"
                                 :validation="[['required']]"
                                 validaton-visibility="live"
                                 number="float"
@@ -149,7 +149,7 @@ const sendFormData = () => {
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
-                                label="Product stock"
+                                :label="__('Product stock')"
                                 :validation="[['required']]"
                                 validaton-visibility="live"
                                 number="integer"
@@ -163,7 +163,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(-1)()"
-                                label="Back"
+                                :label="__('Back')"
                                 data-next="true"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4 ms-auto me-auto"

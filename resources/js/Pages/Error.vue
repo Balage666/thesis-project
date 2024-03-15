@@ -32,7 +32,7 @@ const description = computed(() => {
 
     <ErrorCodeCard
         :status-code=props.status
-        :title=title
-        :description=description
+        :title=__(title)
+        :description=__(description)
     />
 </template>

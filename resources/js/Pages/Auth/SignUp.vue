@@ -54,7 +54,7 @@ const signUp = () => {
 
                     <form @submit.prevent="signUp">
 
-                        <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div>
+                        <!-- <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="name">{{ __("Full Name") }}</label>
                             <input

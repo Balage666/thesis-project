@@ -98,7 +98,7 @@ console.log(permissions.value);
 
                 <div class="col">
                     <h2 class="mt-3 mb-3">Storefront</h2>
-                    <Link class="btn btn-lg btn-light" type="button" as="button">
+                    <Link :href="route('storefront')" class="btn btn-lg btn-light" type="button" as="button">
                         <div class="p-5">
                             <i class="fa-solid fa-store fa-2xl"></i>
                         </div>
