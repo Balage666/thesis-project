@@ -16,7 +16,7 @@ class StoreFrontController extends Controller
 
         $carouselProducts = Product::where('stock', '>', 20)->inRandomOrder()->limit(15)->get();
 
-        $allProducts = Product::paginate(6);
+        $allProducts = Product::latest()->paginate(6);
 
         return Inertia::render("Storefront", [
             'allProducts' => StorefrontProductResource::collection($allProducts),

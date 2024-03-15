@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use App\Models\UserRole;
@@ -29,7 +30,7 @@ class UserController extends Controller
     public function List()
     {
         return Inertia::render("User/List",
-            ['users' => UserResource::collection( User::paginate(10) )]
+            ['users' => UserResource::collection( User::all() )]
         );
     }
 
@@ -90,7 +91,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('storefront');
+        return redirect()->route('user-show', [ "user" => $createUser ])->with('message', 'User created!');
 
     }
 
@@ -120,6 +121,7 @@ class UserController extends Controller
      */
     public function Edit(User $user)
     {
+        $this->authorizeForUser(auth()->user(), 'legacyEdit', [$user]);
 
         // $foundUser = User::where('id', $user->id)->with(['Roles', 'PhoneNumbers', 'Addresses', 'Products'])->get();
 
@@ -132,23 +134,27 @@ class UserController extends Controller
      * Update the specified resource in storage.
      * Logic behind Legacy Edit
      */
-    public function Update(Request $request, User $user)
+    public function Update(UpdateUserRequest $request, User $user)
     {
         // dd($request, $user, $user->Roles());
 
-        $updateUserFormFields = $request->validate([
-            'name' => ['required', "regex:$this->nameRegex"],
-            'email' => ['required', 'email'],
-            'roles' => ['required', 'min:1']
-        ]);
+        $validated = $request->validated();
 
-        $rules = ['email' => 'unique:users,email'];
+        $updateUserFormFields = $validated;
 
-        $validator = Validator::make($updateUserFormFields, $rules);
+        // $updateUserFormFields = $request->validate([
+        //     'name' => ['required', "regex:$this->nameRegex"],
+        //     'email' => ['required', 'email'],
+        //     'roles' => ['required', 'min:1']
+        // ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator->errors())->onlyInput('name');
-        }
+        // $rules = ['email' => 'unique:users,email'];
+
+        // $validator = Validator::make($updateUserFormFields, $rules);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator->errors())->onlyInput('name');
+        // }
 
         $user->name = $updateUserFormFields['name'];
         $user->email = $updateUserFormFields['email'];
@@ -180,6 +186,14 @@ class UserController extends Controller
         // dd($user);
         if (auth()->user()->id === $user->id) {
             return redirect()->route('user-list')->withErrors(['delete' => 'User self-deletion prevented!']);
+        }
+
+        if (auth()->user()->Roles->contains('name', 'Moderator') && $user->Roles->contains('name', 'Admin')) {
+            return redirect()->route('user-list')->withErrors(['delete' => 'Cannot delete Admin as Moderator']);
+        }
+
+        if (auth()->user()->Roles->contains('name', 'Moderator') && $user->Roles->contains('name', 'Moderator')) {
+            return redirect()->route('user-list')->withErrors(['delete' => 'Cannot delete other Moderators as Moderator']);
         }
 
         $user->delete();

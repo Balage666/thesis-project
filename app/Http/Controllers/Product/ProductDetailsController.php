@@ -16,6 +16,7 @@ class ProductDetailsController extends Controller
     public function AddRating(RateProductRequest $request, Product $product) {
 
         $validated = $request->validated();
+        // dd($validated);
 
         $userRatings = auth()->user()->ProductRatings;
 
@@ -64,4 +65,6 @@ class ProductDetailsController extends Controller
         return redirect()->back()->with('message', 'Comment deleted!');
 
     }
+
+
 }
