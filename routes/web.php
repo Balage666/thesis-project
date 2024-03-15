@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('show/{product}', [ProductController::class, 'Show'])->name('product-show')->withoutMiddleware('auth')->withoutMiddleware('role:Seller,Admin');
         Route::get('edit/{product}', [ProductController::class, 'Edit'])->name('product-edit');
         Route::post('edit/{product}', [ProductController::class, 'Update'])->name('product-update');
-        Route::get('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
+        Route::post('delete/{product}', [ProductController::class, 'Destroy'])->name('product-delete');
 
         /*
         |--------------------------------------------------------------------------
@@ -148,7 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/set-language/{language}', [LanguageSwitcherController::class, 'setLanguage'])->name('switch-language')->withoutMiddleware('auth');
 
     Route::group(['prefix' => 'users'], function () {
-        Route::get('profile/{user}', [UserController::class, 'Profile'])->name('user-profile');
+        Route::get('profile/{user}', [UserController::class, 'Show'])->name('user-profile');
     });
 
 });

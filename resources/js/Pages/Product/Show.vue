@@ -1,6 +1,6 @@
 <script setup>
 
-import { usePage, useForm } from '@inertiajs/inertia-vue3';
+import { usePage, useForm, Link } from '@inertiajs/inertia-vue3';
 import { router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 
@@ -8,6 +8,7 @@ import Galleria from 'primevue/galleria';
 import "primevue/resources/themes/lara-light-cyan/theme.css";
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
+import RateProduct from '*vue-components/Input/RateProduct.vue';
 
 const props = defineProps({
     product: {
@@ -26,6 +27,20 @@ const carouselProducts = computed(() => props.productsInSameCategory.data);
 const productShow = computed(() => props.product.data)
 const productImages = computed(() => productShow.value.images.map((img) => img.product_picture))
 const productComments = computed(() => productShow.value.comments)
+const productRatingsCount = computed(() => productShow.value.count_of_ratings);
+const averageProductRating = computed(() => productShow.value.avg_of_ratings);
+
+const currentUserRating = computed(() => currentUser.value.product_ratings.find((r) => r.product_id == productShow.value.id)?.rating);
+
+const stars = computed(() => Math.round(averageProductRating.value));
+
+console.log(currentUserRating.value || 0);
+
+
+
+const checkAlreadyRated = (user, product) => {
+    return user?.product_ratings.some((r) => r.product_id == product.id);
+}
 
 const commentForm = useForm({
     comment: ''
@@ -45,6 +60,14 @@ const sendDeleteCommentRequest = (comment) => {
 
     router.post(route('comment-destroy', { comment: comment }));
 
+}
+
+const sendProductRatingRequest = (payload) => {
+
+    console.log(payload);
+
+
+    router.post(route('rate-add', { product: payload.product }), { rating: payload.rating });
 }
 
 </script>
@@ -77,13 +100,22 @@ const sendDeleteCommentRequest = (comment) => {
 
                     <div>
                         <div>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
+                            <span v-if="productRatingsCount == 0" v-for="(s,i) in 5" class="fa-regular fa-star"></span>
+                            <span v-else v-for="s in stars" class="fa-solid fa-star"></span>
                         </div>
-                        <span class="text-muted">41 reviews</span>
+                        <span class="text-muted">{{ productRatingsCount }} ratings</span>
+                        <RateProduct
+                            :alreadyRated="checkAlreadyRated(currentUser, productShow)"
+                            @onRated="sendProductRatingRequest"
+                            :product="productShow"
+                            :ratedAs="currentUserRating || 0">
+                            <template #onicon>
+                                <span class="fa-solid fa-star"></span>
+                            </template>
+                            <template #officon>
+                                <span class="fa-regular fa-star"></span>
+                            </template>
+                        </RateProduct>
                     </div>
 
                     <p class="lead">{{ productShow.description }}</p>
@@ -98,6 +130,7 @@ const sendDeleteCommentRequest = (comment) => {
 
                         <div class="col-6">
 
+                            <!--TODO: Implement Add to favorite button-->
                             <Link href="#" method="post" as="button" type="button" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</Link>
 
                         </div>

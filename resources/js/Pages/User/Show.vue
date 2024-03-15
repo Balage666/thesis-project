@@ -2,6 +2,7 @@
 
 import { ref, reactive, onMounted } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 import { Modal } from 'bootstrap';
 
 
@@ -23,6 +24,10 @@ const props = defineProps({
         type: Object
     }
 })
+
+const pageProps = ref(usePage().props.value);
+const permissions = ref(pageProps.value.permissions);
+const currentUser = ref(pageProps.value.active_session.user);
 
 const changeProfilePictureModal = ref(null);
 
@@ -137,8 +142,8 @@ const sendEmittedChangedProfilePictureData = (payload) => {
             <div class="container-fluid bg-info-subtle border-0 rounded-5 px-4 py-5 my-3">
                 <div class="row">
 
-                    <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
-                    <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+                    <!-- <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
+                    <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
                     <!--DONE: Implement edit mode-->
                     <div class="col-12 col-lg-12">
 
@@ -179,7 +184,7 @@ const sendEmittedChangedProfilePictureData = (payload) => {
                 </div>
 
 
-                <div class="row mt-3">
+                <div class="row mt-3" v-show="!permissions.has_only_customer_role || currentUser.id == user.id">
 
                     <div class="col-12 col-lg-6">
 
@@ -212,9 +217,9 @@ const sendEmittedChangedProfilePictureData = (payload) => {
                 </div>
 
                 <!-- FIXED: Arrow button renders active when the accordion is closed -->
-                <div class="row mt-3">
+                <div class="row mt-3" v-show="!permissions.has_only_customer_role || currentUser.id == user.id">
 
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mt-2 mt-lg-0">
 
                         <Accordion title="Favorites" :startsCollapsed="true">
                             <p>
@@ -239,7 +244,7 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 
                     </div>
 
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mt-2 mt-lg-0">
 
                         <!-- FIXED: Arrow button renders active when the accordion is closed -->
                         <Accordion title="Orders" :startsCollapsed="true">

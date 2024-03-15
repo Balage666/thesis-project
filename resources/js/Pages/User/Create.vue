@@ -42,7 +42,7 @@ const sendFormData = () => {
             <FormKit type="multi-step" tab-style="progress" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
 
 
-                <FormKit type="step" name="userInformations">
+                <FormKit type="step" :name="__('userInformations')">
                     <h3 class="mb-7 text-center"> {{ __("Create a user with filling the form below!") }} </h3>
 
                     <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
@@ -55,7 +55,7 @@ const sendFormData = () => {
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
-                        label="User's name"
+                        :label="__('User\'s name')"
                         :validation="[['required'], ['matches', /^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u]]"
                         validation-visibility="live"
 
@@ -70,7 +70,7 @@ const sendFormData = () => {
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
-                        label="User's email"
+                        :label="__('User\'s email')"
                         validation="required|email"
                         validation-visibility="live"
                     />
@@ -84,7 +84,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="User's password"
+                            :label="__('User\'s password')"
                             :validation="[['required'], ['matches', /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]]"
                             validation-visibility="live"
                         />
@@ -97,7 +97,7 @@ const sendFormData = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="Confirm user's password"
+                            :label="__('Confirm user\'s password')"
                             :validation="[['required'], ['confirm']]"
                             validation-label="Confirmation"
                             validation-visibility="live"
@@ -109,7 +109,7 @@ const sendFormData = () => {
                         <FormKit
                             type="button"
                             @click="handlers.incrementStep(1)()"
-                            label="Continue"
+                            :label="__('Continue')"
                             data-next="true"
                             outer-class="form-outline mb-4 ms-auto me-auto"
                             input-class="btn btn-lg btn-secondary shadow-sm fw-bold"
@@ -118,7 +118,7 @@ const sendFormData = () => {
                     </template>
                 </FormKit>
 
-                <FormKit type="step" name="userRoles">
+                <FormKit type="step" :name="__('userRoles')">
 
                     <h3 class="mb-7 text-center"> {{ __("Select roles for the user!") }} </h3>
 
@@ -129,7 +129,7 @@ const sendFormData = () => {
                         label="Roles"
                         v-model="form.roles"
                         :options="userRoles"
-                        help="Select roles"
+                        :help="__('Select roles')"
                         validation="required|min:1"
                     />
 
@@ -138,7 +138,7 @@ const sendFormData = () => {
                         <FormKit
                             type="button"
                             @click="handlers.incrementStep(-1)()"
-                            label="Back"
+                            :label="__('Back')"
                             data-next="true"
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
@@ -147,7 +147,7 @@ const sendFormData = () => {
 
 
                         <FormKit type="submit"
-                            label="Create"
+                            :label="__('Create')"
                             outer-class="form-outline mb-4"
                             input-class="btn btn-lg btn-primary shadow-sm fw-bold"
                         />

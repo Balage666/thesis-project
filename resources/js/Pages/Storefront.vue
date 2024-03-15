@@ -26,7 +26,10 @@ const rangeInput = ref([]);
 const carouselProductsShowCase = computed(() => props.carouselProducts.data);
 const allProductsShowCase = computed(() => props.allProducts.data);
 
+const calculateStars = (avg) => {
 
+    return Math.round(avg);
+}
 
 </script>
 
@@ -38,7 +41,7 @@ const allProductsShowCase = computed(() => props.allProducts.data);
     <div>
         <BodyLayout>
 
-            <!-- <pre>{{ $page.props.permissions }}</pre> -->
+            <!-- <pre>{{ allProductsShowCase }}</pre> -->
 
             <div class="container-fluid bg-info-subtle border-0">
 
@@ -145,7 +148,7 @@ const allProductsShowCase = computed(() => props.allProducts.data);
 
                         <hr>
 
-                        <div class="container overflow-y-scroll h-75">
+                        <div class="container overflow-y-scroll" style="height: 650px;">
 
                             <div class="row">
 
@@ -167,11 +170,11 @@ const allProductsShowCase = computed(() => props.allProducts.data);
                                                 <div class="d-flex justify-content-between mb-2">
                                                     <p class="text-muted mb-0">Available: <span class="fw-bold">{{ product.stock }}</span></p>
                                                     <div class="ms-auto text-warning">
+                                                        <i v-for="s in calculateStars(product.avg_of_ratings)" class="fa fa-star"></i>
+                                                        <!-- <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i> -->
                                                     </div>
                                                 </div>
 

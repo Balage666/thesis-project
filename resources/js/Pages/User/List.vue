@@ -1,6 +1,7 @@
 <script setup>
 
 import { Link, Head, router } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue'
@@ -12,7 +13,12 @@ const props = defineProps({
     }
 });
 
-const check = (user) => {
+const pageProps = ref(usePage().props.value);
+const permissions = ref(pageProps.value.permissions);
+
+// console.log(permissions.value);
+
+const sendUserDeleteRequest = (user) => {
 
     console.log(user);
     router.post(route('user-delete', { user: user }));
@@ -38,25 +44,25 @@ const check = (user) => {
 
                 <div class="row m-3 d-none d-md-flex">
 
-                    <!-- <div class="col-lg-12 col-md-12 col-12 mt-3">
+                    <div class="col-lg-6 col-md-6 col-12 mt-3">
 
                         <form class="d-flex align-content-center justify-content-center" role="search">
-                            <input class="form-control form-control-lg border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
+                            <input class="form-control border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
                             <button class="btn btn-primary border-2 rounded-start-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                         </form>
 
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="col-lg-3 col-md-12 col-12 mt-3"></div> -->
+                    <!-- <div class="col-lg-3 col-md-12 col-12 mt-3"></div>
 
                     <div class="col-lg-12 col-md-12 col-12 mt-3">
                         <Pagination :pagination="props.users.meta"/>
                     </div>
-                    <!-- <div class="col-lg-3 col-md-12 col-12 mt-3"></div> -->
+                    <div class="col-lg-3 col-md-12 col-12 mt-3"></div> -->
 
                 </div>
 
-                <div class="navbar row m-3 d-flex d-md-none">
+                <!-- <div class="navbar row m-3 d-flex d-md-none">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -66,7 +72,7 @@ const check = (user) => {
                             <li class="nav-item">
                                 <Pagination :pagination="props.users.meta"/>
                             </li>
-                            <!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                             <li class="nav-item">
@@ -77,26 +83,21 @@ const check = (user) => {
                                     <input class="form-control form-control-lg border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
                                     <button class="btn btn-primary border-2 rounded-start-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                                 </form>
-                            </li> -->
+                            </li>
                         </ul>
-                        <!-- <form class="d-flex" role="search">
+                        <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form> -->
+                        </form>
                     </div>
 
 
-                </div>
+                </div> -->
 
-                <div class="row m-3">
+                <div class="row m-3 overflow-y-scroll" style="height: 650px;">
                     <div class="col-12">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item authFormCardBackground bg-gradient"  v-for="user in props.users.data" :key="user.id">
-                                <!-- <div class="row">
-                                    <div class="col-12">
-                                        <input type="checkbox" name="" id="" v-model="user.checked">
-                                    </div>
-                                </div> -->
                                 <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                                     <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + user.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                         <div class="col-3 me-2">
@@ -147,7 +148,7 @@ const check = (user) => {
                                             <div class="col-12">
 
                                                 <div class="my-3 my-lg-0 text-center">
-                                                    <button @click="check(user)" class="btn btn-lg btn-danger" type="button">Delete</button>
+                                                    <button @click="sendUserDeleteRequest(user)" class="btn btn-lg btn-danger" type="button">Delete</button>
                                                 </div>
 
                                             </div>
@@ -159,11 +160,11 @@ const check = (user) => {
                         </div>
                     </div>
                 </div>
-                <div class="row m-3">
+                <!-- <div class="row m-3">
                     <div class="col-12">
                         <Pagination :pagination="props.users.meta"/>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </BodyLayout>

@@ -14,9 +14,13 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    ratedAs: {
+        type: Number,
+        default: 0
+    }
 });
 
-const rating = ref(0);
+const rating = ref(props.ratedAs);
 
 const emits = defineEmits(["onRated"]);
 
@@ -37,6 +41,14 @@ const sendRatedProductData = () => {
             :readonly="props.alreadyRated"
             :cancel="props.alreadyRated"
             @update:modelValue="sendRatedProductData"
-        />
+        >
+            <template #onicon>
+                <slot name="onicon"/>
+            </template>
+
+            <template #officon>
+                <slot name="officon"/>
+            </template>
+        </Rating>
     </div>
 </template>

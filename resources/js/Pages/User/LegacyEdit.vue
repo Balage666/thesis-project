@@ -38,7 +38,7 @@ const callResetPassword = () => {
 </script>
 <template>
     <Head>
-        <title>Legacy Edit</title>
+        <title>{{ __(':name - Legacy Edit', userValues) }}</title>
     </Head>
 
     <BodyLayout>
@@ -51,11 +51,11 @@ const callResetPassword = () => {
 
                 <FormKit type="multi-step" tab-style="progress" :allow-incomplete="true" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
 
-                    <FormKit type="step" name="editUserInfo">
+                    <FormKit type="step" :name="__('editUserInfo')">
                         <h3 class="mb-7 text-center"> {{ __("Edit :name's data", userValues) }} </h3>
 
-                        <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
-                        <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
+                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
+                        <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div> -->
 
                         <FormKit
                             id="name"
@@ -65,7 +65,7 @@ const callResetPassword = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="User's name"
+                            :label="__('User\'s name')"
                             :validation="[['required'], ['matches', /^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u]]"
                             validation-visibility="live"
 
@@ -79,7 +79,7 @@ const callResetPassword = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            label="User's email"
+                            :label="__('User\'s email')"
                             validation="required|email"
                             validation-visibility="live"
                         />
@@ -97,7 +97,7 @@ const callResetPassword = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(1)()"
-                                label="Continue"
+                                :label="__('Continue')"
                                 data-next="true"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-secondary shadow-sm fw-bold"
@@ -106,7 +106,7 @@ const callResetPassword = () => {
                         </template>
                     </FormKit>
 
-                    <FormKit type="step" name="editRoles">
+                    <FormKit type="step" :name="('editRoles')">
 
                         <h3 class="mb-7 text-center"> {{ __("Modify roles for :name!", userValues) }} </h3>
 
@@ -117,7 +117,7 @@ const callResetPassword = () => {
                             :label="__(':name\'s Roles', userValues)"
                             v-model="form.roles"
                             :options="filterUserRoles"
-                            help="Select roles"
+                            :help="__('Select roles')"
                             validation="required|min:1"
                         />
 
@@ -126,7 +126,7 @@ const callResetPassword = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(-1)()"
-                                label="Back"
+                                :label="__('Back')"
                                 data-next="true"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
@@ -135,7 +135,7 @@ const callResetPassword = () => {
 
 
                             <FormKit type="submit"
-                                label="Update"
+                                :label="__('Update')"
                                 outer-class="form-outline mb-4"
                                 input-class="btn btn-lg btn-primary shadow-sm fw-bold"
                             />

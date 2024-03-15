@@ -26,7 +26,7 @@ const sendShowModalEmit = () => {
                 <div class="container-img">
                     <!--FIXME: Image doesn't fit in its container on small resolution-->
                     <img :src="props.user.profile_picture" :alt="props.user.name" class="rounded-circle" style="width: 90%">
-                    <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible" @click="sendShowModalEmit"><i class="fa-solid fa-pencil"></i> Change</button>
+                    <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible" @click="sendShowModalEmit"><i class="fa-solid fa-pencil"></i> {{ __('Change') }}</button>
                 </div>
                 <div class="mt-1 mt-lg-0 mt-md-0">
                     <h4>{{ props.user.name }}</h4>

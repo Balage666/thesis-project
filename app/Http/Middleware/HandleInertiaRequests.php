@@ -51,6 +51,7 @@ class HandleInertiaRequests extends Middleware
         $has_admin_role = false;
         $has_moderator_role = false;
         $has_seller_role = false;
+        $has_only_customer_role = false;
         if (auth()->check()) {
 
             $userWithRolesLoaded = auth()->user()->load(['Roles']);
@@ -62,6 +63,9 @@ class HandleInertiaRequests extends Middleware
             $has_admin_role = $userWithRolesLoaded->Roles->contains('name', 'Admin');
             $has_moderator_role = $userWithRolesLoaded->Roles->contains('name', 'Moderator');
             $has_seller_role = $userWithRolesLoaded->Roles->contains('name', 'Seller');
+
+            $has_only_customer_role = $userWithRolesLoaded->Roles->contains('name', 'Customer') &&
+                                    $userWithRolesLoaded->Roles->count() == 1;
         }
 
 
@@ -80,7 +84,8 @@ class HandleInertiaRequests extends Middleware
                 'elligible_for_dashboard' => $elligible_for_dashboard,
                 'has_admin_role' => $has_admin_role,
                 'has_moderator_role' => $has_moderator_role,
-                'has_seller_role' => $has_seller_role
+                'has_seller_role' => $has_seller_role,
+                'has_only_customer_role' => $has_only_customer_role,
             ],
             'locales' => config('app.locales'),
             'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale(),

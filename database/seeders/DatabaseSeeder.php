@@ -77,6 +77,41 @@ class DatabaseSeeder extends Seeder
             ])
         ]);
 
+        \App\Models\User::create([
+            'name' => 'Just Moderator',
+            'email' => 'just.moderator@bluevenue.tp',
+            'email_verified_at' => now(),
+            'password' => Hash::make('moderator'),
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name=Just+Moderator",
+            'remember_token' => Str::random(10),
+        ])->Roles()->saveMany([
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Customer'
+            ]),
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Moderator'
+            ]),
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'Sal Lair Moadherathor',
+            'email' => 'sal.lair.moadherathor@bluevenue.tp',
+            'email_verified_at' => now(),
+            'password' => Hash::make('moderator'),
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name=Sal+Lair+Moadherathor",
+            'remember_token' => Str::random(10),
+        ])->Roles()->saveMany([
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Customer'
+            ]),
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Seller'
+            ]),
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Moderator'
+            ]),
+        ]);
+
         foreach ($categories as $category) {
             \App\Models\Category::create([
                 'name' => $category,
@@ -84,7 +119,20 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        \App\Models\Category::factory(10)->create();
+
         \App\Models\Product::factory(20)->create()->each(function ($product) {
+
+            \App\Models\User::all()->each(function ($user) use($product) {
+
+                $product->Ratings()->save(
+                    \App\Models\ProductRating::newModelInstance([
+                        'rating' => fake()->numberBetween(3, 5),
+                        'rater' => $user->id
+                    ])
+                );
+
+            });
 
             for ($i=0; $i < 5; $i++) {
                 $product->Pictures()->save(
