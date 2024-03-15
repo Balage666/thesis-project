@@ -24,7 +24,11 @@ class ProductDataResource extends JsonResource
             'price' => $this->price,
             'stock' => $this->stock,
             'category_id' => $this->category->id,
-            'comments' => CommentResource::collection($this->comments)
+            'comments' => CommentResource::collection($this->comments),
+            'ratings' => $this->ratings,
+            'count_of_ratings' => $this->ratings->count(),
+            'sum_of_ratings' => $this->ratings->sum('rating'),
+            'avg_of_ratings' => $this->ratings->avg('rating')
         ];
     }
 }

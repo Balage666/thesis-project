@@ -24,7 +24,10 @@ class StorefrontProductResource extends JsonResource
             'is_close_to_run_out_of_stock' => $this->stock < 10,
             'category' => new CategoryResource($this->category),
             'preview_image' => $this->pictures[0]?->product_picture,
-            'ratings' => $this->ratings
+            'ratings' => $this->ratings,
+            'count_of_ratings' => $this->ratings->count(),
+            'sum_of_ratings' => $this->ratings->sum('rating'),
+            'avg_of_ratings' => $this->ratings->avg('rating')
         ];
     }
 }

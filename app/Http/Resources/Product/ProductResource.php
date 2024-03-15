@@ -31,7 +31,7 @@ class ProductResource extends JsonResource
             'updated_at' => $this->updated_at,
             'created_at_human_readable' => $this->created_at->diffForHumans(),
             'updated_at_human_readable' => $this->updated_at->diffForHumans(),
-
+            'preview_image' => $this->pictures[0]?->product_picture,
             'category' => new CategoryResource($this->category),
             'distributor' => $this->distributor,
             'comments' => CommentResource::collection($this->comments),

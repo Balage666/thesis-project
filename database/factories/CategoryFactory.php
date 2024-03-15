@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Http\Helpers\Shared\SeederHelper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 /**
@@ -16,9 +17,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $categoryType = $this->faker->randomElement(SeederHelper::BASE_CATEGORIES);
+        $userID = User::inRandomOrder()->first()->id;
+        // $categoryType = $this->faker->randomElement(SeederHelper::BASE_CATEGORIES);
         return [
-            'name' => $categoryType,
+            'name' => ucfirst(fake()->unique()->word()),
+            'user_id' => $userID
         ];
     }
 }
