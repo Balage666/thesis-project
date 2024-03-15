@@ -18,7 +18,6 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-
         $userID = User::inRandomOrder()->first()->id;
         $randomCategoryId = Category::inRandomOrder()->first()->id;
         return [

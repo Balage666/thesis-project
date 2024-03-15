@@ -25,7 +25,7 @@ const sendChangedData = (payload) => {
             <PhoneNumberItem class="list-group-item" v-for="phoneNumberItem in props.list" :item="phoneNumberItem" @itemChanged="sendChangedData"/>
         </ul>
 
-        <h3 v-else class="text-center">There are no available phone numbers!</h3>
+        <h3 v-else class="text-center">{{ __('There are no available phone numbers!') }}</h3>
     </div>
 
 </template>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\Shared\ROLES;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategorySelectorResource;
@@ -89,7 +90,7 @@ class ProductController extends Controller
 
         }
 
-        return redirect()->route('storefront')->with('message', 'Product created!');
+        return redirect()->route('product-show', ['product' => $createdProduct])->with('message', 'Product created!');
     }
 
     /**
@@ -146,7 +147,7 @@ class ProductController extends Controller
 
         $product->update();
 
-        return redirect()->route('storefront')->with('message', 'Product Updated!');
+        return redirect()->route('product-show', ['product' => $product])->with('message', 'Product Updated!');
     }
 
     /**
@@ -154,8 +155,15 @@ class ProductController extends Controller
      */
     public function Destroy(Product $product)
     {
+        $isAbleToDeleteProduct = auth()->user()->Products->some($product) ||
+        auth()->user()->Roles->contains('name', 'Admin');
+
+        if (!$isAbleToDeleteProduct) {
+            return redirect()->route('product-list')->withErrors(['delete' => 'You can\'t delete other\'s products as Seller']);
+        }
+
         $product->delete();
 
-        return redirect()->route('storfront')->with('message', 'Product deleted!');
+        return redirect()->route('product-list')->with('message', 'Product deleted!');
     }
 }
