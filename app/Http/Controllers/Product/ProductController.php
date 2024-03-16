@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Controllers\Controller;
-use App\Http\Helpers\Shared\ROLES;
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Category\CategorySelectorResource;
-use App\Http\Resources\Product\ProductCarouselResource;
-use App\Http\Resources\Product\ProductDataResource;
-use App\Http\Resources\Product\ProductResource;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductPicture;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\ProductPicture;
+use App\Http\Helpers\Shared\ROLES;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Category\CategoryResource;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Resources\Product\ProductDataResource;
+use App\Http\Resources\Product\ProductCarouselResource;
+use App\Http\Resources\Category\CategorySelectorResource;
 
 class ProductController extends Controller
 {
@@ -80,8 +81,12 @@ class ProductController extends Controller
 
                 $imagePath = Storage::putFileAs("public/$dirPath", $image["file"], $fileName);
 
+                $publicPath = Str::replaceFirst('public/', '', $imagePath);
+
+                // dd($publicPath);
+
                 $productPic = ProductPicture::newModelInstance([
-                    'product_picture' => "/storage/$imagePath",
+                    'product_picture' => "/storage/$publicPath",
                 ]);
                 $createdProduct->Pictures()->save($productPic);
 
@@ -98,7 +103,9 @@ class ProductController extends Controller
      */
     public function Show(Product $product)
     {
-        $productsInSameCategory = ProductCarouselResource::collection($product->Category->Products->shuffle());
+        $productsInSameCategory = ProductCarouselResource::collection($product->Category->Products->take(6)->shuffle());
+
+        // dd($productsInSameCategory);
 
         return Inertia::render("Product/Show", [
             'productsInSameCategory' => $productsInSameCategory,
