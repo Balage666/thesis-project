@@ -31,6 +31,10 @@ const permissions = ref(pageProps.value.permissions);
 const currentUser = ref(pageProps.value.active_session.user);
 console.log(permissions.value);
 
+const targetUserRolesRef = ref(props.user.roles);
+const targetUserRoles = ref(targetUserRolesRef.value.map((role) => role.name));
+console.log(targetUserRoles.value);
+
 const emits = defineEmits(['editModeToggled', 'nameModified', 'emailModified']);
 
 const emitToggleData = () => {
@@ -87,7 +91,7 @@ const sendModifiedEmailData = () => {
 
             <hr>
 
-            <div class="row" v-show="!permissions.has_only_customer_role || currentUser.id == props.user.id">
+            <div class="row" v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role) || currentUser.id == props.user.id">
                 <div class="col-sm-6">
                     <h6 class="my-0 fw-bold text-center text-lg-start text-md-start text-sm-start">{{ __('Password') }}</h6>
                 </div>
@@ -97,12 +101,13 @@ const sendModifiedEmailData = () => {
                 </div>
             </div>
 
-            <hr v-show="!permissions.has_only_customer_role || currentUser.id == props.user.id">
+            <hr v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role) || currentUser.id == props.user.id">
 
             <div class="row">
                 <div class="col-sm-12 d-grid gap-2 gap-lg-0 d-lg-flex d-md-flex align-items-md-center align-items-lg-center justify-content-md-center justify-content-lg-between">
-                    <Link v-show="!permissions.has_only_customer_role" :href="route('user-edit', { user: props.user })" class="btn btn-lg btn-info" as="button" type="button">{{ __("Legacy Editor") }}</Link>
-                    <button v-show="!permissions.has_only_customer_role || currentUser.id == props.user.id" @click="emitToggleData" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
+                    <Link v-show="!permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || permissions.has_moderator_role && currentUser.id == props.user.id" :href="route('user-edit', { user: props.user })" class="btn btn-lg btn-info" as="button" type="button">{{ __("Legacy Editor") }}</Link>
+                    <!-- <button v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role) || currentUser.id == props.user.id" @click="emitToggleData" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button> -->
+                    <button v-show="!permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || currentUser.id == props.user.id " @click="emitToggleData" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
                 </div>
             </div>
         </div>
