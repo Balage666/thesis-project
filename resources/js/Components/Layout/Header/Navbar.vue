@@ -48,6 +48,7 @@ const permissions = ref(pageProps.value.permissions)
                             </button>
                             <ul class="dropdown-menu bg-white">
                                 <li v-show="permissions.elligible_for_dashboard"><Link :href="route('dashboard-main')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-toolbox"></i> {{ __("Dashboard") }}</Link></li>
+                                <li v-show="permissions.authenticated"><Link :href="route('user-profile', { user: currentUser })" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-address-card"></i> {{ __("My profile") }}</Link></li>
                                 <li><Link :href="route('log-out')" as="button" method="get" class="dropdown-item text-center"><i class="fa-solid fa-door-open"></i> {{ __("LogOut") }}</Link></li>
                             </ul>
                         </li>
