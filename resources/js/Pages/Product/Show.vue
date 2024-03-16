@@ -2,10 +2,17 @@
 
 import { usePage, useForm, Link } from '@inertiajs/inertia-vue3';
 import { router } from '@inertiajs/vue3';
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 
 import Galleria from 'primevue/galleria';
+import InputNumber from 'primevue/inputnumber';
+import InputText from 'primevue/inputtext';
+import FloatLabel from 'primevue/floatlabel';
+import TextArea from 'primevue/textarea';
+
 import "primevue/resources/themes/lara-light-cyan/theme.css";
+
+import editProductModeObj from '*js-shared/edit-product-mode-obj';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import RateProduct from '*vue-components/Input/RateProduct.vue';
@@ -30,13 +37,55 @@ const productComments = computed(() => productShow.value.comments)
 const productRatingsCount = computed(() => productShow.value.count_of_ratings);
 const averageProductRating = computed(() => productShow.value.avg_of_ratings);
 
-const currentUserRating = computed(() => currentUser.value.product_ratings.find((r) => r.product_id == productShow.value.id)?.rating);
+const currentUserRating = computed(() => currentUser.value?.product_ratings.find((r) => r.product_id == productShow.value.id)?.rating);
 
 const stars = computed(() => Math.round(averageProductRating.value));
 
 console.log(currentUserRating.value || 0);
 
+console.log(productShow.value);
 
+const EditMode = reactive(editProductModeObj);
+
+console.log(Object.entries(EditMode).every(m => m[1] == false));
+
+const toggleEditMode = () => {
+
+    for (const key in EditMode) {
+        if (Object.hasOwnProperty.call(EditMode, key)) {
+            EditMode[key] = !EditMode[key]
+        }
+    }
+
+}
+
+const editNameForm = useForm({
+    name: productShow.value.name
+})
+
+const editDescriptionForm = useForm({
+    description: productShow.value.description
+})
+
+console.log(productShow.value.description);
+
+const changePriceForm = useForm({
+
+    price: productShow.value.price
+
+});
+
+const changeStockValueForm = useForm({
+
+    stock: productShow.value.stock
+
+})
+
+const sendModifiedNameData = () => {
+
+    router.post(route('product-name-change', { product: productShow.value }), editNameForm);
+
+}
 
 const checkAlreadyRated = (user, product) => {
     return user?.product_ratings.some((r) => r.product_id == product.id);
@@ -70,17 +119,21 @@ const sendProductRatingRequest = (payload) => {
     router.post(route('rate-add', { product: payload.product }), { rating: payload.rating });
 }
 
+const sendDeleteRatingRequest = (payload) => {
+
+}
+
 </script>
 
 <template>
 
     <Head>
-        <title>{{ __('Show product') }}</title>
+        <title>{{ __('Show product - :name', productShow) }}</title>
     </Head>
 
     <BodyLayout>
 
-        <pre>{{ permissions }}</pre>
+        <pre>{{ EditMode }}</pre>
 
         <div class="card p-5 container-fluid bg-info-subtle border-0">
 
@@ -96,7 +149,32 @@ const sendProductRatingRequest = (payload) => {
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-7">
-                    <h1>{{ productShow.name }}</h1>
+
+                    <div class="d-flex gap-3">
+
+                        <div>
+                            <button @click="toggleEditMode" class="btn btn-lg btn-info mb-2"> <i class="fa-solid fa-screwdriver-wrench fa-sm"></i> {{ Object.entries(EditMode).every(m => m[1] == true) ? __('Cancel') : __('Edit Mode') }}</button>
+                        </div>
+
+                        <div>
+                            <Link :href="route('product-edit', { product: productShow })" class="btn btn-lg btn-info" as="button" type="button"> <i class="fa-solid fa-wrench"></i> {{ __("Legacy Editor") }}</Link>
+                        </div>
+
+                    </div>
+
+                    <h1 v-show="!EditMode.editNameFormVisible">{{ productShow.name }}</h1>
+                    <div class="mt-3 mb-3">
+                        <form @submit.prevent="sendModifiedNameData" v-show="EditMode.editNameFormVisible">
+                            <div class="d-flex gap-2">
+                                <FloatLabel>
+                                    <InputText id="name-input" v-model="editNameForm.name"/>
+                                    <label for="name-input">Name</label>
+                                </FloatLabel>
+
+                                <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                            </div>
+                        </form>
+                    </div>
 
                     <div>
                         <div>
@@ -105,8 +183,10 @@ const sendProductRatingRequest = (payload) => {
                         </div>
                         <span class="text-muted">{{ productRatingsCount }} ratings</span>
                         <RateProduct
+                            v-show="permissions.authenticated"
                             :alreadyRated="checkAlreadyRated(currentUser, productShow)"
                             @onRated="sendProductRatingRequest"
+                            @onRatingDelete="sendDeleteRatingRequest"
                             :product="productShow"
                             :ratedAs="currentUserRating || 0">
                             <template #onicon>
@@ -118,29 +198,80 @@ const sendProductRatingRequest = (payload) => {
                         </RateProduct>
                     </div>
 
-                    <p class="lead">{{ productShow.description }}</p>
+                    <p v-show="!EditMode.editDescriptionFormVisible" class="lead">{{ productShow.description }}</p>
+                    <div class="mt-3 mb-3">
+                        <form @submit.prevent="sendModifiedDescriptionData" v-show="EditMode.editDescriptionFormVisible">
 
-                    <div class="row">
+                            <div class="d-flex gap-2">
+                                <FloatLabel>
+                                    <TextArea id="desc-input" v-model="editDescriptionForm.description" rows="2" cols="50" />
+                                    <label for="desc-input">Description</label>
+                                </FloatLabel>
 
-                        <div class="col-6">
+                                <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                            </div>
+                        </form>
+                    </div>
 
-                            <Link :href="route('add-to-basket', { product: productShow })" method="post" as="button" type="button" class="btn btn-lg btn-secondary"> <i class="fa-solid fa-basket-shopping"></i> Add to Basket</Link>
+
+                    <h3 class="mb-3" v-show="Object.entries(EditMode).every(m => m[1] == false)">
+                        <span class="text-muted">Price: </span>{{ productShow.price }}
+                        <span class="text-black-50"> • </span>
+                        <span class="text-muted">{{ __('In Stock:') }}</span> {{ productShow.stock }}
+                    </h3>
+
+                    <div v-show="EditMode.changePriceFormVisible && EditMode.changeStockFormVisible">
+
+                        <div class="mb-4">
+                            <form @submit.prevent="sendModifiedPriceData">
+                                <div class="d-flex gap-2">
+
+                                    <FloatLabel>
+                                        <InputNumber id="price-input" v-model="changePriceForm.price" variant="filled" :minFractionDigits="2" />
+                                        <label for="price-input">Price</label>
+                                    </FloatLabel>
+
+                                    <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="mb-3">
+
+                            <form @submit.prevent="sendModifiedStockData">
+                                <div class="d-flex gap-2">
+                                    <FloatLabel>
+                                        <InputNumber id="stock-input" v-model="changeStockValueForm.stock" />
+                                        <label for="stock-input">Stock</label>
+                                    </FloatLabel>
+
+                                    <button type="submit" class="btn btn-sm btn-primary">{{ __('Modify') }}</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex gap-3 text-center">
+
+                        <div>
+
+                            <Link :href="route('add-to-basket', { product: productShow })" method="post" as="button" type="button" class="btn btn-lg btn-info"> <i class="fa-solid fa-basket-shopping"></i> Add to Basket</Link>
 
                         </div>
 
-                        <div class="col-6">
+                        <div>
 
                             <!--TODO: Implement Add to favorite button-->
                             <Link href="#" method="post" as="button" type="button" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</Link>
 
                         </div>
-
                     </div>
                 </div>
             </div>
 
             <div class="row mt-3">
-                <h3>Comments</h3>
+                <h3>{{ __('Comments') }}</h3>
             </div>
 
             <hr>
@@ -150,7 +281,7 @@ const sendProductRatingRequest = (payload) => {
                     <div class="card border">
                         <div class="card-body p-4">
                             <div v-if="productComments.length == 0">
-                                <h3>There are no comments!</h3>
+                                <h3>{{ __('There are no comments!') }}</h3>
                             </div>
                             <div v-else class="card mb-4" v-for="comment in productComments">
                                 <div class="card-body">
@@ -174,7 +305,7 @@ const sendProductRatingRequest = (payload) => {
                             <div class="form-outline mb-4">
                                 <div class="form-floating">
                                     <textarea v-model="commentForm.comment" class="form-control" placeholder="Leave a comment here" id="commentInput" style="height: 120px"></textarea>
-                                    <label for="commentInput">{{ __('New comment') }}</label>
+                                    <label for="commentInput" class="text-muted">{{ __('New comment') }}</label>
                                 </div>
                             </div>
                             <div class="form-outline text-end">
