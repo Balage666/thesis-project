@@ -22,7 +22,7 @@ const props = defineProps({
 
 const rating = ref(props.ratedAs);
 
-const emits = defineEmits(["onRated"]);
+const emits = defineEmits(["onRated", "onRatingDelete"]);
 
 const sendRatedProductData = () => {
     const data = {
@@ -32,23 +32,36 @@ const sendRatedProductData = () => {
 
     emits("onRated", data);
 };
+
+const sendDeleteRatingData = () => {
+
+    // emits('onRatingDelete', )
+}
+
 </script>
 <template>
-    <div>
-        <Rating
-            v-model="rating"
-            :stars="5"
-            :readonly="props.alreadyRated"
-            :cancel="props.alreadyRated"
-            @update:modelValue="sendRatedProductData"
-        >
-            <template #onicon>
-                <slot name="onicon"/>
-            </template>
+    <div class="d-flex align-items-center">
+        <div>
+            <Rating
+                v-model="rating"
+                :stars="5"
+                :readonly="props.alreadyRated"
+                :cancel="false"
+                @update:modelValue="sendRatedProductData"
+            >
+                <template #onicon>
+                    <slot name="onicon"/>
+                </template>
 
-            <template #officon>
-                <slot name="officon"/>
-            </template>
-        </Rating>
+                <template #officon>
+                    <slot name="officon"/>
+                </template>
+            </Rating>
+        </div>
+        <div>
+            <button @click="emits('onRatingDelete')" class="btn" v-show="props.alreadyRated">
+                <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+            </button>
+        </div>
     </div>
 </template>
