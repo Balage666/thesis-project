@@ -11,6 +11,7 @@ import CreatePhoneNumber from '*vue-components/Input/CreatePhoneNumber.vue'
 import CreateAddress from '*vue-components/Input/CreateAddress.vue';
 import FileUploadDialog from '*vue-components/Input/FileUploadDialog.vue';
 
+import ListProduct from '*vue-components/DataDisplay/Product/ListProduct.vue';
 import ListPhoneNumbers from '*vue-components/DataDisplay/PhoneNumber/ListPhoneNumbers.vue';
 import ListAddresses from '*vue-components/DataDisplay/Address/ListAddresses.vue';
 import UserCard from '*vue-components/DataDisplay/UserDetail/UserCard.vue';
@@ -71,6 +72,11 @@ const closeDialog = () => {
 }
 
 const user = ref(props.userToShow.data[0]);
+const targetUserRolesRef = ref(user.value.roles);
+const targetUserRoles = ref(targetUserRolesRef.value.map(r => r.name));
+
+console.log(user.value);
+console.log(targetUserRoles.value);
 
 const sendEmittedModifiedEmailData = (payload) => {
 
@@ -119,15 +125,12 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 <template>
 
     <!-- TODO: Make a separate accordion for user roles -->
-    <!-- <p class="text-secondary my-1" v-for="role in user.roles">{{ __(role.name) }}</p>
-    <div class="d-grid d-lg-flex gap-2">
-        <button class="btn btn-lg btn-primary">Follow</button>
-        <button class="btn btn-lg btn-secondary">Message</button>
-    </div> -->
 
     <Head>
         <title>{{ __(':name\'s details', user) }}</title>
     </Head>
+
+    <!-- <pre>{{ permissions }}</pre> -->
 
     <BodyLayout>
         <div>
@@ -183,8 +186,8 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 
                 </div>
 
-
-                <div class="row mt-3" v-show="!permissions.has_only_customer_role || currentUser.id == user.id">
+                <!-- !permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || permissions.has_moderator_role && currentUser.id == props.user.id -->
+                <div class="row mt-3" v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role && ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) ) || permissions.has_admin_role || currentUser.id == user.id">
 
                     <div class="col-12 col-lg-6">
 
@@ -216,8 +219,7 @@ const sendEmittedChangedProfilePictureData = (payload) => {
 
                 </div>
 
-                <!-- FIXED: Arrow button renders active when the accordion is closed -->
-                <div class="row mt-3" v-show="!permissions.has_only_customer_role || currentUser.id == user.id">
+                <div class="row mt-3" v-show="(!permissions.has_only_customer_role && permissions.has_admin_role) || currentUser.id == user.id">
 
                     <div class="col-12 col-lg-6 mt-2 mt-lg-0">
 
@@ -279,24 +281,9 @@ const sendEmittedChangedProfilePictureData = (payload) => {
                         <!-- TODO: List User's products -->
 
                         <Accordion title="Created Products">
-                            <p>
-                                <strong>
-                                    This is the first item's accordion body.
-                                </strong>
-                                It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </p>
 
-                            <p>
-                                Oh, thank you, thank you. Okay now, we run some industrial strength electrical cable from the top of the clocktower down to spreading it over the street between two lamp posts. Meanwhile, we out-fitted the vehicle with this big pole and hook which runs directly into the flux-capacitor. At the calculated moment, you start off from down the street driving toward the cable execrating to eighty-eight miles per hour. According to the flyer, at !0:04 pm lightning will strike the clocktower sending one point twenty-one gigawatts into the flux-capacitor, sending you back to 1985. Alright now, watch this. You wind up the car and release it, I'll simulate the lightening. Ready, set, release. Huhh. Why not? No. Right. You know Marty, you look so familiar, do I know your mother?
-                            </p>
+                            <ListProduct :products="user.products"/>
 
-                            <p>
-                                Well, she's not doing a very good job. Hey beat it, spook, this don't concern you. Hey Marty, I'm not your answering service, but you're outside pouting about the car, Jennifer Parker called you twice. About 30 years, it's a nice round number. Well gee, I don't know.
-                            </p>
-
-                            <p>
-                                Why that's me, look at me, I'm an old man. Oh yes sir. That was so stupid, Grandpa hit him with the car. Breakfast. What did you sleep in your clothes again last night.
-                            </p>
                         </Accordion>
 
                     </div>
