@@ -48,10 +48,14 @@ class HandleInertiaRequests extends Middleware
         }
 
         $elligible_for_dashboard = false;
+        $has_customer_role = false;
         $has_admin_role = false;
         $has_moderator_role = false;
         $has_seller_role = false;
         $has_only_customer_role = false;
+        $has_only_customer_role_and_seller_role = false;
+        $has_moderator_role_at_most = false;
+
         if (auth()->check()) {
 
             $userWithRolesLoaded = auth()->user()->load(['Roles']);
@@ -63,9 +67,17 @@ class HandleInertiaRequests extends Middleware
             $has_admin_role = $userWithRolesLoaded->Roles->contains('name', 'Admin');
             $has_moderator_role = $userWithRolesLoaded->Roles->contains('name', 'Moderator');
             $has_seller_role = $userWithRolesLoaded->Roles->contains('name', 'Seller');
+            $has_customer_role = $userWithRolesLoaded->Roles->contains('name', 'Customer');
 
             $has_only_customer_role = $userWithRolesLoaded->Roles->contains('name', 'Customer') &&
                                     $userWithRolesLoaded->Roles->count() == 1;
+
+            $has_only_customer_role_and_seller_role = $userWithRolesLoaded->Roles->contains('name', 'Customer') &&
+            $userWithRolesLoaded->Roles->contains('name', 'Seller') &&
+            $userWithRolesLoaded->Roles->count() == 2;
+
+            $has_moderator_role_at_most = $userWithRolesLoaded->Roles->contains('name', 'Moderator') &&
+            !$userWithRolesLoaded->Roles->contains('name', 'Admin');
         }
 
 
@@ -82,10 +94,13 @@ class HandleInertiaRequests extends Middleware
             'permissions' => [
                 'authenticated' => auth()->check(),
                 'elligible_for_dashboard' => $elligible_for_dashboard,
+                'has_customer_role' => $has_customer_role,
                 'has_admin_role' => $has_admin_role,
                 'has_moderator_role' => $has_moderator_role,
+                'has_moderator_role_at_most' => $has_moderator_role_at_most,
                 'has_seller_role' => $has_seller_role,
                 'has_only_customer_role' => $has_only_customer_role,
+                'has_only_customer_role_and_seller_role' => $has_only_customer_role_and_seller_role,
             ],
             'locales' => config('app.locales'),
             'current_locale' => Session::has('locale') ? Session::get('locale') : app()->currentLocale(),
