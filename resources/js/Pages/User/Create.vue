@@ -3,11 +3,16 @@
 
 import { FormKit } from '@formkit/vue';
 import { useForm, router } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
 import { userRoles } from '*js-shared/user-roles'
+import { userRolesAsModeratorForCreate } from '*js-shared/user-roles-as-moderator_for_create';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
+
+const pageProps = ref(usePage().props.value);
+const permissions = ref(pageProps.value.permissions);
 
 const form = useForm({
     name: null,
@@ -17,13 +22,24 @@ const form = useForm({
     roles: []
 });
 
-console.log(form.errors.name);
+// console.log(form.errors.name);
 
 const sendFormData = () => {
 
     console.log(`data about to be submitted: ${form.name}, ${form.email}, ${form.password}, ${form.roles}`)
 
     form.post(route('user-store'));
+
+}
+
+console.log(userRolesAsModeratorForCreate);
+
+const getRoles = () => {
+
+    if (permissions.value.has_moderator_role_at_most) {
+        return userRolesAsModeratorForCreate;
+    }
+    return userRoles;
 
 }
 
@@ -128,7 +144,7 @@ const sendFormData = () => {
                         type="checkbox"
                         label="Roles"
                         v-model="form.roles"
-                        :options="userRoles"
+                        :options="getRoles()"
                         :help="__('Select roles')"
                         validation="required|min:1"
                     />
