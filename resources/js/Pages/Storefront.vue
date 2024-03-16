@@ -154,7 +154,7 @@ const calculateStars = (avg) => {
 
                                     <div class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in allProductsShowCase">
                                         <div class="card border-3 border-info">
-                                            <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" />
+                                            <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" style="height: 260px;" />
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="small">
