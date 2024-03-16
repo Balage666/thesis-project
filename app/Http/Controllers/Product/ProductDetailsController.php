@@ -10,6 +10,10 @@ use App\Models\ProductComment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\RateProductRequest;
 use App\Http\Requests\Product\AddProductCommentRequest;
+use App\Http\Requests\Product\ChangeProductDescriptionRequest;
+use App\Http\Requests\Product\ChangeProductNameRequest;
+use App\Http\Requests\Product\ChangeProductPriceRequest;
+use App\Http\Requests\Product\ChangeProductStockValueRequest;
 
 class ProductDetailsController extends Controller
 {
@@ -38,6 +42,14 @@ class ProductDetailsController extends Controller
 
     }
 
+    public function DeleteRating(ProductRating $productRating) {
+
+        $productRating->delete();
+
+        return redirect()->back()->with('message', 'Rating deleted!');
+
+    }
+
     public function AddComment(AddProductCommentRequest $request, Product $product) {
 
         $validated = $request->validated();
@@ -63,6 +75,30 @@ class ProductDetailsController extends Controller
         $comment->delete();
 
         return redirect()->back()->with('message', 'Comment deleted!');
+
+    }
+
+    public function ChangeProductName(ChangeProductNameRequest $request, Product $product) {
+        $validated = $request->validated();
+        dd($validated);
+    }
+
+    public function ChangeProductDescription(ChangeProductDescriptionRequest $request, Product $product) {
+        $validated = $request->validated();
+        dd($validated);
+    }
+
+    public function ChangeProductPrice(ChangeProductPriceRequest $request, Product $product) {
+
+        $validated = $request->validated();
+        dd($validated);
+
+    }
+
+    public function ChangeStockValueValue(ChangeProductStockValueRequest $request, Product $product) {
+
+        $validated = $request->validated();
+        dd($validated);
 
     }
 
