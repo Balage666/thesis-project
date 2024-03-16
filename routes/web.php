@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
          */
         Route::post('phone-add/{user}', [PhoneController::class, 'Store'])->name('phone-number-add');
         Route::post('phone-edit/{phone}', [PhoneController::class, 'Update'])->name('phone-number-update');
-        Route::get('phone-delete/{phone}', [PhoneController::class, 'Delete'])->name('phone-number-delete');
+        Route::post('phone-delete/{phone}', [PhoneController::class, 'Delete'])->name('phone-number-delete');
 
         /*
         |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         |--------------------------------------------------------------------------
          */
         Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create');
-        Route::get('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete');
+        Route::post('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete');
 
     });
 
@@ -103,8 +103,15 @@ Route::group(['middleware' => 'auth'], function () {
         |--------------------------------------------------------------------------
          */
         Route::post('rating-add/{product}', [ProductDetailsController::class, 'AddRating'])->name('rate-add')->withoutMiddleware('role:Seller,Admin');
+        Route::post('rating-delete/{product}', [ProductDetailsController::class, 'DeleteRating'])->name('rate-destroy')->withoutMiddleware('role:Seller,Admin');
         Route::post('comment-add/{product}', [ProductDetailsController::class, 'AddComment'])->name('comment-add')->withoutMiddleware('role:Seller,Admin');
         Route::post('comment-delete/{comment}', [ProductDetailsController::class, 'DeleteComment'])->name('comment-destroy')->withoutMiddleware('role:Seller,Admin');
+
+        Route::post('change-name/{product}', [ProductDetailsController::class, 'ChangeProductName'])->name('product-name-change');
+        Route::post('change-description/{product}', [ProductDetailsController::class, 'ChangeProductDescription'])->name('product-description-change');
+        Route::post('change-price/{product}', [ProductDetailsController::class, 'ChangeProductPrice'])->name('product-price-change');
+        Route::post('change-stock-value/{product}', [ProductDetailsController::class, 'ChangeStockValue'])->name('product-stock-change');
+
     });
 
     Route::group(['prefix' => 'category-management', 'middleware' => 'role:Seller,Admin'], function () {
