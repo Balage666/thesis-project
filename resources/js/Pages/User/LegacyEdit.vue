@@ -6,6 +6,7 @@ import { useForm, router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
 
 import { filterUserRoles } from '*js-shared/filtered-user-roles';
+import { userRolesAsModeratorForEdit } from '*js-shared/user-roles-as-moderator_for_edit';
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import { ref } from 'vue';
 
@@ -22,28 +23,30 @@ const userValues = props.userToEdit.data[0];
 
 const rolesUserHave = userValues.roles.map(r => r.name).filter(r => filterUserRoles.includes(r));
 
+console.log(filterUserRoles);
 console.log(rolesUserHave);
 console.log(userValues.roles);
+
+// console.log(userRolesAsModerator);
+
+const getRoles = () => {
+
+    if (currentUser.value.roles.some((r) => r.name == 'Moderator') &&
+    !currentUser.value.roles.some((r) => r.name == 'Admin') &&
+    currentUser.value.id != userValues.id)
+    {
+        return userRolesAsModeratorForEdit;
+    }
+    return filterUserRoles;
+
+}
 
 const rolesReadOnly = () => {
 
     let readOnly = false;
     if (currentUser.value.id == userValues.id) {
         readOnly = true;
-        return readOnly;
     }
-
-    let currentUserHasOnlyModeratorRole = currentUser.value.roles.some((r) => r.name == 'Moderator') &&
-    !currentUser.value.roles.some((r) => r.name == 'Admin');
-
-    let targetUserHasModeratorOrAdminRole = userValues.roles.some((r) => r.name == 'Moderator') ||
-    userValues.roles.some((r) => r.name == 'Admin')
-
-    if (currentUserHasOnlyModeratorRole && targetUserHasModeratorOrAdminRole) {
-        readOnly = true;
-        return readOnly;
-    }
-
     return readOnly;
 
 }
@@ -145,7 +148,7 @@ const callResetPassword = () => {
                             type="checkbox"
                             :label="__(':name\'s Roles', userValues)"
                             v-model="form.roles"
-                            :options="filterUserRoles"
+                            :options="getRoles()"
                             :help="__('Select roles')"
                             validation="required|min:1"
                             :disabled="rolesReadOnly()"
