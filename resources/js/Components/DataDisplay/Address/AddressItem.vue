@@ -4,6 +4,7 @@ import countries from 'countries-phone-masks';
 
 import { State } from 'country-state-city';
 import { Link } from '@inertiajs/inertia-vue3';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     item: {
@@ -25,6 +26,12 @@ const gatherNameOfRegion = (countryIso, regionIso) => {
 
 }
 
+const sendDeleteAddressRequest = () => {
+
+    router.post(route('address-delete', { address: props.item }));
+
+}
+
 </script>
 
 <template>
@@ -36,7 +43,8 @@ const gatherNameOfRegion = (countryIso, regionIso) => {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 text-end">
-                                <Link :href="route('address-delete', { address: props.item })" method="get" as="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></Link>
+                                <!-- <Link :href="route('address-delete', { address: props.item })" method="post" as="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></Link> -->
+                                <button @click="sendDeleteAddressRequest" type="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></button>
                             </div>
                         </div>
 

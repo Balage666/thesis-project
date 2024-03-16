@@ -4,6 +4,7 @@ import { reactive } from 'vue';
 import InputMask from 'primevue/inputmask';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/inertia-vue3';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     item: {
@@ -43,6 +44,12 @@ const sendEditedPhoneNumberData = () => {
 
 }
 
+const sendDeletePhoneNumberRequest = () => {
+
+    router.post(route('phone-number-delete', { phone: props.item }));
+
+}
+
 </script>
 
 <template>
@@ -61,7 +68,9 @@ const sendEditedPhoneNumberData = () => {
             <div class="col-6 text-end">
                 <div class="d-grid d-md-flex align-items-md-end justify-content-md-end gap-2">
                     <button type="button" class="btn btn-primary" @click="toggleEditModeForItem">{{ phoneNumberItem.editModeVisible ? 'Cancel' : 'Edit' }}</button>
-                    <Link :href="route('phone-number-delete', { phone: props.item })" method="get" as="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">{{ __('Delete') }}</Link>
+
+                    <!-- <Link :href="route('phone-number-delete', { phone: props.item })" method="post" as="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">{{ __('Delete') }}</Link> -->
+                    <button @click="sendDeletePhoneNumberRequest" type="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">{{ __('Delete') }}</button>
                 </div>
             </div>
         </div>
