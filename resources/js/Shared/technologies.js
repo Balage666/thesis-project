@@ -1,6 +1,7 @@
 export const usedTechnologies = [
     { id: Symbol(), url: 'https://laravel.com/', title: 'Laravel', icon: 'fab fa-laravel' },
     { id: Symbol(), url: 'https://vuejs.org/', title: 'Vue-js', icon: 'fab fa-vuejs' },
+    // { id: Symbol(), url: 'https://formkit.com/', title: 'FormKit', icon: 'i-vscode-icons-file-type-formkit' },
     { id: Symbol(), url: 'https://fontawesome.com/', title: 'Font Awesome', icon: 'fab fa-font-awesome' },
     { id: Symbol(), url: 'https://primevue.org/', title: 'PrimeVue', icon: 'pi pi-prime'},
     { id: Symbol(), url: 'https://getbootstrap.com/', title: 'Bootstrap', icon: 'fab fa-bootstrap' },
