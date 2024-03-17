@@ -110,7 +110,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('change-name/{product}', [ProductDetailsController::class, 'ChangeProductName'])->name('product-name-change');
         Route::post('change-description/{product}', [ProductDetailsController::class, 'ChangeProductDescription'])->name('product-description-change');
         Route::post('change-price/{product}', [ProductDetailsController::class, 'ChangeProductPrice'])->name('product-price-change');
-        Route::post('change-stock-value/{product}', [ProductDetailsController::class, 'ChangeStockValue'])->name('product-stock-change');
+        Route::post('change-stock-value/{product}', [ProductDetailsController::class, 'ChangeProductStockValue'])->name('product-stock-change');
+
+        Route::post('upload-pictures/{product}', [ProductDetailsController::class, 'UploadProductPictures'])->name('product-pictures-upload');
+        Route::post('delete-pictures/{product}', [ProductDetailsController::class, 'DeleteProductPictures'])->name('product-pictures-delete');
 
     });
 
@@ -171,7 +174,7 @@ Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
     Route::get('log-out', [AuthController::class, 'LogOut'])->name('log-out')->withoutMiddleware('guest');
 
     Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
-    Route::post('sign-on', [AuthController::class, 'SignOn'])->name('sign-on');
+    Route::post('sign-on', [AuthController::class, 'ImprovedSignOn'])->name('sign-on');
 });
 
 Route::get('/new-feature-test', function () {
