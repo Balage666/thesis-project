@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UpdateUserRequest;
-use App\Http\Resources\User\UserResource;
-use App\Models\User;
-use App\Models\UserRole;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 use Helper;
+use App\Models\User;
+use Inertia\Inertia;
+use App\Models\UserRole;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserResource;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\User\UpdateUserRequest;
 
 
 class UserController extends Controller
@@ -79,7 +80,9 @@ class UserController extends Controller
             'name' => $tempName,
             'email' => $createUserFormFields['email'],
             'password' => $createUserFormFields['password'],
-            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name={$tempNameParts[0]}+{$tempNameParts[1]}"
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name={$tempNameParts[0]}+{$tempNameParts[1]}",
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
         ]);
 
         // dd($createUser->id);
