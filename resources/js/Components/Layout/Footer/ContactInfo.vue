@@ -20,27 +20,27 @@ import { usedTechnologies } from '*js-shared/technologies';
                             Blue Venue
                         </h6>
                         <p>
-                            Blue Venue is a completely made up brand name for my webshop application
+                            {{ __(`Blue Venue is a completely made up brand name for my webshop application
                             created for my thesis. The app developed with the following technologies mainly:
-                            Laravel, Inertia, Vue3, FormKit, PrimeVue, Bootstrap
+                            Laravel, Inertia, Vue3, FormKit, PrimeVue, Bootstrap`) }}
                         </p>
                     </div>
 
                     <hr class="w-100 clearfix d-md-none" />
 
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 fw-bold">Sources</h6>
+                        <h6 class="text-uppercase mb-4 fw-bold">{{ ('Sources') }}</h6>
                         <p>
-                            <a class="text-white">Laravel Documentation</a>
+                            <a class="text-white">{{ __('Laravel Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">Inertia Documentation</a>
+                            <a class="text-white">{{ __('Inertia Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">Vue3 Documentation</a>
+                            <a class="text-white">{{ __('Vue3 Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">Bootstrap Documentation</a>
+                            <a class="text-white">{{ __('Bootstrap Documentation') }}</a>
                         </p>
                     </div>
 
@@ -51,17 +51,14 @@ import { usedTechnologies } from '*js-shared/technologies';
                             Useful links
                         </h6>
                         <p>
-                            <a class="text-white" v-if="$page.props.permissions.authenticated">Your Account</a>
-                            <a class="text-white" v-else>Login</a>
+                            <a class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</a>
+                            <a class="text-white" v-else>{{ __('Login') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">Distributors</a>
+                            <a class="text-white">{{ __('Distributors') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">Brands</a>
-                        </p>
-                        <p>
-                            <a class="text-white">Introduction page</a>
+                            <a class="text-white">{{ __('Introduction page') }}</a>
                         </p>
                     </div>
 
@@ -83,9 +80,9 @@ import { usedTechnologies } from '*js-shared/technologies';
             <section v-if="!$page.props.permissions.authenticated">
 
                 <p class="d-flex justify-content-center align-items-center">
-                    <span class="me-3 fw-bold">Register for free!</span>
+                    <span class="me-3 fw-bold">{{ __('Register for free!') }}</span>
                     <Link :href="route('sign-up')" type="button" class="fw-bold btn btn-secondary rounded">
-                        Sign up
+                        {{ __('Sign up') }}
                     </Link>
                 </p>
 

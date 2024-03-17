@@ -14,6 +14,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    user: {
+        type: Object,
+        required: true
+    },
     ratedAs: {
         type: Number,
         default: 0
@@ -32,11 +36,6 @@ const sendRatedProductData = () => {
 
     emits("onRated", data);
 };
-
-const sendDeleteRatingData = () => {
-
-    // emits('onRatingDelete', )
-}
 
 </script>
 <template>

@@ -55,8 +55,7 @@ const getRoles = () => {
 
         <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
 
-            <FormKit type="multi-step" tab-style="progress" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
-
+            <FormKit type="multi-step" tab-style="progress" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center">
 
                 <FormKit type="step" :name="__('userInformations')">
                     <h3 class="mb-7 text-center"> {{ __("Create a user with filling the form below!") }} </h3>

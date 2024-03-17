@@ -23,6 +23,7 @@ class ProductDataResource extends JsonResource
             'images' => $this->pictures,
             'price' => $this->price,
             'stock' => $this->stock,
+            'distributor' => $this->distributor,
             'category_id' => $this->category->id,
             'comments' => CommentResource::collection($this->comments),
             'ratings' => $this->ratings,

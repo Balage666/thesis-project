@@ -46,9 +46,14 @@ const calculateStars = (avg) => {
             <div class="container-fluid bg-info-subtle border-0">
 
                 <div class="row">
+                    <h3 class="mt-3">{{ __('Show case') }}</h3>
+                </div>
+
+                <hr>
+
+                <div class="row">
 
                     <div class="col-12">
-                        <h3>Show case</h3>
                         <ProductCarousel class="d-none d-md-none d-lg-flex" :carouselId="'large'" :products="carouselProductsShowCase" :visiblePerSlide="3"/>
                         <ProductCarousel class="d-none d-md-flex d-sm-none d-lg-none" :carouselId="'mid'" :products="carouselProductsShowCase" :visiblePerSlide="2"/>
                         <ProductCarousel class="d-flex d-md-none d-sm-flex d-lg-none" :carouesleId="'small'" :products="carouselProductsShowCase" :visiblePerSlide="1"/>

@@ -82,7 +82,7 @@ const resetFileUploadInputComponent = () => {
                             </template>
 
                             <template #empty>
-                                <p>{{ __('Drag and drop files to here to upload.') }}</p>
+                                <p>{{ __('Drag and drop files here to upload.') }}</p>
                             </template>
                         </FileUpload>
                     </div>
