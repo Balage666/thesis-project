@@ -2,7 +2,8 @@
 
 import { usePage, useForm, Link } from '@inertiajs/inertia-vue3';
 import { router } from '@inertiajs/vue3';
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, reactive, onMounted } from 'vue';
+import { Modal } from 'bootstrap';
 
 import Galleria from 'primevue/galleria';
 import InputNumber from 'primevue/inputnumber';
@@ -16,6 +17,7 @@ import editProductModeObj from '*js-shared/edit-product-mode-obj';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import RateProduct from '*vue-components/Input/RateProduct.vue';
+import ProductImageManagerModal from '*vue-components/Input/ProductImageManagerModal.vue';
 
 const props = defineProps({
     product: {
@@ -37,7 +39,7 @@ const productComments = computed(() => productShow.value.comments)
 const productRatingsCount = computed(() => productShow.value.count_of_ratings);
 const averageProductRating = computed(() => productShow.value.avg_of_ratings);
 
-const currentUserRating = computed(() => currentUser.value?.product_ratings.find((r) => r.product_id == productShow.value.id)?.rating);
+const currentUserRating = computed(() => currentUser.value?.product_ratings.find((r) => r.product_id == productShow.value.id));
 
 const stars = computed(() => Math.round(averageProductRating.value));
 
@@ -67,8 +69,6 @@ const editDescriptionForm = useForm({
     description: productShow.value.description
 })
 
-console.log(productShow.value.description);
-
 const changePriceForm = useForm({
 
     price: productShow.value.price
@@ -86,6 +86,25 @@ const sendModifiedNameData = () => {
     router.post(route('product-name-change', { product: productShow.value }), editNameForm);
 
 }
+
+const sendModifiedDescriptionData = () => {
+
+    router.post(route('product-description-change', { product: productShow.value }), editDescriptionForm);
+
+}
+
+const sendModifiedPriceData = () => {
+
+    router.post(route('product-price-change', { product: productShow.value }), changePriceForm);
+
+}
+
+const sendModifiedStockData = () => {
+
+    router.post(route('product-stock-change', { product: productShow.value }), changeStockValueForm);
+
+}
+
 
 const checkAlreadyRated = (user, product) => {
     return user?.product_ratings.some((r) => r.product_id == product.id);
@@ -121,6 +140,54 @@ const sendProductRatingRequest = (payload) => {
 
 const sendDeleteRatingRequest = (payload) => {
 
+    console.log(currentUserRating.value);
+
+    const data = {
+
+        rating: currentUserRating.value
+    }
+
+    router.post(route('rate-destroy', { product: productShow.value }), data);
+
+}
+
+const sendDeleteProductPictureRequest = (payload) => {
+
+    const data = {
+
+        images: payload
+    };
+
+    router.post(route('product-pictures-delete', { product: productShow.value }), data)
+
+}
+
+const sendUploadProductPicturesRequest = (payload) => {
+
+    const data = {
+        images: payload.images
+    }
+
+    router.post(route('product-pictures-upload', { product: productShow.value }), data);
+
+    console.log(payload);
+}
+
+const prouductImageModal = ref(null);
+
+onMounted(() => {
+    prouductImageModal.value = new Modal(document.getElementById('productImagesUpload'));
+})
+
+const showDialog = () => {
+
+    prouductImageModal.value.show();
+
+}
+
+const closeDialog = () => {
+
+    prouductImageModal.value.hide();
 }
 
 </script>
@@ -133,7 +200,16 @@ const sendDeleteRatingRequest = (payload) => {
 
     <BodyLayout>
 
-        <pre>{{ EditMode }}</pre>
+        <ProductImageManagerModal
+            :id="'productImagesUpload'"
+            :images="productShow.images"
+            :product="productShow"
+            @onModalClose="closeDialog"
+            @onItemsDelete="sendDeleteProductPictureRequest"
+            @onUpload="sendUploadProductPicturesRequest"
+        />
+
+        <!-- <pre>{{ productShow }}</pre> -->
 
         <div class="card p-5 container-fluid bg-info-subtle border-0">
 
@@ -150,7 +226,7 @@ const sendDeleteRatingRequest = (payload) => {
 
                 <div class="col-12 col-md-6 col-lg-7">
 
-                    <div class="d-flex gap-3">
+                    <div class="d-flex gap-3" v-if="permissions.has_admin_role || (permissions.has_seller_role && productShow.distributor.id == currentUser.id)">
 
                         <div>
                             <button @click="toggleEditMode" class="btn btn-lg btn-info mb-2"> <i class="fa-solid fa-screwdriver-wrench fa-sm"></i> {{ Object.entries(EditMode).every(m => m[1] == true) ? __('Cancel') : __('Edit Mode') }}</button>
@@ -158,6 +234,10 @@ const sendDeleteRatingRequest = (payload) => {
 
                         <div>
                             <Link :href="route('product-edit', { product: productShow })" class="btn btn-lg btn-info" as="button" type="button"> <i class="fa-solid fa-wrench"></i> {{ __("Legacy Editor") }}</Link>
+                        </div>
+
+                        <div v-show="EditMode.changePicturesButtonVisible">
+                            <button @click="showDialog" class="btn btn-lg btn-info mb-2"> <i class="fa-regular fa-images"></i> {{ __('Change Pictures') }}</button>
                         </div>
 
                     </div>
@@ -168,10 +248,10 @@ const sendDeleteRatingRequest = (payload) => {
                             <div class="d-flex gap-2">
                                 <FloatLabel>
                                     <InputText id="name-input" v-model="editNameForm.name"/>
-                                    <label for="name-input">Name</label>
+                                    <label for="name-input">{{ __('Name') }}</label>
                                 </FloatLabel>
 
-                                <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                                <button :disabled="!editNameForm.isDirty" type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
                             </div>
                         </form>
                     </div>
@@ -181,14 +261,14 @@ const sendDeleteRatingRequest = (payload) => {
                             <span v-if="productRatingsCount == 0" v-for="(s,i) in 5" class="fa-regular fa-star"></span>
                             <span v-else v-for="s in stars" class="fa-solid fa-star"></span>
                         </div>
-                        <span class="text-muted">{{ productRatingsCount }} ratings</span>
+                        <span class="text-muted">{{ productRatingsCount }} {{ __('ratings') }}</span>
                         <RateProduct
                             v-show="permissions.authenticated"
                             :alreadyRated="checkAlreadyRated(currentUser, productShow)"
                             @onRated="sendProductRatingRequest"
                             @onRatingDelete="sendDeleteRatingRequest"
                             :product="productShow"
-                            :ratedAs="currentUserRating || 0">
+                            :ratedAs="currentUserRating?.rating || 0">
                             <template #onicon>
                                 <span class="fa-solid fa-star"></span>
                             </template>
@@ -205,17 +285,17 @@ const sendDeleteRatingRequest = (payload) => {
                             <div class="d-flex gap-2">
                                 <FloatLabel>
                                     <TextArea id="desc-input" v-model="editDescriptionForm.description" rows="2" cols="50" />
-                                    <label for="desc-input">Description</label>
+                                    <label for="desc-input">{{ __('Description') }}</label>
                                 </FloatLabel>
 
-                                <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                                <button :disabled="!editDescriptionForm.isDirty" type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
                             </div>
                         </form>
                     </div>
 
 
                     <h3 class="mb-3" v-show="Object.entries(EditMode).every(m => m[1] == false)">
-                        <span class="text-muted">Price: </span>{{ productShow.price }}
+                        <span class="text-muted">Price: </span> {{ productShow.price }}
                         <span class="text-black-50"> • </span>
                         <span class="text-muted">{{ __('In Stock:') }}</span> {{ productShow.stock }}
                     </h3>
@@ -227,11 +307,11 @@ const sendDeleteRatingRequest = (payload) => {
                                 <div class="d-flex gap-2">
 
                                     <FloatLabel>
-                                        <InputNumber id="price-input" v-model="changePriceForm.price" variant="filled" :minFractionDigits="2" />
+                                        <InputNumber id="price-input" v-model="changePriceForm.price" variant="filled" :minFractionDigits="2" :max="600000" />
                                         <label for="price-input">Price</label>
                                     </FloatLabel>
 
-                                    <button type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
+                                    <button :disabled="!changePriceForm.isDirty" type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
                                 </div>
                             </form>
                         </div>
@@ -241,11 +321,11 @@ const sendDeleteRatingRequest = (payload) => {
                             <form @submit.prevent="sendModifiedStockData">
                                 <div class="d-flex gap-2">
                                     <FloatLabel>
-                                        <InputNumber id="stock-input" v-model="changeStockValueForm.stock" />
+                                        <InputNumber id="stock-input" v-model="changeStockValueForm.stock" :max="9999" />
                                         <label for="stock-input">Stock</label>
                                     </FloatLabel>
 
-                                    <button type="submit" class="btn btn-sm btn-primary">{{ __('Modify') }}</button>
+                                    <button :disabled="!changeStockValueForm.isDirty" type="submit" class="btn btn-sm btn-primary">{{ __('Modify') }}</button>
                                 </div>
                             </form>
                         </div>
@@ -267,6 +347,10 @@ const sendDeleteRatingRequest = (payload) => {
 
                         </div>
                     </div>
+
+                    <h3 class="mt-2 mb-3" v-show="permissions.has_admin_role">
+                        <span class="text-muted">{{ __('Created by: ') }}</span> {{ productShow.distributor.name }}
+                    </h3>
                 </div>
             </div>
 
