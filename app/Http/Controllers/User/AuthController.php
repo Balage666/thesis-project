@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Helpers\Shared\ValidationHelper;
+use App\Http\Requests\Auth\ImprovedSignUpRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
 use Helper;
@@ -61,7 +62,7 @@ class AuthController extends Controller
 
     public function SignUp() {
 
-        return Inertia::render("Auth/SignUp");
+        return Inertia::render("Auth/ImprovedSignUp");
 
     }
 
@@ -103,5 +104,41 @@ class AuthController extends Controller
         ]));
 
         return redirect()->route('log-in')->with("registration_success", "Successfully registered!");
+    }
+
+    public function ImprovedSignOn(ImprovedSignUpRequest $request) {
+
+        // dd($request);
+        $formFields = $request->validated();
+
+        $tempName = $formFields["name"];
+
+        $tempNameParts = explode(" ", $tempName);
+
+        $user = User::create([
+            "email" => $formFields["email"],
+            "name" => $tempName,
+            "password" => $formFields["password"],
+            "profile_picture" => "https://ui-avatars.com/api/?size=256&background=random&name={$tempNameParts[0]}+{$tempNameParts[1]}",
+            "remember_token" => Str::random(10)
+        ]);
+
+        $roleValue = $formFields["role"];
+        $user->Roles()->save(
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Customer'
+            ])
+        );
+
+        if ($roleValue > 1) {
+            $user->Roles()->save(
+                \App\Models\UserRole::newModelInstance([
+                    'name' => 'Seller'
+                ])
+            );
+        }
+
+        return redirect()->route('log-in')->with("message", "Successfully registered!");
+
     }
 }
