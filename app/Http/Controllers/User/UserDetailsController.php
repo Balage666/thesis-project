@@ -52,9 +52,9 @@ class UserDetailsController extends Controller
 
         $user->email = $editEmailFormField['email'];
 
-        // if ($oldEmail == $user->email) {
-        //     return back()->with('message', 'Email stayed the same!');
-        // }
+        if ($oldEmail == $user->email) {
+            return back()->with('message', 'Email stayed the same!');
+        }
 
         $user->updated_at = now();
         $user->update();
