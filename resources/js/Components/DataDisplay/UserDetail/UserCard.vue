@@ -1,5 +1,10 @@
 <script setup>
 
+import { usePage } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+
+import { Link } from '@inertiajs/inertia-vue3';
+
 const props = defineProps({
     user: {
         type: Object,
@@ -10,6 +15,12 @@ const props = defineProps({
         required: true
     }
 })
+
+const pageProps = ref(usePage().props.value);
+
+const permissions = ref(pageProps.value.permissions);
+
+const currentUser = ref(pageProps.value.active_session.user);
 
 const emits = defineEmits(['onPictureButtonClick'])
 
@@ -30,6 +41,9 @@ const sendShowModalEmit = () => {
                 </div>
                 <div class="mt-1 mt-lg-0 mt-md-0">
                     <h4>{{ props.user.name }}</h4>
+                </div>
+                <div class="mt-1 mt-lg-0 mt-md-0" v-if="permissions.has_only_customer_role && currentUser.id == props.user.id">
+                    <Link :href="route('seller-role-grant', { user: props.user })" method="post" as="button" type="button" class="btn btn-secondary"><i class="fa-solid fa-money-bill-trend-up"></i> {{ __('Request Seller role') }}</Link>
                 </div>
             </div>
         </div>
