@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Helper;
+use App\Models\User;
+use App\Models\UserRole;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Mail\User\GrantSellerRoleMail;
+use App\Mail\User\ResetPasswordMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserDetailsController extends Controller
 {
@@ -65,11 +70,18 @@ class UserDetailsController extends Controller
     //TODO: Implement reset password
     public function ResetPassword(Request $request, User $user) {
 
-        $resetPassword = "ResetPassword";
+        $passwordRegex = Helper::GetPasswordRegex();
+
+        $resetPassword = fake()->regexify($passwordRegex);
         $user->password = $resetPassword;
         $user->updated_at = now();
 
         $user->update();
+
+        $title = 'Email testing from BlueVenue';
+        $body = "Your password has been reset! Here is your new one: $resetPassword";
+
+        Mail::to(env("MAIL_USERNAME"))->send(new ResetPasswordMail($title, $body));
 
         return redirect()->back()->with('message', "Password has been reset for {$user->name}!");
 
@@ -100,5 +112,22 @@ class UserDetailsController extends Controller
 
         return redirect()->back()->with('message', "Profile picture has been changed for {$user->name}!");
 
+    }
+
+    public function GrantSellerRole(Request $request, User $user) {
+
+        $newRole = UserRole::newModelInstance([
+            'name' => 'Seller'
+        ]);
+
+
+        $user->Roles()->save($newRole);
+
+        $title = 'Email testing from BlueVenue';
+        $body = "The following role: $newRole->name has been granted to you, $user->name!";
+
+        Mail::to(env("MAIL_USERNAME"))->send(new GrantSellerRoleMail($title, $body));
+
+        return redirect()->back()->with('message', 'Email sent!');
     }
 }
