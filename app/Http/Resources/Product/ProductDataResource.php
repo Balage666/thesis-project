@@ -19,7 +19,7 @@ class ProductDataResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'preview_image' => $this->pictures[0]?->product_picture,
+            'preview_image' => $this->pictures->first()?->product_picture,
             'images' => $this->pictures,
             'price' => $this->price,
             'stock' => $this->stock,
