@@ -132,10 +132,11 @@ const resetFileUploadInputComponent = () => {
                             </div>
 
                             <div>
-                                <button :disabled="selectedCount == 0" @click="sendDeleteEmit" type="button" class="btn btn-danger">{{  __('Delete selected items') }} : {{ selectedCount }}</button>
+                                <button v-if="imageList.length != 0" :disabled="selectedCount == 0" @click="sendDeleteEmit" type="button" class="btn btn-danger">{{  __('Delete selected items') }} : {{ selectedCount }}</button>
                             </div>
                         </div>
-                        <div class="row my-1" v-for="image in imageList">
+                        <h5 v-if="imageList.length == 0" class="text-center">{{ __('This product has not got any images') }}</h5>
+                        <div v-else class="row my-1" v-for="image in imageList">
                             <div class="col-1 mt-3">
                                 <input v-model="image.selected" type="checkbox" :id="'selected' + image.id">
                             </div>
