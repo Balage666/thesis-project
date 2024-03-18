@@ -263,7 +263,7 @@ const closeDialog = () => {
                         </div>
                         <span class="text-muted">{{ productRatingsCount }} {{ __('ratings') }}</span>
                         <RateProduct
-                            v-show="permissions.authenticated"
+                            v-if="permissions.authenticated && productShow.distributor.id != currentUser.id"
                             :alreadyRated="checkAlreadyRated(currentUser, productShow)"
                             @onRated="sendProductRatingRequest"
                             @onRatingDelete="sendDeleteRatingRequest"
