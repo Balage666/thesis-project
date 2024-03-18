@@ -125,12 +125,14 @@ class DatabaseSeeder extends Seeder
 
             \App\Models\User::all()->each(function ($user) use($product) {
 
-                $product->Ratings()->save(
-                    \App\Models\ProductRating::newModelInstance([
-                        'rating' => fake()->numberBetween(3, 5),
-                        'rater' => $user->id
-                    ])
-                );
+                if ($user->id != $product->Distributor->id) {
+                    $product->Ratings()->save(
+                        \App\Models\ProductRating::newModelInstance([
+                            'rating' => fake()->numberBetween(3, 5),
+                            'rater' => $user->id
+                        ])
+                    );
+                }
 
             });
 
