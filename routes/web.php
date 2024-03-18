@@ -58,9 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
         | UserDetails Routes
         |--------------------------------------------------------------------------
          */
-        Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit');
-        Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit');
-        Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password');
+        Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password')->withoutMiddleware('role:Moderator,Admin');
         Route::post('change-profile-picture/{user}', [UserDetailsController::class, 'ChangeProfilePicture'])->name('user-change-profile-picture');
 
         /*
@@ -68,18 +68,20 @@ Route::group(['middleware' => 'auth'], function () {
         | PhoneNumber Routes
         |--------------------------------------------------------------------------
          */
-        Route::post('phone-add/{user}', [PhoneController::class, 'Store'])->name('phone-number-add');
-        Route::post('phone-edit/{phone}', [PhoneController::class, 'Update'])->name('phone-number-update');
-        Route::post('phone-delete/{phone}', [PhoneController::class, 'Delete'])->name('phone-number-delete');
+        Route::post('phone-add/{user}', [PhoneController::class, 'Store'])->name('phone-number-add')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('phone-edit/{phone}', [PhoneController::class, 'Update'])->name('phone-number-update')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('phone-delete/{phone}', [PhoneController::class, 'Delete'])->name('phone-number-delete')->withoutMiddleware('role:Moderator,Admin');
 
         /*
         |--------------------------------------------------------------------------
         | Address Routes
         |--------------------------------------------------------------------------
          */
-        Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create');
-        Route::post('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete');
+        Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete')->withoutMiddleware('role:Moderator,Admin');
 
+
+        Route::post('grant-seller-role/{user}', [UserDetailsController::class, 'GrantSellerRole'])->name('seller-role-grant')->withoutMiddleware('role:Moderator,Admin');
     });
 
     Route::group(['prefix' => 'product-management', 'middleware' => 'role:Seller,Admin'], function () {
