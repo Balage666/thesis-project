@@ -11,12 +11,18 @@ use Inertia\Inertia;
 
 class StoreFrontController extends Controller
 {
-    public function StoreFront() {
+    public function StoreFront(Request $request) {
 
 
         $carouselProducts = Product::where('stock', '>', 20)->inRandomOrder()->limit(15)->get();
 
-        $allProducts = Product::latest()->paginate(6);
+        $allProducts = Product::orderBy('created_at', 'desc')->paginate(6);
+
+        // dd($allProducts);
+
+        if ($request->wantsJson()) {
+            return StorefrontProductResource::collection($allProducts);
+        }
 
         return Inertia::render("Storefront", [
             'allProducts' => StorefrontProductResource::collection($allProducts),

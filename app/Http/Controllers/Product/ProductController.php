@@ -23,9 +23,25 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function List()
+    public function List(Request $request)
     {
         $products = Product::all()->sortByDesc('stock');
+
+        if ($request->get('search')) {
+
+            $search = $request->get('search');
+
+            $products = Product::where('name', 'LIKE', "%$search%")->orWhere('description', 'LIKE', "%$search%")
+                ->orWhereHas('Distributor', function ($query) use ($search) {
+                    $distributorNameSearch = $search;
+                    $query->where('name', 'LIKE', "%$distributorNameSearch%");
+                })
+                ->orWhereHas('Category', function ($query) use ($search) {
+                    $categoryNameSearch = ucfirst($search);
+                    $query->where('name', 'LIKE', "%$categoryNameSearch%");
+                })->orderBy('created_at', 'desc')->get();
+        }
+
         return Inertia::render("Product/List", [
             'products' => ProductResource::collection($products)
         ]);

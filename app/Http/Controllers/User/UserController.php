@@ -28,10 +28,30 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function List()
+    public function List(Request $request)
     {
+        // dd($request->get('search'));
+
+        $usersList = User::orderBy('created_at', 'desc')->paginate(8);
+
+        if ($request->get('search')) {
+            $search = $request->get('search');
+
+            $usersList = User::where('name', 'LIKE', "%$search%")
+            ->orWhereHas('Roles', function ($query) use($search) {
+                $roleSearch = ucfirst($search);
+                $query->where('name', 'LIKE', "%$roleSearch%");
+            })->orderBy('created_at', 'desc')->paginate(8)->withQueryString();
+        }
+
+        // dd($usersList);
+
+        if ($request->wantsJson()) {
+            return UserResource::collection( $usersList );
+        }
+
         return Inertia::render("User/List",
-            ['users' => UserResource::collection( User::all() )]
+            ['users' => UserResource::collection( $usersList )]
         );
     }
 
