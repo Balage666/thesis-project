@@ -2,12 +2,16 @@
 import { Link } from '@inertiajs/inertia-vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { computed, ref } from 'vue';
+
+import { useIntersectionObserver } from '@vueuse/core';
+
 import Slider from 'primevue/slider'
 import "primevue/resources/themes/lara-light-cyan/theme.css";
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
 import Pagination from '*vue-components/DataDisplay/Pagination.vue';
+import axios from 'axios';
 
 const props = defineProps({
     carouselProducts: {
@@ -31,6 +35,50 @@ const calculateStars = (avg) => {
     return Math.round(avg);
 }
 
+const scrollable = ref(null);
+
+const next = ref(props.allProducts.meta.links.filter(l => l.label === 'Next').shift().url);
+
+
+// if (next) {
+
+//     axios.get(`${next}`).then((response) => {
+
+//         console.log(response.data.data);
+//         console.log(response.data.meta);
+//         // props.allProducts.data = [...props.allProducts.data, ...response.data.data];
+
+//     })
+// }
+
+useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
+    // console.log(isIntersecting);
+
+    if (!isIntersecting) {
+        return
+    }
+
+    if (next.value === null) {
+        return
+    }
+    else {
+
+        axios.get(`${next.value}`).then((response) => {
+
+            console.log(response.data.meta);
+            // console.log(response.data.data);
+
+
+            props.allProducts.data.push(...response.data.data);
+            console.log(props.allProducts.data, props.allProducts.meta, response.data.data, response.data.meta);
+            props.allProducts.meta = response.data.meta;
+
+            next.value = props.allProducts.meta.links.filter(l => l.label === 'Next').shift().url;
+
+        })
+    }
+})
+
 </script>
 
 <template>
@@ -40,8 +88,6 @@ const calculateStars = (avg) => {
 
     <div>
         <BodyLayout>
-
-            <!-- <pre>{{ allProductsShowCase }}</pre> -->
 
             <div class="container-fluid bg-info-subtle border-0">
 
@@ -62,7 +108,7 @@ const calculateStars = (avg) => {
 
                 <div class="row mt-5">
 
-                    <div class="col-4 filter-board-bg-color border-0 rounded-top-5 rounded-bottom-0 p-3">
+                    <div class="col-12 col-md-4 filter-board-bg-color border-0 rounded-top-5 rounded-bottom-0 p-3">
 
                         <div class="text-center">
                             <h3>Filters</h3>
@@ -145,7 +191,7 @@ const calculateStars = (avg) => {
 
                     </div>
 
-                    <div class="col-8 p-3">
+                    <div class="col-12 col-md-8 p-3">
 
                         <div class="text-center">
                             <h3>Products</h3>
@@ -153,46 +199,67 @@ const calculateStars = (avg) => {
 
                         <hr>
 
-                        <div class="container overflow-y-scroll" style="height: 650px;">
+                        <div class="container">
 
-                            <div class="row">
+                            <div class="row overflow-y-scroll" style="height: 650px">
 
-                                    <div class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in allProductsShowCase">
-                                        <div class="card border-3 border-info">
-                                            <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" style="height: 260px;" />
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="small">
-                                                        <span class="text-muted">{{ product.category.name }}</span>
-                                                    </p>
+                                <div class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in props.allProducts.data" :key="product.id">
+
+                                    <div class="card border-3 border-info">
+                                        <img :src="product.preview_image" class="card-img-top" :title="product.category.name" :alt="product.name" style="height: 260px;" />
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <p class="small">
+                                                    <span class="text-muted">{{ product.category.name }}</span>
+                                                </p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <h5 class="mb-0">{{ product.name }}</h5>
+                                                <h5 class="text-dark mb-0">{{ product.price }}</h5>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <p class="text-muted mb-0">Available: <span class="fw-bold">{{ product.stock }}</span></p>
+                                                <div class="ms-auto text-warning">
+                                                    <i v-for="s in calculateStars(product.avg_of_ratings)" class="fa fa-star"></i>
                                                 </div>
+                                            </div>
 
-                                                <div class="d-flex justify-content-between mb-3">
-                                                    <h5 class="mb-0">{{ product.name }}</h5>
-                                                    <h5 class="text-dark mb-0">{{ product.price }}</h5>
-                                                </div>
+                                            <div class="d-flex justify-content-between">
 
-                                                <div class="d-flex justify-content-between mb-2">
-                                                    <p class="text-muted mb-0">Available: <span class="fw-bold">{{ product.stock }}</span></p>
-                                                    <div class="ms-auto text-warning">
-                                                        <i v-for="s in calculateStars(product.avg_of_ratings)" class="fa fa-star"></i>
-                                                        <!-- <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> -->
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-flex justify-content-between">
-
-                                                        <Link method="get" href="#" class="btn btn-lg btn-outline-danger" v-show="permissions.authenticated"><i class="fa-regular fa-heart"></i></Link>
-                                                        <Link href="" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></Link>
-                                                        <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
-                                                </div>
+                                                    <Link method="get" href="#" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated"><i class="fa-regular fa-heart"></i></Link>
+                                                    <Link href="" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></Link>
+                                                    <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+
+                                <div v-if="next !== null" class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" ref="scrollable" v-for="n in 3">
+                                    <div class="card" aria-hidden="true">
+                                        <!-- <img src="x" class="card-img-top" alt="..."> -->
+                                        <div class="card-body">
+                                            <h5 class="card-title placeholder-glow">
+                                                <span class="placeholder col-6"></span>
+                                            </h5>
+                                            <p class="card-text placeholder-glow">
+                                            <span class="placeholder col-7"></span>
+                                            <span class="placeholder col-4"></span>
+                                            <span class="placeholder col-4"></span>
+                                            <span class="placeholder col-6"></span>
+                                            <span class="placeholder col-8"></span>
+                                            </p>
+
+                                            <div class="d-flex justify-content-between">
+                                                <a class="btn btn-lg btn-outline-danger disabled placeholder" aria-disabled="true"></a>
+                                                <a class="btn btn-lg btn-info disabled placeholder" aria-disabled="true"></a>
+                                                <a class="btn btn-lg btn-secondary disabled placeholder" aria-disabled="true"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

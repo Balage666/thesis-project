@@ -1,7 +1,9 @@
 <script setup>
 import { Link, router } from '@inertiajs/vue3';
-import { usePage } from '@inertiajs/inertia-vue3';
+import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import { computed, ref } from 'vue';
+
+import { useIntersectionObserver } from '@vueuse/core';
 
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import ListAccordion from '*vue-components/DataDisplay/ListAccordion.vue';
@@ -13,25 +15,7 @@ const props = defineProps({
     }
 })
 
-// const propArray = [
-// 'id',,'is_out_of_stock','is_close_to_run_out_of_stock',
-// 'description', 'created_at_human_readable', 'updated_at_human_readable',
-// 'comments', 'ratings'
-// ];
-
 const productList = computed(() => props.products.data);
-// const ObjectProperties = computed(() => Object.getOwnPropertyNames(productList.value[0])
-// .filter(
-//     p => !propArray.includes(p)
-// )
-// .map(
-//     (p) => `${p[0].toUpperCase()}${p.slice(1)}`
-// )
-// .map(
-//     (p) => p.replaceAll('_', ' ')
-// ))
-
-// console.log(ObjectProperties.value);
 
 const currentUser = ref(usePage().props.value.active_session.user);
 
@@ -41,6 +25,24 @@ const sendDeleteRequest = (product) => {
 
     console.log(product);
     router.post(route('product-delete', { product: product }));
+
+}
+
+const searchForm = useForm({
+    search: route().params.search || ''
+})
+
+const sendSearch = () => {
+
+    router.get(route(route().current()), { search: searchForm.search })
+
+}
+
+const sendCleanSearch = () => {
+
+    if (searchForm.search === '') {
+        router.get(route(route().current()));
+    }
 
 }
 
@@ -55,7 +57,6 @@ const sendDeleteRequest = (product) => {
     <Head>
         <title>{{ __('List products (design in development)') }}</title>
     </Head>
-    <pre>{{ productList.length }}</pre>
     <BodyLayout>
         <!-- <h1>List products (design in development)</h1> -->
 
@@ -71,8 +72,8 @@ const sendDeleteRequest = (product) => {
 
                     <div class="col-lg-6 col-md-6 col-12 mt-3">
 
-                        <form class="d-flex align-content-center justify-content-center" role="search">
-                            <input class="form-control border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
+                        <form @submit.prevent="sendSearch" class="d-flex align-content-center justify-content-center" role="search">
+                            <input @input="sendCleanSearch" v-model="searchForm.search" class="form-control border-0 rounded-end-0" type="search" :placeholder="__('Search')" aria-label="Search">
                             <button class="btn btn-primary border-2 rounded-start-0" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                         </form>
 
@@ -85,7 +86,6 @@ const sendDeleteRequest = (product) => {
                         <ListAccordion>
 
                             <ListAccordionItem v-for="product in productList" :item="product">
-
                                 <template v-slot:accordion-header>
                                     <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + product.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                         <div class="col-12 col-md-6 col-lg-9 mt-1">
@@ -152,7 +152,6 @@ const sendDeleteRequest = (product) => {
                                     </div>
 
                                 </template>
-
                             </ListAccordionItem>
 
                         </ListAccordion>
