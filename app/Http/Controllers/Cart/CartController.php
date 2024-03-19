@@ -157,7 +157,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket doesn\'t exist!']);
         }
 
         $cartItems = $cart->CartItems;
@@ -170,13 +170,87 @@ class CartController extends Controller
             $item->delete();
         });
 
-        return redirect()->back()->with('message', 'Cart cleared!');
+        return redirect()->back()->with('message', 'Basket cleared!');
 
     }
 
-    public function Increment() {}
+    public function Increment(Product $product) {
 
-    public function Decrement() {}
+        $cart = Cart::find(session('cart_id'));
+
+        if (auth()->check()) {
+
+            //Authenticated user
+            $cart = auth()->user()->Cart;
+
+        }
+
+        if (is_null($cart)) {
+            return redirect()->back()->withErrors(['cart' => 'Basket doesn\'t exist!']);
+        }
+
+        $cartItems = $cart->CartItems;
+
+        $searchForItem = $cartItems->search(function ($item) use($product) {
+            return $item->ProductItem->id == $product->id;
+        });
+
+        if (!is_numeric($searchForItem)) {
+            return redirect()->back()->withErrors(['cartItem' => 'This item is not in the basket!']);
+        }
+
+        if ($product->stock == 0) {
+            return redirect()->back()->withErrors(['cart' => 'You can\'t put more of that product into your basket!']);
+        }
+
+        $cartItems[$searchForItem]->amount++;
+        $cartItems[$searchForItem]->price += $product->price;
+
+        $cartItems[$searchForItem]->save();
+
+        $product->stock--;
+        $product->save();
+
+    }
+
+    public function Decrement(Product $product) {
+
+        $cart = Cart::find(session('cart_id'));
+
+        if (auth()->check()) {
+
+            //Authenticated user
+            $cart = auth()->user()->Cart;
+
+        }
+
+        if (is_null($cart)) {
+            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+        }
+
+        $cartItems = $cart->CartItems;
+
+        $searchForItem = $cartItems->search(function ($item) use($product) {
+            return $item->ProductItem->id == $product->id;
+        });
+
+        if (!is_numeric($searchForItem)) {
+            return redirect()->back()->withErrors(['cartItem' => 'This item is not in the cart!']);
+        }
+
+        if ($cartItems[$searchForItem]->amount - 1 == 0) {
+            $cartItems[$searchForItem]->delete();
+        }
+        else {
+            $cartItems[$searchForItem]->amount--;
+            $cartItems[$searchForItem]->price -= $product->price;
+            $cartItems[$searchForItem]->save();
+        }
+        $product->stock++;
+        $product->save();
+
+
+    }
 
     public function CheckOut() {}
 }
