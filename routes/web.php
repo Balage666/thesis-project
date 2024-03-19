@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'dashboard', 'middleware' => 'role:Seller,Moderator,Admin'], function () {
 
         Route::get('main', [DashboardController::class, 'Main'])->name('dashboard-main');
+        Route::get('charts', [DashboardController::class, 'Charts'])->name('dashboard-charts');
 
     });
 
@@ -61,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('edit-name/{user}', [UserDetailsController::class, 'EditName'])->name('user-name-edit')->withoutMiddleware('role:Moderator,Admin');
         Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit')->withoutMiddleware('role:Moderator,Admin');
         Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password')->withoutMiddleware('role:Moderator,Admin');
-        Route::post('change-profile-picture/{user}', [UserDetailsController::class, 'ChangeProfilePicture'])->name('user-change-profile-picture');
+        Route::post('change-profile-picture/{user}', [UserDetailsController::class, 'ChangeProfilePicture'])->name('user-change-profile-picture')->withoutMiddleware('role:Moderator,Admin');
 
         /*
         |--------------------------------------------------------------------------
