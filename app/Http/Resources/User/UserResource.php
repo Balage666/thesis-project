@@ -36,7 +36,8 @@ class UserResource extends JsonResource
             'has_seller_role' => $this->roles()->where('name', 'Seller')->exists(),
             'phone_numbers' => PhoneResource::collection($this->phoneNumbers),
             'addresses' => AddressResource::collection($this->addresses),
-            'products' => ProductResource::collection($this->products)
+            'products' => ProductResource::collection($this->products),
+            'favorites' => $this->favorites,
         ];
     }
 }
