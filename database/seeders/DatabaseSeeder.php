@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
                 if ($user->id != $product->Distributor->id) {
                     $product->Ratings()->save(
                         \App\Models\ProductRating::newModelInstance([
-                            'rating' => fake()->numberBetween(3, 5),
+                            'rating' => fake()->numberBetween(1, 5),
                             'rater' => $user->id
                         ])
                     );
