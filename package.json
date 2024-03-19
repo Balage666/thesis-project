@@ -25,6 +25,7 @@
         "@tiptap/starter-kit": "^2.2.4",
         "@tiptap/vue-3": "^2.2.4",
         "@vueuse/core": "^10.9.0",
+        "chart.js": "^4.4.2",
         "countries-phone-masks": "^1.0.8",
         "country-state-city": "^3.2.1",
         "devicon": "^2.16.0",
