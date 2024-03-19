@@ -86,4 +86,9 @@ class User extends Authenticatable
     public function AddedCategories() {
         return $this->hasMany(Category::class, 'user_id', 'id');
     }
+
+    public function Favorites() {
+
+        return $this->hasMany(Favorite::class, 'user_id', 'id');
+    }
 }

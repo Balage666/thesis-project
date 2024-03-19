@@ -87,7 +87,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load([
-                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart'
+                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart', 'Favorites'
                 ]) : null,
                 'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems']) : null
             ],
