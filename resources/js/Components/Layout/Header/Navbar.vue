@@ -2,12 +2,24 @@
 
 import { Link } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { Popover } from 'bootstrap';
 
 const pageProps = ref(usePage().props.value);
 
 const currentUser = ref(pageProps.value.active_session.user);
 const permissions = ref(pageProps.value.permissions)
+
+// const popOverList = ref([]);
+
+// onMounted(() => {
+
+//     let list = document.querySelectorAll('[data-bs-toggle="popover"]');
+
+//     popOverList.value = [...list].map(element => new Popover(element));
+
+// })
+
 
 </script>
 
@@ -55,14 +67,34 @@ const permissions = ref(pageProps.value.permissions)
                     </div>
 
 
-                    <li class="nav-item m-auto">
-                        <button class="nav-link row" href="#">
-                            <i class="fa-solid fa-heart"></i> <span class="col-12">{{ __("Favorites") }}</span>
+                    <li class="nav-item m-auto" v-if="permissions.authenticated">
+                        <!-- <button
+                            class="nav-link row"
+                            data-bs-toggle="popover"
+                            data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            data-bs-placement="left"
+                            data-bs-custom-class="navbar-popover"
+                        > -->
+                        <button class="nav-link row">
+                            <i class="fa-solid fa-heart"></i>
+                            <span class="col-12">
+                                {{ __("Favorites") }}
+                                <span v-if="currentUser?.favorites.length > 0" class="badge text-bg-danger">{{ currentUser?.favorites.length }}</span>
+                            </span>
                         </button>
+
                     </li>
 
                     <li class="nav-item m-auto">
-                        <button class="nav-link row" href="#">
+                        <!-- <button
+                            class="nav-link row"
+
+                            data-bs-toggle="popover"
+                            data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            data-bs-placement="left"
+                            data-bs-custom-class="navbar-popover"
+                        > -->
+                        <button class="nav-link row">
                             <i class="fa-solid fa-basket-shopping"></i> <span class="col-12">{{ __("Basket") }}</span>
                         </button>
                     </li>
