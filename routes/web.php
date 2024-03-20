@@ -15,6 +15,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserDetailsController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Favorite\FavoriteController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
@@ -82,7 +83,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('address-add/{user}', [AddressController::class, 'Store'])->name('address-create')->withoutMiddleware('role:Moderator,Admin');
         Route::post('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete')->withoutMiddleware('role:Moderator,Admin');
 
-
+        /*
+        |--------------------------------------------------------------------------
+        | Favorite Routes
+        |--------------------------------------------------------------------------
+         */
+        Route::post('add-product-to-favorites/{user}/{product}', [FavoriteController::class, 'AddToFavorites'])->name('add-to-favorites')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('remove-from-favorites/{user}/{product}', [FavoriteController::class, 'RemoveFromFavorites'])->name('remove-from-favorites')->withoutMiddleware('role:Moderator,Admin');
     });
 
     Route::group(['prefix' => 'product-management', 'middleware' => 'role:Seller,Admin'], function () {
@@ -128,6 +135,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'shopping-basket'], function () {
+
+        Route::get(
+            'list', [CartController::class, 'List']
+        )->name('basket-list')->withoutMiddleware('auth');
 
         Route::post(
             'add/{product}', [CartController::class, 'AddToCart']
