@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('edit-email/{user}', [UserDetailsController::class, 'EditEmail'])->name('user-email-edit')->withoutMiddleware('role:Moderator,Admin');
         Route::post('reset-password/{user}', [UserDetailsController::class, 'ResetPassword'])->name('user-reset-password')->withoutMiddleware('role:Moderator,Admin');
         Route::post('change-profile-picture/{user}', [UserDetailsController::class, 'ChangeProfilePicture'])->name('user-change-profile-picture')->withoutMiddleware('role:Moderator,Admin');
+        Route::post('grant-seller-role/{user}', [UserDetailsController::class, 'GrantSellerRole'])->name('seller-role-grant')->withoutMiddleware('role:Moderator,Admin');
 
         /*
         |--------------------------------------------------------------------------
@@ -82,7 +83,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('address-delete/{address}', [AddressController::class, 'Delete'])->name('address-delete')->withoutMiddleware('role:Moderator,Admin');
 
 
-        Route::post('grant-seller-role/{user}', [UserDetailsController::class, 'GrantSellerRole'])->name('seller-role-grant')->withoutMiddleware('role:Moderator,Admin');
     });
 
     Route::group(['prefix' => 'product-management', 'middleware' => 'role:Seller,Admin'], function () {
@@ -137,7 +137,17 @@ Route::group(['middleware' => 'auth'], function () {
             'remove/{product}', [CartController::class, 'RemoveFromCart']
         )->name('remove-from-basket')->withoutMiddleware('auth');
 
-        Route::post('clear', [CartController::class, 'ClearCart'])->name('clear-basket')->withoutMiddleware('auth');
+        Route::post(
+            'increment/{product}', [CartController::class, 'Increment']
+        )->name('basket-increment')->withoutMiddleware('auth');
+
+        Route::post(
+            'decrement/{product}', [CartController::class, 'Decrement']
+        )->name('basket-decrement')->withoutMiddleware('auth');
+
+        Route::post(
+            'clear', [CartController::class, 'ClearCart']
+        )->name('clear-basket')->withoutMiddleware('auth');
     });
 
     Route::group(['prefix' => 'order-management'], function() {
