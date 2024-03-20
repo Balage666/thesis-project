@@ -12,6 +12,7 @@ import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import ProductCarousel from '*vue-components/DataDisplay/Product/ProductCarousel.vue';
 import Pagination from '*vue-components/DataDisplay/Pagination.vue';
 import axios from 'axios';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     carouselProducts: {
@@ -24,6 +25,8 @@ const props = defineProps({
 
 const pageProps = ref(usePage().props.value);
 const permissions = ref(pageProps.value.permissions);
+
+const currentUser = ref(pageProps.value.active_session.user);
 
 const rangeInput = ref([]);
 
@@ -39,17 +42,6 @@ const scrollable = ref(null);
 
 const next = ref(props.allProducts.meta.links.filter(l => l.label === 'Next').shift().url);
 
-
-// if (next) {
-
-//     axios.get(`${next}`).then((response) => {
-
-//         console.log(response.data.data);
-//         console.log(response.data.meta);
-//         // props.allProducts.data = [...props.allProducts.data, ...response.data.data];
-
-//     })
-// }
 
 useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
     // console.log(isIntersecting);
@@ -79,6 +71,33 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
     }
 })
 
+const processEmit = (payload) => {
+
+    console.log(payload.emitType);
+
+    if (payload.emitType == 'favoriteAdded') {
+        addToFavorites(payload.user, payload.product);
+    }
+
+    if (payload.emitType == 'favoriteRemoved') {
+        removeFromFavorites(payload.user, payload.product);
+    }
+
+}
+
+const addToFavorites = (user, product) => {
+
+
+    // console.log(user);
+    router.post(route('add-to-favorites', { user: user, product: product }));
+
+}
+
+const removeFromFavorites = (user, product) => {
+
+    router.post(route('remove-from-favorites', { user: user, product: product }));
+}
+
 </script>
 
 <template>
@@ -87,6 +106,9 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
     </Head>
 
     <div>
+
+        <pre>{{ pageProps.active_session.user?.favorites }}</pre>
+
         <BodyLayout>
 
             <div class="container-fluid bg-info-subtle border-0">
@@ -100,9 +122,32 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
                 <div class="row">
 
                     <div class="col-12">
-                        <ProductCarousel class="d-none d-md-none d-lg-flex" :carouselId="'large'" :products="carouselProductsShowCase" :visiblePerSlide="3"/>
-                        <ProductCarousel class="d-none d-md-flex d-sm-none d-lg-none" :carouselId="'mid'" :products="carouselProductsShowCase" :visiblePerSlide="2"/>
-                        <ProductCarousel class="d-flex d-md-none d-sm-flex d-lg-none" :carouesleId="'small'" :products="carouselProductsShowCase" :visiblePerSlide="1"/>
+                        <ProductCarousel
+                            class="d-none d-md-none d-lg-flex"
+                            :carouselId="'large'"
+                            :products="carouselProductsShowCase"
+                            :visiblePerSlide="3"
+                            @favoriteAdded="processEmit"
+                            @favoriteRemoved="processEmit"
+                        />
+
+                        <ProductCarousel
+                            class="d-none d-md-flex d-sm-none d-lg-none"
+                            :carouselId="'mid'"
+                            :products="carouselProductsShowCase"
+                            :visiblePerSlide="2"
+                            @favoriteAdded="processEmit"
+                            @favoriteRemoved="processEmit"
+                        />
+
+                        <ProductCarousel
+                            class="d-flex d-md-none d-sm-flex d-lg-none"
+                            :carouesleId="'small'"
+                            :products="carouselProductsShowCase"
+                            :visiblePerSlide="1"
+                            @favoriteAdded="processEmit"
+                            @favoriteRemoved="processEmit"
+                        />
                     </div>
                 </div>
 
@@ -228,7 +273,9 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
 
                                             <div class="d-flex justify-content-between">
 
-                                                    <Link method="get" href="#" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated"><i class="fa-regular fa-heart"></i></Link>
+                                                    <button @click="addToFavorites(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-regular fa-heart"></i></button>
+                                                    <button @click="removeFromFavorites(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-solid fa-heart"></i></button>
+
                                                     <Link href="" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></Link>
                                                     <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                             </div>
