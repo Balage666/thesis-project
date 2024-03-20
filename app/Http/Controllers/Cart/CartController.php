@@ -252,5 +252,24 @@ class CartController extends Controller
 
     }
 
+    public function List() {
+
+        $cart = Cart::find(session('cart_id'));
+
+        if (auth()->check()) {
+
+            //Authenticated user
+            $cart = auth()->user()->Cart;
+
+        }
+
+        if (is_null($cart)) {
+            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+        }
+
+
+
+    }
+
     public function CheckOut() {}
 }
