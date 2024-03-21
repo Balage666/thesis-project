@@ -11,6 +11,7 @@ use App\Http\Requests\Cart\CartItemStockRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Cart\ProductStockValidationRule;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -252,9 +253,9 @@ class CartController extends Controller
 
     }
 
-    public function List() {
+    public function ViewList() {
 
-        $cart = Cart::find(session('cart_id'));
+        $cart = Cart::find(session('cart_id'))->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
 
         if (auth()->check()) {
 
@@ -267,7 +268,11 @@ class CartController extends Controller
             return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
         }
 
+        // dd($cart->CartItems);
 
+        return Inertia::render("Cart/ViewList", [
+            'cart' => $cart
+        ]);
 
     }
 
