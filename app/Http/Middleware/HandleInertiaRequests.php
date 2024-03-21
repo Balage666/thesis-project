@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
 
         $guest_cart = null;
         if (!auth()->check() && Session::has('cart_id')) {
-            $guest_cart = Cart::find(Session::get('cart_id'))?->load(['CartItems']);
+            $guest_cart = Cart::find(Session::get('cart_id'))?->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
         }
 
         $elligible_for_dashboard = false;
@@ -87,9 +87,9 @@ class HandleInertiaRequests extends Middleware
             ],
             'active_session' => [
                 'user' => auth()->user() ? auth()->user()->load([
-                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart', 'Favorites'
+                    'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart.CartItems.ProductItem.Pictures', 'Cart.CartItems.ProductItem.Category', 'Favorites.Product.Pictures'
                 ]) : null,
-                'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems']) : null
+                // 'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems.ProductItem']) : null
             ],
             'permissions' => [
                 'authenticated' => auth()->check(),
