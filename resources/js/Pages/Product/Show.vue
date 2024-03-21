@@ -190,6 +190,17 @@ const closeDialog = () => {
     prouductImageModal.value.hide();
 }
 
+const addToFavorites = (user, product) => {
+
+    router.post(route('add-to-favorites', { user: user, product: product }));
+}
+
+const removeFromFavorites = (user, product) => {
+
+    router.post(route('remove-from-favorites', { user: user, product: product }))
+
+}
+
 </script>
 
 <template>
@@ -332,7 +343,7 @@ const closeDialog = () => {
 
                     </div>
 
-                    <div class="d-flex gap-3 text-center">
+                    <div class="d-flex gap-3 text-center" v-if="currentUser.id != productShow.distributor.id">
 
                         <div>
 
@@ -343,8 +354,8 @@ const closeDialog = () => {
                         <div>
 
                             <!--TODO: Implement Add to favorite button-->
-                            <Link href="#" method="post" as="button" type="button" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</Link>
-
+                            <button v-if="permissions.authenticated && !currentUser.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</button>
+                            <button v-if="permissions.authenticated && currentUser.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> Remove from favorites</button>
                         </div>
                     </div>
 
