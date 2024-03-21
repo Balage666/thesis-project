@@ -4,7 +4,7 @@
         <div class="accordion-item authFormCardBackground bg-gradient">
             <h2 class="accordion-header" :id="'heading' + cleanTitle">
                 <button class="accordion-button py-3 px-5 bg-info bg-gradient" :class="props.startsCollapsed ? 'collapsed' : ''" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse'+ cleanTitle" aria-expanded="false" :aria-controls="'collapse' + cleanTitle">
-                    <h1 class="text-black">{{ props.title }}</h1>
+                    <h1 class="text-black">{{ __(props.title) }}</h1>
                 </button>
             </h2>
             <div :id="'collapse'+ cleanTitle" class="accordion-collapse collapse" :class="!props.startsCollapsed ? 'show' : ''" :aria-labelledby="'heading' + props.title" :data-bs-parent="'#accordion' + cleanTitle">
