@@ -17,11 +17,11 @@ const locales = ref(page.props.value.locales);
 
 const languageToSwitch = ref(page.props.value.current_locale);
 
-console.log(`Current Locale: ${page.props.value.current_locale}`);
+// console.log(`Current Locale: ${page.props.value.current_locale}`);
 
 
 const switchLanguage = () => {
-    console.log(`Current Locale: ${page.props.value.current_locale}, Lang to switch: ${languageToSwitch.value}`);
+    // console.log(`Current Locale: ${page.props.value.current_locale}, Lang to switch: ${languageToSwitch.value}`);
     router.get(route('switch-language', { language: languageToSwitch.value }));
 }
 
