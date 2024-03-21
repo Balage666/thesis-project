@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
@@ -47,6 +47,14 @@ const emitFavoriteRemove = (user, product) => {
     emits('favoriteRemoved', { emitType: 'favoriteRemoved', user: user, product: product });
 }
 
+const addToCart = (product) => {
+
+    // console.log(product);
+
+    router.post(route('add-to-basket', { product: product }));
+
+}
+
 </script>
 
 
@@ -77,9 +85,9 @@ const emitFavoriteRemove = (user, product) => {
                                 </div>
 
                                 <div class="d-flex justify-content-between gap-1">
-                                    <button @click="emitFavoriteAdd(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-regular fa-heart"></i></button>
-                                    <button @click="emitFavoriteRemove(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-solid fa-heart"></i></button>
-                                    <a href="#" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></a>
+                                    <button @click="emitFavoriteAdd(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-regular fa-heart"></i></button>
+                                    <button @click="emitFavoriteRemove(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-solid fa-heart"></i></button>
+                                    <button @click="addToCart(product)" class="btn btn-lg btn-info" v-if="currentUser?.id != product.distributor.id"><i class="fa-solid fa-basket-shopping"></i></button>
                                     <Link :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                 </div>
                             </div>
