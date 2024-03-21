@@ -137,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'shopping-basket'], function () {
 
         Route::get(
-            'list', [CartController::class, 'List']
+            'view-list', [CartController::class, 'ViewList']
         )->name('basket-list')->withoutMiddleware('auth');
 
         Route::post(
