@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\Favorite\FavoriteResource;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserDetail\PhoneResource;
 use App\Http\Resources\UserDetail\AddressResource;
@@ -37,7 +38,7 @@ class UserResource extends JsonResource
             'phone_numbers' => PhoneResource::collection($this->phoneNumbers),
             'addresses' => AddressResource::collection($this->addresses),
             'products' => ProductResource::collection($this->products),
-            'favorites' => $this->favorites,
+            'favorites' => FavoriteResource::collection($this->favorites),
         ];
     }
 }

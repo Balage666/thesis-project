@@ -20,6 +20,7 @@ class StorefrontProductResource extends JsonResource
             'name' => $this->name,
             'price' => $this->price,
             'stock' => $this->stock,
+            'distributor' => $this->distributor,
             'is_out_of_stock' => $this->stock == 0,
             'is_close_to_run_out_of_stock' => $this->stock < 10,
             'category' => new CategoryResource($this->category),

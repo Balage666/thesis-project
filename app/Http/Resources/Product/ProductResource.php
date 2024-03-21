@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'shortened_description' => Str::limit($this->description, 50, '...'),
-            'price' => $this->price,
+            'price' => "€ $this->price",
             'stock' => $this->stock,
             'is_out_of_stock' => $this->stock == 0,
             'is_close_to_run_out_of_stock' => $this->stock < 10,
