@@ -73,8 +73,6 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
 
 const processEmit = (payload) => {
 
-    console.log(payload.emitType);
-
     if (payload.emitType == 'favoriteAdded') {
         addToFavorites(payload.user, payload.product);
     }
@@ -98,6 +96,12 @@ const removeFromFavorites = (user, product) => {
     router.post(route('remove-from-favorites', { user: user, product: product }));
 }
 
+const addToCart = (product) => {
+
+    router.post(route('add-to-basket', { product: product }));
+
+}
+
 </script>
 
 <template>
@@ -107,8 +111,8 @@ const removeFromFavorites = (user, product) => {
 
     <div>
 
-        <pre>{{ pageProps.active_session.user?.favorites }}</pre>
-
+        <!-- <pre>{{ currentUser.cart }}</pre> -->
+        <!-- <pre>{{ pageProps.guest_cart }}</pre> -->
         <BodyLayout>
 
             <div class="container-fluid bg-info-subtle border-0">
@@ -273,10 +277,10 @@ const removeFromFavorites = (user, product) => {
 
                                             <div class="d-flex justify-content-between">
 
-                                                    <button @click="addToFavorites(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-regular fa-heart"></i></button>
-                                                    <button @click="removeFromFavorites(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id)"><i class="fa-solid fa-heart"></i></button>
+                                                    <button @click="addToFavorites(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-regular fa-heart"></i></button>
+                                                    <button @click="removeFromFavorites(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-solid fa-heart"></i></button>
 
-                                                    <Link href="" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></Link>
+                                                    <button @click="addToCart(product)" v-if="currentUser?.id != product.distributor.id" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></button>
                                                     <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                             </div>
                                         </div>
