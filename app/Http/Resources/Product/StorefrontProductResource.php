@@ -18,7 +18,7 @@ class StorefrontProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => $this->price,
+            'price' => "€ $this->price",
             'stock' => $this->stock,
             'distributor' => $this->distributor,
             'is_out_of_stock' => $this->stock == 0,

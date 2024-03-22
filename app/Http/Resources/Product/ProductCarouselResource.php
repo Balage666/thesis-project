@@ -21,7 +21,7 @@ class ProductCarouselResource extends JsonResource
             'shortened_description' => Str::limit($this->description, 50, '...'),
             'distributor' => $this->distributor,
             'preview_image' => $this->pictures->first()?->product_picture,
-            'price' => $this->price,
+            'price' => "€ $this->price",
             'stock' => $this->stock,
         ];
     }
