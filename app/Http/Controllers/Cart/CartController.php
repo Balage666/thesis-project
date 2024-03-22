@@ -255,7 +255,7 @@ class CartController extends Controller
 
     public function ViewList() {
 
-        $cart = Cart::find(session('cart_id'))->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
+        $cart = Cart::find(session('cart_id'))?->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
 
         if (auth()->check()) {
 
