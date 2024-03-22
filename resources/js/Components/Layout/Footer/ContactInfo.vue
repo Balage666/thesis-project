@@ -20,16 +20,14 @@ import { usedTechnologies } from '*js-shared/technologies';
                             Blue Venue
                         </h6>
                         <p>
-                            {{ __(`Blue Venue is a completely made up brand name for my webshop application
-                            created for my thesis. The app developed with the following technologies mainly:
-                            Laravel, Inertia, Vue3, FormKit, PrimeVue, Bootstrap`) }}
+                            {{ __("Blue Venue is a completely made up brand name for my webshop application created for my thesis. The app developed with the following technologies mainly: Laravel, Inertia, Vue3, FormKit, PrimeVue, Bootstrap") }}
                         </p>
                     </div>
 
                     <hr class="w-100 clearfix d-md-none" />
 
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 fw-bold">{{ ('Sources') }}</h6>
+                        <h6 class="text-uppercase mb-4 fw-bold">{{ ('Main Sources') }}</h6>
                         <p>
                             <a class="text-white">{{ __('Laravel Documentation') }}</a>
                         </p>
@@ -54,23 +52,8 @@ import { usedTechnologies } from '*js-shared/technologies';
                             <a class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</a>
                             <a class="text-white" v-else>{{ __('Login') }}</a>
                         </p>
-                        <p>
-                            <a class="text-white">{{ __('Distributors') }}</a>
-                        </p>
-                        <p>
-                            <a class="text-white">{{ __('Introduction page') }}</a>
-                        </p>
                     </div>
 
-                    <!-- <hr class="w-100 clearfix d-md-none" /> -->
-
-                    <!-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 fw-bold">Contact</h6>
-                        <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                        <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-                        <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-                    </div> -->
                 </div>
 
             </section>
