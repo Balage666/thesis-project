@@ -61,8 +61,6 @@ const sendFormData = () => {
 
 <template>
 
-    <!-- <pre>{{ listOfStatesByCountryIso }}</pre> -->
-
     <form v-if="props.visible" @submit.prevent="sendFormData">
         <div class="container">
             <div class="row">
@@ -84,7 +82,6 @@ const sendFormData = () => {
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                     <label class="form-label d-flex justify-content-start" for="region">{{ __("Select your state or region") }}</label>
-                    <!-- <input class="form-control form-control-lg formInputFieldBackground" type="text" name="region" id="region" v-model="addressForm.region"> -->
                     <select
                         :disabled="listOfStatesByCountryIso.length == 0"
                         :required="listOfStatesByCountryIso.length != 0"

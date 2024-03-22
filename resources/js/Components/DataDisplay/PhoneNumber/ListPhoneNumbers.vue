@@ -21,7 +21,6 @@ const sendChangedData = (payload) => {
 <template>
     <div class="container">
         <ul class="list-group" v-if="props.list.length > 0">
-        <!-- <pre v-for="item in props.list">{{ item }}</pre> -->
             <PhoneNumberItem class="list-group-item" v-for="phoneNumberItem in props.list" :item="phoneNumberItem" @itemChanged="sendChangedData"/>
         </ul>
 

@@ -132,13 +132,9 @@ const sendDeleteFavoriteItemRequest = (payload) => {
 
 <template>
 
-    <!-- TODO: Make a separate accordion for user roles -->
-
     <Head>
         <title>{{ __(':name\'s details', user) }}</title>
     </Head>
-
-    <!-- <pre>{{ user }}</pre> -->
 
     <BodyLayout>
         <div>
@@ -153,9 +149,6 @@ const sendDeleteFavoriteItemRequest = (payload) => {
             <div class="container-fluid bg-info-subtle border-0 rounded-5 px-4 py-5 my-3">
                 <div class="row">
 
-                    <!-- <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
-                    <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
-                    <!--DONE: Implement edit mode-->
                     <div class="col-12 col-lg-12">
 
                         <Accordion title="User Details">
@@ -194,7 +187,6 @@ const sendDeleteFavoriteItemRequest = (payload) => {
 
                 </div>
 
-                <!-- !permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || permissions.has_moderator_role && currentUser.id == props.user.id -->
                 <div class="row mt-3" v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role && ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) ) || permissions.has_admin_role || currentUser.id == user.id">
 
                     <div class="col-12 col-lg-6">
@@ -242,7 +234,6 @@ const sendDeleteFavoriteItemRequest = (payload) => {
 
                     <div class="col-12 col-lg-6 mt-2 mt-lg-0">
 
-                        <!-- FIXED: Arrow button renders active when the accordion is closed -->
                         <Accordion title="Orders" :startsCollapsed="true">
                             <p>
                                 <strong>
@@ -271,9 +262,6 @@ const sendDeleteFavoriteItemRequest = (payload) => {
 
                     <div class="col-12">
 
-                        <!-- FIXED: Arrow button renders active when the accordion is closed -->
-                        <!-- TODO: List User's products -->
-
                         <Accordion title="Created Products">
 
                             <ListProduct :products="user.products"/>
@@ -285,9 +273,6 @@ const sendDeleteFavoriteItemRequest = (payload) => {
                 </div>
 
             </div>
-
-            <!-- <BodyLayout>
-            </BodyLayout> -->
 
         </div>
     </BodyLayout>

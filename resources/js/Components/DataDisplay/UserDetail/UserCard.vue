@@ -35,7 +35,6 @@ const sendShowModalEmit = () => {
         <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
                 <div class="container-img">
-                    <!--FIXME: Image doesn't fit in its container on small resolution-->
                     <img :src="props.user.profile_picture" :alt="props.user.name" class="rounded-circle" style="width: 90%">
                     <button class="btn btn-lg btn-primary" v-if="props.profilePictureEditModeVisible" @click="sendShowModalEmit"><i class="fa-solid fa-pencil"></i> {{ __('Change') }}</button>
                 </div>

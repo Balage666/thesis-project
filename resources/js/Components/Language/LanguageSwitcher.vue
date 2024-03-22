@@ -1,5 +1,4 @@
 <template>
-    <!--DUCKTAPED: Displays incorrect language sometimes-->
     <select v-model="languageToSwitch" @change="switchLanguage" class="form-select form-select-lg" name="language_switcher" id="language_switcher">
         <option v-for="(lang) in locales" :value="lang.code">{{ __(lang.value) }}</option>
     </select>

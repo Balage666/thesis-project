@@ -53,15 +53,10 @@ const sendCleanSearch = () => {
 </style>
 
 <template>
-    <!--TODO: Implement Add to favorite button-->
     <Head>
-        <title>{{ __('List products (design in development)') }}</title>
+        <title>{{ __('List products') }}</title>
     </Head>
     <BodyLayout>
-        <!-- <h1>List products (design in development)</h1> -->
-
-
-        <!--TODO: Make it scrollable and redesign it-->
 
         <div class="container-fluid bg-info-subtle border-0 p-5">
             <div v-if="productList.length == 0">
@@ -157,87 +152,6 @@ const sendCleanSearch = () => {
                         </ListAccordion>
 
 
-                        <!-- <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item authFormCardBackground bg-gradient" v-for="product in productList" :key="product.id">
-
-                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                    <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + product.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                        <div class="col-12 col-md-6 col-lg-9 mt-1">
-                                            <span class="fw-bold">{{ product.name }}</span>
-                                        </div>
-                                    </button>
-                                </h2>
-
-                                <div :id="'open' + product.id" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                    <div class="container-fluid accordion-body">
-                                        <div class="row">
-                                            <div class="col-md-12 p-md-5 col-lg-12">
-                                                <div class="card border-0 rounded-5">
-                                                    <div class="card-body">
-                                                        <div class="d-flex flex-column text-center">
-                                                            <div class="row">
-                                                                <div class="col-12 col-xs-12 col-md-4 col-lg-3 mt-md-2">
-                                                                    <span>{{ __('Distributed by: ') }}</span>
-                                                                    <h4>{{ product.distributor.name }}</h4>
-                                                                </div>
-                                                                <div class="col-12 col-xs-12 col-md-4 col-lg-6 mt-0 mt-md-3">
-                                                                    <span>{{ __('Product name: ') }}</span>
-                                                                    <h4 class="fw-bold">{{ product.name }}</h4>
-                                                                </div>
-                                                                <div class="col-12 col-xs-12 col-md-4 col-lg-3 mt-md-3">
-                                                                    <button class="btn btn-danger" @click="sendDeleteRequest(product)"><i class="fa-solid fa-x"></i></button>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-12 col-md-6 p-md-5 mt-3 mt-md-0 mt-lg-0 col-lg-6">
-
-                                                <div class="card mb-3">
-                                                    <div class="row g-0">
-                                                        <div class="col-lg-4 col-12 text-center d-none d-lg-flex">
-                                                            <img :src="product.preview_image" class="img-fluid" :alt="product.name" :title="product.name">
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-12 col-12">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ product.name }}</h5>
-                                                                <p class="card-text">{{ product.shortened_description }}</p>
-                                                                <p class="card-text"><small class="text-muted">Last updated {{ product.updated_at_human_readable }}</small></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-12 col-md-6 p-md-5 mt-3 mt-md-0 mt-lg-0 col-lg-6">
-
-                                                <div class="card mb-3 border-0">
-                                                    <div class="row g-0">
-                                                        <div class="d-grid gap-2">
-                                                            <Link :href="route('product-show', { product: product })"  method="get" as="button" type="button" class="btn btn-lg btn-info shadow-sm fw-bold">{{ __('View Product') }}</Link>
-                                                            <Link :href="route('product-edit', { product: product })" method="get" as="button" type="button" class="btn btn-lg btn-info shadow-sm fw-bold">{{ __('Legacy Product Editor') }}</Link>
-
-                                                            <Link href="" method="get" as="button" type="button" class="btn btn-lg btn-outline-danger shadow-sm fw-bold">{{ __('Add to Favorites') }}</Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-
                     </div>
                 </div>
             </div>
@@ -249,32 +163,6 @@ const sendCleanSearch = () => {
 
 
 </template>
-<!-- <div class="col-md-12 p-md-5 col-lg-12">
-
-    <div class="my-2 my-lg-0">
-        <h2 class="text-center mb-5">Products in this category</h2>
-        <div v-if="category.products.length == 0">
-            <h4 class="text-center">{{ __('Such emptiness!') }}</h4>
-        </div>
-        <div v-else>
-            <ul class="list-group border-0 rounded-5">
-                <li class="list-group-item p-3 text-center" v-for="product in category.products">
-                    <div class="row mt-3">
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <img :src="product.preview_image" class="border-0 rounded-3" style="width: 25%">
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-9 mt-2">
-                            <span class="fw-bold">
-                                {{ __(product.name) }}
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</div> -->
 
 
 

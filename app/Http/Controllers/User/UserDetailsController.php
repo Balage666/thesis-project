@@ -67,7 +67,6 @@ class UserDetailsController extends Controller
         return redirect()->back()->with('message', 'Email modified!');
     }
 
-    //TODO: Implement reset password
     public function ResetPassword(Request $request, User $user) {
 
         $passwordRegex = Helper::GetPasswordRegex();

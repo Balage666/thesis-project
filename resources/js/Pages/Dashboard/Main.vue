@@ -60,15 +60,6 @@ console.log(permissions.value);
                     </Link>
                 </div>
 
-                <!-- <div class="col">
-                    <h2 class="mt-3 mb-3">Create order</h2>
-                    <Link :href="route('order-create')" class="btn btn-lg btn-warning" type="button" as="button">
-                        <div class="p-5">
-                            <i class="fa-solid fa-box-open fa-2xl"></i>
-                        </div>
-                    </Link>
-                </div> -->
-
                 <div class="col">
                     <h2 class="mt-3 mb-3">{{ __('Order list') }}</h2>
                     <Link :href="route('all-orders')" class="btn btn-lg btn-warning" type="button" as="button">

@@ -27,9 +27,6 @@ const close = () => {
     hidden.value = true
 }
 
-// console.log(props.index);
-// console.log(props.message);
-
 onMounted(() => {
 
     setTimeout(() => {
@@ -40,12 +37,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <!-- TODO: Design toast component! -->
     <Transition>
         <div v-show="!hidden" class="toast show my-2" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }">
                 <strong class="me-auto">{{ props.title }}</strong>
-                <!-- <small class="text-body-secondary">11 mins ago</small> -->
                 <button type="button" class="btn-close" @click="close" aria-label="Close"></button>
             </div>
             <div class="toast-body">

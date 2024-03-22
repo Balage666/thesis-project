@@ -61,7 +61,6 @@ const sendDeletePhoneNumberRequest = () => {
                 </span>
                 <form v-if="phoneNumberItem.editModeVisible" @submit.prevent="sendEditedPhoneNumberData">
                     <InputMask id="phone_number" name="phone_number" v-model="phoneNumberItemForm.number" :mask="phoneNumberItemForm.mask" :placeholder="phoneNumberItemForm.mask"/>
-                    <!-- <input type="text" class="form-control-sm border-0 rounded-end-0"> -->
                     <input type="submit" class="btn btn-sm btn-primary border-0 rounded-start-0 fw-bold" :value="__('Modify')">
                 </form>
             </div>
@@ -69,7 +68,6 @@ const sendDeletePhoneNumberRequest = () => {
                 <div class="d-grid d-md-flex align-items-md-end justify-content-md-end gap-2">
                     <button type="button" class="btn btn-primary" @click="toggleEditModeForItem">{{ phoneNumberItem.editModeVisible ? 'Cancel' : 'Edit' }}</button>
 
-                    <!-- <Link :href="route('phone-number-delete', { phone: props.item })" method="post" as="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">{{ __('Delete') }}</Link> -->
                     <button @click="sendDeletePhoneNumberRequest" type="button" class="btn btn-danger" v-if="!phoneNumberItem.editModeVisible">{{ __('Delete') }}</button>
                 </div>
             </div>

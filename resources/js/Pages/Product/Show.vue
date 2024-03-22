@@ -220,8 +220,6 @@ const removeFromFavorites = (user, product) => {
             @onUpload="sendUploadProductPicturesRequest"
         />
 
-        <!-- <pre>{{ productShow }}</pre> -->
-
         <div class="card p-5 container-fluid bg-info-subtle border-0">
 
             <div class="row g-5 d-flex align-items-md-center justify-content-md-center align-items-lg-center justify-content-lg-center">
@@ -353,7 +351,6 @@ const removeFromFavorites = (user, product) => {
 
                         <div>
 
-                            <!--TODO: Implement Add to favorite button-->
                             <button v-if="permissions.authenticated && !currentUser.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</button>
                             <button v-if="permissions.authenticated && currentUser.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> Remove from favorites</button>
                         </div>

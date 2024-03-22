@@ -46,8 +46,6 @@ const sendFormData = () => {
 
     <BodyLayout>
 
-        <!-- <h1>Create Product</h1> -->
-
         <div class="my-5 py-5">
             <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
 
@@ -90,8 +88,6 @@ const sendFormData = () => {
 
                     <FormKit type="step" :name="__('productDetails')">
                         <h3 class="mb-2 mx-auto text-center"> {{ __("Create a product with filling the form below!") }} </h3>
-
-                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
 
                         <FormKit
                             id="name"

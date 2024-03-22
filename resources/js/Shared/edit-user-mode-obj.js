@@ -8,10 +8,3 @@ const filtered = asArray.filter(
 export default {
     ...Object.fromEntries(filtered)
 }
-
-// export default {
-//     changeProfilePictureButtonVisible: false,
-//     editNameFormVisible: false,
-//     editEmailFormVisible: false,
-//     resetPasswordButtonVisible: false
-// }

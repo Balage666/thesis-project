@@ -36,17 +36,8 @@ const removeFromBasket = (product) => {
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <!--TODO: Remove this-->
-                <!-- <div class="w-75 py-2 ms-lg-auto me-lg-auto ms-sm-auto me-sm-auto" v-show="route().current('storefront')">
-                    <form class="d-flex" role="search">
-                        <input class="form-control form-control-lg form-control-sm rounded-start-5" type="search" :placeholder="__('Search')" aria-label="Search">
-                        <button class="btn btn-primary rounded-end-5" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
-                    </form>
-                </div> -->
-
                 <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0 py-2">
 
-                    <!-- FIXME: Dropdown is bugged on smaller screen resolutions, when items are shown -->
                     <div class="m-auto">
                         <li class="nav-item dropdown-center" v-if="!permissions.authenticated">
                             <button class="nav-link row" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">

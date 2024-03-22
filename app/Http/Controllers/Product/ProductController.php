@@ -71,8 +71,6 @@ class ProductController extends Controller
             "images" => $storeProductRequest['images']
         ];
 
-        // dd($storeProductRequest->files->has('images'));
-
         $category = Category::findOrFail($createFormFields['categoryId']);
 
         $createdProduct = Product::newModelInstance([

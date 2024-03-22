@@ -106,7 +106,6 @@ const sendModifiedEmailData = () => {
             <div class="row">
                 <div class="col-sm-12 d-grid gap-2 gap-lg-0 d-lg-flex d-md-flex align-items-md-center align-items-lg-center justify-content-md-center justify-content-lg-between">
                     <Link v-show="!permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || permissions.has_moderator_role && currentUser.id == props.user.id" :href="route('user-edit', { user: props.user })" class="btn btn-lg btn-info" as="button" type="button">{{ __("Legacy Editor") }}</Link>
-                    <!-- <button v-show="(!permissions.has_only_customer_role && !permissions.has_only_customer_role_and_seller_role) || currentUser.id == props.user.id" @click="emitToggleData" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button> -->
                     <button v-show="!permissions.has_only_customer_role && ( ( permissions.has_moderator_role_at_most && !targetUserRoles.includes('Moderator') ) || permissions.has_admin_role) || currentUser.id == props.user.id " @click="emitToggleData" class="btn btn-lg btn-info">{{ __("Edit Mode") }}</button>
                 </div>
             </div>

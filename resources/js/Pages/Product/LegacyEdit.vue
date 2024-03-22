@@ -48,9 +48,6 @@ const sendFormData = () => {
     </Head>
 
     <BodyLayout>
-        <!-- <h1>Legacy Edit - Product</h1> -->
-
-        <!-- <pre>{{ productValues }}</pre> -->
 
         <div class="my-5 py-5">
             <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
@@ -95,8 +92,6 @@ const sendFormData = () => {
 
                     <FormKit type="step" :name="__('productDetails')">
                         <h3 class="mb-2 mx-auto text-center"> {{ __("Update product with changing one of the values") }} </h3>
-
-                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div> -->
 
                         <FormKit
                             id="name"

@@ -54,7 +54,6 @@ const signUp = () => {
 
                     <form @submit.prevent="signUp">
 
-                        <!-- <div class="alert alert-danger" v-if="form.errors.name">{{ form.errors.name }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="name">{{ __("Full Name") }}</label>
                             <input
@@ -68,8 +67,6 @@ const signUp = () => {
                             >
                         </div>
 
-
-                        <!-- <div class="alert alert-danger" v-if="form.errors.email">{{ form.errors.email }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="email">{{ __("Email address") }}</label>
                             <input
@@ -83,7 +80,6 @@ const signUp = () => {
                             >
                         </div>
 
-                        <!-- <div class="alert alert-danger" v-if="form.errors.password">{{ form.errors.password }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="password">{{ __("Password") }}</label>
                             <input
@@ -97,7 +93,6 @@ const signUp = () => {
                             >
                         </div>
 
-                        <!-- <div class="alert alert-danger" v-if="form.errors.password_confirmation">{{ form.errors.password_confirmation }}</div> -->
                         <div class="form-outline mb-4">
                             <label class="form-label d-flex justify-content-start" for="password_confirmation">{{ __("Password confirmation") }}</label>
                             <input

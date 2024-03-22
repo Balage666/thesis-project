@@ -202,6 +202,5 @@ Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
 });
 
 Route::get('/new-feature-test', function () {
-    // dd(ProductResource::collection(Product::all()));
     return Inertia::render("Test", ['products' => ProductResource::collection( Product::all() ) ]);
 })->name('feature-test');

@@ -76,8 +76,6 @@ const closeNewCategoryModal = () => {
 
     <BodyLayout>
 
-        <!-- <pre>{{ props.categories }}</pre> -->
-
         <AddNewCategoryModal
             :id="'addCategory'"
             @onModalClose="closeNewCategoryModal"

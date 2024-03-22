@@ -43,7 +43,6 @@ const sendDeleteAddressRequest = () => {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 text-end">
-                                <!-- <Link :href="route('address-delete', { address: props.item })" method="post" as="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></Link> -->
                                 <button @click="sendDeleteAddressRequest" type="button" class="btn"><i class="fa-solid fa-circle-xmark text-danger fw-bold fs-5"></i></button>
                             </div>
                         </div>

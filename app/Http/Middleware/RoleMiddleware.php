@@ -16,10 +16,6 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // Log::info($roles);
-        // dd($roles);
-        // dd(auth()->user()->Roles->pluck('name'));
-
         $canAccessIt = false;
 
         foreach (auth()->user()->Roles->pluck('name') as $userRole) {

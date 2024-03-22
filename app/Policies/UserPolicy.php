@@ -30,7 +30,6 @@ class UserPolicy
         // dd($moderatorRole, $authUser->Roles->contains('name', $moderatorRole) && $targetedUser->Roles->contains('name', $adminRole));
 
         if ($authUser->Roles->contains('name', 'Admin')) {
-            // dd('I\'m Admin');
             $canEditUser = true;
             return $canEditUser;
         }
@@ -38,7 +37,6 @@ class UserPolicy
         if ($authUser->Roles->contains('name', 'Moderator')) {
 
             if ($authUser->id == $targetedUser->id) {
-                // dd('Myself!');
                 $canEditUser = true;
                 return $canEditUser;
             }
@@ -48,7 +46,6 @@ class UserPolicy
                 !$targetedUser->Roles->contains('name', 'Admin'))
             {
 
-                // dd('A customer');
                 $canEditUser = true;
                 return $canEditUser;
             }
@@ -65,32 +62,6 @@ class UserPolicy
             return $canEditUser;
 
         }
-
-
-        // if ($authUser->Roles->contains('name', $moderatorRole) &&
-        //     !$authUser->Roles->contains('name', $adminRole))
-        // {
-
-        //     if ($targetedUser->Roles->contains('name', $adminRole) ||
-        //         $targetedUser->Roles->contains('name', $moderatorRole))
-        //     {
-        //         $cannotEditUser = true;
-        //     }
-        //     else {
-        //         $cannotEditUser = false;
-        //     }
-
-        // }
-
-        // if ($authUser->Roles->contains('name', $moderatorRole) ||
-        //     $authUser->Roles->contains('name', $adminRole))
-        // {
-        //     if ($authUser->id == $targetedUser->id) {
-        //         $cannotEditUser = false;
-        //     }
-        // }
-
-        // dd("cannot edit user details:", $cannotEditUser);
 
         return $canEditUser;
 

@@ -75,9 +75,6 @@ const callResetPassword = () => {
 
     <BodyLayout>
         <div class="p-5">
-            <!-- <h1>Legacy Edit</h1> -->
-            <!-- <pre>{{ props.userToEdit }}</pre> -->
-
 
             <FormKit type="form" :actions="false" #default="{ disabled }" @submit="sendFormData()">
 
@@ -85,9 +82,6 @@ const callResetPassword = () => {
 
                     <FormKit type="step" :name="__('editUserInfo')">
                         <h3 class="mb-7 text-center"> {{ __("Edit :name's data", userValues) }} </h3>
-
-                        <!-- <div class="alert alert-danger" v-if="$page.props.errors" v-for="error in $page.props.errors">{{ __(error) }}</div>
-                        <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div> -->
 
                         <FormKit
                             id="name"
