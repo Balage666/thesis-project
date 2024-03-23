@@ -29,11 +29,9 @@ const props = defineProps({
 const pageProps = ref(usePage().props.value);
 const permissions = ref(pageProps.value.permissions);
 const currentUser = ref(pageProps.value.active_session.user);
-console.log(permissions.value);
 
 const targetUserRolesRef = ref(props.user.roles);
 const targetUserRoles = ref(targetUserRolesRef.value.map((role) => role.name));
-console.log(targetUserRoles.value);
 
 const emits = defineEmits(['editModeToggled', 'nameModified', 'emailModified']);
 
