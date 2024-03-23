@@ -128,16 +128,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function Profile(User $user) {
-
-        // $this->authorizeForUser(auth()->user(), 'profile', [$user]);
-
-        return Inertia::render("User/Profile", [
-            'user' => UserResource::collection(User::where('id', $user->id)->get())
-        ]);
-
-    }
-
     /**
      * Show the form for editing the specified resource.
      * Legacy Edit Form page

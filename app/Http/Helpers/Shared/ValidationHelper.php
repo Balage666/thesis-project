@@ -17,4 +17,5 @@ class ValidationHelper {
 
     public const PASSWORD_REGEX = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
 
+    public const PHONE_NUMBER_REGEX = "/^([0-9\s\-\+\(\)]*)$/";
 }

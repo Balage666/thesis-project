@@ -43,6 +43,11 @@ class Helper {
         return ValidationHelper::PASSWORD_REGEX;
     }
 
+    public static function GetPhoneNumberRegex()
+    {
+        return ValidationHelper::PHONE_NUMBER_REGEX;
+    }
+
     public static function GetAdminRole() {
         return ROLES::ADMIN->value;
     }
