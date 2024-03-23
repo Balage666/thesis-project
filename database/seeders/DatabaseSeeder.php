@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Http\Helpers\Shared\OrderStatus;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -115,7 +117,9 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $category) {
             \App\Models\Category::create([
                 'name' => $category,
-                'user_id' => User::inRandomOrder()->first()->id
+                'user_id' => User::whereHas('Roles', function($query) {
+                    $query->where('name', '=', 'Seller');
+                })->inRandomOrder()->first()->id
             ]);
         }
 
@@ -153,14 +157,25 @@ class DatabaseSeeder extends Seeder
 
         });
 
-        // \App\Models\Product::factory(20)->create()->each(function ($product) use ($provider) {
 
-        //     $product->Pictures()->save(\App\Models\ProductPicture::create([
-        //         'product_picture' => RandomImage::make(256, 256, "$product->name", $provider)->url(),
-        //         'product_id' => $product->id
-        //     ]));
+        \App\Models\Order::factory(30)->create()->each(function ($order) {
 
-        // }
+            \App\Models\Product::all()->each(function ($product) use($order) {
+
+                if ($product->Distributor->id != $order->Customer->id) {
+                    $generateAmount = fake()->numberBetween(1,10);
+                    $order->OrderItems()->save(
+                        \App\Models\OrderItem::newModelInstance([
+                            'product_id' => $product->id,
+                            'amount' => $generateAmount,
+                            'price' => $product->price * $generateAmount
+                        ])
+                    );
+                }
+
+            });
+
+        });
 
     }
 }
