@@ -18,7 +18,11 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $userID = User::inRandomOrder()->first()->id;
+
+        // $userID = User::inRandomOrder()->first()->id;
+        $userID = User::whereHas('Roles', function($query) {
+            $query->where('name', '=', 'Seller');
+        })->inRandomOrder()->first()->id;
         $randomCategoryId = Category::inRandomOrder()->first()->id;
         return [
             'name' => $this->faker->word(),
