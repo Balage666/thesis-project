@@ -91,4 +91,10 @@ class User extends Authenticatable
 
         return $this->hasMany(Favorite::class, 'user_id', 'id');
     }
+
+    public function Orders() {
+
+        return $this->hasMany(Order::class, 'user_id', 'id');
+
+    }
 }
