@@ -3,6 +3,7 @@
 namespace App\Http\Resources\User;
 
 use App\Http\Resources\Favorite\FavoriteResource;
+use App\Http\Resources\Order\OrderDataResource;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserDetail\PhoneResource;
 use App\Http\Resources\UserDetail\AddressResource;
@@ -39,6 +40,7 @@ class UserResource extends JsonResource
             'addresses' => AddressResource::collection($this->addresses),
             'products' => ProductResource::collection($this->products),
             'favorites' => FavoriteResource::collection($this->favorites),
+            'orders' => OrderDataResource::collection($this->orders)
         ];
     }
 }
