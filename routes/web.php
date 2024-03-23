@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
@@ -14,12 +16,11 @@ use App\Http\Controllers\Address\AddressController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserDetailsController;
 use App\Http\Controllers\Category\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Favorite\FavoriteController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Socialite\GoogleAuthController;
 use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\Localization\LanguageSwitcherController;
-use App\Http\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,14 +164,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'order-management'], function() {
 
-        Route::get('{user}/list', [OrderController::class, 'List'])->name('user-order');
-        Route::get('list/all', [OrderController::class, 'AllList'])->name('all-orders');
+        Route::middleware('role:Admin')->get('list/all', [OrderController::class, 'AllList'])->name('all-orders');
         Route::get('order/{cart}/create', [OrderController::class, 'Create'])->name('order-create')->withoutMiddleware('auth');
         Route::post('order/{cart}/create', [OrderController::class, 'Store'])->name('order-store')->withoutMiddleware('auth');
-        Route::get('order/{order}/edit', [OrderController::class, 'Edit'])->name('order-edit');
-        Route::post('order/{order}/edit', [OrderController::class, 'Update'])->name('order-update');
-        Route::post('order/{order}/delete', [OrderController::class, 'Destroy'])->name('order-destroy')->withoutMiddleware('auth');
-
+        Route::middleware('role:Customer')->post('order/{order}/delete', [OrderController::class, 'Destroy'])->name('order-destroy');
+        Route::middleware('role:Customer')->get('order/{order}', [OrderController::class, 'Show'])->name('order-show');
     });
 
     Route::get('/', function() {
@@ -200,7 +198,3 @@ Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
     Route::get('sign-up', [AuthController::class, 'SignUp'])->name('sign-up');
     Route::post('sign-on', [AuthController::class, 'ImprovedSignOn'])->name('sign-on');
 });
-
-Route::get('/new-feature-test', function () {
-    return Inertia::render("Test", ['products' => ProductResource::collection( Product::all() ) ]);
-})->name('feature-test');
