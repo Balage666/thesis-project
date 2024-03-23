@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function List(Request $request)
     {
-        $products = Product::all()->sortByDesc('stock');
+        $products = Product::all()->sortByDesc('created_at');
 
         if ($request->get('search')) {
 
