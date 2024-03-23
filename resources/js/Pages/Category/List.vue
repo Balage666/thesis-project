@@ -56,18 +56,6 @@ const closeNewCategoryModal = () => {
 
 }
 
-// const openConfirmationModal = () => {
-
-//     confirmationModal.value.show();
-
-// }
-
-// const closeConfirmationModal = () => {
-
-//     confirmationModal.value.hide();
-
-// }
-
 </script>
 <template>
     <Head>
