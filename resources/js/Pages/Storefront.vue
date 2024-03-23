@@ -317,7 +317,7 @@ const addToCart = (product) => {
 
                             <div class="row overflow-y-scroll" style="height: 950px">
 
-                                <h4 v-if="props.allProducts.data.length == 0">No products found!</h4>
+                                <h4 v-if="props.allProducts.data.length == 0">{{ __('No products found!') }}</h4>
 
                                 <div v-else class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in props.allProducts.data" :key="product.id">
 
