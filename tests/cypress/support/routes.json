@@ -1,0 +1,714 @@
+{
+  "cypress.factory": {
+    "name": "cypress.factory",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@factory",
+    "uri": "__cypress__/factory",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.login": {
+    "name": "cypress.login",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@login",
+    "uri": "__cypress__/login",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.logout": {
+    "name": "cypress.logout",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@logout",
+    "uri": "__cypress__/logout",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.artisan": {
+    "name": "cypress.artisan",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@artisan",
+    "uri": "__cypress__/artisan",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.run-php": {
+    "name": "cypress.run-php",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@runPhp",
+    "uri": "__cypress__/run-php",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.csrf-token": {
+    "name": "cypress.csrf-token",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@csrfToken",
+    "uri": "__cypress__/csrf_token",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "cypress.routes": {
+    "name": "cypress.routes",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@routes",
+    "uri": "__cypress__/routes",
+    "method": [
+      "POST"
+    ]
+  },
+  "cypress.current-user": {
+    "name": "cypress.current-user",
+    "domain": null,
+    "action": "Laracasts\\Cypress\\Controllers\\CypressController@currentUser",
+    "uri": "__cypress__/current-user",
+    "method": [
+      "POST"
+    ]
+  },
+  "sanctum.csrf-cookie": {
+    "name": "sanctum.csrf-cookie",
+    "domain": null,
+    "action": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
+    "uri": "sanctum/csrf-cookie",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "ignition.healthCheck": {
+    "name": "ignition.healthCheck",
+    "domain": null,
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController",
+    "uri": "_ignition/health-check",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "ignition.executeSolution": {
+    "name": "ignition.executeSolution",
+    "domain": null,
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController",
+    "uri": "_ignition/execute-solution",
+    "method": [
+      "POST"
+    ]
+  },
+  "ignition.updateConfig": {
+    "name": "ignition.updateConfig",
+    "domain": null,
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController",
+    "uri": "_ignition/update-config",
+    "method": [
+      "POST"
+    ]
+  },
+  "generated::obdUra8LGsvIPtvU": {
+    "name": "generated::obdUra8LGsvIPtvU",
+    "domain": null,
+    "action": "Closure",
+    "uri": "api/user",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "dashboard-main": {
+    "name": "dashboard-main",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Dashboard\\DashboardController@Main",
+    "uri": "dashboard/main",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "dashboard-charts": {
+    "name": "dashboard-charts",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Dashboard\\DashboardController@Charts",
+    "uri": "dashboard/charts",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-create": {
+    "name": "user-create",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Create",
+    "uri": "user-management/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-list": {
+    "name": "user-list",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@List",
+    "uri": "user-management/list",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-show": {
+    "name": "user-show",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Show",
+    "uri": "user-management/show/{user}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-edit": {
+    "name": "user-edit",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Edit",
+    "uri": "user-management/edit/{user}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-store": {
+    "name": "user-store",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Store",
+    "uri": "user-management/store",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-update": {
+    "name": "user-update",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Update",
+    "uri": "user-management/edit/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-delete": {
+    "name": "user-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Destroy",
+    "uri": "user-management/delete/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-name-edit": {
+    "name": "user-name-edit",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserDetailsController@EditName",
+    "uri": "user-management/edit-name/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-email-edit": {
+    "name": "user-email-edit",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserDetailsController@EditEmail",
+    "uri": "user-management/edit-email/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-reset-password": {
+    "name": "user-reset-password",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserDetailsController@ResetPassword",
+    "uri": "user-management/reset-password/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "user-change-profile-picture": {
+    "name": "user-change-profile-picture",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserDetailsController@ChangeProfilePicture",
+    "uri": "user-management/change-profile-picture/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "seller-role-grant": {
+    "name": "seller-role-grant",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserDetailsController@GrantSellerRole",
+    "uri": "user-management/grant-seller-role/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "phone-number-add": {
+    "name": "phone-number-add",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Phone\\PhoneController@Store",
+    "uri": "user-management/phone-add/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "phone-number-update": {
+    "name": "phone-number-update",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Phone\\PhoneController@Update",
+    "uri": "user-management/phone-edit/{phone}",
+    "method": [
+      "POST"
+    ]
+  },
+  "phone-number-delete": {
+    "name": "phone-number-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Phone\\PhoneController@Delete",
+    "uri": "user-management/phone-delete/{phone}",
+    "method": [
+      "POST"
+    ]
+  },
+  "address-create": {
+    "name": "address-create",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Address\\AddressController@Store",
+    "uri": "user-management/address-add/{user}",
+    "method": [
+      "POST"
+    ]
+  },
+  "address-delete": {
+    "name": "address-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Address\\AddressController@Delete",
+    "uri": "user-management/address-delete/{address}",
+    "method": [
+      "POST"
+    ]
+  },
+  "add-to-favorites": {
+    "name": "add-to-favorites",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Favorite\\FavoriteController@AddToFavorites",
+    "uri": "user-management/add-product-to-favorites/{user}/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "remove-from-favorites": {
+    "name": "remove-from-favorites",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Favorite\\FavoriteController@RemoveFromFavorites",
+    "uri": "user-management/remove-from-favorites/{user}/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-create": {
+    "name": "product-create",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Create",
+    "uri": "product-management/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "product-store": {
+    "name": "product-store",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Store",
+    "uri": "product-management/store",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-list": {
+    "name": "product-list",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@List",
+    "uri": "product-management/list",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "product-show": {
+    "name": "product-show",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Show",
+    "uri": "product-management/show/{product}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "product-edit": {
+    "name": "product-edit",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Edit",
+    "uri": "product-management/edit/{product}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "product-update": {
+    "name": "product-update",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Update",
+    "uri": "product-management/edit/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-delete": {
+    "name": "product-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductController@Destroy",
+    "uri": "product-management/delete/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "rate-add": {
+    "name": "rate-add",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@AddRating",
+    "uri": "product-management/rating-add/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "rate-destroy": {
+    "name": "rate-destroy",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@DeleteRating",
+    "uri": "product-management/rating-delete/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "comment-add": {
+    "name": "comment-add",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@AddComment",
+    "uri": "product-management/comment-add/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "comment-destroy": {
+    "name": "comment-destroy",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@DeleteComment",
+    "uri": "product-management/comment-delete/{comment}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-name-change": {
+    "name": "product-name-change",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@ChangeProductName",
+    "uri": "product-management/change-name/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-description-change": {
+    "name": "product-description-change",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@ChangeProductDescription",
+    "uri": "product-management/change-description/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-price-change": {
+    "name": "product-price-change",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@ChangeProductPrice",
+    "uri": "product-management/change-price/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-stock-change": {
+    "name": "product-stock-change",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@ChangeProductStockValue",
+    "uri": "product-management/change-stock-value/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-pictures-upload": {
+    "name": "product-pictures-upload",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@UploadProductPictures",
+    "uri": "product-management/upload-pictures/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "product-pictures-delete": {
+    "name": "product-pictures-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Product\\ProductDetailsController@DeleteProductPictures",
+    "uri": "product-management/delete-pictures/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "category-list": {
+    "name": "category-list",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Category\\CategoryController@List",
+    "uri": "category-management/list",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "category-store": {
+    "name": "category-store",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Category\\CategoryController@Store",
+    "uri": "category-management/store",
+    "method": [
+      "POST"
+    ]
+  },
+  "category-delete": {
+    "name": "category-delete",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Category\\CategoryController@Destroy",
+    "uri": "category-management/delete/{category}",
+    "method": [
+      "POST"
+    ]
+  },
+  "basket-list": {
+    "name": "basket-list",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@ViewList",
+    "uri": "shopping-basket/view-list",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "add-to-basket": {
+    "name": "add-to-basket",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@AddToCart",
+    "uri": "shopping-basket/add/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "remove-from-basket": {
+    "name": "remove-from-basket",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@RemoveFromCart",
+    "uri": "shopping-basket/remove/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "basket-increment": {
+    "name": "basket-increment",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@Increment",
+    "uri": "shopping-basket/increment/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "basket-decrement": {
+    "name": "basket-decrement",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@Decrement",
+    "uri": "shopping-basket/decrement/{product}",
+    "method": [
+      "POST"
+    ]
+  },
+  "clear-basket": {
+    "name": "clear-basket",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Cart\\CartController@ClearCart",
+    "uri": "shopping-basket/clear",
+    "method": [
+      "POST"
+    ]
+  },
+  "all-orders": {
+    "name": "all-orders",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\Order\\OrderController@AllList",
+    "uri": "order-management/list/all",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "order-create": {
+    "name": "order-create",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Order\\OrderController@Create",
+    "uri": "order-management/order/{cart}/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "order-store": {
+    "name": "order-store",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Order\\OrderController@Store",
+    "uri": "order-management/order/{cart}/create",
+    "method": [
+      "POST"
+    ]
+  },
+  "order-destroy": {
+    "name": "order-destroy",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\Order\\OrderController@Destroy",
+    "uri": "order-management/order/{order}/delete",
+    "method": [
+      "POST"
+    ]
+  },
+  "order-show": {
+    "name": "order-show",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\Order\\OrderController@Show",
+    "uri": "order-management/order/{order}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "generated::HnYyA5Y8bB2KN1ZE": {
+    "name": "generated::HnYyA5Y8bB2KN1ZE",
+    "domain": null,
+    "action": "Closure",
+    "uri": "/",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "storefront": {
+    "name": "storefront",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\StoreFrontController@Storefront",
+    "uri": "storefront",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "switch-language": {
+    "name": "switch-language",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Localization\\LanguageSwitcherController@setLanguage",
+    "uri": "set-language/{language}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "user-profile": {
+    "name": "user-profile",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\UserController@Show",
+    "uri": "users/profile/{user}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "log-in": {
+    "name": "log-in",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\AuthController@LogIn",
+    "uri": "auth/log-in",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "log-on": {
+    "name": "log-on",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\AuthController@LogOn",
+    "uri": "auth/log-on",
+    "method": [
+      "POST"
+    ]
+  },
+  "google-log-in": {
+    "name": "google-log-in",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Socialite\\GoogleAuthController@redirect",
+    "uri": "auth/google-log-in",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "google-log-on": {
+    "name": "google-log-on",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\Socialite\\GoogleAuthController@callBackGoogle",
+    "uri": "auth/google-log-on",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "log-out": {
+    "name": "log-out",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\AuthController@LogOut",
+    "uri": "auth/log-out",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "sign-up": {
+    "name": "sign-up",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\AuthController@SignUp",
+    "uri": "auth/sign-up",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "sign-on": {
+    "name": "sign-on",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\User\\AuthController@ImprovedSignOn",
+    "uri": "auth/sign-on",
+    "method": [
+      "POST"
+    ]
+  }
+}
