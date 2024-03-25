@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'dashboard', 'middleware' => 'role:Seller,Moderator,Admin'], function () {
 
         Route::get('main', [DashboardController::class, 'Main'])->name('dashboard-main');
-        Route::get('charts', [DashboardController::class, 'Charts'])->name('dashboard-charts');
+        Route::middleware('role:Admin')->get('charts', [DashboardController::class, 'Charts'])->name('dashboard-charts');
 
     });
 
