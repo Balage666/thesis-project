@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Emsifa\RandomImage\RandomImage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Helpers\Shared\SeederHelper;
 
@@ -77,6 +76,35 @@ class DatabaseSeeder extends Seeder
             \App\Models\UserRole::newModelInstance([
                 'name' => 'Admin',
             ])
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'Only Customer',
+            'email' => 'only.customer@bluevenue.tp',
+            'email_verified_at' => now(),
+            'password' => Hash::make('customer'),
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name=Only+Customer",
+            'remember_token' => Str::random(10),
+        ])->Roles()->save(
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Customer'
+            ])
+        );
+
+        \App\Models\User::create([
+            'name' => 'Sel Ler',
+            'email' => 'sel.ler@bluevenue.tp',
+            'email_verified_at' => now(),
+            'password' => Hash::make('seller'),
+            'profile_picture' => "https://ui-avatars.com/api/?size=256&background=random&name=Only+Customer",
+            'remember_token' => Str::random(10),
+        ])->Roles()->saveMany([
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Customer'
+            ]),
+            \App\Models\UserRole::newModelInstance([
+                'name' => 'Seller'
+            ]),
         ]);
 
         \App\Models\User::create([
