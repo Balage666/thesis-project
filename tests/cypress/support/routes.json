@@ -110,8 +110,8 @@
       "POST"
     ]
   },
-  "generated::obdUra8LGsvIPtvU": {
-    "name": "generated::obdUra8LGsvIPtvU",
+  "generated::fySp5OxIGmpAEcEt": {
+    "name": "generated::fySp5OxIGmpAEcEt",
     "domain": null,
     "action": "Closure",
     "uri": "api/user",
@@ -133,7 +133,7 @@
   "dashboard-charts": {
     "name": "dashboard-charts",
     "domain": null,
-    "action": "App\\Http\\Controllers\\Dashboard\\DashboardController@Charts",
+    "action": "\\App\\Http\\Controllers\\Dashboard\\DashboardController@Charts",
     "uri": "dashboard/charts",
     "method": [
       "GET",
@@ -603,8 +603,8 @@
       "HEAD"
     ]
   },
-  "generated::HnYyA5Y8bB2KN1ZE": {
-    "name": "generated::HnYyA5Y8bB2KN1ZE",
+  "generated::KWQyisHmz3IkBEeI": {
+    "name": "generated::KWQyisHmz3IkBEeI",
     "domain": null,
     "action": "Closure",
     "uri": "/",

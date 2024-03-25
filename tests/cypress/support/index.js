@@ -31,9 +31,10 @@ before(() => {
     cy.refreshRoutes();
     cy.refreshDatabase();
     cy.seed();
+
 });
 
-after(() => {
-    cy.task('activateLocalEnvFile', {}, { log: false });
-    cy.artisan('config:clear', {}, { log: false });
-});
+// after(() => {
+//     cy.task('activateLocalEnvFile', {}, { log: false });
+//     cy.artisan('config:clear', {}, { log: false });
+// });
