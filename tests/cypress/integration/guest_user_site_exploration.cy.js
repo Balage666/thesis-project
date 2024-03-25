@@ -28,28 +28,35 @@ describe('Guest user explores the site' , () => {
         ['/product-management/show/1', () => cy.url().should('include', `/product-management/show/1`)],
         ['/product-management/edit/1', () => cy.url().should('include', `${logIn}`)],
         ['/category-management/list', () => cy.url().should('include', `${logIn}`)],
-
+        ['/order-management/list/all', () => cy.url().should('include', `${logIn}`)],
+        ['/order-management/order/1', () => cy.url().should('include', `${logIn}`)]
     ];
 
     const deleteRequests = [
-        ['user', 'guest-user-tries-to-delete-a-user', (alias) => {
-            cy.get(`@${alias}`).then((resp) => {
+        [
+            'user',
+            'guest-user-tries-to-delete-a-user',
+            (alias) => { cy.get(`@${alias}`).then((resp) => {
 
                 expect(resp.status).to.eq(405);
                 expect(resp.statusText).to.have.string('Method Not Allowed')
             });}
         ],
 
-        ['product', 'guest-user-tries-to-delete-a-product', (alias) => {
-            cy.get(`@${alias}`).then((resp) => {
+        [
+            'product',
+            'guest-user-tries-to-delete-a-product',
+            (alias) => { cy.get(`@${alias}`).then((resp) => {
 
                 expect(resp.status).to.eq(405);
                 expect(resp.statusText).to.have.string('Method Not Allowed')
             });}
         ],
 
-        ['category', 'guest-user-tries-to-delete-a-category', (alias) => {
-            cy.get(`@${alias}`).then((resp) => {
+        [
+            'category',
+            'guest-user-tries-to-delete-a-category',
+            (alias) => { cy.get(`@${alias}`).then((resp) => {
 
                 expect(resp.status).to.eq(405);
                 expect(resp.statusText).to.have.string('Method Not Allowed')
