@@ -128,8 +128,8 @@ const sendFormData = () => {
                                 :validation="[['required']]"
                                 validaton-visibility="live"
                                 number="float"
-                                min="500.00"
-                                max="600000"
+                                min="5.00"
+                                max="100.00"
                             />
 
                             <FormKit

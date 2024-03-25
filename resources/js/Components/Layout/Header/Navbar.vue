@@ -66,7 +66,7 @@ const removeFromBasket = (product) => {
                             <i class="fa-solid fa-heart"></i>
                             <span class="col-12">
                                 {{ __("Favorites") }}
-                                <span v-if="currentUser?.favorites.length > 0" class="badge text-bg-danger">{{ currentUser?.favorites.length }}</span>
+                                <span data-cy="favorite-counter" v-if="currentUser?.favorites.length > 0" class="badge text-bg-danger">{{ currentUser?.favorites.length }}</span>
                             </span>
                         </button>
                         <ul class="dropdown-menu bg-white p-3">

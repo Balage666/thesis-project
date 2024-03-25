@@ -87,7 +87,7 @@ const calculateStars = (avg) => {
 const scrollable = ref(null);
 
 console.log(currentLocale.value);
-const next = ref(currentLocale.value == 'en' ? props.allProducts.meta.links.filter(l => l.label == 'Next').shift()?.url : props.allProducts.meta.links.filter(l => l.label == 'Következő').shift()?.url);
+const next = ref(currentLocale.value == 'en' ? props.allProducts.meta?.links.filter(l => l.label == 'Next').shift()?.url : props.allProducts.meta.links.filter(l => l.label == 'Következő').shift()?.url);
 console.log(next.value);
 
 useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
@@ -95,7 +95,7 @@ useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
         return
     }
 
-    if (next.value === null) {
+    if (next.value === null || next.value === undefined) {
         return
     }
     else {
@@ -215,6 +215,7 @@ const addToCart = (product) => {
                                             <input
                                                 class="form-check-input"
                                                 type="checkbox"
+                                                :data-cy="'category_'+category.id"
                                                 :name="category.name"
                                                 :id="category.id"
                                                 :value="category.id"
@@ -239,6 +240,7 @@ const addToCart = (product) => {
                                             <input
                                                 class="form-check-input"
                                                 type="checkbox"
+                                                :data-cy="'distributor_'+distributor.id"
                                                 :name="distributor.name"
                                                 :id="distributor.id"
                                                 :value="distributor.id"
@@ -317,7 +319,7 @@ const addToCart = (product) => {
 
                             <div class="row overflow-y-scroll" style="height: 950px">
 
-                                <h4 v-if="props.allProducts.data.length == 0">{{ __('No products found!') }}</h4>
+                                <h4 v-if="props.allProducts.data.length == 0" class="text-center">{{ __('No products found!') }}</h4>
 
                                 <div v-else class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" v-for="product in props.allProducts.data" :key="product.id">
 
@@ -347,7 +349,7 @@ const addToCart = (product) => {
                                                     <button @click="addToFavorites(currentUser, product)" class="btn btn-lg btn-outline-danger" v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-regular fa-heart"></i></button>
                                                     <button @click="removeFromFavorites(currentUser, product)" class="btn btn-lg btn-danger" v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id === product.id) && currentUser.id != product.distributor.id"><i class="fa-solid fa-heart"></i></button>
 
-                                                    <button @click="addToCart(product)" v-if="currentUser?.id != product.distributor.id" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></button>
+                                                    <button :data-cy="'add-to-cart-product-'+product.id" @click="addToCart(product)" v-if="currentUser?.id != product.distributor.id" class="btn btn-lg btn-info"><i class="fa-solid fa-basket-shopping"></i></button>
                                                     <Link method="get" :href="route('product-show', { product: product })" class="btn btn-lg btn-secondary"><i class="fa-solid fa-eye"></i></Link>
                                             </div>
                                         </div>
@@ -355,7 +357,7 @@ const addToCart = (product) => {
 
                                 </div>
 
-                                <div v-if="next !== null" class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" ref="scrollable" v-for="n in 3">
+                                <div v-if="next !== null && next !== undefined" class="mt-2 col-md-12 col-lg-4 mb-4 mb-lg-0" ref="scrollable" v-for="n in 3">
                                     <div class="card" aria-hidden="true">
                                         <div class="card-body">
                                             <h5 class="card-title placeholder-glow">

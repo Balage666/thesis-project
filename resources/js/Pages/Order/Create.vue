@@ -19,12 +19,10 @@ const pageProps = ref(usePage().props.value);
 const permissions = ref(pageProps.value.permissions);
 const currentUser = ref(pageProps.value.active_session.user);
 
-console.log(currentUser.value);
-
 const cartShow = ref(props.cart);
 const cartItems = ref(cartShow.value.cart_items)
 
-const totalPrice = computed(() => cartItems.value.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0));
+const totalPrice = computed(() => cartItems.value.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0).toFixed(2));
 
 const listOfCountries = Country.getAllCountries().map(({ flag, name, isoCode }) => ({ flag, name, isoCode }));
 const listOfStatesByCountryIso = ref([])
@@ -62,12 +60,17 @@ const createOrderForm = useForm({
 
 const setHiddenFields = () => {
 
+    let addressValues = currentUser.value.addresses.find((address) => address.id == createOrderForm.fullAddress);
+
+    console.log(addressValues);
     // console.log(createOrderForm.fullAddress_text);
 
-    createOrderForm.address = createOrderForm.fullAddress.address_text || ''
-    createOrderForm.country = createOrderForm.fullAddress.country || -1
-    createOrderForm.stateOrRegion = createOrderForm.fullAddress.state_or_region || -1
-    createOrderForm.zipOrPostalCode = createOrderForm.fullAddress.postal_or_zip_code || ''
+    createOrderForm.address = addressValues?.address_text || ''
+    createOrderForm.country = addressValues?.country || -1
+    createOrderForm.stateOrRegion = addressValues?.state_or_region || -1
+    createOrderForm.zipOrPostalCode = addressValues?.postal_or_zip_code || ''
+
+    console.log(createOrderForm.address, createOrderForm.country, createOrderForm.stateOrRegion, createOrderForm.zipOrPostalCode);
 }
 
 const createOrder = () => {
@@ -128,7 +131,7 @@ const createOrder = () => {
 
                             <div class="col-sm-6">
                                 <label for="phone" class="form-label">{{ __('Phone number') }}</label>
-                                <select v-model="createOrderForm.phoneNumber" v-if="permissions.authenticated && currentUser.phone_numbers.length > 0" class="form-select formInputFieldBackground" id="address" required>
+                                <select v-model="createOrderForm.phoneNumber" v-if="permissions.authenticated && currentUser.phone_numbers.length > 0" class="form-select formInputFieldBackground" id="phone" required>
                                     <option :value="''">{{ __('--Select your phone number--') }}</option>
                                     <option v-for="phone in currentUser.phone_numbers" :value="phone.number">{{ phone.number }}</option>
                                 </select>
@@ -140,7 +143,7 @@ const createOrder = () => {
                                 <label for="address" class="form-label">{{ __('Address') }}</label>
                                 <select @change="setHiddenFields" v-model="createOrderForm.fullAddress" class="form-select formInputFieldBackground" id="address" required>
                                     <option :value="-1">{{ __('--Select your address--') }}</option>
-                                    <option v-for="address in currentUser.addresses" :value="address">{{ `${getCountryNameByIso(address.country)}, ${getStateNameByIsoCodeAndCountryIsoCode(address.state_or_region, address.country)}, ${address.postal_or_zip_code}, ${address.address_text}` }}</option>
+                                    <option v-for="address in currentUser.addresses" :value="address.id">{{ `${getCountryNameByIso(address.country)}, ${getStateNameByIsoCodeAndCountryIsoCode(address.state_or_region, address.country)}, ${address.postal_or_zip_code}, ${address.address_text}` }}</option>
                                 </select>
                             </div>
 

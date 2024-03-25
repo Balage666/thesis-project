@@ -112,7 +112,7 @@ const sendFormData = () => {
             </div>
             <div class="row">
                 <div class="col-12 d-grid gap-2 mt-4">
-                    <button type="submit" class="btn btn-primary shadow-sm fw-bold">{{ __('Add address') }}</button>
+                    <button data-cy="add-address" type="submit" class="btn btn-primary shadow-sm fw-bold">{{ __('Add address') }}</button>
                 </div>
             </div>
         </div>

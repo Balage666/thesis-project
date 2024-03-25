@@ -272,7 +272,7 @@ const removeFromFavorites = (user, product) => {
                         </div>
                         <span class="text-muted">{{ productRatingsCount }} {{ __('ratings') }}</span>
                         <RateProduct
-                            v-if="permissions.authenticated && productShow.distributor.id != currentUser.id"
+                            v-if="permissions.authenticated && productShow.distributor.id != currentUser?.id"
                             :alreadyRated="checkAlreadyRated(currentUser, productShow)"
                             @onRated="sendProductRatingRequest"
                             @onRatingDelete="sendDeleteRatingRequest"
@@ -341,7 +341,7 @@ const removeFromFavorites = (user, product) => {
 
                     </div>
 
-                    <div class="d-flex gap-3 text-center" v-if="currentUser.id != productShow.distributor.id">
+                    <div class="d-flex gap-3 text-center" v-if="currentUser?.id != productShow.distributor.id">
 
                         <div>
 
@@ -351,8 +351,8 @@ const removeFromFavorites = (user, product) => {
 
                         <div>
 
-                            <button v-if="permissions.authenticated && !currentUser.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</button>
-                            <button v-if="permissions.authenticated && currentUser.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> Remove from favorites</button>
+                            <button v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</button>
+                            <button v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> Remove from favorites</button>
                         </div>
                     </div>
 

@@ -29,16 +29,16 @@ import { usedTechnologies } from '*js-shared/technologies';
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">{{ ('Main Sources') }}</h6>
                         <p>
-                            <a class="text-white">{{ __('Laravel Documentation') }}</a>
+                            <a href="https://laravel.com/docs/11.x" class="text-white">{{ __('Laravel Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">{{ __('Inertia Documentation') }}</a>
+                            <a href="https://inertiajs.com/" class="text-white">{{ __('Inertia Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">{{ __('Vue3 Documentation') }}</a>
+                            <a href="https://vuejs.org/" class="text-white">{{ __('Vue3 Documentation') }}</a>
                         </p>
                         <p>
-                            <a class="text-white">{{ __('Bootstrap Documentation') }}</a>
+                            <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" class="text-white">{{ __('Bootstrap Documentation') }}</a>
                         </p>
                     </div>
 
@@ -49,8 +49,8 @@ import { usedTechnologies } from '*js-shared/technologies';
                             Useful links
                         </h6>
                         <p>
-                            <a class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</a>
-                            <a class="text-white" v-else>{{ __('Login') }}</a>
+                            <Link :href="route('user-profile', {user: $page.props.active_session.user } )" class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</Link>
+                            <Link :href="route('log-in')" class="text-white" v-else>{{ __('Login') }}</Link>
                         </p>
                     </div>
 

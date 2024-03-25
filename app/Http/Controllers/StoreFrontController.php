@@ -62,7 +62,10 @@ class StoreFrontController extends Controller
 
         $carouselProducts = Product::where('stock', '>', 20)->inRandomOrder()->limit(15)->get();
 
-        $allProducts = $allProducts->toQuery()->paginate(6)->withQueryString();
+        if ($allProducts->isNotEmpty()) {
+            $allProducts = $allProducts->toQuery()->paginate(6)->withQueryString();
+        }
+
 
         if ($request->wantsJson()) {
             return StorefrontProductResource::collection($allProducts);

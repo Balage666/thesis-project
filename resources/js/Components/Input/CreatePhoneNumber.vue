@@ -82,7 +82,7 @@ const resetForm = () => {
                 </div>
                 <div class="row">
                     <div class="col-12 d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-primary shadow-sm fw-bold">{{ __('Add phone number') }}</button>
+                        <button data-cy="add-phone-number" type="submit" class="btn btn-primary shadow-sm fw-bold">{{ __('Add phone number') }}</button>
                     </div>
                 </div>
             </div>

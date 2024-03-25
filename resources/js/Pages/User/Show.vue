@@ -127,6 +127,12 @@ const sendDeleteFavoriteItemRequest = (payload) => {
 
 }
 
+const sendSellerRoleRequest = (payload) => {
+
+    router.post(route('seller-role-grant', { user: payload }));
+
+}
+
 </script>
 
 
@@ -161,6 +167,7 @@ const sendDeleteFavoriteItemRequest = (payload) => {
                                             :user="user"
                                             :profilePictureEditModeVisible="EditMode.changeProfilePictureButtonVisible"
                                             @onPictureButtonClick="showDialog"
+                                            @onGrantSellerRoleButtonClick="sendSellerRoleRequest"
                                         />
 
                                     </div>

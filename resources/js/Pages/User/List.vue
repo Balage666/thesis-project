@@ -160,7 +160,7 @@ const sendCleanSearch = () => {
                                             <div class="col-12">
 
                                                 <div class="my-3 my-lg-0 text-center">
-                                                    <button @click="sendUserDeleteRequest(user)" class="btn btn-lg btn-danger" type="button">Delete</button>
+                                                    <button @click="sendUserDeleteRequest(user)" class="btn btn-lg btn-danger" type="button">{{ __('Delete') }}</button>
                                                 </div>
 
                                             </div>
