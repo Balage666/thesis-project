@@ -304,7 +304,7 @@ const removeFromFavorites = (user, product) => {
 
 
                     <h3 class="mb-3" v-show="Object.entries(EditMode).every(m => m[1] == false)">
-                        <span class="text-muted">Price: </span> {{ productShow.price }}
+                        <span class="text-muted">Price: </span> {{ `€ ${productShow.price}` }}
                         <span class="text-black-50"> • </span>
                         <span class="text-muted">{{ __('In Stock:') }}</span> {{ productShow.stock }}
                     </h3>
