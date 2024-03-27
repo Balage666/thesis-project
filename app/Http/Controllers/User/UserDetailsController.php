@@ -80,7 +80,11 @@ class UserDetailsController extends Controller
         $title = 'Email testing from BlueVenue';
         $body = "Your password has been reset! Here is your new one: $resetPassword";
 
-        Mail::to(env("MAIL_USERNAME"))->send(new ResetPasswordMail($title, $body));
+        try {
+            Mail::to(env("MAIL_USERNAME"))->send(new ResetPasswordMail($title, $body));
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['mailer' => 'Something went wrong during mailing procedure!']);
+        }
 
         return redirect()->back()->with('message', "Password has been reset for {$user->name}!");
 
@@ -125,7 +129,13 @@ class UserDetailsController extends Controller
         $title = 'Email testing from BlueVenue';
         $body = "The following role: $newRole->name has been granted to you, $user->name!";
 
-        Mail::to(env("MAIL_USERNAME"))->send(new GrantSellerRoleMail($title, $body));
+        try {
+            //code...
+            Mail::to(env("MAIL_USERNAME"))->send(new GrantSellerRoleMail($title, $body));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->withErrors(['mailer' => 'Something went wrong during mailing procedure!']);
+        }
 
         return redirect()->back()->with('message', 'Email sent!');
     }
