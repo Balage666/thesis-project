@@ -69,6 +69,9 @@ const sendFormData = () => {
                             :validation="[['required']]"
                             validation-visibility="live"
                             :placeholder="__('--Select category--')"
+                            :validation-messages="{
+                                required: __('Product category is required')
+                            }"
                         />
 
 
@@ -100,6 +103,9 @@ const sendFormData = () => {
                             :label="__('Product name')"
                             :validation="[['required']]"
                             validation-visibility="live"
+                            :validation-messages="{
+                                required: __('Product name is required')
+                            }"
 
                         />
 
@@ -130,6 +136,9 @@ const sendFormData = () => {
                                 number="float"
                                 min="5.00"
                                 max="100.00"
+                                :validation-messages="{
+                                    required: __('Product price is required')
+                                }"
                             />
 
                             <FormKit
@@ -146,6 +155,9 @@ const sendFormData = () => {
                                 number="integer"
                                 min="1"
                                 max="999"
+                                :validation-messages="{
+                                    required: __('Product stock is required')
+                                }"
                             />
                         </FormKit>
 
@@ -201,7 +213,7 @@ const sendFormData = () => {
                             <FormKit
                                 type="button"
                                 @click="handlers.incrementStep(-1)()"
-                                label="Back"
+                                :label="__('Back')"
                                 data-next="true"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4 ms-auto me-auto"

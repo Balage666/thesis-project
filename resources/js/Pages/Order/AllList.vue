@@ -99,7 +99,7 @@ console.log(orderListShow.value);
                                 <template v-slot:accordion-header>
                                     <button class="accordion-button collapsed bg-info bg-gradient" type="button" data-bs-toggle="collapse" :data-bs-target="'#open' + order.id" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                         <div class="col-12 col-md-6 col-lg-9 mt-1">
-                                            <span class="fw-bold">{{ `Order #${order.id}` }}</span>
+                                            <span class="fw-bold">{{ `${__('Order #')}${order.id}` }}</span>
                                         </div>
                                     </button>
                                 </template>
@@ -135,7 +135,7 @@ console.log(orderListShow.value);
 
                                                 <div class="col-md-7 col-lg-8 p-3">
 
-                                                    <h2 class="mb-3 text-center">{{ __(`Details of order #${order.id}`) }}</h2>
+                                                    <h2 class="mb-3 text-center">{{ __(`Details of the order`) }}</h2>
 
                                                     <div class="row g-3">
 
@@ -184,7 +184,7 @@ console.log(orderListShow.value);
 
                                                         <div class="col-12">
                                                             <h4>{{ __('Status:') }}</h4>
-                                                            <p class="lead fw-bold">{{ order.status }}</p>
+                                                            <p class="lead fw-bold">{{ __(order.status) }}</p>
                                                         </div>
                                                     </div>
 
@@ -192,7 +192,7 @@ console.log(orderListShow.value);
 
                                                 <div class="col-md-5 col-lg-4 p-3 overflow-y-scroll" style="max-height: 800px;">
 
-                                                    <h2 class="mb-3 text-center">{{ __(`Items of order #${order.id}`) }}</h2>
+                                                    <h2 class="mb-3 text-center">{{ __(`Items of the order`) }}</h2>
 
                                                     <ul class="list-group mb-3">
                                                         <li class="list-group-item d-flex justify-content-between lh-sm p-3 bg-info" v-for="item in order.order_items">

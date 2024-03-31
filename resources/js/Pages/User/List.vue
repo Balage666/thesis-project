@@ -135,8 +135,8 @@ const sendCleanSearch = () => {
                                                             <div class="mt-1">
                                                                 <h4>{{ user.name }}</h4>
                                                                 <div class="d-grid gap-2">
-                                                                    <Link :href="route('user-show', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">View User</Link>
-                                                                    <Link :href="route('user-edit', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">Legacy User Editor</Link>
+                                                                    <Link :href="route('user-show', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">{{ __('View User') }}</Link>
+                                                                    <Link :href="route('user-edit', { user: user })" method="get" as="button" type="button" class="btn btn-outline btn-lg btn-info shadow-sm fw-bold">{{ __('Legacy User Editor') }}</Link>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -160,7 +160,7 @@ const sendCleanSearch = () => {
                                             <div class="col-12">
 
                                                 <div class="my-3 my-lg-0 text-center">
-                                                    <button @click="sendUserDeleteRequest(user)" class="btn btn-lg btn-danger" type="button">{{ __('Delete') }}</button>
+                                                    <button @click="sendUserDeleteRequest(user)" class="btn btn-lg btn-danger" type="button"> <i class="fa-solid fa-x"></i> {{ __('Delete') }}</button>
                                                 </div>
 
                                             </div>

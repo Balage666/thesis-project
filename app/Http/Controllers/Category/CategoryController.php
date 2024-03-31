@@ -35,7 +35,7 @@ class CategoryController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return redirect()->back()->with('message', 'Category Added');
+        return redirect()->back()->with('message', 'Category Added!');
     }
 
     /**

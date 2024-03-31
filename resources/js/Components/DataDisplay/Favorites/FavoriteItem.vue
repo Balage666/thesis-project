@@ -31,7 +31,7 @@ const emitFavoriteDeleteRequest = (product) => {
             </div>
             <div class="col-6 text-end d-flex align-items-center justify-content-evenly">
 
-                <button @click="emitFavoriteDeleteRequest(item.product)" type="button" class="btn btn-danger">{{ __('Delete') }}</button>
+                <button @click="emitFavoriteDeleteRequest(item.product)" type="button" class="btn btn-danger"> <i class="fa-solid fa-circle-xmark fa-sm"></i> {{ __('Delete') }}</button>
 
             </div>
 

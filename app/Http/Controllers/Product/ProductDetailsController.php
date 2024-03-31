@@ -78,7 +78,7 @@ class ProductDetailsController extends Controller
 
         $newComment->save();
 
-        return redirect()->back()->with('message', 'Comment Added');
+        return redirect()->back()->with('message', 'Comment Added!');
 
     }
 

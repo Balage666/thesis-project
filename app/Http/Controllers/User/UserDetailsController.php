@@ -86,7 +86,7 @@ class UserDetailsController extends Controller
             return redirect()->back()->withErrors(['mailer' => 'Something went wrong during mailing procedure!']);
         }
 
-        return redirect()->back()->with('message', "Password has been reset for {$user->name}!");
+        return redirect()->back()->with('message', "User's password has been reset by the system!");
 
     }
 
@@ -113,7 +113,7 @@ class UserDetailsController extends Controller
 
         $user->update();
 
-        return redirect()->back()->with('message', "Profile picture has been changed for {$user->name}!");
+        return redirect()->back()->with('message', "User's profile picture has been changed by the system!");
 
     }
 

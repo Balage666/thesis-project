@@ -70,10 +70,13 @@ const getRoles = () => {
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
-                        :label="__('User\'s name')"
+                        :label="__(`User's name`)"
                         :validation="[['required'], ['matches', /^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u]]"
                         validation-visibility="live"
-
+                        :validation-messages="{
+                            required: __(`User's name is required`),
+                            matches: __(`Incorrect format for user's name`)
+                        }"
                     />
 
 
@@ -85,9 +88,13 @@ const getRoles = () => {
                         label-class="form-label d-flex justify-content-start fw-bold"
                         outer-class="form-outline mb-4"
                         input-class="form-control form-control-lg"
-                        :label="__('User\'s email')"
+                        :label="__(`User's email`)"
                         validation="required|email"
                         validation-visibility="live"
+                        :validation-messages="{
+                            required: __(`User's email is required`),
+                            email: __(`User's email is incorrect`)
+                        }"
                     />
 
                     <FormKit type="group">
@@ -99,9 +106,13 @@ const getRoles = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            :label="__('User\'s password')"
+                            :label="__(`User's password`)"
                             :validation="[['required'], ['matches', /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]]"
                             validation-visibility="live"
+                            :validation-messages="{
+                                required: __('Password is required'),
+                                matches: __('Incorrect format for password')
+                            }"
                         />
 
                         <FormKit
@@ -112,10 +123,14 @@ const getRoles = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            :label="__('Confirm user\'s password')"
+                            :label="__(`Confirm user's password`)"
                             :validation="[['required'], ['confirm']]"
                             validation-label="Confirmation"
                             validation-visibility="live"
+                            :validation-messages="{
+                                required: __('Password confirmation is required'),
+                                confirm: __('Passwords must match')
+                            }"
                         />
                     </FormKit>
 
@@ -141,11 +156,15 @@ const getRoles = () => {
                         id="roles"
                         name="roles"
                         type="checkbox"
-                        label="Roles"
+                        :label="__('Roles')"
                         v-model="form.roles"
                         :options="getRoles()"
                         :help="__('Select roles')"
                         validation="required|min:1"
+                        :validation-messages="{
+                            required: __('Select roles is required'),
+                            min: __('Select roles is required')
+                        }"
                     />
 
                     <template #stepPrevious="{ handlers, node }">

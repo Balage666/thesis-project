@@ -95,7 +95,7 @@ const sendModifiedEmailData = () => {
                 </div>
                 <div class="col-sm-6 text-center text-lg-start text-md-start text-sm-start">
                     <h6  class="my-0 text-secondary" v-if="!props.resetPasswordButtonVisible">************************</h6>
-                    <Link :href="route('user-reset-password', { user: props.user })" method="post" as="button" class="text-secondary my-0 " v-if="props.resetPasswordButtonVisible">{{__('Reset :name\'s password', props.user)}}</Link>
+                    <Link :href="route('user-reset-password', { user: props.user })" method="post" as="button" class="text-secondary my-0 " v-if="props.resetPasswordButtonVisible">{{__(`Reset :name's password`, props.user)}}</Link>
                 </div>
             </div>
 

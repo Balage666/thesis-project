@@ -21,16 +21,16 @@ onMounted(() => {
 
 <template>
     <Head>
-        <title>{{ props.title }}</title>
+        <title>{{ __(props.title) }}</title>
     </Head>
     <div class="container vh-100 d-flex flex-grow-1 justify-content-center align-items-center">
         <div class="card bg-light-subtle vw-100" style="height: 24rem">
             <div class="d-flex align-items-center justify-content-center vh-100">
                 <div class="text-center">
-                    <h1 class="display-1 fw-bold">{{ props.statusCode }}</h1>
-                    <p class="fs-3"> {{ props.title }}</p>
+                    <h1 class="display-1 fw-bold">{{ __(props.statusCode) }}</h1>
+                    <p class="fs-3"> {{ __(props.title) }}</p>
                     <p class="lead">
-                        {{ props.description }}
+                        {{ __(props.description) }}
                     </p>
                 </div>
             </div>

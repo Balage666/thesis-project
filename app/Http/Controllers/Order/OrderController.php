@@ -48,7 +48,7 @@ class OrderController extends Controller
         $cart->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
 
         if (is_null($cart)) {
-            return redirect()->route('storefront')->withErrors(['checkout' => 'Unable to proceed to checkout, Cart doesn\'t exist!']);
+            return redirect()->route('storefront')->withErrors(['checkout' => 'Unable to proceed to checkout, Cart does not exist!']);
         }
 
         return Inertia::render("Order/Create", [

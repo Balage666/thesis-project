@@ -304,7 +304,7 @@ const removeFromFavorites = (user, product) => {
 
 
                     <h3 class="mb-3" v-show="Object.entries(EditMode).every(m => m[1] == false)">
-                        <span class="text-muted">Price: </span> {{ `€ ${productShow.price}` }}
+                        <span class="text-muted">{{ __('Price') }}: </span> {{ `€ ${productShow.price}` }}
                         <span class="text-black-50"> • </span>
                         <span class="text-muted">{{ __('In Stock:') }}</span> {{ productShow.stock }}
                     </h3>
@@ -317,7 +317,7 @@ const removeFromFavorites = (user, product) => {
 
                                     <FloatLabel>
                                         <InputNumber id="price-input" v-model="changePriceForm.price" variant="filled" :minFractionDigits="2" :max="600000" />
-                                        <label for="price-input">Price</label>
+                                        <label for="price-input">{{ __('Price') }}</label>
                                     </FloatLabel>
 
                                     <button :disabled="!changePriceForm.isDirty" type="submit" class="btn btn-primary btn-sm">{{ __('Modify') }}</button>
@@ -331,7 +331,7 @@ const removeFromFavorites = (user, product) => {
                                 <div class="d-flex gap-2">
                                     <FloatLabel>
                                         <InputNumber id="stock-input" v-model="changeStockValueForm.stock" :max="9999" />
-                                        <label for="stock-input">Stock</label>
+                                        <label for="stock-input">{{ __('Stock') }}</label>
                                     </FloatLabel>
 
                                     <button :disabled="!changeStockValueForm.isDirty" type="submit" class="btn btn-sm btn-primary">{{ __('Modify') }}</button>
@@ -387,7 +387,7 @@ const removeFromFavorites = (user, product) => {
                                         </div>
                                         <div class="d-flex flex-row align-items-center">
                                             <button @click="sendDeleteCommentRequest(comment)" v-if="permissions.has_admin_role || currentUser?.id === comment.commenter.id" class="btn btn-lg btn-danger">
-                                                <i class="fa-solid fa-x"></i> Delete
+                                                <i class="fa-solid fa-x"></i> {{ __('Delete') }}
                                             </button>
                                         </div>
                                     </div>

@@ -140,7 +140,7 @@ const closeNewCategoryModal = () => {
                                             <div class="col-md-12 p-md-5 col-lg-12">
 
                                                 <div class="my-2 my-lg-0">
-                                                    <h2 class="text-center mb-5">Products in this category</h2>
+                                                    <h2 class="text-center mb-5">{{ __('Products in this category') }}</h2>
                                                     <div v-if="category.products.length == 0">
                                                         <h4 class="text-center">{{ __('Such emptiness!') }}</h4>
                                                     </div>

@@ -122,7 +122,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
         $cartItems = $cart->CartItems;
@@ -158,7 +158,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Basket doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
         $cartItems = $cart->CartItems;
@@ -187,7 +187,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Basket doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
         $cartItems = $cart->CartItems;
@@ -201,7 +201,7 @@ class CartController extends Controller
         }
 
         if ($product->stock == 0) {
-            return redirect()->back()->withErrors(['cart' => 'You can\'t put more of that product into your basket!']);
+            return redirect()->back()->withErrors(['cart' => 'You cannot put more of that product into your basket!']);
         }
 
         $cartItems[$searchForItem]->amount++;
@@ -226,7 +226,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
         $cartItems = $cart->CartItems;
@@ -236,7 +236,7 @@ class CartController extends Controller
         });
 
         if (!is_numeric($searchForItem)) {
-            return redirect()->back()->withErrors(['cartItem' => 'This item is not in the cart!']);
+            return redirect()->back()->withErrors(['cartItem' => 'This item is not in the basket!']);
         }
 
         if ($cartItems[$searchForItem]->amount - 1 == 0) {
@@ -265,7 +265,7 @@ class CartController extends Controller
         }
 
         if (is_null($cart)) {
-            return redirect()->back()->withErrors(['cart' => 'Cart doesn\'t exist!']);
+            return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
         // dd($cart->CartItems);

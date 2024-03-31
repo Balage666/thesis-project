@@ -180,7 +180,7 @@ class ProductController extends Controller
         auth()->user()->Roles->contains('name', 'Admin');
 
         if (!$isAbleToDeleteProduct) {
-            return redirect()->route('product-list')->withErrors(['delete' => 'You can\'t delete other\'s products as Seller']);
+            return redirect()->route('product-list')->withErrors(['delete' => 'You cannot delete products created by other users as Seller']);
         }
 
         $product->delete();

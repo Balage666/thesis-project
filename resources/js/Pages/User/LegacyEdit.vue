@@ -81,7 +81,7 @@ const callResetPassword = () => {
                 <FormKit type="multi-step" tab-style="progress" :allow-incomplete="true" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center ">
 
                     <FormKit type="step" :name="__('editUserInfo')">
-                        <h3 class="mb-7 text-center"> {{ __("Edit :name's data", userValues) }} </h3>
+                        <h3 class="mb-7 text-center"> {{ __("Edit data for :name", userValues) }} </h3>
 
                         <FormKit
                             id="name"
@@ -91,10 +91,13 @@ const callResetPassword = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            :label="__('User\'s name')"
+                            :label="__(`User's name`)"
                             :validation="[['required'], ['matches', /^[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{1,}\s[A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]{2,}$/u]]"
                             validation-visibility="live"
-
+                            :validation-messages="{
+                                required: __(`User's name is required`),
+                                matches: __(`Incorrect format for user's name`)
+                            }"
                         />
 
                         <FormKit
@@ -105,13 +108,17 @@ const callResetPassword = () => {
                             label-class="form-label d-flex justify-content-start fw-bold"
                             outer-class="form-outline mb-4"
                             input-class="form-control form-control-lg"
-                            :label="__('User\'s email')"
+                            :label="__(`User's email`)"
                             validation="required|email"
                             validation-visibility="live"
+                            :validation-messages="{
+                                required: __(`User's email is required`),
+                                email: __(`User's email is incorrect`)
+                            }"
                         />
 
                         <FormKit type="button"
-                            :label="__('Reset :name\'s password', userValues)"
+                            :label="__(`Reset :name's password`, userValues)"
                             outer-class="form-outline mb-4 text-center"
                             input-class="btn btn-lg btn-info shadow-sm fw-bold"
                             @click="callResetPassword"
@@ -132,7 +139,7 @@ const callResetPassword = () => {
                         </template>
                     </FormKit>
 
-                    <FormKit type="step" :name="('editRoles')">
+                    <FormKit type="step" :name="__('editRoles')">
 
                         <h3 class="mb-7 text-center"> {{ __("Modify roles for :name!", userValues) }} </h3>
 
@@ -140,12 +147,16 @@ const callResetPassword = () => {
                             id="roles"
                             name="roles"
                             type="checkbox"
-                            :label="__(':name\'s Roles', userValues)"
+                            :label="__(`:name's Roles`, userValues)"
                             v-model="form.roles"
                             :options="getRoles()"
                             :help="__('Select roles')"
                             validation="required|min:1"
                             :disabled="rolesReadOnly()"
+                            :validation-messages="{
+                                required: __('Select roles is required'),
+                                min: __('Select roles is required')
+                            }"
                         />
 
                         <template #stepPrevious="{ handlers, node }">

@@ -201,7 +201,7 @@ const sendSellerRoleRequest = (payload) => {
                         <Accordion title="Addresses">
                             <div class="form-outline mb-4">
                                 <div class="text-end">
-                                    <button class="btn" :class="[ AddressFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="toggleAddressFormComponent"><i class="fa-solid" :class="[ AddressFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ AddressFormVisible ? 'Cancel' : 'New address'}} </button>
+                                    <button class="btn" :class="[ AddressFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="toggleAddressFormComponent"><i class="fa-solid" :class="[ AddressFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ AddressFormVisible ? __('Cancel') : __('New address') }} </button>
                                 </div>
                                 <CreateAddress :visible="AddressFormVisible" @submitted="sendEmittedAddressData" />
                             </div>
@@ -215,7 +215,7 @@ const sendSellerRoleRequest = (payload) => {
                         <Accordion title="Phones">
                             <div class="form-outline mb-4">
                                 <div class="text-end">
-                                    <button class="btn" :class="[ PhoneNumberFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="togglePhoneNumberFormComponent"><i class="fa-solid" :class="[ PhoneNumberFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ PhoneNumberFormVisible ? 'Cancel' : 'New phone number' }} </button>
+                                    <button class="btn" :class="[ PhoneNumberFormVisible ? 'btn-secondary' : 'btn-info' ]" @click="togglePhoneNumberFormComponent"><i class="fa-solid" :class="[ PhoneNumberFormVisible ? 'fa-x' : 'fa-plus' ]"></i> {{ PhoneNumberFormVisible ? __('Cancel') : __('New phone number') }} </button>
                                 </div>
                                 <CreatePhoneNumber :visible="PhoneNumberFormVisible" @submitted="sendEmittedPhoneNumberData"/>
                             </div>

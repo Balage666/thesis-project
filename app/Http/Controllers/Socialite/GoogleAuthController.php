@@ -46,7 +46,8 @@ class GoogleAuthController extends Controller
             }
 
         } catch (\Throwable $th) {
-            dd('Something went wrong during the google authentication process! '.$th->getMessage());
+            abort(503, $th->getMessage());
+            // dd('Something went wrong during the google authentication process! '.$th->getMessage());
         }
 
     }
