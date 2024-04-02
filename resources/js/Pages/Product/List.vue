@@ -19,11 +19,11 @@ const productList = computed(() => props.products.data);
 
 const currentUser = ref(usePage().props.value.active_session.user);
 
-console.log(productList.value);
+// console.log(productList.value);
 
 const sendDeleteRequest = (product) => {
 
-    console.log(product);
+    // console.log(product);
     router.post(route('product-delete', { product: product }));
 
 }

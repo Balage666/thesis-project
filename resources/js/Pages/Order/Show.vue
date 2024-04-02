@@ -18,7 +18,7 @@ const orderShow = ref(props.order.data);
 
 const totalPrice = computed(() => orderShow.value.order_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0))
 
-console.log(orderShow.value);
+// console.log(orderShow.value);
 
 const getCountryName = (isoCode) => {
 

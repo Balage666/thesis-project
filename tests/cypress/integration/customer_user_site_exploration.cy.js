@@ -417,7 +417,7 @@ describe('Customer user explores the site', () => {
 
             cy.get('#email').should('have.value', user.email);
 
-            console.log(user);
+            // console.log(user);
             cy.get(':nth-child(4) > #phone').select(user.phone_numbers[0].number).should('have.value', user.phone_numbers[0].number);
 
             cy.wait(2000);

@@ -27,7 +27,7 @@ import { usedTechnologies } from '*js-shared/technologies';
                     <hr class="w-100 clearfix d-md-none" />
 
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 fw-bold">{{ ('Main Sources') }}</h6>
+                        <h6 class="text-uppercase mb-4 fw-bold">{{ __('Main Sources') }}</h6>
                         <p>
                             <a href="https://laravel.com/docs/11.x" class="text-white">{{ __('Laravel Documentation') }}</a>
                         </p>
@@ -46,7 +46,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">
-                            Useful links
+                            {{ __('Account') }}
                         </h6>
                         <p>
                             <Link :href="route('user-profile', {user: $page.props.active_session.user } )" class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</Link>

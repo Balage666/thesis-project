@@ -16,7 +16,7 @@ const cartShow = ref(props.cart);
 
 // console.log(props.cart);
 
-console.log(cartShow.value.cart_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0));
+// console.log(cartShow.value.cart_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0));
 
 const totalPrice = computed(() => {
 

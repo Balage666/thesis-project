@@ -28,7 +28,7 @@ const createProductForm = useForm({
 
 const sendFormData = () => {
 
-    console.log(createProductForm);
+    // console.log(createProductForm);
     createProductForm.post(route('product-store'));
 }
 

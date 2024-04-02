@@ -33,13 +33,13 @@ onMounted(() => {
 
 const sendDeleteRequest = (category) => {
 
-    console.log(category);
+    // console.log(category);
     router.post(route('category-delete', { category: category }));
 
 }
 
 const sendStoreRequest = (payload) => {
-    console.log(payload);
+    // console.log(payload);
 
     router.post(route('category-store'), payload);
 }

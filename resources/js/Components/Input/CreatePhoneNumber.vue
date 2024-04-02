@@ -41,7 +41,7 @@ const sendFormData = () => {
     phoneNumberForm.number = phoneNumberForm.number.replace('(', '').replace(')', '').replaceAll('-', '')
     phoneNumberForm.mask = `${countries.find(({ iso }) => iso === phoneNumberForm.countryIso).code} ${phoneNumberForm.mask}`
 
-    console.log(phoneNumberForm);
+    // console.log(phoneNumberForm);
 
     // router.post(route('phone-number-add', { user: props.user }), phoneNumberForm);
 

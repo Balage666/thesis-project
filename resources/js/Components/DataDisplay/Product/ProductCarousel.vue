@@ -43,7 +43,7 @@ const emitFavoriteAdd = (user, product) => {
 
 const emitFavoriteRemove = (user, product) => {
 
-    console.log('Remove clicked');
+    // console.log('Remove clicked');
     emits('favoriteRemoved', { emitType: 'favoriteRemoved', user: user, product: product });
 }
 
@@ -76,7 +76,7 @@ const addToCart = (product) => {
                 <div class="carousel-item" v-for="(itemArray, index) in chunkedCarouselProducts" :key="index" :class="{ 'active' : index === 0 }">
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="card my-2 mx-2 bg-light border-info border-3 p-2" v-for="product in itemArray">
-                            <img :src="product.preview_image" class="card-img-top" :alt="product.name" />
+                            <img :src="product.preview_image" class="card-img-top" :alt="product.name" style="height: 260px;"/>
                             <div class="card-body">
 
                                 <div class="d-flex justify-content-between mb-3">

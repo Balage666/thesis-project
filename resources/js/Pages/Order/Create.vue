@@ -62,7 +62,7 @@ const setHiddenFields = () => {
 
     let addressValues = currentUser.value.addresses.find((address) => address.id == createOrderForm.fullAddress);
 
-    console.log(addressValues);
+    // console.log(addressValues);
     // console.log(createOrderForm.fullAddress_text);
 
     createOrderForm.address = addressValues?.address_text || ''
@@ -70,7 +70,7 @@ const setHiddenFields = () => {
     createOrderForm.stateOrRegion = addressValues?.state_or_region || -1
     createOrderForm.zipOrPostalCode = addressValues?.postal_or_zip_code || ''
 
-    console.log(createOrderForm.address, createOrderForm.country, createOrderForm.stateOrRegion, createOrderForm.zipOrPostalCode);
+    // console.log(createOrderForm.address, createOrderForm.country, createOrderForm.stateOrRegion, createOrderForm.zipOrPostalCode);
 }
 
 const createOrder = () => {

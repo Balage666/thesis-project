@@ -45,7 +45,7 @@ onMounted(() => {
 
 const toggleEditMode = (payload) => {
 
-    console.log(payload)
+    // console.log(payload)
 
     for (const key in EditMode) {
         if (Object.hasOwnProperty.call(EditMode, key)) {
@@ -77,7 +77,7 @@ const user = ref(props.userToShow.data[0]);
 const targetUserRolesRef = ref(user.value.roles);
 const targetUserRoles = ref(targetUserRolesRef.value.map(r => r.name));
 
-console.log(user.value);
+// console.log(user.value);
 
 const sendEmittedModifiedEmailData = (payload) => {
 
@@ -99,7 +99,7 @@ const sendEmittedPhoneNumberData = (payload) => {
 }
 
 const sendEmittedAddressData = (payload) => {
-    console.log(payload);
+    // console.log(payload);
     router.post(route('address-create', { user: user.value }), payload);
 }
 
@@ -107,15 +107,15 @@ const sendEmittedChangedPhoneNumberData = (payload) => {
     // console.log(payload)
     const [form, phone] = payload;
 
-    console.log(phone)
-    console.log(form)
+    // console.log(phone)
+    // console.log(form)
 
     router.post(route('phone-number-update', { phone: phone }), form)
 }
 
 const sendEmittedChangedProfilePictureData = (payload) => {
 
-    console.log(payload);
+    // console.log(payload);
 
     router.post(route('user-change-profile-picture', { user: user.value }), payload);
 }

@@ -25,7 +25,7 @@ const currentLocale = ref(pageProps.value.current_locale);
 
 const sendUserDeleteRequest = (user) => {
 
-    console.log(user);
+    // console.log(user);
     router.post(route('user-delete', { user: user }));
 
 }
@@ -40,7 +40,7 @@ const next = ref(currentLocale.value === 'en' ? props.users.meta.links.filter(l 
 
 useIntersectionObserver(last, ([{ isIntersecting }]) => {
 
-    console.log(isIntersecting);
+    // console.log(isIntersecting);
 
     if (!isIntersecting) {
         return
@@ -52,7 +52,7 @@ useIntersectionObserver(last, ([{ isIntersecting }]) => {
 
     axios.get(`${next.value}`).then((response) => {
 
-        console.log(response);
+        // console.log(response);
 
         props.users.data.push(...response.data.data);
         props.users.meta = response.data.meta;

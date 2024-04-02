@@ -26,13 +26,13 @@ const form = useForm({
 
 const sendFormData = () => {
 
-    console.log(`data about to be submitted: ${form.name}, ${form.email}, ${form.password}, ${form.roles}`)
+    // console.log(`data about to be submitted: ${form.name}, ${form.email}, ${form.password}, ${form.roles}`)
 
     form.post(route('user-store'));
 
 }
 
-console.log(userRolesAsModeratorForCreate);
+// console.log(userRolesAsModeratorForCreate);
 
 const getRoles = () => {
 
