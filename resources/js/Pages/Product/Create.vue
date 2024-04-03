@@ -53,8 +53,6 @@ const sendFormData = () => {
 
                     <FormKit type="step" :name="__('productCategory')">
 
-                        <div class="alert alert-success" v-if="$page.props.flash.message">{{ __($page.props.flash.message) }}</div>
-
                         <h3 class="mb-3 mx-5 text-center"> {{ __("Choose a category for your product!") }} </h3>
                         <FormKit
                             id="category"
