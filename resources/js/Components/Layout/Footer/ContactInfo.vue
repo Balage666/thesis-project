@@ -46,7 +46,7 @@ import { usedTechnologies } from '*js-shared/technologies';
 
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 fw-bold">
-                            {{ __('Account') }}
+                            {{ __('Account Management') }}
                         </h6>
                         <p>
                             <Link :href="route('user-profile', {user: $page.props.active_session.user } )" class="text-white" v-if="$page.props.permissions.authenticated">{{ __('Your Account') }}</Link>

@@ -345,14 +345,14 @@ const removeFromFavorites = (user, product) => {
 
                         <div>
 
-                            <Link :href="route('add-to-basket', { product: productShow })" method="post" as="button" type="button" class="btn btn-lg btn-info"> <i class="fa-solid fa-basket-shopping"></i> Add to Basket</Link>
+                            <Link :href="route('add-to-basket', { product: productShow })" method="post" as="button" type="button" class="btn btn-lg btn-info"> <i class="fa-solid fa-basket-shopping"></i> {{ __('Add to Basket') }}</Link>
 
                         </div>
 
                         <div>
 
-                            <button v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> Mark as favorite</button>
-                            <button v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> Remove from favorites</button>
+                            <button v-if="permissions.authenticated && !currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="addToFavorites(currentUser, productShow)" class="btn btn-lg btn-outline-danger"> <i class="fa-regular fa-heart"></i> {{ __('Mark as favorite') }}</button>
+                            <button v-if="permissions.authenticated && currentUser?.favorites.find(f => f.product_id == productShow.id)" @click="removeFromFavorites(currentUser, productShow)" class="btn btn-lg btn-danger"> <i class="fa-solid fa-heart"></i> {{ __('Remove from favorites') }}</button>
                         </div>
                     </div>
 

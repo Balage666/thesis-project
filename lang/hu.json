@@ -317,7 +317,7 @@
     "Address created!": "Cím rögzítve!",
     "Address successfully deleted!": "Cím sikeresen törlésre került!",
     "Basket cleared!": "Kosár kiürítve!",
-    "Basket does not exist!": "Kosár nem létezik!",
+    "Basket does not exist!": "Kosarad nem létezik!",
     "This item is not in the basket!": "Ez az elem nincs a kosárban!",
     "You cannot put more of that product into your basket!": "Nem rakhatsz többet ebből a termékből a kosaradba!",
     "Product removed from basket!": "Termék eltávolításra került a kosaradból!",
@@ -331,5 +331,15 @@
     "500: Server Error": "500: Szerveroldali hiba",
     "404: Page Not Found": "404: Oldal nem található",
     "403: Forbidden": "403: Hozzáférés megtagadva",
-    "Main Sources": "Források"
+    "Main Sources": "Források",
+    "Product price must be at least 5.": "A termék árának legalább 5-nek kell lennie!",
+    "Product price must be no more than 100.": "A termék ára nem lehet több, mint 100!",
+    "Product stock must be at least 1.": "A termék mennyiségének legalább 1-nek kell lennie!",
+    "Product stock must be no more than 999.": "A termék mennyisége nem lehet több, mint 999!",
+    "Account Management": "Fiók kezelés",
+    "Alert": "Figyelmeztetés",
+    "Add to Basket": "Hozzáadás a kosárhoz",
+    "Mark as favorite": "Hozzáadás Kedvencek közé",
+    "Remove from favorites": "Eltávolítás Kedvencek közül",
+    "Uploaded images": "Feltöltött képek"
 }

@@ -128,7 +128,7 @@ const resetFileUploadInputComponent = () => {
 
                         <div class="d-flex align-items-center justify-content-center gap-2">
                             <div class="mt-1">
-                                <h4>Uploaded images</h4>
+                                <h4>{{ __('Uploaded images') }}</h4>
                             </div>
 
                             <div>

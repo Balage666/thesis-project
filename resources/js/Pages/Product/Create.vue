@@ -21,7 +21,7 @@ const createProductForm = useForm({
     categoryId: '',
     name: '',
     description: '',
-    price: 500.00,
+    price: 50.00,
     stock: 1,
     images: []
 })
@@ -125,19 +125,20 @@ const sendFormData = () => {
                             <FormKit
                                 id="price"
                                 type="number"
+                                step="any"
                                 name="price"
                                 v-model="createProductForm.price"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
                                 :label="__('Product price')"
-                                :validation="[['required']]"
+                                :validation="[['required'], ['min', 5.00], ['max', 100.00]]"
                                 validaton-visibility="live"
                                 number="float"
-                                min="5.00"
-                                max="100.00"
                                 :validation-messages="{
-                                    required: __('Product price is required')
+                                    required: __('Product price is required'),
+                                    min: __('Product price must be at least 5.'),
+                                    max: __('Product price must be no more than 100.')
                                 }"
                             />
 
@@ -150,13 +151,13 @@ const sendFormData = () => {
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
                                 :label="__('Product stock')"
-                                :validation="[['required']]"
+                                :validation="[['required'], ['min', 1], ['max', 999]]"
                                 validaton-visibility="live"
                                 number="integer"
-                                min="1"
-                                max="999"
                                 :validation-messages="{
-                                    required: __('Product stock is required')
+                                    required: __('Product stock is required'),
+                                    min: __('Product stock must be at least 1.'),
+                                    max: __('Product stock must be no more than 999.')
                                 }"
                             />
                         </FormKit>

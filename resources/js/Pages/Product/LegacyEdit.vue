@@ -73,6 +73,9 @@ const sendFormData = () => {
                             :validation="[['required']]"
                             validation-visibility="live"
                             :placeholder="__('--Select category--')"
+                            :validation-messages="{
+                                required: __('Product category is required')
+                            }"
                         />
 
 
@@ -104,6 +107,9 @@ const sendFormData = () => {
                             :label="__('Product name')"
                             :validation="[['required']]"
                             validation-visibility="live"
+                            :validation-messages="{
+                                required: __('Product name is required')
+                            }"
 
                         />
 
@@ -123,17 +129,21 @@ const sendFormData = () => {
                             <FormKit
                                 id="price"
                                 type="number"
+                                step="any"
                                 name="price"
                                 v-model="editProductForm.price"
                                 label-class="form-label d-flex justify-content-start fw-bold"
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
                                 :label="__('Product price')"
-                                :validation="[['required']]"
+                                :validation="[['required'], ['min', 5.00], ['max', 100.00]]"
                                 validaton-visibility="live"
                                 number="float"
-                                min="500.00"
-                                max="600000"
+                                :validation-messages="{
+                                    required: __('Product price is required'),
+                                    min: __('Product price must be at least 5.'),
+                                    max: __('Product price must be no more than 100.')
+                                }"
                             />
 
                             <FormKit
@@ -145,11 +155,14 @@ const sendFormData = () => {
                                 outer-class="form-outline mb-4"
                                 input-class="form-control form-control-lg"
                                 :label="__('Product stock')"
-                                :validation="[['required']]"
+                                :validation="[['required'], ['min', 1], ['max', 999]]"
                                 validaton-visibility="live"
                                 number="integer"
-                                min="1"
-                                max="999"
+                                :validation-messages="{
+                                    required: __('Product stock is required'),
+                                    min: __('Product stock must be at least 1.'),
+                                    max: __('Product stock must be no more than 999.')
+                                }"
                             />
                         </FormKit>
 
@@ -167,7 +180,7 @@ const sendFormData = () => {
 
                             <FormKit type="submit"
                                 tabindex="0"
-                                label="Update"
+                                :label="__('Update')"
                                 outer-class="form-outline mb-4 ms-auto me-auto"
                                 input-class="btn btn-lg btn-primary shadow-sm fw-bold"
                             />

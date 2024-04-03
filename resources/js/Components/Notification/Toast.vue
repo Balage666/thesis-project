@@ -40,11 +40,11 @@ onMounted(() => {
     <Transition>
         <div v-show="!hidden" class="toast show my-2" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header" :class="{ 'error-toast-bg-color text-white' : props.toastType === 'alert', 'bg-primary-subtle' : props.toastType !== 'alert' }">
-                <strong class="me-auto">{{ props.title }}</strong>
+                <strong class="me-auto">{{ __(props.title) }}</strong>
                 <button type="button" class="btn-close" @click="close" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                {{ props.message }}
+                {{ __(props.message) }}
             </div>
         </div>
     </Transition>
