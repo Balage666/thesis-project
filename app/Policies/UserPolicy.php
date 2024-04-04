@@ -20,14 +20,7 @@ class UserPolicy
 
     public function legacyEdit(User $authUser, User $targetedUser) {
 
-        $cannotEditUser = false;
-
         $canEditUser = false;
-
-        $adminRole = ROLES::ADMIN->value;
-        $moderatorRole = ROLES::MODERATOR->value;
-        $customerRole = ROLES::CUSTOMER->value;
-        // dd($moderatorRole, $authUser->Roles->contains('name', $moderatorRole) && $targetedUser->Roles->contains('name', $adminRole));
 
         if ($authUser->Roles->contains('name', 'Admin')) {
             $canEditUser = true;
@@ -53,7 +46,6 @@ class UserPolicy
             if ($targetedUser->Roles->contains('name', 'Moderator') ||
                 $targetedUser->Roles->contains('name', 'Admin')
             ) {
-                // dd('Other moderator or Admin');
                 $canEditUser = false;
                 return $canEditUser;
 

@@ -64,7 +64,6 @@ class UserController extends Controller
      */
     public function Store(Request $request)
     {
-
         $createUserFormFields = $request->validate([
             'name' => ['required', "regex:$this->nameRegex"],
             'email' => ['required', 'email'],
