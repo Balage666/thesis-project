@@ -30,8 +30,6 @@ class UserController extends Controller
      */
     public function List(Request $request)
     {
-        // dd($request->get('search'));
-
         $usersList = User::orderBy('created_at', 'desc')->paginate(8);
 
         if ($request->get('search')) {
@@ -43,8 +41,6 @@ class UserController extends Controller
                 $query->where('name', 'LIKE', "%$roleSearch%");
             })->orderBy('created_at', 'desc')->paginate(8)->withQueryString();
         }
-
-        // dd($usersList);
 
         if ($request->wantsJson()) {
             return UserResource::collection( $usersList );
@@ -68,7 +64,6 @@ class UserController extends Controller
      */
     public function Store(Request $request)
     {
-        // dd($request);
 
         $createUserFormFields = $request->validate([
             'name' => ['required', "regex:$this->nameRegex"],
@@ -77,16 +72,11 @@ class UserController extends Controller
             'roles' => ['required', 'min:1']
         ]);
 
-        // dd($createUserFormFields);
-
         $rules = ['email' => 'unique:users,email'];
 
         $validator = Validator::make($createUserFormFields, $rules);
 
-        // dd($validator->fails());
-
         if ($validator->fails()) {
-            // dd($validator->errors());
             return back()->withErrors($validator->errors())->onlyInput('name');
         }
 
@@ -104,8 +94,6 @@ class UserController extends Controller
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
-
-        // dd($createUser->id);
 
         foreach ($roles as $role) {
             UserRole::create([
@@ -136,8 +124,6 @@ class UserController extends Controller
     {
         $this->authorizeForUser(auth()->user(), 'legacyEdit', [$user]);
 
-        // $foundUser = User::where('id', $user->id)->with(['Roles', 'PhoneNumbers', 'Addresses', 'Products'])->get();
-
         return Inertia::render("User/LegacyEdit", [
             'userToEdit' => UserResource::collection(User::where('id', $user->id)->get())
         ]);
@@ -149,33 +135,15 @@ class UserController extends Controller
      */
     public function Update(UpdateUserRequest $request, User $user)
     {
-        // dd($request, $user, $user->Roles());
-
         $validated = $request->validated();
 
         $updateUserFormFields = $validated;
-
-        // $updateUserFormFields = $request->validate([
-        //     'name' => ['required', "regex:$this->nameRegex"],
-        //     'email' => ['required', 'email'],
-        //     'roles' => ['required', 'min:1']
-        // ]);
-
-        // $rules = ['email' => 'unique:users,email'];
-
-        // $validator = Validator::make($updateUserFormFields, $rules);
-
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator->errors())->onlyInput('name');
-        // }
 
         $user->name = $updateUserFormFields['name'];
         $user->email = $updateUserFormFields['email'];
         $user->updated_at = now();
 
         $roles = $updateUserFormFields['roles'];
-
-        // dd($roles);
 
         $user->update();
 
@@ -196,7 +164,6 @@ class UserController extends Controller
      */
     public function Destroy(User $user)
     {
-        // dd($user);
         if (auth()->user()->id === $user->id) {
             return redirect()->route('user-list')->withErrors(['delete' => 'User self-deletion prevented!']);
         }

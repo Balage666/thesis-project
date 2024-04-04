@@ -15,8 +15,6 @@ const props = defineProps({
 
 const { selectOptions } = useForSelect(props.categories.data)
 
-// console.log(categoryList.value)
-
 const createProductForm = useForm({
     categoryId: '',
     name: '',
@@ -28,7 +26,6 @@ const createProductForm = useForm({
 
 const sendFormData = () => {
 
-    // console.log(createProductForm);
     createProductForm.post(route('product-store'));
 }
 

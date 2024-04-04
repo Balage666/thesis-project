@@ -13,8 +13,6 @@ class AddressController extends Controller
 {
     public function Store(Request $request, User $user) {
 
-        // dd($request['countryIso']);
-
         $addressFormFields = $request->validate([
             'countryIso' => ['required', 'max:2'],
             'regionIso' => ['required'],
@@ -29,8 +27,6 @@ class AddressController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-
-        // dd($addressFormFields);
 
         Address::create([
             'country' => $addressFormFields['countryIso'],

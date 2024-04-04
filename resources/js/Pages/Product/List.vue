@@ -3,8 +3,6 @@ import { Link, router } from '@inertiajs/vue3';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import { computed, ref } from 'vue';
 
-import { useIntersectionObserver } from '@vueuse/core';
-
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import ListAccordion from '*vue-components/DataDisplay/ListAccordion.vue';
 import ListAccordionItem from '*vue-components/DataDisplay/ListAccordionItem.vue';
@@ -19,11 +17,8 @@ const productList = computed(() => props.products.data);
 
 const currentUser = ref(usePage().props.value.active_session.user);
 
-// console.log(productList.value);
-
 const sendDeleteRequest = (product) => {
 
-    // console.log(product);
     router.post(route('product-delete', { product: product }));
 
 }
@@ -139,7 +134,6 @@ const sendCleanSearch = () => {
                                                 <div class="d-grid gap-2">
                                                     <Link :href="route('product-show', { product: product })"  method="get" as="button" type="button" class="btn btn-lg btn-info shadow-sm fw-bold">{{ __('View Product') }}</Link>
                                                     <Link :href="route('product-edit', { product: product })" method="get" as="button" type="button" class="btn btn-lg btn-info shadow-sm fw-bold">{{ __('Legacy Product Editor') }}</Link>
-                                                    <!-- <Link :href="route('add-to-favorites', {})" method="get" as="button" type="button" class="btn btn-lg btn-outline-danger shadow-sm fw-bold">{{ __('Add to Favorites') }}</Link> -->
                                                 </div>
                                             </div>
                                         </div>

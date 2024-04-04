@@ -97,14 +97,10 @@ class ProductController extends Controller
 
                 $publicPath = Str::replaceFirst('public/', '', $imagePath);
 
-                // dd($publicPath);
-
                 $productPic = ProductPicture::newModelInstance([
                     'product_picture' => "/storage/$publicPath",
                 ]);
                 $createdProduct->Pictures()->save($productPic);
-
-                // dd($productPic, $createdProduct->id);
             }
 
         }
@@ -118,8 +114,6 @@ class ProductController extends Controller
     public function Show(Product $product)
     {
         $productsInSameCategory = ProductCarouselResource::collection($product->Category->Products->take(6)->shuffle());
-
-        // dd($productsInSameCategory);
 
         return Inertia::render("Product/Show", [
             'productsInSameCategory' => $productsInSameCategory,

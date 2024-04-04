@@ -99,30 +99,21 @@ const sendEmittedPhoneNumberData = (payload) => {
 }
 
 const sendEmittedAddressData = (payload) => {
-    // console.log(payload);
     router.post(route('address-create', { user: user.value }), payload);
 }
 
 const sendEmittedChangedPhoneNumberData = (payload) => {
-    // console.log(payload)
     const [form, phone] = payload;
-
-    // console.log(phone)
-    // console.log(form)
 
     router.post(route('phone-number-update', { phone: phone }), form)
 }
 
 const sendEmittedChangedProfilePictureData = (payload) => {
 
-    // console.log(payload);
-
     router.post(route('user-change-profile-picture', { user: user.value }), payload);
 }
 
 const sendDeleteFavoriteItemRequest = (payload) => {
-
-    // console.log(payload);
     router.post(route('remove-from-favorites', { user: user.value, product: payload }))
 
 }

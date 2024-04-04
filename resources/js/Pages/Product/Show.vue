@@ -43,13 +43,7 @@ const currentUserRating = computed(() => currentUser.value?.product_ratings.find
 
 const stars = computed(() => Math.round(averageProductRating.value));
 
-// console.log(currentUserRating.value || 0);
-
-// console.log(productShow.value);
-
 const EditMode = reactive(editProductModeObj);
-
-// console.log(Object.entries(EditMode).every(m => m[1] == false));
 
 const toggleEditMode = () => {
 
@@ -116,15 +110,11 @@ const commentForm = useForm({
 
 const sendAddCommentRequest = () => {
 
-    // console.log(commentForm.comment);
-
     router.post(route('comment-add', { product: productShow.value }), commentForm)
 
 }
 
 const sendDeleteCommentRequest = (comment) => {
-
-    // console.log(comment);
 
     router.post(route('comment-destroy', { comment: comment }));
 
@@ -132,15 +122,10 @@ const sendDeleteCommentRequest = (comment) => {
 
 const sendProductRatingRequest = (payload) => {
 
-    // console.log(payload);
-
-
     router.post(route('rate-add', { product: payload.product }), { rating: payload.rating });
 }
 
 const sendDeleteRatingRequest = (payload) => {
-
-    // console.log(currentUserRating.value);
 
     const data = {
 
@@ -169,8 +154,6 @@ const sendUploadProductPicturesRequest = (payload) => {
     }
 
     router.post(route('product-pictures-upload', { product: productShow.value }), data);
-
-    // console.log(payload);
 }
 
 const prouductImageModal = ref(null);

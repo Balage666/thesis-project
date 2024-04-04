@@ -130,10 +130,8 @@ class UserDetailsController extends Controller
         $body = "The following role: $newRole->name has been granted to you, $user->name!";
 
         try {
-            //code...
             Mail::to(env("MAIL_USERNAME"))->send(new GrantSellerRoleMail($title, $body));
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->back()->withErrors(['mailer' => 'Something went wrong during mailing procedure!']);
         }
 

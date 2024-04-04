@@ -24,7 +24,6 @@ class ProductDetailsController extends Controller
     public function AddRating(RateProductRequest $request, Product $product) {
 
         $validated = $request->validated();
-        // dd($validated);
 
         $userRatings = auth()->user()->ProductRatings;
 
@@ -65,8 +64,6 @@ class ProductDetailsController extends Controller
     public function AddComment(AddProductCommentRequest $request, Product $product) {
 
         $validated = $request->validated();
-
-        // dd($validated);
 
         $user = User::find(auth()->user()->id);
         $newComment = ProductComment::newModelInstance([

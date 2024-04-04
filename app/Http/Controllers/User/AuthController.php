@@ -26,11 +26,6 @@ class AuthController extends Controller
 
         $formFields = $request->validated();
 
-        // $formFields = $request->validate([
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
-
         if (auth()->attempt($formFields)) {
 
             $request->session()->regenerate();
@@ -47,7 +42,6 @@ class AuthController extends Controller
         auth()->logout();
 
         $saved_locale = $request->session()->get('locale');
-        // dd($request->session()->get('locale'));
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
@@ -68,24 +62,7 @@ class AuthController extends Controller
 
     public function SignOn(SignupRequest $request) {
 
-        // $nameRegex = Helper::GetStrictNameRegex();
-        // $passwordRegex = Helper::GetPasswordRegex();
-
-        // $formFields = $request->validate([
-        //     'email' => ['required', 'email'],
-        //     'name' => ['required', 'min:3', "regex:$nameRegex"],
-        //     'password' => ['required', 'confirmed', 'min:8', "regex:$passwordRegex"],
-        // ]);
-
         $formFields = $request->validated();
-
-        // $rules = ['email' => 'unique:users,email'];
-
-        // $validator = Validator::make($formFields, $rules);
-
-        // if ($validator->fails()) {
-        //     return back()->withErrors(['email' => 'Invalid email'])->onlyInput('email');
-        // }
 
         $tempName = $formFields["name"];
 
@@ -108,7 +85,6 @@ class AuthController extends Controller
 
     public function ImprovedSignOn(ImprovedSignUpRequest $request) {
 
-        // dd($request);
         $formFields = $request->validated();
 
         $tempName = $formFields["name"];

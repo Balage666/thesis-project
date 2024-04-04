@@ -35,8 +35,6 @@ class PhoneController extends Controller
             'number' => ['required', 'unique:phones,number']
         ]);
 
-        // dd($editedPhoneNumberFormField);
-
         $phone->number = $editedPhoneNumberFormField['number'];
         $phone->updated_at = now();
 
@@ -46,8 +44,6 @@ class PhoneController extends Controller
     }
 
     public function Delete(Phone $phone) {
-
-        // dd($phone);
 
         $phone->delete();
 

@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import { ref, watch } from 'vue'
 
-import { Country, State, City } from 'country-state-city'
+import { Country, State } from 'country-state-city'
 
 const emits = defineEmits(['submitted']);
 
@@ -38,7 +38,6 @@ const resetForm = () => {
 
 const getStatesByCountryIso = () => {
     listOfStatesByCountryIso.value = State.getStatesOfCountry(addressForm.countryIso);
-    // console.log(listOfStatesByCountryIso);
 }
 
 const check = () => {
@@ -51,8 +50,6 @@ const sendFormData = () => {
     if (addressForm.regionIso == -1) {
         addressForm.regionIso = '-';
     }
-
-    // console.log(addressForm);
 
     emits('submitted', addressForm);
 }
