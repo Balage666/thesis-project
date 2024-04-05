@@ -74,6 +74,9 @@ const resetFileUploadInputComponent = () => {
                             :fileLimit="1"
                             :maxFileSize="1000000"
                             @upload="check($event)"
+                            :chooseLabel="__('Choose')"
+                            :uploadLabel="__('Upload')"
+                            :cancelLabel="__('Cancel')"
                         >
                             <template #chooseicon>
                                 <i class="fa-solid fa-plus"></i>
@@ -85,7 +88,7 @@ const resetFileUploadInputComponent = () => {
                         </FileUpload>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" @click="sendCloseEmit">Close</button>
+                        <button type="button" class="btn btn-secondary" @click="sendCloseEmit">{{ __('Close') }}</button>
                     </div>
                 </div>
             </div>
