@@ -13,7 +13,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       return require("./tests/cypress/plugins/index.cjs")(on, config);
     },
-    baseUrl: "http://localhost:8000",
+    baseUrl: "http://127.0.0.1:8000",
     specPattern: "tests/cypress/integration/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "tests/cypress/support/index.js",
   },

@@ -120,7 +120,7 @@ describe('Moderator user explores the site', () => {
 
         cy.get('.col-sm-6.text-center > button').click();
 
-        cy.get('.toast-body').should('contain.text', 'Password has been reset');
+        cy.get('.toast-body').should('contain.text', `User's password has been reset by the system!`);
 
     })
 
@@ -148,6 +148,6 @@ describe('Moderator user explores the site', () => {
 
         cy.get('.text-end > .btn').click();
 
-        cy.get('.toast-body').should('have.text', 'Comment Added');
+        cy.get('.toast-body').should('have.text', 'Comment Added!');
     })
 })

@@ -154,7 +154,7 @@ describe('Customer user explores the site', () => {
 
         cy.get('.col-sm-6.text-center > button').click();
 
-        cy.get('.toast-body').should('contain.text', 'Password has been reset');
+        cy.get('.toast-body').should('contain.text', `User's password has been reset by the system!`);
 
         cy.get('button[data-cy="request-seller-role"]').click();
 

@@ -25,8 +25,8 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 before(() => {
-    cy.task('activateCypressEnvFile', {}, { log: false });
-    cy.artisan('config:clear', {}, { log: false });
+    // cy.task('activateCypressEnvFile', {}, { log: false });
+    // cy.artisan('config:clear', {}, { log: false });
 
     cy.refreshRoutes();
     cy.refreshDatabase();
