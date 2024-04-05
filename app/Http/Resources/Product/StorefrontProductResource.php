@@ -24,7 +24,6 @@ class StorefrontProductResource extends JsonResource
             'is_out_of_stock' => $this->stock == 0,
             'is_close_to_run_out_of_stock' => $this->stock < 10,
             'category' => new CategoryResource($this->category),
-            // 'pictures' => $this->Pictures,
             'preview_image' => $this->pictures->first()?->product_picture,
             'ratings' => $this->ratings,
             'count_of_ratings' => $this->ratings->count(),

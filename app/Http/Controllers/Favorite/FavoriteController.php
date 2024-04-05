@@ -27,7 +27,6 @@ class FavoriteController extends Controller
             $query->where('id', '=', $product->id);
         })->first()->Product;
 
-        // dd(is_null($foundProduct));
 
         if (is_null($foundProduct)) {
             return redirect()->back()->withErrors(['favorite' => 'This product is not in your favorites yet!']);

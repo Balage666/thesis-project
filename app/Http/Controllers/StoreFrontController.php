@@ -15,14 +15,11 @@ class StoreFrontController extends Controller
 {
     public function StoreFront(Request $request) {
 
-        // dd($request);
-
         $selectedCategories = $request->get('selectedCategories');
         $selectedDistributors = $request->get('selectedDistributors');
         $rangeInput = $request->get('rangeInput');
         $availability = $request->get('availability');
 
-        // dd($rangeInput, $availability, $selectedCategories, $selectedDistributors);
         $allProducts = Product::orderBy('created_at', 'desc')->get();
 
         if (!is_null($selectedCategories) && count($selectedCategories) != 0) {
@@ -54,7 +51,6 @@ class StoreFrontController extends Controller
             });
         }
 
-        // dd($allProducts, $selectedCategories, $selectedDistributors);
 
         $cateogories = Category::all();
 

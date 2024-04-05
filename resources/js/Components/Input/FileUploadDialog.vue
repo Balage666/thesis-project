@@ -36,7 +36,6 @@ const check = ($event) => {
     sendCloseEmit();
 
     emits('pictureModified', form);
-    // router.post(route('user-change-profile-picture'), form);
 
 }
 

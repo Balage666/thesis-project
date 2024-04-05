@@ -19,7 +19,6 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
-        // $userID = User::inRandomOrder()->first()->id;
         $userID = User::whereHas('Roles', function($query) {
             $query->where('name', '=', 'Seller');
         })->inRandomOrder()->first()->id;
@@ -28,7 +27,6 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->paragraph(),
             'price' => number_format($this->faker->randomFloat(2, 5, 15), 2),
-            // 'price' => $this->faker->numberBetween(500, 1000),
             'stock' => $this->faker->numberBetween(0, 100),
             'created_by' => $userID,
             'category_id' => $randomCategoryId,

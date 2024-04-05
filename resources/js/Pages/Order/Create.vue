@@ -41,7 +41,6 @@ const getStateNameByIsoCodeAndCountryIsoCode = (stateIsoCode, countryIsoCode) =>
 const getStatesByCountryIso = (countryIsoCode) => {
 
     listOfStatesByCountryIso.value = State.getStatesOfCountry(countryIsoCode);
-    // console.log(listOfStatesByCountryIso.value);
 }
 
 const createOrderForm = useForm({
@@ -62,19 +61,14 @@ const setHiddenFields = () => {
 
     let addressValues = currentUser.value.addresses.find((address) => address.id == createOrderForm.fullAddress);
 
-    // console.log(addressValues);
-    // console.log(createOrderForm.fullAddress_text);
-
     createOrderForm.address = addressValues?.address_text || ''
     createOrderForm.country = addressValues?.country || -1
     createOrderForm.stateOrRegion = addressValues?.state_or_region || -1
     createOrderForm.zipOrPostalCode = addressValues?.postal_or_zip_code || ''
 
-    // console.log(createOrderForm.address, createOrderForm.country, createOrderForm.stateOrRegion, createOrderForm.zipOrPostalCode);
 }
 
 const createOrder = () => {
-    // console.log(createOrderForm);
 
     router.post(route('order-store', { cart: cartShow.value }), createOrderForm);
 }
@@ -198,7 +192,7 @@ const createOrder = () => {
                                 </div>
 
                                 <div class="col-6">
-                                    <button class="btn btn-primary btn-lg" type="submit">{{ ('Proceed') }}</button>
+                                    <button class="btn btn-primary btn-lg" type="submit">{{ __('Proceed') }}</button>
                                 </div>
 
 

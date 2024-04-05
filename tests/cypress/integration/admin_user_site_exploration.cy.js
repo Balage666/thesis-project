@@ -139,19 +139,4 @@ describe('Admin user explores the site', () => {
 
         cy.get('.toast-body').should('have.text', 'Order deleted!');
     })
-
-    // it('deletes a user', () => {
-
-    //     successfullyRedirectsTo('/user-management/list');
-
-    //     cy.get('.form-control').type('Customer');
-
-    //     cy.get('.d-flex > .btn').click();
-
-    //     cy.get('.accordion-button')
-
-    //     // cy.get('#open11038 > .container-fluid > .row > .col-12 > .my-3 > .btn').click();
-
-    //     cy.get('.toast-body').should('have.text', 'User deleted');
-    // })
 })

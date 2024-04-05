@@ -17,8 +17,6 @@ const emits = defineEmits(['itemChanged'])
 
 const phoneNumberItem = reactive({ ...props.item, editModeVisible: false })
 
-// console.log(phoneNumberItem);
-
 const phoneNumberItemForm = useForm({
     number: phoneNumberItem.formatted_number,
     mask: phoneNumberItem.mask

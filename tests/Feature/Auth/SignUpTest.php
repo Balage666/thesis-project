@@ -15,13 +15,6 @@ class SignUpTest extends TestCase
 
     use RefreshDatabase;
 
-    // public function setUp(): void
-    // {
-    //     parent::setUp();
-
-    //     $this->artisan('migrate:refresh --seed');
-    // }
-
     public function test_sign_up_page_accessible(): void
     {
         $response = $this->get(route('sign-up'));

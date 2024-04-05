@@ -19,7 +19,6 @@ const removeFromFavorites = (user, product) => {
 
 const removeFromBasket = (product) => {
 
-    // console.log('clicked');
     router.post(route('remove-from-basket', { product: product }));
 
 }

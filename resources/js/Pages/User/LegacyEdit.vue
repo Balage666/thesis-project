@@ -23,12 +23,6 @@ const userValues = props.userToEdit.data[0];
 
 const rolesUserHave = userValues.roles.map(r => r.name).filter(r => filterUserRoles.includes(r));
 
-// console.log(filterUserRoles);
-// console.log(rolesUserHave);
-// console.log(userValues.roles);
-
-// console.log(userRolesAsModerator);
-
 const getRoles = () => {
 
     if (currentUser.value.roles.some((r) => r.name == 'Moderator') &&

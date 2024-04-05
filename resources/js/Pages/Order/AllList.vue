@@ -15,10 +15,6 @@ const props = defineProps({
         required: true
     }
 })
-
-// const totalPrice = computed(() => orderShow.value.order_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0))
-
-
 const orderListShow = ref(
     props.orders.data
 );
@@ -113,7 +109,7 @@ console.log(orderListShow.value);
                                                     <div class="row">
                                                         <div class="col-12 col-xs-12 col-md-4 col-lg-3 mt-md-2">
                                                             <span>{{ __('Ordered by: ') }}</span>
-                                                            <h4>{{ order.customer.name }}</h4>
+                                                            <h4>{{ order.customer?.name || 'Guest' }}</h4>
                                                         </div>
                                                         <div class="col-12 col-xs-12 col-md-4 col-lg-6 mt-0 mt-md-3">
                                                             <span>{{ __('Ordered at: ') }}</span>

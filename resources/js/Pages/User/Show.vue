@@ -45,8 +45,6 @@ onMounted(() => {
 
 const toggleEditMode = (payload) => {
 
-    // console.log(payload)
-
     for (const key in EditMode) {
         if (Object.hasOwnProperty.call(EditMode, key)) {
             EditMode[key] = !EditMode[key]
@@ -77,24 +75,19 @@ const user = ref(props.userToShow.data[0]);
 const targetUserRolesRef = ref(user.value.roles);
 const targetUserRoles = ref(targetUserRolesRef.value.map(r => r.name));
 
-// console.log(user.value);
-
 const sendEmittedModifiedEmailData = (payload) => {
 
-    // console.log(payload);
     router.post(route('user-email-edit', { user: user.value }), payload);
 
 }
 
 const sendEmittedModifedNameData = (payload) => {
 
-    // console.log(payload);
     router.post(route('user-name-edit', { user: user.value }), payload);
 }
 
 const sendEmittedPhoneNumberData = (payload) => {
 
-    // console.log(payload);
     router.post(route('phone-number-add', { user: user.value }), payload);
 }
 

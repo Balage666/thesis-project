@@ -29,8 +29,6 @@ class PhoneResource extends JsonResource
 
     private function formatNumber(String $phoneNumber, String $mask) {
 
-        // dd($phoneNumber, $mask);
-
         $maskParts = explode(' ', $mask);
         [$countryCode, $realMask] = $maskParts;
 
@@ -43,7 +41,6 @@ class PhoneResource extends JsonResource
             $realMask[$j] = $phoneNumber[$i];
         }
 
-        // dd($realMask);
         return "{$countryCode} {$realMask}";
     }
 }

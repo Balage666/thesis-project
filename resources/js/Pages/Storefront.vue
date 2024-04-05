@@ -46,10 +46,7 @@ const filterForm = useForm({
 });
 
 const selectedFilters = computed(() => {
-    // console.log(filterForm.selectedDistributors.length);
     let count = filterForm.selectedCategories.length + filterForm.selectedDistributors.length + (filterForm.rangeInput.length == 2 ? 1 : 0) + (filterForm.availability ? 1 : 0);
-
-    // console.log(count);
 
     return count;
 
@@ -57,7 +54,6 @@ const selectedFilters = computed(() => {
 
 const filter = () => {
 
-    // console.log(filterForm);
     const {selectedCategories, selectedDistributors, availability, rangeInput} = filterForm;
     router.get(route(route().current()), { selectedCategories: selectedCategories, selectedDistributors: selectedDistributors, rangeInput: rangeInput, availability: availability })
 }
@@ -69,12 +65,10 @@ const clearFilters = () => {
     filterForm.rangeInput = [];
     filterForm.availability = false;
 
-    // console.log(route().current());
     router.get(route(route().current()));
 
 }
 
-// console.log(filterForm.availability);
 
 const carouselProductsShowCase = computed(() => props.carouselProducts.data);
 const allProductsShowCase = computed(() => props.allProducts.data);
@@ -86,10 +80,7 @@ const calculateStars = (avg) => {
 
 const scrollable = ref(null);
 
-// console.log(currentLocale.value);
-// console.log(props.allProducts.meta);
 const next = ref(currentLocale.value == 'en' ? props.allProducts.meta?.links.filter(l => l.label == 'Next').shift()?.url : props.allProducts.meta?.links.filter(l => l.label == 'Következő').shift()?.url);
-// console.log(next.value);
 
 useIntersectionObserver(scrollable, ([{ isIntersecting }]) => {
     if (!isIntersecting) {

@@ -9,8 +9,6 @@ import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 
 const permissions = ref(usePage().props.value.permissions);
 
-// console.log(permissions.value);
-
 </script>
 
 <template>

@@ -43,8 +43,6 @@ class OrderController extends Controller
 
     public function Create(Cart $cart) {
 
-        // dd($cart->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']));
-
         $cart->load(['CartItems.ProductItem.Pictures', 'CartItems.ProductItem.Category']);
 
         if (is_null($cart)) {
@@ -122,8 +120,6 @@ class OrderController extends Controller
     }
 
     public function Destroy(Order $order) {
-
-        // dd(auth()->user()->Roles->contains('name', 'Admin'));
 
         $order->delete();
 

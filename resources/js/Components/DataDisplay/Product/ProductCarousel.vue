@@ -37,19 +37,15 @@ const currentUser = ref(pageProps.value.active_session.user);
 const emitFavoriteAdd = (user, product) => {
 
     emits('favoriteAdded', { emitType: 'favoriteAdded', user: user, product: product });
-    // emits('favoriteAdded', data);
 
 }
 
 const emitFavoriteRemove = (user, product) => {
 
-    // console.log('Remove clicked');
     emits('favoriteRemoved', { emitType: 'favoriteRemoved', user: user, product: product });
 }
 
 const addToCart = (product) => {
-
-    // console.log(product);
 
     router.post(route('add-to-basket', { product: product }));
 

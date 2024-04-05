@@ -59,15 +59,11 @@ const sendCloseEmit = () => {
 }
 
 const sendUploadEmit = ($event) => {
-
-    // console.log($event);
     const { files } = $event
 
     const data = {
         images: files
     }
-
-    // console.log(files);
 
     sendCloseEmit()
 

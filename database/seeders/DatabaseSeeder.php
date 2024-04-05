@@ -34,14 +34,6 @@ class DatabaseSeeder extends Seeder
                     \App\Models\UserRole::newModelInstance([
                         'name' => 'Seller'
                     ]),
-                    // \App\Models\UserRole::create([
-                    //     'name' => 'Customer',
-                    //     'user_id' => $user->id
-                    // ]),
-                    // \App\Models\UserRole::create([
-                    //     'name' => 'Seller',
-                    //     'user_id' => $user->id
-                    // ])
                 ]);
             }
             else {

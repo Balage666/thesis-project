@@ -8,9 +8,6 @@ import selectRoleObj from '*js-shared/select-role-obj';
 
 import ToastStack from '*vue-components/Notification/ToastStack.vue';
 
-// console.log(selectRoleObj);
-
-
 const signUpForm = useForm({
     name: null,
     email: null,
@@ -21,8 +18,6 @@ const signUpForm = useForm({
 
 const sendFormData = () => {
 
-    // console.log(signUpForm);
-    // signUpForm.post(route('sign-on'));
     router.post(route('sign-on'), signUpForm);
 }
 

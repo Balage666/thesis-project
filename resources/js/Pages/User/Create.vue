@@ -22,17 +22,11 @@ const form = useForm({
     roles: []
 });
 
-// console.log(form.errors.name);
-
 const sendFormData = () => {
-
-    // console.log(`data about to be submitted: ${form.name}, ${form.email}, ${form.password}, ${form.roles}`)
 
     form.post(route('user-store'));
 
 }
-
-// console.log(userRolesAsModeratorForCreate);
 
 const getRoles = () => {
 

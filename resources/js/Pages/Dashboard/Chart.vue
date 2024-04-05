@@ -39,13 +39,19 @@ const hasOnlyCustomerAndModeratorRole = computed(() => allUsersShow.value.filter
 const hasOnlyCustomerAndSellerAndModeratorRole = computed(() => allUsersShow.value.filter(u => u.roles.find(r => r.name == 'Customer') && u.roles.find(r => r.name == 'Seller') && u.roles.find(r => r.name == 'Moderator') && u.roles.length == 3))
 const hasEveryRole = computed(() => allUsersShow.value.filter(u => u.roles.length == 4))
 
-// console.log(allProductsShow.value);
-
 const productsNameAndQty = computed(() => allProductsShow.value.map(({name, stock}) => ({name, stock, bg: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')}) ));
 
 const countOfCategories = computed(() => allCategoriesShow.value.length);
 
-const productsByCategories = computed(() => allCategoriesShow.value.map((c) =>({ name: c.name, countOfProducts: c.products.length, bg: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') })))
+const productsByCategories = computed(() => {
+    return  allCategoriesShow.value.map(
+        (c) => ({
+                    name: c.name,
+                    countOfProducts: c.products.length,
+                    bg: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')
+                })
+        )
+})
 
 
 const globalOptions = reactive({

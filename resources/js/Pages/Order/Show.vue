@@ -16,9 +16,7 @@ const props = defineProps({
 
 const orderShow = ref(props.order.data);
 
-const totalPrice = computed(() => orderShow.value.order_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0))
-
-// console.log(orderShow.value);
+const totalPrice = computed(() => orderShow.value.order_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0).toFixed(2))
 
 const getCountryName = (isoCode) => {
 
@@ -99,7 +97,7 @@ const sendDeleteRequest = (order) => {
 
                         <div class="col-md-6">
                             <h4>{{ __('Status:') }}</h4>
-                            <p class="lead fw-bold">{{ orderShow.status }}</p>
+                            <p class="lead fw-bold">{{ __(orderShow.status) }}</p>
                         </div>
                     </div>
 

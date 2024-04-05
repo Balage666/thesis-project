@@ -12,7 +12,6 @@ const props = defineProps({
 const emits = defineEmits(['listChanged']);
 
 const sendChangedData = (payload) => {
-    // console.log(payload);
     emits('listChanged', payload);
 }
 

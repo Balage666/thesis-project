@@ -26,9 +26,7 @@ class SignupRequest extends FormRequest
         $passwordRegex = Helper::GetPasswordRegex();
         return [
             'email' => ['required', 'email', 'unique:users,email'],
-            // 'name' => ['required', 'min:3', 'regex:/^[A-Z][a-z]+\s[a-zA-Z\s\.]+/'],
             'name' => ['required', 'min:3', "regex:$nameRegex"],
-            // 'password' => ['required', 'confirmed', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'],
             'password' => ['required', 'confirmed', 'min:8', "regex:$passwordRegex"],
         ];
     }

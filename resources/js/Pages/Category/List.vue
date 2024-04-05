@@ -10,7 +10,6 @@ import { Modal } from 'bootstrap';
 import BodyLayout from '*vue-pages/Layouts/BodyLayout.vue';
 import Pagination from '*vue-components/DataDisplay/Pagination.vue';
 import AddNewCategoryModal from '*vue-components/Input/AddNewCategoryModal.vue';
-// import ConfirmationDialog from '*vue-components/Notification/ConfirmationDialog.vue';
 
 const props = defineProps({
     categories: {
@@ -26,20 +25,16 @@ const currentUser = ref(usePage().props.value.active_session.user);
 onMounted(() => {
 
     newCategoryModal.value = new Modal(document.getElementById('addCategory'));
-    // confirmationModal.value = new Modal(document.getElementById('confirm'))
-
 });
 
 
 const sendDeleteRequest = (category) => {
 
-    // console.log(category);
     router.post(route('category-delete', { category: category }));
 
 }
 
 const sendStoreRequest = (payload) => {
-    // console.log(payload);
 
     router.post(route('category-store'), payload);
 }

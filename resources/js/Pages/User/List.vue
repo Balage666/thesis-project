@@ -21,26 +21,18 @@ const pageProps = ref(usePage().props.value);
 const permissions = ref(pageProps.value.permissions);
 const currentLocale = ref(pageProps.value.current_locale);
 
-// console.log(permissions.value);
 
 const sendUserDeleteRequest = (user) => {
-
-    // console.log(user);
     router.post(route('user-delete', { user: user }));
 
 }
 
-// console.log(props.users.meta);
 
 const last = ref(null);
 
 const next = ref(currentLocale.value === 'en' ? props.users.meta.links.filter(l => l.label === 'Next').shift()?.url : props.users.meta.links.filter(l => l.label === 'Következő').shift()?.url);
 
-// console.log(next.value);
-
 useIntersectionObserver(last, ([{ isIntersecting }]) => {
-
-    // console.log(isIntersecting);
 
     if (!isIntersecting) {
         return
@@ -51,8 +43,6 @@ useIntersectionObserver(last, ([{ isIntersecting }]) => {
     }
 
     axios.get(`${next.value}`).then((response) => {
-
-        // console.log(response);
 
         props.users.data.push(...response.data.data);
         props.users.meta = response.data.meta;
@@ -78,8 +68,6 @@ const sendCleanSearch = () => {
     }
 
 }
-
-// console.log(route().params);
 
 </script>
 

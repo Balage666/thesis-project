@@ -268,7 +268,6 @@ class CartController extends Controller
             return redirect()->back()->withErrors(['cart' => 'Basket does not exist!']);
         }
 
-        // dd($cart->CartItems);
 
         return Inertia::render("Cart/ViewList", [
             'cart' => $cart
