@@ -16,7 +16,7 @@ const cartShow = ref(props.cart);
 
 const totalPrice = computed(() => {
 
-    return cartShow.value.cart_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0);
+    return cartShow.value.cart_items.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr.price), 0).toFixed(2);
 })
 
 const sendIncrement = (product) => {
