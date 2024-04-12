@@ -246,9 +246,6 @@ describe('Customer user explores the site', () => {
 
         cy.get('.toast-body').should('contain.text', 'Product removed from favorites!');
 
-        // cy.get(':nth-child(1) > .overflow-y-scroll > :nth-child(1)').check();
-        // cy.get(':nth-child(1) > .overflow-y-scroll > :nth-child(1) > #\31 ').check();
-
         cy.get('input[data-cy="category_14"]').check();
 
         cy.get('input[data-cy="distributor_2"]').check();
@@ -302,7 +299,6 @@ describe('Customer user explores the site', () => {
 
             const firstName = user.name.split(' ')[0];
             const lastName = user.name.split(' ')[1];
-            // console.log(user);
             cy.get('#firstName').should('have.value', firstName);
             cy.get('#lastName').should('have.value', lastName);
 
@@ -417,7 +413,6 @@ describe('Customer user explores the site', () => {
 
             cy.get('#email').should('have.value', user.email);
 
-            // console.log(user);
             cy.get(':nth-child(4) > #phone').select(user.phone_numbers[0].number).should('have.value', user.phone_numbers[0].number);
 
             cy.wait(2000);

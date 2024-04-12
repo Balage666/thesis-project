@@ -6,7 +6,6 @@ import { usedTechnologies } from '*js-shared/technologies';
 
 </script>
 
-<!--TODO: Add the rest of the technologies-->
 <template>
     <div class="p-3 banner-bg-color">
 
