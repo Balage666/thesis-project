@@ -334,7 +334,7 @@
     "500: Server Error": "500: Szerveroldali hiba",
     "404: Page Not Found": "404: Oldal nem található",
     "403: Forbidden": "403: Hozzáférés megtagadva",
-    "Main Sources": "Források",
+    "Main Sources": "Főként felhasznált források",
     "Product price must be at least 5.": "A termék árának legalább 5-nek kell lennie!",
     "Product price must be no more than 100.": "A termék ára nem lehet több, mint 100!",
     "Product stock must be at least 1.": "A termék mennyiségének legalább 1-nek kell lennie!",
