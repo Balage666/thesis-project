@@ -52,9 +52,11 @@ class StoreFrontController extends Controller
         }
 
 
-        $cateogories = Category::all();
+        $categories = Category::all();
 
-        $distributors = User::all();
+        $distributors = User::whereHas('Roles', function ($query) {
+            $query->where('name', 'LIKE', 'Seller');
+        })->get();
 
         $carouselProducts = Product::where('stock', '>', 20)->inRandomOrder()->limit(15)->get();
 
@@ -70,7 +72,7 @@ class StoreFrontController extends Controller
         return Inertia::render("Storefront", [
             'allProducts' => StorefrontProductResource::collection($allProducts),
             'carouselProducts' => ProductCarouselResource::collection($carouselProducts),
-            'categories' => $cateogories,
+            'categories' => $categories,
             'distributors' => $distributors
         ]);
     }

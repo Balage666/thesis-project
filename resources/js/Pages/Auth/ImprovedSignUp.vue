@@ -32,7 +32,7 @@ const sendFormData = () => {
     <div class="my-2">
         <FormKit type="form" @submit="sendFormData()" :actions="false" #default="{ disabled }">
 
-            <FormKit type="multi-step" tab-style="progress" :hide-progress-labels="false" :allow-incomplete="true" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center mb-5">
+            <FormKit type="multi-step" tab-style="progress" :hide-progress-labels="false" :allow-incomplete="false" steps-class="authFormCardBackground" outer-class="d-flex justify-content-center mb-5">
 
                 <FormKit type="step" :name="__('userDetails')">
 

@@ -210,18 +210,6 @@ console.log(orderListShow.value);
 
                                     </div>
 
-                                    <div class="col-12 col-md-6 p-md-5 mt-3 mt-md-0 mt-lg-0 col-lg-6">
-
-                                        <div class="card mb-3 border-0">
-                                            <div class="row g-0">
-                                                <div class="d-grid gap-2">
-                                                    <!-- <Link :href="route('product-show', { product: product })"  method="get" as="button" type="button" class="btn btn-lg btn-info shadow-sm fw-bold">{{ __('View Product') }}</Link> -->
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
                                 </template>
                             </ListAccordionItem>
                         </ListAccordion>

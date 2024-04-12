@@ -89,7 +89,6 @@ class HandleInertiaRequests extends Middleware
                 'user' => auth()->user() ? auth()->user()->load([
                     'Roles', 'PhoneNumbers', 'Addresses', 'Products', 'ProductRatings', 'Cart.CartItems.ProductItem.Pictures', 'Cart.CartItems.ProductItem.Category', 'Favorites.Product.Pictures'
                 ]) : null,
-                // 'auth_cart' => auth()->user() ? auth()->user()->load(['Cart'])->Cart?->load(['CartItems.ProductItem']) : null
             ],
             'permissions' => [
                 'authenticated' => auth()->check(),
