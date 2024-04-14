@@ -83,7 +83,10 @@ class UserDetailsController extends Controller
         try {
             Mail::to(env("MAIL_USERNAME"))->send(new ResetPasswordMail($title, $body));
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['mailer' => 'Something went wrong during mailing procedure!']);
+            return redirect()->back()->withErrors([
+                'mailer' => "Something went wrong during mailing procedure!",
+                'password' => "Here is your new password: $resetPassword"
+            ]);
         }
 
         return redirect()->back()->with('message', "User's password has been reset by the system!");
